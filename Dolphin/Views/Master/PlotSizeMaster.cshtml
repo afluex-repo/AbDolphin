@@ -1,0 +1,190 @@
+﻿@model Dolphin.Models.Master
+@{
+    ViewBag.Title = "PlotSizeMaster";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("SavePlotSize", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">Plot Size Master</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Add New Plot Size</h5>
+                                    <p style="color: red">
+                                        @TempData["PlotSize"]
+                                    </p>
+                                </div>
+                                <div class="card-block">
+
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6">
+                                            <label class="float-label">Width In Feet<span style="color:red">*</span></label>
+                                            @Html.TextBoxFor(m => m.WidthFeet, new { @class = "form-control", @onchange = "return calculatePlotArea();", @onkeypress = "return isNumberOrDecimal(event);", maxlength = "50", @placeholder = "Enter Width in Feet" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="float-label">Width In Inches<span style="color:red">*</span></label>
+                                           @Html.TextBoxFor(m => m.WidthInch, new { @class = "form-control", @onblur = "return calculatePlotArea();", @onkeypress = "return isNumberOrDecimal(event);", maxlength = "50", @placeholder = "Enter  width  in inches" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6">
+                                            <label class="float-label">Height In Feet<span style="color:red">*</span></label>
+                                            @Html.TextBoxFor(m => m.HeightFeet, new { @class = "form-control", @onblur = "return calculatePlotArea();", @onkeypress = "return isNumberOrDecimal(event);", maxlength = "50", @placeholder = "Enter  Height in Feet" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="float-label">Height In Inches<span style="color:red">*</span></label>
+                                            @Html.TextBoxFor(m => m.HeightInch, new { @class = "form-control", @onblur = "return calculatePlotArea();", @onkeypress = "return isNumberOrDecimal(event);", maxlength = "50", @placeholder = "Enter  Height in Inches" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6">
+                                            <label class="float-label">Plot Area<span style="color:red">*</span></label>
+                                           @Html.TextBoxFor(m => m.PlotArea, new { @class = "form-control", @ReadOnly = "ReadOnly", @Placeholder = "Plot Area", @onkeypress = "return isNumberOrDecimal(event);" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="float-label">Unit<span style="color:red">*</span></label>
+                                            @Html.DropDownListFor(m => m.UnitID, new SelectList(ViewBag.ddlUnit, "Value", "Text"), new { @class = "form-control" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        
+                                        <div class="col-md-6">
+                                            @if (Model.PlotSizeID == null)
+                                            {
+                                                <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave" />
+                                            }
+                                            else
+                                            {
+                                                @Html.HiddenFor(m => m.PlotSizeID, new { @Value = @Model.PlotSizeID })
+                                                <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="btnUpdate" />
+                                            }
+                                            <a class="btn btn-info" href="/Master/PlotSizeList">Back To List</a>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+    function calculatePlotArea() {
+        var widthFeet = Number($('#WidthFeet').val());
+        var widthInch = Number($('#WidthInch').val());
+        var totalWidth = widthFeet + (widthInch / 12);
+
+        var heightFeet = Number($('#HeightFeet').val());
+        var heightInch = Number($('#HeightInch').val());
+        var totalHeight = heightFeet + (heightInch / 12);
+
+        document.getElementById("PlotArea").value = totalHeight * totalWidth;
+    }
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#WidthFeet').val() == '') {
+            $("#WidthFeet").addClass('errortext');
+            $('#WidthFeet').focus();
+            return false;
+        }
+        if ($('#WidthInch').val() == '') {
+            $("#WidthInch").addClass('errortext');
+            $('#WidthInch').focus();
+            return false;
+        }
+        if ($('#HeightFeet').val() == '') {
+            $("#HeightFeet").addClass('errortext');
+            $('#HeightFeet').focus();
+            return false;
+        }
+        if ($('#HeightInch').val() == '') {
+            $("#HeightInch").addClass('errortext');
+            $('#HeightInch').focus();
+            return false;
+        }
+        if ($('#PlotArea').val() == '') {
+            $("#PlotArea").addClass('errortext');
+            $('#PlotArea').focus();
+            return false;
+        }
+        if ($('#UnitID').val() == '0') {
+            $("#UnitID").addClass('errortext');
+            $('#UnitID').focus();
+            return false;
+        }
+
+        return true;
+    }
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+</script>
+
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+

@@ -1,0 +1,138 @@
+﻿@model Dolphin.Models.Master
+@{
+    ViewBag.Title = "SectorMaster";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("SaveSector", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="page-header-title">
+                            <h4 class="m-b-10">Sector Master</h4>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <div class="page-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Add New Sector</h5>
+                                        <p style="color: red">
+                                            @TempData["SectorMaster"]
+                                        </p>
+                                        <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
+                                    </div>
+                                    <div class="card-block">
+
+
+                                        <div class="form-group row">
+                                            <div class="col-sm-6">
+                                                <label class="float-label">Site Name<span style="color:red">*</span></label>
+                                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control" })
+                                                <span class="form-bar"></span>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="float-label">Sector Name<span style="color:red">*</span></label>
+                                                @Html.TextBoxFor(m => m.SectorName, new { @class = "form-control", @Placeholder = "Sector Name" })
+                                                <span class="form-bar"></span>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                @if (Model.SectorID == null)
+                                                {
+                                                    <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave" />
+                                                }
+                                                else
+                                                {
+                                                    @Html.HiddenFor(m => m.SectorID, new { @Value = @Model.SectorID })
+                                                    <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="btnUpdate" />
+                                                }
+                                                <a class="btn btn-info" href="/Master/SectorList">Back To List</a>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        }
+
+        <script>
+            function validateform() {
+                $(".errortext").removeClass("errortext");
+
+                if ($('#SiteID').val() == '0') {
+                    $("#SiteID").addClass('errortext');
+                    $('#SiteID').focus();
+                    return false;
+                }
+                if ($('#SectorName').val() == '') {
+                    $("#SectorName").addClass('errortext');
+                    $('#SectorName').focus();
+                    return false;
+                }
+
+
+                return true;
+            }
+
+            function isNumberOrDecimal(evt) {
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if (charCode != 46 && charCode > 31
+                  && (charCode < 48 || charCode > 57))
+                    return false;
+
+                return true;
+            }
+
+            function onlyAlphabets(e, t) {
+                try {
+                    if (window.event) {
+                        var charCode = window.event.keyCode;
+                    }
+                    else if (e) {
+                        var charCode = e.which;
+                    }
+                    else { return true; }
+                    if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                        return true;
+                    else
+                        return false;
+                }
+                catch (err) {
+                    alert(err.Description);
+                }
+            }
+
+        </script>
+
+
+        <style>
+            .errortext {
+                border: 1px solid red !important;
+                background-color: #fff0f0 !important;
+            }
+        </style>

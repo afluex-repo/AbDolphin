@@ -1,0 +1,97 @@
+﻿@model Dolphin.Models.Plot
+
+@{
+    ViewBag.Title = "AccountHeadList";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("AccountHeadList", "Admin", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">Account Head List</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- HTML5 Export Buttons table start -->
+                            <div class="card">
+                                <div class="card-header table-card-header">
+                                    <p style="color:red">
+                                        @TempData["msg"]
+                                    </p>
+                                    <a class="btn btn-primary btn-sm" target="_blank" style="margin-left:76%" href="/Admin/AccountHead">Add New</a>
+                                </div>
+                                <div class="card-block">
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-hover table-bordered" data-page-length='25' style="width:100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Name</th>
+                                                    <th>Mobile No</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.lstAccountHead != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var Item in Model.lstAccountHead)
+                                                        {
+                                                            <tr class="text-left">
+                                                                <td>@i</td>
+                                                                <td>@Item.Name</td>
+                                                                <td>@Item.Mobile</td>
+                                                                @if (Item.Status == "True")
+                                                                {
+                                                                    <td><a class="btn btn-success py-1" href="/Admin/InActivateAccountHead?Id=@Item.AccountHeadId" style="border-radius:100px;"><span>Active</span></a></td>
+                                                                }
+                                                                else if (Item.Status == "False")
+                                                                {
+                                                                    <td><a class="btn btn-danger btn-sm" href="/Admin/ActivateAccountHead?Id=@Item.AccountHeadId" style="border-radius:100px;"><span>InActive</span></a></td>
+                                                                }
+                                                                else
+                                                                {
+
+                                                                }
+                                                                <td>
+                                                                    <a class="btn btn-danger btn-sm" href="/Admin/DeleteAccountHead?Id=@Item.AccountHeadId"><span>Delete</span></a>
+                                                                </td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+
+
+

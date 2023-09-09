@@ -1,0 +1,190 @@
+﻿@model Dolphin.Models.Topup
+@{
+    ViewBag.Title = "AdvancePayment";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+}
+
+<style>
+    #divload {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 9999;
+        background: url("../files/assets/images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
+    }
+
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+@*<div class="loader" id="divload"></div>*@
+
+@using (Html.BeginForm("AdvancePayment", "Topup", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10"> Advance Payment</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Advance Payment</h5>
+                                    <p style="color:red;text-align:center;">
+                                        @TempData["Topup"]
+                                    </p>
+                                </div>
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Login ID<span style="color: red">*</span><span id="memberName" style="color: blue; float: right"></span>
+                                                @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @Placeholder = "Login ID", @onchange = "return GetNameByLoginId();" })
+                                                @Html.HiddenFor(m => m.PK_UserId)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Name<span style="color: red">*</span><span id="memberName" style="color: blue; float: right"></span>
+                                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name", @readonly = true })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Amount<span style="color: red">*</span><span id="memberName" style="color: blue; float: right"></span>
+                                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "Payment", @onkeypress = "return isNumberOrDecimal(event);" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Payment Date<span style="color: red">*</span><span id="memberName" style="color: blue; float: right"></span>
+                                                @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @Placeholder = "Payment Date",@readonly=true })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <br />
+                                                <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Save" id="btnsave" name="btnsave" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+    function validateform()
+    {
+        $(".errortext").removeClass("errortext");
+        if ($("#LoginID").val() == "") {
+            $("#LoginID").addClass();
+            $("#LoginID").focus();
+            return false;
+        }
+        if ($("#Name").val() == "") {
+            $("#Name").addClass();
+            $("#Name").focus();
+            return false;
+        }
+        if ($("#Amount").val() == "") {
+            $("#Amount").addClass();
+            $("#Amount").focus();
+            return false;
+        }
+        if ($("#PaymentDate").val() == "") {
+            $("#PaymentDate").addClass();
+            $("#PaymentDate").focus();
+            return false;
+        }
+    } 
+
+
+    function GetNameByLoginId()
+    {
+        debugger;
+        var LoginID = $("#LoginID").val();
+        $.ajax({
+            url: '/Topup/GetNameByLoginId', type: 'post', dataType: 'json',
+            data: { 'LoginID': LoginID },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    $("#Name").val(data.Name);
+                    $("#PK_UserId").val(data.PK_UserId);
+                    $("#Name").removeClass('errortext');
+                    $("#LoginID").removeClass('errortext');
+                }
+                else if (data.Result == "no") {
+                    alert("Invalid LoginId");
+                    $("#Name").val('');
+                    $("#LoginID").addClass('errortext');
+                    $('#LoginID').focus();
+                    $('#LoginID').val('');
+                }
+            }
+        });
+    }
+
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    $('#PaymentDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+
+
+
+</script>
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,85 @@
+﻿@model Dolphin.Models.Reports
+
+@{
+    ViewBag.Title = "SummryReports";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
+}
+
+<div class="loader" id="divload"></div>
+
+@using (Html.BeginForm("SummryReports", "AssociateDashBoard", FormMethod.Post, new { @id = "form1" }))
+{
+    <p style="color: red"> @TempData["Plot"]</p>
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        @*<h4 class="m-b-10">Direct Business Reports</h4>*@
+                        <h4 class="m-b-10">Summry Reports</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- HTML5 Export Buttons table start -->
+                            <div class="card">
+                                <div class="card-header table-card-header">
+
+                                </div>
+                                <div class="card-block">
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>LoginId</th>
+                                                    <th>Name</th>
+                                                    @*<th>Business</th>*@
+                                                    <th>Income</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.lstsummry != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var Item in Model.lstsummry)
+                                                        {
+                                                            <tr class="text-left">
+                                                                <td>@i</td>
+                                                                <td>@Item.LoginId</td>
+                                                                <td>@Item.Name</td>
+                                                                @*<td>@Item.Business</td>*@
+                                                                <td>@Item.Income</td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+                                                }
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+

@@ -1,0 +1,106 @@
+﻿@model Dolphin.Models.AssociateBooking
+
+@{
+    ViewBag.Title = "PayoutLedger";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
+}
+
+ 
+@using (Html.BeginForm("PayoutLedger", "AssociateDashboard", FormMethod.Post, new { @id = "form1" }))
+{
+
+    <p style="color: red">
+        @TempData[""]
+    </p>
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">Payout Ledger</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- HTML5 Export Buttons table start -->
+                            <div class="card">
+                                @*<div class="card-header table-card-header">
+                                        <a class="btn btn-primary btn-sm" style="margin-left:75%" href="/Master/NewsMaster">Add New</a>
+                                    </div>*@
+                                <div class="card-block">
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Transaction Date</th>
+                                                    <th>Narration</th>
+                                                    <th>Credit Amount</th>
+                                                    <th>Debit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.lstPlot != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var Item in Model.lstPlot)
+                                                        {
+                                                            <tr class="text-left">
+                                                                <td>@i</td>
+                                                                <td>@Item.TransactionDate</td>
+                                                                <td>@Item.Narration</td>
+                                                                <td>@Item.Credit</td>
+                                                                
+                                                                <td>@Item.Debit</td>
+                                                                
+                                                            </tr>
+
+                                                            i++;
+                                                        }
+                                                    }
+                                                }
+
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th>@ViewBag.Credit</th>
+                                                    <th>@ViewBag.Debit</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Transaction Date</th>
+                                                    <th>Narration</th>
+                                                    <th>Credit Amount</th>
+                                                    <th>Debit</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+
+

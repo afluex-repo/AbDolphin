@@ -1,0 +1,211 @@
+﻿@model Dolphin.Models.Reports
+
+@{
+    ViewBag.Title = "DownBusinessReport";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<style>
+    #divload {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 9999;
+        background: url("../files/assets/images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
+    }
+
+    .errortext {
+        border: 1px solid red !important;
+    }
+    .table td, .table th {
+    padding: 7px;
+}
+</style>
+<div class="loader" id="divload"></div>
+
+@using (Html.BeginForm("DownBusinessReport", "AdminReports", FormMethod.Post, new { @id = "form1" }))
+{
+
+    <p style="color: red">
+        @TempData["Plot"]
+    </p>
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">Downline Business Reports</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- HTML5 Export Buttons table start -->
+                            <div class="card">
+                                <div class="card-header table-card-header">
+
+                                </div>
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                LoginId
+                                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Search by Customer ID" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                From Date
+                                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                To Date
+                                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <br />
+                                                <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="btnSearch" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Login Detail</th>
+                                                    <th>Total Business</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.lstP != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var Item in Model.lstP)
+                                                        {
+                                                            <tr class="text-left">
+                                                                <td>@i</td>
+                                                                <td>@Item.LoginId</td>
+                                                                <td>@Item.TotalAllotmentAmount</td>
+                                                                <td><a href="#@Item.Fk_UserId" class="btn btn-success btn-sm" onclick="OpenLedger('@Item.Fk_UserId');">View Business
+</a></td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+                                                }
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.Fk_UserId)
+    <div class="modal fade" id="myModal" role="dialog" style="display: none;padding-top:55px;">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Business Details</h6>
+                    <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
+
+                </div>
+                <div class="modal-body" style="color: black">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel-body table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="tblData">
+                                    <thead>
+                                        <tr>
+                                            <th>LoginId</th>
+                                            <th>Name</th>
+                                            <th>Business</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal();">Close</button>
+                    </div>*@
+            </div>
+
+        </div>
+    </div>
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+<script>
+
+
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+    function OpenLedger(Fk_UserId) {
+        $("#Fk_UserId").val(Fk_UserId);
+        $(".errortext").removeClass("errortext");
+        $.ajax({
+            url: "/AdminReports/GetDownLineBusinessById",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_UserId: $("#Fk_UserId").val(), FromDate: $("#FromDate").val(), ToDate: $("#ToDate").val() },
+            success: function (data) {
+                console.log(data)
+                debugger
+                $('#tblData').find("tr:not(:first)").remove();
+                if (data.lstDownLineBusiness !=null && data.lstDownLineBusiness.length > 0) {
+                    for (var i = 0; i < data.lstDownLineBusiness.length; i++) {
+                        $("#tblData").append('<tr><td id="LoginId' + i + ' " >' + data.lstDownLineBusiness[i].LoginId +
+                            '</td><td id="Name' + i + ' " >' + data.lstDownLineBusiness[i].Name +
+                             '</td><td id="Business' + i + ' " >' + data.lstDownLineBusiness[i].Business +
+                            '</td></tr>')
+                    }
+                    $("#myModal").modal('show');
+                }
+                else {
+                    alert('No record found !!')
+                }
+            }
+        });
+
+    }
+
+    function closeModal() {
+        $("#myModal").hide();
+        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
+    }
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+
+
+</script>

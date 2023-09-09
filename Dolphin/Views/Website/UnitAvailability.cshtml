@@ -1,0 +1,430 @@
+﻿@model Dolphin.Models.Website
+
+@{
+    ViewBag.Title = "UnitAvailability";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .pd-bottom-90 {
+    padding-bottom: 90px;
+}
+.pd-top-120 {
+    padding-top: 120px;
+}
+.rld-banner-tab {
+    border-bottom: 0;
+}
+.rld-banner-tab .nav-item:last-child {
+    margin-bottom: 0;
+}
+status {
+    padding-top: 50px;
+}
+.rld-main-search {
+    padding: 50px 30px 35px 30px;
+    background: #fff;
+    -webkit-box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 0 6px 6px 6px;
+}
+
+    .rld-main-search .rld-single-input,
+    .rld-main-search .rld-single-select .single-select {
+        margin-bottom: 15px;
+    }
+
+    .rld-main-search .btn {
+        width: 100%;
+    }
+
+.rld-single-input {
+    position: relative;
+}
+
+    .rld-single-input input {
+        height: 48px;
+        line-height: 48px;
+        width: 100%;
+        padding: 0 20px;
+        border: 1px solid #D4D4D4;
+        -webkit-transition: all 0.4s ease;
+        -moz-transition: all 0.4s ease;
+        -o-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+        border-radius: 4px;
+        font-size: 15px;
+    }
+
+        .rld-single-input input:hover, .rld-single-input input:active, .rld-single-input input:focus {
+            border: 1px solid var(--main-color-one);
+        }
+
+    .rld-single-input.left-icon:before {
+        content: '';
+        background-image: url("../img/icons/1.png");
+        position: absolute;
+        top: 17px;
+        background-size: auto;
+        height: 17px;
+        width: 12px;
+        left: 19px;
+        background-repeat: no-repeat;
+    }
+
+    .rld-single-input.left-icon input {
+        padding-left: 40px;
+    }
+
+    .rld-single-input textarea {
+        height: 120px;
+        width: 100%;
+        padding: 10px 20px;
+        border: 1px solid #D4D4D4;
+        -webkit-transition: all 0.4s ease;
+        -moz-transition: all 0.4s ease;
+        -o-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+        border-radius: 4px;
+        font-size: 15px;
+    }
+
+        .rld-single-input textarea:hover, .rld-single-input textarea:active, .rld-single-input textarea:focus {
+            border: 1px solid var(--main-color-one);
+        }
+
+.rld-single-select .single-select {
+    height: 48px;
+    line-height: 47px;
+    width: 100%;
+    padding: 0 34px 0 20px;
+    border: 1px solid #D4D4D4;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    position: relative;
+    border-radius: 4px;
+}
+
+    .rld-single-select .single-select:hover, .rld-single-select .single-select:active, .rld-single-select .single-select:focus {
+        border: 1px solid var(--main-color-one);
+    }
+
+    .rld-single-select .single-select:after {
+        border: 0;
+    }
+
+    .rld-single-select .single-select:before {
+        content: '';
+        background-image: url("../img/icons/2.png");
+        position: absolute;
+        top: 19px;
+        background-size: auto;
+        height: 10px;
+        width: 11px;
+        right: 14px;
+        left: auto;
+        background-repeat: no-repeat;
+    }
+
+    .rld-single-select .single-select .list {
+        width: 100%;
+    }
+
+.rld-price-slider-wrap .rld-price-slider,
+.rld-price-slider-wrap .rld-size-slider {
+    height: 5px;
+    background: #FFF0E5;
+    border: 0;
+    margin: 20px 0 0 0;
+}
+
+.rld-price-slider-wrap .ui-slider-handle {
+    height: 24px;
+    width: 42px;
+    background: var(--main-color-one);
+    border: 0;
+    text-align: center;
+    color: #fff;
+    border-radius: 30px;
+    top: -10px;
+    font-size: 13px;
+    line-height: 25px;
+}
+
+/****** banner-search *******/
+.rld-banner-search .rld-single-input input {
+    -webkit-box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+    border: 0;
+    padding-right: 140px;
+}
+
+.rld-banner-search .rld-single-input button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 48px;
+    line-height: 48px;
+    border: 0;
+    padding: 0 20px;
+    font-weight: 600;
+    background: var(--main-color-one);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+}
+.availability-status {
+    padding-top: 50px;
+}
+p.forbuy {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    background: #d5a829;
+    border: solid 1px #c39619;
+    padding: 15px 40px;
+    border-radius: 20px 0px 20px 0px;
+}
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #de2223;
+    outline: 0;
+    box-shadow: 0 0 4px 0rem #de2223;
+}
+}
+</style>
+    <!-- Main Stylesheet -->
+    @*<link rel="stylesheet" href="../assets/css/style.css">*@
+    
+
+
+    @using (Html.BeginForm("UnitAvailability", "Website", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+    {
+
+        <!-- Sub banner start -->
+        <div class="sub-banner">
+            <div class="container">
+                <div class="page-name">
+                    <h1>Unit Availability</h1>
+                    <ul>
+                        <li>Home</li>
+                        <li><span>/</span>Unit Availability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <!-- Unit Availability area start -->
+        <div class="main-search-area pd-top-120 pd-bottom-90">
+            <div class="container">
+                <div class="banner-search-wrap">
+                    <ul class="nav nav-tabs rld-banner-tab">
+                        <li class="nav-item">
+                            <p class="forbuy">For Buy</p>
+                            @*<a class="nav-link active" data-toggle="tab" href="#tabs_1">For Buy</a>*@
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tabs_1">
+                            <div class="rld-main-search">
+                                <div class="row">
+
+                                    <div class="col-xl-2 col-lg-6 col-md-6">
+                                        <div class="form-group">
+
+                                            @Html.DropDownListFor(m => m.SiteTypeID, new SelectList(ViewBag.ddlSiteType, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteTypeChange();" })
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-4 col-md-4">
+
+                                        @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+
+                                    </div>
+                                    <div class="col-xl-2 col-lg-4 col-md-4">
+                                        @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
+                                    </div>
+                                    <div class="col-xl-2 col-lg-4 col-md-4">
+                                        @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-xl-2 col-lg-4 col-md-4">
+                                        @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @placeholder = "Plot Number" })
+                                    </div>
+                                    <div class="col-xl-2 col-lg-4 col-md-4">
+                                        <input type="submit" name="Search" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails(); " />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container availability-status">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label style="color: black;"><b><u>Availability Status</u></b></label>
+                    </div>
+                    <div class="col-md-2">
+                        <div style="border: solid; border-color: #e66b6b; background-color: #e66b6b; height: 20px; width: 20px; float: left"></div>
+                        - Booked
+                    </div>
+                    <div class="col-md-2">
+                        <div style="border: solid; border-color: #69ce69; background-color: #69ce69; height: 20px; width: 20px; float: left"></div>
+                        - Available
+                    </div>
+                    <div class="col-md-2">
+                        <div style="border: solid; border-color: yellow; background-color: yellow; height: 20px; width: 20px; float: left"></div>
+                        - On Hold
+                    </div>
+                    <div class="col-md-2">
+                        <div style="border: solid; border-color: #e470e4; background-color: #e470e4; height: 20px; width: 20px; float: left"></div>
+                        - Allotted
+                    </div>
+
+                </div>
+            </div>
+            <div class="tab-content" style="margin-left:100px;">
+                <div class="tab-pane fade show active" id="tabs_1">
+                    <div class="rld-main-search">
+
+                        <div class="row">
+                            @if (Model != null)
+                {
+                    if (Model.lstPlot != null)
+                    {
+                        foreach (var Item in Model.lstPlot)
+                        {
+                                        @*<a href="#" data-toggle="tooltip" title="Plot Amount :@Item.PlotAmount ; Plot Area :@Item.PlotArea">*@
+                                        <div style="width:15%;margin-left:0.5%;color:black;background: @Item.ColorCSS; border:Solid; float:left; height:100px; margin-bottom:0.5%; text-align:center; padding-top:0.5%">
+                                            <input type="hidden" value="@Item.PlotID" />
+                                            <input type="hidden" value="@Item.SiteID" />
+                                            <input type="hidden" value="@Item.SectorID" />
+                                            <b>Plot Number : </b>@Item.PlotNumber
+                                            <br />
+                                            <b>Plot Area : </b>@Item.PlotArea
+                                            <br />
+                                            (@Item.SectorName,@Item.BlockName)
+                                        </div>
+                                        @*</a>*@
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div></div>
+                    </div>
+                    <!-- Unit Availability area end -->
+                    }
+    
+<script>
+    function GetDetails() {
+
+        $(".errortext").removeClass("errortext");
+        if ($('#SiteTypeID').val() == '0') {
+            $("#SiteTypeID").addClass('errortext');
+            $('#SiteTypeID').focus();
+            return false;
+        }
+
+        if ($('#SiteID').val() == '0') {
+            $("#SiteID").addClass('errortext');
+            $('#SiteID').focus();
+            return false;
+        }
+        return true;
+    }
+    function onSiteTypeChange() {
+        //  $("#divload").css({ 'display': '' });
+
+        var value = $('#SiteTypeID').val();
+        var values = $('#SiteID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Website/GetSiteBySiteType",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteTypeID: value },
+            success: function (data) {
+                var j = 1;
+
+                //   $("#divload").css({ 'display': 'none' });
+
+                $("#SiteID").html(""); // clear before appending new list
+                $("#SiteID").empty();
+                $("#SiteID").append(
+                      $('<option></option>').val(0).html('Select Site'));
+                $.each(data.ddlSite, function (index, Sectorcount) {
+                    $("#SiteID").append(
+                          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                });
+
+            }
+
+        });
+
+    }
+    function onSiteChange() {
+        $("#divload").css({ 'display': '' });
+
+        var value = $('#SiteID').val();
+        var values = $('#SectorID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Website/GetSitesDetails",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+                var j = 1;
+                if (data.Result == "yes") {
+                    $("#divload").css({ 'display': 'none' });
+                    $('#Rate').val(data.Rate);
+                    $("#SectorID").html(""); // clear before appending new list
+                    $("#SectorID").empty();
+                    $("#SectorID").append(
+                          $('<option></option>').val(0).html('Select Sector'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#SectorID").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                    });
+
+                }
+                else {
+                    $("#SectorID").empty();
+                    $('#Rate').val('');
+                }
+            }
+
+        });
+
+    }
+
+    function onSectorChange() {
+
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#SiteID').val();
+        var sectorID = $('#SectorID').val();
+        $.ajax({
+            url: '/Website/GetBlockList', type: 'post', dataType: 'json',
+            data: { 'SiteID': siteID, 'sectorID': sectorID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                $("#BlockID").html(""); // clear before appending new list
+                $("#BlockID").empty();
+                $("#BlockID").append(
+                      $('<option></option>').val(0).html('Select Block'));
+                $.each(data.lstBlock, function (index, BlockCount) {
+                    $("#BlockID").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+
+            }
+
+        });
+    }
+
+
+</script>

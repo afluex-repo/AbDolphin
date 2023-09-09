@@ -1,0 +1,83 @@
+﻿@model Dolphin.Models.Master
+
+@{
+    ViewBag.Title = "NewsList";
+Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+
+
+@using (Html.BeginForm("NewsList", "Master", FormMethod.Post, new { @id = "form1" }))
+{
+ 
+    <p style="color: red">
+        @TempData["News"]
+    </p>
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">News List</h5>
+                    <button class="btn btn-primary repeater-add-btn px-4"><a href="/Master/NewsMaster" class="text-white">Add New</a></button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+               <div class="table-responsive">
+                   <table class="table table-bordered table-striped mb-0">
+                       <thead>
+                           <tr class="table-active">
+                               <th>Sr No.</th>
+                               <th>Heading</th>
+                               <th>Body</th>
+                               <th>News For</th>
+                               <th>Action</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           @if (Model != null)
+                           {
+                               if (Model.lstBlock1 != null)
+                               {
+                                   int i = 1;
+                                   foreach (var Item in Model.lstBlock1)
+                                   {
+                                       <tr class="text-left">
+                                           <td>@i</td>
+                                           <td>@Item.NewsHeading</td>
+                                           <td>@Item.NewsBody</td>
+                                           <td>@Item.NewsFor</td>
+                                           <td>
+                                               <a href="/Master/NewsMaster?NewsID=@Item.NewsID" class="btn btn-info btn-sm">Edit</a>
+                                               <a href="/Master/DeleteNews?id=@Item.NewsID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you wish to delete this News?');">Delete</a>
+                                           </td>
+
+                                       </tr>
+
+                                       i++;
+                                   }
+                               }
+                           }
+                       </tbody>
+                       <tfoot>
+                           <tr class="table-active">
+                               <th>Sr No.</th>
+                               <th>Heading</th>
+                               <th>Body</th>
+                               <th>News For</th>
+                               <th>Action</th>
+                           </tr>
+                       </tfoot>
+                   </table>
+               </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+
+

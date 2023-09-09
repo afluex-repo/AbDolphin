@@ -1,0 +1,97 @@
+﻿@model Dolphin.Models.Master
+@{
+    ViewBag.Title = "BranchList";
+
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("BranchList", "Master", FormMethod.Post, new { @id = "form1" }))
+{
+
+    <p style="color: red">
+        @TempData["Branch"]
+    </p>
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">Branch List</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- HTML5 Export Buttons table start -->
+                            <div class="card">
+                                <div class="card-header table-card-header">
+                                    <a class="btn btn-primary btn-sm" style="margin-left:76%" href="/Master/BranchMaster">Add New</a>
+                                </div>
+                                <div class="card-block">
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Branch Name</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.lstBlock1 != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var Item in Model.lstBlock1)
+                                                        {
+                                                            <tr>
+                                                                <td>@i</td>
+                                                                <td>@Item.BranchName</td>
+
+                                                                <td>
+                                                                    <a href="/Master/BranchMaster?BranchID=@Item.EncryptKey" class="btn btn-info btn-sm">Edit</a>
+                                                                    <a href="/Master/DeleteBranch?id=@Item.BranchID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you wish to delete this Branch?');">Delete</a>
+                                                                </td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+
+
+                                                    }
+                                                }
+
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Branch Name</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+
+
+

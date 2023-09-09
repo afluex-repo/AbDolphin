@@ -1,0 +1,87 @@
+﻿@model Dolphin.Models.Reports
+
+@{
+    ViewBag.Title = "BusinessDevelopmentExpenseMaster_Report";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
+}
+
+@using (Html.BeginForm("BusinessDevelopmentExpenseMaster_Report", "AssociateDashboard", FormMethod.Post, new { @id = "form1" }))
+{
+
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">BusinessDevelopmentExpense Report</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-block">
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Name</th>
+                                                    <th>Target</th>
+                                                    <th>Business</th>
+                                                    <th>Income</th>
+                                                    <th>Month</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.lstExpenseMasterBusinessReport != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var Item in Model.lstExpenseMasterBusinessReport)
+                                                        {
+                                                            <tr class="text-left">
+
+                                                                <td>@i</td>
+                                                                <td>@Item.Name</td>
+                                                                <td>@Item.Target</td>
+                                                                <td>@Item.Business</td>
+                                                                <td>@Item.Income</td>
+                                                                <td>@Item.Month</td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th>@ViewBag.Target</th>
+                                                    <th>@ViewBag.Income</th>
+                                                    <th>@ViewBag.Business</th>
+                                                    <th></th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,40 @@
+﻿@model Dolphin.Models.Home
+
+<ul class="metismenu" id="menu">
+    @if (Model != null)
+            {
+                if (Model.lstMenu != null)
+                {
+                    foreach (var item in Model.lstMenu)
+                    {
+                <li>
+                    <a href="@item.Url" class="has-arrow">
+                        <div class="parent-icon">
+                            <i class='bx bx-home'></i>
+                        </div>
+                        <div class="menu-title">@item.MenuName</div>
+                    </a>
+
+                    @if (item.Url == "#")
+                    {
+                        <ul>
+                            @foreach (var item1 in Model.lstsubmenu)
+                            {
+                                if (item1.MenuId == item.MenuId)
+                                {
+
+                                    <li>
+                                        <a href="@item1.Url"><i class='bx bx-category'></i>@item1.SubMenuName</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    }
+                </li>
+            }
+        }
+    }
+</ul>
+
+
+
