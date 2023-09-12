@@ -7,19 +7,10 @@
 
 
 <style>
-    #divload {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        z-index: 9999;
-        background: url("../files/assets/images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
-    }
-
     .errortext {
         border: 1px solid red !important;
     }
 </style>
-<div class="loader" id="divload"></div>
 
 @using (Html.BeginForm("PayoutRequest", "AssociateDashboard", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
