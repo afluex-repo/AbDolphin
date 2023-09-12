@@ -538,8 +538,10 @@ namespace Dolphin.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         TempData["Login"] = "Password updated successfully..";
-                        FormName = "Login";
-                        Controller = "Home";
+                        //FormName = "Login";
+                        //Controller = "Home";
+                        FormName = "ChangePasswordCustomer";
+                        Controller = "CustomerDashboard";
                     }
                     else
                     {

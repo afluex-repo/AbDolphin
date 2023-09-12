@@ -98,7 +98,7 @@
                                         <h5>Due Installment</h5>
 
                                     </div>
-                                    <div class="card-block">
+                                    @*<div class="card-block">
                                         <div class="table-responsive">
                                             <table class="table table-hover">
                                                 <thead>
@@ -139,7 +139,7 @@
                                             </table>
 
                                         </div>
-                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
                         </div>
@@ -148,9 +148,233 @@
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+
+
+        <div class="page-content">
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">Dashboard</h5>
+                    </div>
+                    <p style="color:red">
+                        @TempData["Dashboard"]
+                    </p>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+            <!--end row-->
+            <div class="row">
+                <div class="col d-flex">
+                    <div class="card radius-10 w-100">
+                        <div class="card-header bg-transparent">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h6 class="mb-0 py-2">Booking Details</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container-1">
+                                <canvas id="chart16"></canvas>
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                                Alloted Plots
+                                <span class="badge bg-warning rounded-pill">&nbsp;</span>
+                            </li>
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                Booked Plots
+                                <span class="badge bg-gradient-ibiza rounded-pill">&nbsp;</span>
+                            </li>
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                Hold Plots <span class="badge bg-gradient-deepblue rounded-pill">&nbsp;</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="col d-flex">
+                    <div class="card radius-10 w-100">
+                        <div class="card-header bg-transparent">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h6 class="mb-0 py-2">News</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container-1">
+                                <canvas id="chart17"></canvas>
+                            </div>
+                        </div>
+                        @*<ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                                Total <span class="badge rounded-pill" style="background-color:#3366cc;">&nbsp;</span>
+                            </li>
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                InActive <span class="badge rounded-pill" style="background-color:#ff9900">&nbsp;</span>
+                            </li>
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                Active <span class="badge rounded-pill" style="background-color:#109618;">&nbsp;</span>
+                            </li>
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                Other <span class="badge rounded-pill" style="background-color:#ccc;">&nbsp;</span>
+                            </li>
+                        </ul>*@
+                    </div>
+                </div>
+                
+
+
+
+
+
+                <div class="col d-flex">
+                    <div class="card radius-10 w-100">
+                        <div class="card-header bg-transparent">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h6 class="mb-0 py-2">Monthly Bookings</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container-1">
+                                <canvas id="chart17"></canvas>
+                            </div>
+                        </div>
+                        @*<ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                                Total <span class="badge rounded-pill" style="background-color:#3366cc;">&nbsp;</span>
+                            </li>
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                InActive <span class="badge rounded-pill" style="background-color:#ff9900">&nbsp;</span>
+                            </li>
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                Active <span class="badge rounded-pill" style="background-color:#109618;">&nbsp;</span>
+                            </li>
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                                Other <span class="badge rounded-pill" style="background-color:#ccc;">&nbsp;</span>
+                            </li>
+                        </ul>*@
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Due Installment</h5>
+                        <div class="table-responsive">
+                            <table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Customer ID</th>
+                                        <th>Customer Name</th>
+                                        <th>Installment No.</th>
+                                        <th>Installment Amount</th>
+                                        <th>Plot Details</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                {
+                                    if (Model.ListInstallment != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.ListInstallment)
+                                        {
+                                <tr>
+                                    <td>@i</td>
+
+                                    <td>@Item.CustomerLoginID</td>
+                                    <td>@Item.CustomerName</td>
+                                    <td>@Item.InstallmentNo</td>
+                                    <td>@Item.InstallmentAmount</td>
+                                    <td>@Item.PlotNumber</td>
+                                </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+
+                                </tbody>
+
+                            </table>
+                            @*<div class="text-end m-r-20">
+                                <a href="/Plot/PlotBookingList" class="b-b-primary btn btn-dark text-white">View all Bookings</a>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+        @*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+
+
+
+
+
+
+
+
+
+
+
     }
 </body>
 </html>
+
+
+
+
 
 
 
