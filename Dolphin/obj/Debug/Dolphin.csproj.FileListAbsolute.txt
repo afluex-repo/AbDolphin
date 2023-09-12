@@ -212,3 +212,4 @@ F:\Sarfraz Ahmad\repository\AbDolphin\Dolphin\bin\System.Web.Http.xml
 F:\Sarfraz Ahmad\repository\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.xml
 F:\Sarfraz Ahmad\repository\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
 F:\Sarfraz Ahmad\repository\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb
+F:\Sarfraz Ahmad\repository\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
