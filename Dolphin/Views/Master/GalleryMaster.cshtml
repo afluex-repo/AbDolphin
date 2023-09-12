@@ -7,80 +7,59 @@
 
 @using (Html.BeginForm("SaveGallery", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">Gallery Master</h4>
-                    </div>
-
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Gallery Master</h5>
                 </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["Images"]
+                </p>
             </div>
         </div>
-    </div>
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
-                <div class="page-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Add New Picture</h5>
-                                    <p style="color: red">
-                                        @TempData["Images"]
-                                    </p>
-                                    <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
-                                </div>
-                                <div class="card-block">
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-md-12 mb-3">
+                        <h6>Add New Picture</h6>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label> Project <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select" })
+</div>
+                    </div>
 
-                                    <div class="form-group row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Project <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control" })
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                @*<img src="@Model.ProfilePicture" height="190" width="250" />*@
-                                                Image <span style="color: red">*</span>
-                                                <input type="file" name="postedFile" id="Image" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <br />
-                                                @if (Model.PK_GalleryID == null)
-                                                {
-                                                    <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave" />
-                                                }
-                                                else
-                                                {
-                                                    @Html.HiddenFor(m => m.PK_GalleryID, new { @Value = @Model.PK_GalleryID })
-                                                    <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="btnUpdate" />
-                                                }
-                                                <a class="btn btn-info" href="/Master/GalleryList">Back To List</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            @*<img src="@Model.ProfilePicture" height="190" width="250" />*@
+                            <label>Image <span style="color: red">*</span></label>   
+                            <input type="file" class="form-control" name="postedFile" id="Image" />
                         </div>
                     </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label class="d-block">&nbsp;</label>   
+                            @if (Model.PK_GalleryID == null)
+                            {
+                                <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave" />
+                            }
+                            else
+                            {
+                                @Html.HiddenFor(m => m.PK_GalleryID, new { @Value = @Model.PK_GalleryID })
+                                <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="btnUpdate" />
+                            }
+                            <a class="btn btn-info text-white" href="/Master/GalleryList">Back To List</a>
+                        </div>
+                    </div>
+
+
+
                 </div>
             </div>
         </div>
     </div>
-     
-
-
 }
 
 <script>

@@ -4,337 +4,317 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 <style>
-    #divload {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        z-index: 9999;
-        background: url("../files/assets/images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
-    }
 
     .errortext {
         border: 1px solid red !important;
     }
 </style>
-<div class="loader" id="divload"></div>
 @using (Html.BeginForm("SaveEMI", "Plot", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
 
 
     @Html.HiddenFor(m => m.PK_BookingId)
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">EMI Payment</h4>
+    
+
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">EMI Payment</h5>
+                </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["Plot"]
+                </p>
+            </div>
+        </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>Select Site <span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label> Select Sector <span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>Select Block <span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
+                        </div>
                     </div>
 
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label> Plot Number <span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number", @style = "text-transform:uppercase" })
+                            @Html.HiddenFor(m => m.PlotID)
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>Booking Number</label>
+                            @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Booking Number" })
+                            @Html.HiddenFor(m => m.PK_BookingId)
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <br />
+                            <input type="button" name="SearchPlot" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails();" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
-                <div class="page-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>EMI Payment</h5>
-                                    <p style="color: red">
-                                        @TempData["Plot"]
-                                    </p>
+
+        <div class="items" id="Details1" style="display: none;">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h5>Plot Details @*<small>List Of Sites</small>*@</h5>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Affiliate ID :</label>
+                                        <label id="AssoID"></label>
+                                    </div>
                                 </div>
-                                <div class="card-block">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                Select Site <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                Select Sector <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                Select Block <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                Plot Number <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number", @style = "text-transform:uppercase" })
-                                                @Html.HiddenFor(m => m.PlotID)
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                Booking Number
-                                                @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Booking Number" })
-                                                @Html.HiddenFor(m => m.PK_BookingId)
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <br />
-                                                <input type="button" name="SearchPlot" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails();" />
-                                            </div>
-                                        </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Affiliate Name :</label>
+                                        <label id="AssoName"></label>
                                     </div>
-                                    <div class="row" id="Details1" style="display: none;">
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <div class="x_panel">
-                                                <div class="x_title">
-                                                    <h2>Plot Details @*<small>List Of Sites</small>*@</h2>
-                                                    <ul class="nav navbar-right panel_toolbox">
-                                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                                                    </ul>
-                                                    <div class="clearfix"></div>
-                                                </div>
-
-                                                <div class="row ">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Affiliate ID :</label>
-                                                            <label id="AssoID"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Affiliate Name :</label>
-                                                            <label id="AssoName"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label> Customer ID :</label>
-                                                            <label id="CustID"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label> Customer Name :</label>
-                                                            <label id="CustName"></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Plot Rate :</label>
-                                                            <label id="Plotrte"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Plot Area :</label>
-                                                            <label id="Plotarea"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Actual Plot Amount :</label>
-                                                            <label id="ActPlotAmt"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Discount :</label>
-                                                            <label id="disct"></label>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="row">
-
-                                                    <div class="col-md-3" hidden="hidden">
-                                                        <div class="form-group">
-                                                            <label>Booking Amount :</label>
-                                                            <label id="bookingAmt"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3" >
-                                                        <div class="form-group">
-                                                            <label>Net Plot Amount :</label>
-                                                            <label id="netplotamount"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Booking Date :</label>
-                                                            <label id="Bookigdt"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Payment Plan :</label>
-                                                            <label id="Payplan"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Total Paid Amount:</label>
-                                                            <label id="Payamt"></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Allotment Date:</label>
-                                                            <label id="Paydt"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>No. of Installments:</label>
-                                                            <label id="noOfinst"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Installment Amount :</label>
-                                                            <label id="instAmt"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Balance :</label>
-                                                            <label id="bal"></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            Pay Amount<span style="color: red">*</span>
-                                                            @Html.TextBoxFor(m => m.PaidAmount, new { @class = "form-control", @Placeholder = "Pay Amount", @onchange = "return validatePayAmount()", @onkeypress = "return  isNumberOrDecimal(event);", @maxlength = "30" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            Payment Date<span style="color: red">*</span>
-                                                            @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @Placeholder = "Select Payment Date",@readonly=true })
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            Payment Mode <span style="color: red">*</span>
-                                                            @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode()" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            Receipt No.<span style="color: red">*</span>
-                                                            @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control", @Placeholder = "Enter Receipt No" })
-                                                        </div>
-                                                    </div>
-                                                @*</div>
-                                                <div class="row">*@
-                                                    <div class="col-md-3" id="divtransactiono" style="display: none">
-                                                        <div class="form-group">
-                                                            <span id="txnNo"></span> <span style="color: red">*</span>
-                                                            @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3" id="divPaymentMode" style="display: none">
-                                                        <div class="form-group">
-                                                            <span id="txndt"></span><span style="color: red">*</span>
-                                                            @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Date", @Readonly = "readonly" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3" id="divbankname" style="display: none">
-                                                        <div class="form-group">
-                                                            Bank Name <span style="color: red">*</span>
-                                                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Name" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3" id="divbankbranch" style="display: none">
-                                                        <div class="form-group">
-                                                            Bank Branch <span style="color: red">*</span>
-                                                            @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3" id="divadjustpayment" style="display: none">
-                                                        <div class="form-group">
-                                                            Payment Remarks <span style="color: red">*</span>
-                                                            @Html.TextBoxFor(m => m.PaymentRemarks, new { @class = "form-control", @maxlength = "100", @Placeholder = "Payment Remarks" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3" id="divreceiver" style="display: none">
-                                                        <div class="form-group">
-                                                            <span id="txtreceiver">Receiver Bank</span>
-                                                            @Html.TextBoxFor(m => m.ReceiverBank, new { @class = "form-control", @maxlength = "100", @Placeholder = "Receiver Bank" })
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            Account Head Name <span style="color: red">*</span>
-                                                            @Html.TextBoxFor(m => m.AccountHeadName, new { @class = "form-control", @Placeholder = "Account Head Name" })
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="row ">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <input type="submit" name="Save" value="Save" id="btnSave" class="btn btn-success" onclick="return validateform();" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="x_content">
-                                                    <div class="x_title">
-                                                        <h2>Installment Details @*<small>List Of Sites</small>*@</h2>
-                                                        <ul class="nav navbar-right panel_toolbox">
-                                                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                                                        </ul>
-                                                        <div class="clearfix"></div>
-                                                    </div>
-                                                    <table id="tblData" width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                                        <thead>
-                                                            <tr>
-                                                                <th hidden>PK_BookingId</th>
-                                                                <th hidden>BookingID</th>
-                                                                @* <th>S No.</th>*@
-                                                                <th>Installment No.</th>
-                                                                <th>Installment Date</th>
-                                                                <th>Installment Amount</th>
-                                                                <th>Paid Amount</th>
-                                                                <th>Payment Date</th>
-                                                                <th>Due Amount</th>
-                                                                <th>Payment Mode</th>
-                                                            </tr>
-                                                        </thead>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label> Customer ID :</label>
+                                        <label id="CustID"></label>
                                     </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label> Customer Name :</label>
+                                        <label id="CustName"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Plot Rate :</label>
+                                        <label id="Plotrte"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Plot Area :</label>
+                                        <label id="Plotarea"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Actual Plot Amount :</label>
+                                        <label id="ActPlotAmt"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Discount :</label>
+                                        <label id="disct"></label>
+                                    </div>
+                                </div>
 
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-3" hidden="hidden">
+                                    <div class="form-group">
+                                        <label>Booking Amount :</label>
+                                        <label id="bookingAmt"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Net Plot Amount :</label>
+                                        <label id="netplotamount"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Booking Date :</label>
+                                        <label id="Bookigdt"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Payment Plan :</label>
+                                        <label id="Payplan"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Total Paid Amount:</label>
+                                        <label id="Payamt"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Allotment Date:</label>
+                                        <label id="Paydt"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>No. of Installments:</label>
+                                        <label id="noOfinst"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Installment Amount :</label>
+                                        <label id="instAmt"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Balance :</label>
+                                        <label id="bal"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-group">
+                                        <label>Pay Amount<span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.PaidAmount, new { @class = "form-control", @Placeholder = "Pay Amount", @onchange = "return validatePayAmount()", @onkeypress = "return  isNumberOrDecimal(event);", @maxlength = "30" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-group">
+                                        <label> Payment Date<span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @Placeholder = "Select Payment Date", @readonly = true })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-group">
+                                        <label> Payment Mode <span style="color: red">*</span></label>
+                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode()" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-group">
+                                        <label>Receipt No.<span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control", @Placeholder = "Enter Receipt No" })
+                                    </div>
+                                </div>
+                                @*</div>
+                    <div class="row">*@
+                                <div class="col-md-3 mb-3" id="divtransactiono" style="display: none">
+                                    <div class="form-group">
+                                        <label><span id="txnNo"></span> <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3" id="divPaymentMode" style="display: none">
+                                    <div class="form-group">
+                                        <label><span id="txndt"></span><span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Date", @Readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3" id="divbankname" style="display: none">
+                                    <div class="form-group">
+                                        <label>Bank Name <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Name" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3" id="divbankbranch" style="display: none">
+                                    <div class="form-group">
+                                        <label>Bank Branch <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3" id="divadjustpayment" style="display: none">
+                                    <div class="form-group">
+                                        <label> Payment Remarks <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.PaymentRemarks, new { @class = "form-control", @maxlength = "100", @Placeholder = "Payment Remarks" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3" id="divreceiver" style="display: none">
+                                    <div class="form-group">
+                                        <label><span id="txtreceiver">Receiver Bank</span></label>
+                                        @Html.TextBoxFor(m => m.ReceiverBank, new { @class = "form-control", @maxlength = "100", @Placeholder = "Receiver Bank" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-group">
+                                        <label> Account Head Name <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.AccountHeadName, new { @class = "form-control", @Placeholder = "Account Head Name" })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row ">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="submit" name="Save" value="Save" id="btnSave" class="btn btn-success" onclick="return validateform();" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="x_content mt-3">
+                                <div class="x_title">
+                                    <h5>Installment Details @*<small>List Of Sites</small>*@</h5>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table id="tblData" width="100%" class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr class="table-active">
+                                                <th hidden>PK_BookingId</th>
+                                                <th hidden>BookingID</th>
+                                                @* <th>S No.</th>*@
+                                                <th>Installment No.</th>
+                                                <th>Installment Date</th>
+                                                <th>Installment Amount</th>
+                                                <th>Paid Amount</th>
+                                                <th>Payment Date</th>
+                                                <th>Due Amount</th>
+                                                <th>Payment Mode</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+         </div>
     </div>
-
-
 
 }
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
