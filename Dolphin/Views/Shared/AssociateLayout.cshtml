@@ -38,17 +38,19 @@
     <div class="wrapper">
         <!--sidebar wrapper -->
         <div class="sidebar-wrapper" data-simplebar="true">
-            <div class="sidebar-header">
-                <div>
-                    <img src="/assets/img/dolphin.png" class="logo-icon" alt="logo icon">
+         
+                <div class="sidebar-header">
+                    <div>
+                        <img src="/assets/img/dolphin.png" class="logo-icon" alt="logo icon">
+                        </div>
+                    <div>
+                        <h4 class="logo-text">Dolphin Infra</h4>
+                    </div>
+                    <div class="toggle-icon ms-auto">
+                        <i class='bx bx-arrow-back'></i>
+                    </div>
                 </div>
-                <div>
-                    <h4 class="logo-text">Dolphin Infra</h4>
-                </div>
-                <div class="toggle-icon ms-auto">
-                    <i class='bx bx-arrow-back'></i>
-                </div>
-            </div>
+            
             <ul class="metismenu" id="menu">
                 <li>
                     <a href="/AssociateDashboard/AssociateDashBoard" class="has-arrow">
@@ -117,6 +119,83 @@
 
                     </ul>
                 </li>
+                <li>
+                    <a href="/AssociateDashboard/KYCDocuments" class="has-arrow">
+                        <div class="parent-icon">
+                            <i class='bx bx-food-menu'></i>
+                        </div>
+                        <div class="menu-title">Upload KYC</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/AssociateDashboard/VisitorListForAssociate" class="has-arrow">
+                        <div class="parent-icon">
+                            <i class='bx bx-receipt'></i>
+                        </div>
+                        <div class="menu-title">Visitor List</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="has-arrow">
+                        <div class="parent-icon">
+                            <i class='bx bx-briefcase'></i>
+                        </div>
+                        <div class="menu-title">Reports</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="/AssociateDashboard/AssociateBookingList"><i class='bx bx-category'></i>Plot Bookings</a>
+                        </li>
+                        <li>
+                            <a href="/AssociateDashboard/PlotAvailability"><i class='bx bx-category'></i>Plot Availability</a>
+                        </li>
+                        <li>
+                            <a href="/AssociateDashboard/CustomerLedgerReport"><i class='bx bx-category'></i>Ledger</a>
+                        </li>
+                        <li>
+                            <a href="/AssociateDashboard/AdvancePaymentList"><i class='bx bx-category'></i>Advance Payment List</a>
+                        </li>
+                        <li>
+                            <a href="/AssociateDashboard/AssociateDownlineDetail"><i class='bx bx-category'></i>Associate Downline</a>
+                        </li>
+                        <li>
+                            <a href="/AssociateDashboard/UnpaidIncome"><i class='bx bx-category'></i>Unpaid Income</a>
+                        </li>
+                        <li>
+                            <a href="/AssociateDashboard/PayoutRequestReport"><i class='bx bx-category'></i>Payout Request List</a>
+                        </li>
+                        <li>
+                            <a href="/User/SummaryReport"><i class='bx bx-category'></i>Summary Report</a>
+                        </li>
+                        <li>
+                            <a href="/AssociateDashboard/BusinessDevelopmentExpenseMaster_Report"><i class='bx bx-category'></i>Business Development Expense Report</a>
+                        </li>
+                        <li>
+                            <a href="/AssociateDashboard/AssociateSelfDownlineBusinessReport"><i class='bx bx-category'></i>Self Downline Business Report</a>
+                        </li>
+                        <li>
+                            <a href="/AssociateDashboard/DownBusinessReport"><i class='bx bx-category'></i>Down Business Report</a>
+                        </li>
+                        <li>
+                            <a href="/AssociateDashboard/BusinessReport"><i class='bx bx-category'></i>Associate Business Report</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="has-arrow">
+                        <div class="parent-icon">
+                            <i class='bx bx-support'></i>
+                        </div>
+                        <div class="menu-title">Support</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="/AssociateDashboard/EnquiryList"><i class='bx bx-category'></i>Enquiry</a>
+                        </li>
+
+                    </ul>
+                </li>
             </ul>
             <!--end navigation-->
         </div>
@@ -168,13 +247,13 @@
                         <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="../../files/assets/images/no_avatar.jpg" class="user-img" alt="user avatar">
                             <div class="user-info">
-                                <p class="user-name mb-0"><span>@Session["Name"]</span></p>
-                                @*<p class="designattion mb-0">Web Designer</p>*@
+                                <p class="user-name mb-0"><span>@Session["FullName"]</span></p>
+                                <p class="designattion mb-0">@Session["Status"] </p>
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" href="/Employee/UpdateAdminProfile"><i class="bx bx-user"></i><span>Profile</span></a>
+                                <a class="dropdown-item d-flex align-items-center" href="/AssociateDashboard/EditProfile"><i class="bx bx-user"></i><span>Profile</span></a>
                             </li>
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="/Home/LoginWeb"><i class="bx bx-log-out-circle"></i><span>Logout</span></a>

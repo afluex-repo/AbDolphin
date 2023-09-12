@@ -267,7 +267,7 @@ namespace Dolphin.Models
         public DataSet GetBusiness()
         {
             SqlParameter[] para = {
-                                        new SqlParameter("@LoginId", LoginId),
+                                        new SqlParameter("@LoginId", UserLoginId),
                                         new SqlParameter("@FromDate", FromDate),
                                         new SqlParameter("@ToDate", ToDate)
                                         //new SqlParameter("@Fk_UserId", AddedBy)
