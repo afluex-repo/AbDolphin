@@ -21,21 +21,7 @@
 @using (Html.BeginForm("PlotBookingListForCancel", "Plot", FormMethod.Post, new { @id = "form1" }))
 {
  
-    <p style="color: red">
-        @TempData["Plot"]
-    </p>
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">Cancel Plot</h4>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+ 
     <div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
@@ -185,8 +171,89 @@
         </div>
     </div>
 
-  
-    
+
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Cancel Plot</h5>
+                </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["Plot"]
+                </p>
+            </div>
+        </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>Customer ID</label>
+                            @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Search by Customer ID" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            Affiliate ID
+                            @Html.TextBoxFor(m => m.AssociateID, new { @class = "form-control", @Placeholder = "Search by Affiliate ID" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            From Date
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            To Date
+                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            Booking No
+                            @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Booking No" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            Select Site
+                            @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            Select Sector
+                            @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            Select Block
+                            @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            Plot Number
+                            @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "PlotNumber" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <br />
+                            <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="Search" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <!-- Popup for Cancel Remark -->
     <div class="modal fade" id="myModal" role="dialog" style="display: none">
         <div class="modal-dialog">

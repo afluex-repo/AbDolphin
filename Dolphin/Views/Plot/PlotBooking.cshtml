@@ -5,14 +5,6 @@
 }
 
 <style>
-    #divload {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        z-index: 9999;
-        background: url("../files/assets/images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
-    }
-
     .errortext {
         border: 1px solid red !important;
     }
@@ -20,314 +12,274 @@
 <div class="loader" id="divload"></div>
 @using (Html.BeginForm("SavePlotBooking", "Plot", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">Plot Booking</h4>
-                    </div>
+    
 
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Plot Booking</h5>
                 </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                   @TempData["Plot"]
+                   @TempData["Booking"]
+                </p>
             </div>
         </div>
-    </div>
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
-                <div class="page-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Plot Booking</h5>
-                                    <p style="color: red">
-                                        @TempData["Plot"]
-                                        @TempData["Booking"]
-                                    </p>
-                                </div>
-                                <div class="card-block">
-
-
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Select Branch <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Customer ID <span style="color: red">*</span>
-                                                @if (Model.PK_BookingId == null)
-                                                {
-                                                @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Customer ID", @onchange = "return getCustomerName();" })
-
-                                                }
-                                                else
-                                                {
-                                                @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Customer ID", @onchange = "return getCustomerName();", @readonly = "d" })
-                                                }
-                                                @Html.HiddenFor(m => m.UserID)
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Customer Name
-                                                @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", @Placeholder = "Customer Name", @readonly = "readonly" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Affiliate ID
-                                                @Html.TextBoxFor(m => m.AssociateID, new { @class = "form-control", @Placeholder = "Affiliate ID", @onchange = "return GetAssociateNameByAssociateID();", @readonly = "abc" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Affiliate Name
-                                                @Html.TextBoxFor(m => m.AssociateName, new { @class = "form-control", @Placeholder = "Affiliate Name", @readonly = "readonly" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Select Site <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Select Sector <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Select Block <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Plot Number <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number", @onchange = "return CheckPlotStatus();", @style = "text-transform:uppercase" })
-                                                @Html.HiddenFor(m => m.PlotID)
-                                                @Html.HiddenFor(m => m.PlotSize)
-                                                @Html.HiddenFor(m => m.BookingPercent)
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Actual Plot Amount <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.PlotAmount, new { @class = "form-control", @Placeholder = "Actual Plot Amount", @readonly = "readonly" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Actual Plot Rate <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.ActualPlotRate, new { @class = "form-control", @Placeholder = "Actual Plot Rate", @readonly = "readonly" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Plot Rate <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.PlotRate, new { @class = "form-control", @maxlength = "6", @Placeholder = "Plot Rate", @onchange = "return calculatePlotAmount();", onkeypress = "return isNumberOrDecimal(event);" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Total PLC <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.TotalPLC, new { @class = "form-control", @Placeholder = "TotalPLC", @onchange = "return calculatePlotAmount()", onkeypress = "return isNumberOrDecimal(event);" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                NetPlotAmount<span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.NetPlotAmount, new { @class = "form-control", @Placeholder = "Net Plot Amount", @readonly = "readonly" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Payment Plan <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.PaymentPlanID, new SelectList(ViewBag.ddlPlan, "Value", "Text"), new { @class = "form-control", @onchange = "return Flexi();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3" id="emi">
-                                            <div class="form-group">
-                                                No. Of EMI
-                                                @Html.TextBoxFor(m => m.NoOfEMI, new { @class = "form-control", @maxlength = "8", @Placeholder = "No. Of EMI", @onkeypress = "return isNumberOrDecimal(event);" })
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-3" hidden="hidden">
-                                            <div class="form-group">
-                                                Booking Amount <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.BookingAmount, new { @class = "form-control", @maxlength = "8", @Placeholder = "BookingAmount", @onkeypress = "return isNumberOrDecimal(event);", @readonly = "readonly" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Booking Date <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.BookingDate, new { @class = "form-control", @Placeholder = "Booking Date", @readonly = "readonly" })
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Discount (In Amount)
-                                                @Html.TextBoxFor(m => m.Discount, new { @class = "form-control", @Placeholder = "Discount", @onchange = "return checkDiscount()", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Pay Amount <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.PayAmount, new { @class = "form-control", @Placeholder = "PayAmount", onkeypress = "return isNumberOrDecimal(event);", @onchange = "return validatePayAmount();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Remaining Amount
-                                                @Html.TextBoxFor(m => m.Balance, new { @class = "form-control", @Placeholder = "Remaining Amount", @readonly = "readonly" })
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Payment Date <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @Placeholder = "PaymentDate", @readonly = "readonly" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Payment Mode <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode()" })
-                                            </div>
-                                        </div>
-                                       
-                                    @*</div>*@
-                                    @*<div class="row">*@
-                                        <div class="col-md-3" id="divtransactiono" style="display: none">
-                                            <div class="form-group">
-                                                <span id="txnNo"></span> <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3" id="divPaymentMode" style="display: none">
-                                            <div class="form-group">
-                                                <span id="txndt"></span><span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Date", @Readonly = "readonly" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3" id="divbankname" style="display: none">
-                                            <div class="form-group">
-                                                Bank Name <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Name" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3" id="divbankbranch" style="display: none">
-                                            <div class="form-group">
-                                                Bank Branch <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3" id="divadjustpayment" style="display: none">
-                                            <div class="form-group">
-                                                <span id="txtpremarks">Payment Remarks</span><span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.PaymentRemarks, new { @class = "form-control", @maxlength = "100", @Placeholder = "Payment Remarks" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3" id="divreceiver" style="display: none">
-                                            <div class="form-group">
-                                                <span id="txtreceiver">Receiver Bank</span>
-                                                @Html.TextBoxFor(m => m.ReceiverBank, new { @class = "form-control", @maxlength = "100", @Placeholder = "Receiver Bank" })
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Account Head Name
-                                                @Html.TextBoxFor(m => m.AccountHeadName, new { @class = "form-control", @Placeholder = "Account Head Name" })
-
-                                                @*@Html.DropDownListFor(m => m.FK_AccountHeadId, new SelectList(ViewBag.ddlAccountHead, "Value", "Text"), new { @class = "form-control" })*@
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    @*<div class="row" id="divPaymentMode" style="display: none">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    Cheque/Transaction Number <span style="color: red">*</span>
-                                                    @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Cheque/Transaction Number", @maxlength = "50" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    Cheque/Transaction Date <span style="color: red">*</span>
-                                                    @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Cheque/Transaction Date", @Readonly = "readonly" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    Bank Name <span style="color: red">*</span>
-                                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Name" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    Bank Branch <span style="color: red">*</span>
-                                                    @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
-                                                </div>
-                                            </div>
-                                        </div>*@
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @if (Model.PK_BookingId == null)
-                                                {
-                                                    <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="Save" />
-                                                }
-                                                else
-                                                {
-                                                    @Html.HiddenFor(m => m.PK_BookingId, new { @Value = @Model.PK_BookingId })
-                                                    <input class="btn btn-success pull-left" type="submit" value="Update" id="btnUpdate" name="Update" />
-                                                }
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>Select Branch <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control form-select" })
                             </div>
                         </div>
-                    </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>Customer ID <span style="color: red">*</span></label>
+                                    @if (Model.PK_BookingId == null)
+                                    {
+                                        @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Customer ID", @onchange = "return getCustomerName();" })
+
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Customer ID", @onchange = "return getCustomerName();", @readonly = "d" })
+                                    }
+                                    @Html.HiddenFor(m => m.UserID)
+</div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>Customer Name</label>
+                                    @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", @Placeholder = "Customer Name", @readonly = "readonly" })
+</div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>Affiliate ID</label>
+                                @Html.TextBoxFor(m => m.AssociateID, new { @class = "form-control", @Placeholder = "Affiliate ID", @onchange = "return GetAssociateNameByAssociateID();", @readonly = "abc" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Affiliate Name</label>
+                                @Html.TextBoxFor(m => m.AssociateName, new { @class = "form-control", @Placeholder = "Affiliate Name", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Select Site <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Select Sector <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Select Block <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Plot Number <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number", @onchange = "return CheckPlotStatus();", @style = "text-transform:uppercase" })
+                                @Html.HiddenFor(m => m.PlotID)
+                                @Html.HiddenFor(m => m.PlotSize)
+                                @Html.HiddenFor(m => m.BookingPercent)
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>Actual Plot Amount <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.PlotAmount, new { @class = "form-control", @Placeholder = "Actual Plot Amount", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>Actual Plot Rate <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.ActualPlotRate, new { @class = "form-control", @Placeholder = "Actual Plot Rate", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>Plot Rate <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.PlotRate, new { @class = "form-control", @maxlength = "6", @Placeholder = "Plot Rate", @onchange = "return calculatePlotAmount();", onkeypress = "return isNumberOrDecimal(event);" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>Total PLC <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.TotalPLC, new { @class = "form-control", @Placeholder = "TotalPLC", @onchange = "return calculatePlotAmount()", onkeypress = "return isNumberOrDecimal(event);" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>NetPlotAmount<span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.NetPlotAmount, new { @class = "form-control", @Placeholder = "Net Plot Amount", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Payment Plan <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.PaymentPlanID, new SelectList(ViewBag.ddlPlan, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return Flexi();" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3" id="emi">
+                            <div class="form-group">
+                                <label>No. Of EMI</label>
+                                @Html.TextBoxFor(m => m.NoOfEMI, new { @class = "form-control", @maxlength = "8", @Placeholder = "No. Of EMI", @onkeypress = "return isNumberOrDecimal(event);" })
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 mb-3" hidden="hidden">
+                            <div class="form-group">
+                                <label>Booking Amount <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.BookingAmount, new { @class = "form-control", @maxlength = "8", @Placeholder = "BookingAmount", @onkeypress = "return isNumberOrDecimal(event);", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Booking Date <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.BookingDate, new { @class = "form-control", @Placeholder = "Booking Date", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Discount (In Amount)</label>
+                                @Html.TextBoxFor(m => m.Discount, new { @class = "form-control", @Placeholder = "Discount", @onchange = "return checkDiscount()", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>Pay Amount <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.PayAmount, new { @class = "form-control", @Placeholder = "PayAmount", onkeypress = "return isNumberOrDecimal(event);", @onchange = "return validatePayAmount();" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Remaining Amount</label>
+                                @Html.TextBoxFor(m => m.Balance, new { @class = "form-control", @Placeholder = "Remaining Amount", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Payment Date <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @Placeholder = "PaymentDate", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>Payment Mode <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return CheckPayMode()" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3" id="divtransactiono" style="display: none">
+                            <div class="form-group">
+                                <label> <span id="txnNo"></span> <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3" id="divPaymentMode" style="display: none">
+                            <div class="form-group">
+                                <label><span id="txndt"></span><span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Date", @Readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3" id="divbankname" style="display: none">
+                            <div class="form-group">
+                                <label> Bank Name <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Name" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3" id="divbankbranch" style="display: none">
+                            <div class="form-group">
+                                <label>Bank Branch <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3" id="divadjustpayment" style="display: none">
+                            <div class="form-group">
+                                <label> <span id="txtpremarks">Payment Remarks</span><span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.PaymentRemarks, new { @class = "form-control", @maxlength = "100", @Placeholder = "Payment Remarks" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3" id="divreceiver" style="display: none">
+                            <div class="form-group">
+                                <label>  <span id="txtreceiver">Receiver Bank</span></label>
+                                @Html.TextBoxFor(m => m.ReceiverBank, new { @class = "form-control", @maxlength = "100", @Placeholder = "Receiver Bank" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Account Head Name</label>
+                                @Html.TextBoxFor(m => m.AccountHeadName, new { @class = "form-control", @Placeholder = "Account Head Name" })
+
+                                @*@Html.DropDownListFor(m => m.FK_AccountHeadId, new SelectList(ViewBag.ddlAccountHead, "Value", "Text"), new { @class = "form-control" })*@
+
+                            </div>
+                        </div>
+
+                        @*<div class="row" id="divPaymentMode" style="display: none">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    Cheque/Transaction Number <span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Cheque/Transaction Number", @maxlength = "50" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    Cheque/Transaction Date <span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Cheque/Transaction Date", @Readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    Bank Name <span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Name" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    Bank Branch <span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
+                                </div>
+                            </div>
+                        </div>*@
+                        <div class="col-md-12 mb-3">
+                            <div class="form-group">
+                                @if (Model.PK_BookingId == null)
+                                {
+                                    <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="Save" />
+                                }
+                                else
+                                {
+                                    @Html.HiddenFor(m => m.PK_BookingId, new { @Value = @Model.PK_BookingId })
+                                    <input class="btn btn-success pull-left" type="submit" value="Update" id="btnUpdate" name="Update" />
+                                }
+                            </div>
+
+
+                        </div>
+
                 </div>
             </div>
         </div>
     </div>
-
 }
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>

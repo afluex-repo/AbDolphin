@@ -4,453 +4,733 @@
     Layout = "~/Views/Shared/AssociateLayout.cshtml";
 }
 
-<html lang="en">
-<body class="nav-md">
-    @using (Html.BeginForm("AssociateDashboard", "AssociateDashBoard", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
-    {
-        <p style="color: red">
-            @TempData["Dashboard"]
-        </p>
-        <div class="page-header">
-            <div class="page-block">
-                <div class="row align-items-center">
-                    <div class="col-md-8">
-                        <div class="page-header-title">
-                            <h4 class="m-b-10">Dashboard</h4>
+
+<div class="page-content">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-info">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Total Associates</p>
+                            <h4 class="my-1 text-info">@ViewBag.TotalAssociate</h4>
                         </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto">
+                            <i class="bx bx-group"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-danger">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Total Active Id</p>
+                            <h4 class="my-1 text-danger">@ViewBag.TotalActiveId</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto">
+                            <i class="bx bx-user-check"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-success">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Total Business</p>
+                            <h4 class="my-1 text-success">@ViewBag.TotalBusiness</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                            <i class="bx bxs-bar-chart-alt-2"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-warning">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Self Business</p>
+                            <h4 class="my-1 text-warning">@ViewBag.SelfBusiness</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto">
+                            <i class="bx bx-poll"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-warning">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Team Business</p>
+                            <h4 class="my-1 text-warning">@ViewBag.TeamBusiness</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto">
+                            <i class="bx bx-line-chart-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-success">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Total Booking</p>
+                            <h4 class="my-1 text-success">@ViewBag.TotalBooking</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                            <i class="bx bx-line-chart"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-danger">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Self Booking</p>
+                            <h4 class="my-1 text-danger">@ViewBag.SelfBooking</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto">
+                            <i class="bx bx-trending-up"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-info">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Team Booking</p>
+                            <h4 class="my-1 text-info">@ViewBag.TeamBooking</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto">
+                            <i class="bx bx-trending-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-info">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Total Registry</p>
+                            <h4 class="my-1 text-info">@ViewBag.Totalregistry</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto">
+                            <i class="bx bx-bar-chart-square"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-danger">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Self Registry</p>
+                            <h4 class="my-1 text-danger">@ViewBag.SelfRegistry</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto">
+                            <i class="bx bx-book"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-success">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Team Registry</p>
+                            <h4 class="my-1 text-success">@ViewBag.TeamRegistry</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                            <i class="bx bx-book-bookmark"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-warning">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Date Wise Business Check</p>
+                            <a href="/User/SummaryReport" class="text-white m-b-3"><h4 class="my-1 text-warning">View Details</h4></a>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto">
+                            <a href="/User/SummaryReport" class="text-white m-b-3"><i class="bx bx-chevrons-down"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-warning">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Vistor Fund Paid</p>
+                            <h4 class="my-1 text-warning">@ViewBag.VisitorFundpaid</h4>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto">
+                            <i class="bx bx-archive"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" >
+            <div class="card radius-10 border-start border-0 border-4 border-success">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Rank</p>
+                            <h6 class="my-1 text-success">@ViewBag.UserRank</h6>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                            <i class="bx bx-user-check"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-start border-0 border-4 border-info">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mb-0 text-secondary">Remaining Percent</p>
+                                    <h4 class="my-1 text-info">@ViewBag.RemainingTargetPercent %</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-0 text-secondary">Target Amount</p>
+                                    <h4 class="my-1 text-info">@ViewBag.TargetBusiness</h4>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        @*<div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                            <i class="bx bxs-bar-chart-alt-2"></i>
+                        </div>*@
+                    </div>
+                    <div class="card-footer" style="padding: 11px 10px">
+                        <div class="progress" style="width:100%;color: white;font-size: 10px;">
+                            <div class="progress-bar" role="progressbar" style="width: @ViewBag.TargetPercentage%" aria-valuenow="@ViewBag.TargetPercentage" aria-valuemin="0" aria-valuemax="100">@ViewBag.TargetPercentage %</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    @*<div class="row row-cols-1 row-cols-md-2 row-cols-xl-2 row-cols-xxl-4">
+        <div class="col">
+            <div class="card radius-10 bg-gradient-cosmic">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Total Associates</p>
+                            <h4 class="my-1 text-white">@ViewBag.TotalAssociate</h4>
+                        </div>
+
 
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="pcoded-inner-content">
-            <div class="main-body">
-                <div class="page-wrapper">
-                    <div class="page-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <h4 class="text-c-yellow">@ViewBag.TotalAssociate</h4>
-                                                <h6 class="text-muted m-b-0">Total Associates</h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-c-yellow">
-                                        <div class="row align-items-center">
-                                            @*<div class="col-9">
-                                                <a href="/TraditionalAssociate/AssociateList" class="text-white m-b-0">View Details</a>
-                                            </div>*@
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <h4 class="text-c-green">@ViewBag.TotalActiveId</h4>
-                                                <h6 class="text-muted m-b-0">Total Active Id</h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-c-green">
-                                        <div class="row align-items-center">
-                                            @*<div class="col-9">
-                                                <a href="/Customer/CustomerList" class="text-white m-b-0">View Details</a>
-                                            </div>*@
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <h4 class="text-c-red">@ViewBag.TotalBusiness</h4>
-                                                <h6 class="text-muted m-b-0">Total Business</h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-c-red">
-                                        <div class="row align-items-center">
-                                            @*<div class="col-9">
-                                                <a href="/Plot/PlotBookingList" class="text-white m-b-0">View Details</a>
-                                            </div>*@
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <h4 class="text-c-purple">@ViewBag.SelfBusiness</h4>
-                                                <h6 class="text-muted m-b-0">Self Business</h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-c-purple">
-                                        <div class="row align-items-center">
-                                            @*<div class="col-9">
-                            <a href="/Plot/PlotBookingList" class="text-white m-b-0">View Details</a>
-                        </div>*@
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <h4 class="text-c-blue">@ViewBag.TeamBusiness</h4>
-                                                <h6 class="text-muted m-b-0">Team Business</h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-c-blue">
-                                        <div class="row align-items-center">
-                                            @*<div class="col-9">
-                            <a href="/Plot/PlotBookingList" class="text-white m-b-0">View Details</a>
-                        </div>*@
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <h4 class="text-c-lite-green">@ViewBag.TotalBooking</h4>
-                                                <h6 class="text-muted m-b-0">Total Booking</h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-c-lite-green">
-                                        <div class="row align-items-center">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <h4 class="text-c-bg-amazon">@ViewBag.SelfBooking</h4>
-                                                <h6 class="text-muted m-b-0">Self Booking</h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-amazon">
-                                        <div class="row align-items-center">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <h4 class="text-c-dribbble">@ViewBag.TeamBooking</h4>
-                                                <h6 class="text-muted m-b-0">Team Booking</h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-dribbble">
-                                        <div class="row align-items-center">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <h4 class="text-c-instagram">@ViewBag.Totalregistry</h4>
-                                                <h6 class="text-muted m-b-0">Total Registry</h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-instagram">
-                                        <div class="row align-items-center">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <h4 class="text-c-youtube">@ViewBag.SelfRegistry</h4>
-                                                <h6 class="text-muted m-b-0">Self Registry</h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-youtube">
-                                        <div class="row align-items-center">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                          
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <h4 class="text-viber">@ViewBag.TeamRegistry</h4>
-                                                <h6 class="text-muted m-b-0">Team Registry</h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-viber">
-                                        <div class="row align-items-center">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                
-                                                <h6 class="text-muted m-b-0">Date Wise Business Check</h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card-footer form-bg-success">
-                                        <div class="row align-items-center">
-                                            <div class="col-9">
-            <a href="/User/SummaryReport" class="text-white m-b-0">View Details</a>
-        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <h4 class="text-viber">@ViewBag.VisitorFundpaid</h4>
-                                                <h6 class="text-muted m-b-0">Vistor Fund Paid</h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-viber">
-                                        <div class="row align-items-center">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block"  style="padding-bottom:10px;">
-                                        <div class="row">
-                                            <div class="col-6">
-                                               <h4 class="text-c-red">@ViewBag.RemainingTargetPercent %</h4>
-                                                <h6 class="text-muted m-b-0">Remaining Percent</h6>
-                                            </div>
-                                            <div class="col-6">
-                                               <h4 class="text-c-purple">@ViewBag.TargetBusiness</h4>
-                                                <h6 class="text-muted m-b-0">Target Amount</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-c-yellow" style="padding: 11px 10px">
-                                        <div class="progress" style="width:100%;color: white;font-size: 10px;">
-                                            <div class="progress-bar" role="progressbar" style="width: @ViewBag.TargetPercentage%" aria-valuenow="@ViewBag.TargetPercentage" aria-valuemin="0" aria-valuemax="100">@ViewBag.TargetPercentage %</div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-block">
-                                        <div class="row align-items-center">
-                                            <div class="col-10">
-                                                <h4 class="text-viber">@ViewBag.UserRank</h4>
-                                                <h6 class="text-muted m-b-0">Rank</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-viber">
-                                        <div class="row align-items-center">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
+        <div class="col">
+            <div class="card radius-10 bg-gradient-ibiza">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Total Active Id</p>
+                            <h4 class="my-1 text-white">@ViewBag.TotalActiveId</h4>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card user-card2">
-                                    <div class="card-block text-center">
-                                        <h6 class="m-b-15">Booking Details</h6>
-                                        <div id="divusers"></div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card user-card2">
-                                    <div class="card-block text-center">
-                                        <h5>News</h5>
-                                    </div>
-                                    <div class="card-block">
-                                        <div class="table-responsive" style="height:160px;">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr></tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if (Model != null)
-                                                    {
-                                                        if (Model.ListNEWS != null)
-                                                        {
-                                                            int i = 1;
-                                                            foreach (var Item in Model.ListNEWS)
-                                                            {
-                                                                <tr>
-                                                                    <marquee direction="up" scrolldelay="400">
-                                                                        @Item.NewsBody
-                                                                    </marquee>
-
-                                                                </tr>
-                                                                i++;
-                                                            }
-                                                        }
-                                                    }
-
-                                                </tbody>
-
-
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-
-                            <div class="col-md-12">
-                                <div class="card user-card2">
-                                    <div class="card-block text-center">
-                                        <h6 class="m-b-15">Monthly Bookings</h6>
-                                        <div id="divinvestment"></div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card table-card">
-                                    <div class="card-header borderless ">
-                                        <h5>Due Installment</h5>
-
-                                    </div>
-                                    <div class="card-block">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-
-                                                        <th>Sr No.</th>
-                                                        <th>Customer ID</th>
-                                                        <th>Customer Name</th>
-                                                        <th>Installment No.</th>
-                                                        <th>Installment Amount</th>
-                                                        <th>Plot Details</th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if (Model != null)
-                                                    {
-                                                        if (Model.ListInstallment != null)
-                                                        {
-                                                            int i = 1;
-                                                            foreach (var Item in Model.ListInstallment)
-                                                            {
-                                                    <tr>
-                                                        <td>@i</td>
-
-                                                        <td>@Item.CustomerLoginID</td>
-                                                        <td>@Item.CustomerName</td>
-                                                        <td>@Item.InstallmentNo</td>
-                                                        <td>@Item.InstallmentAmount</td>
-                                                        <td>@Item.PlotNumber</td>
-                                                    </tr>
-                                                                i++;
-                                                            }
-                                                        }
-                                                    }
-
-                                                </tbody>
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                       
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-ohhappiness">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Total Business</p>
+                            <h4 class="my-1 text-white">@ViewBag.TotalBusiness</h4>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-kyoto">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Self Business</p>
+                            <h4 class="my-1 text-white">@ViewBag.SelfBusiness</h4>
 
 
-    }
-</body>
-</html>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-kyoto">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Team Business</p>
+                            <h4 class="my-1 text-white">@ViewBag.TeamBusiness</h4>
+
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-ohhappiness">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Self Business</p>
+                            <h4 class="my-1 text-white">@ViewBag.SelfBusiness</h4>
+
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-ibiza">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Total Booking</p>
+                            <h4 class="my-1 text-white">@ViewBag.TotalBooking</h4>
+
+
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-cosmic">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Self Booking</p>
+                            <h4 class="my-1 text-white">@ViewBag.SelfBooking</h4>
+
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-cosmic">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Team Booking</p>
+                            <h4 class="my-1 text-white">@ViewBag.TeamBooking</h4>
+
+
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-ibiza">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Total Registry</p>
+                            <h4 class="my-1 text-white">@ViewBag.Totalregistry</h4>
+
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-ohhappiness">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Self Registry</p>
+                            <h4 class="my-1 text-white">@ViewBag.SelfRegistry</h4>
+
+
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-kyoto">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Team Registry</p>
+                            <h4 class="my-1 text-white">@ViewBag.TeamRegistry</h4>
+
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-kyoto">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Date Wise Business Check</p>
+
+
+                        </div>
+                        <div>
+                            <a href="/User/SummaryReport" class="text-white m-b-3">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-ohhappiness">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Vistor Fund Paid</p>
+                            <h4 class="my-1 text-white">@ViewBag.VisitorFundpaid</h4>
+
+
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-cosmic">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Rank</p>
+                            <h4 class="my-1 text-white">@ViewBag.UserRank</h4>
+
+
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 bg-gradient-ibiza">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-auto">
+                            <p class="mb-0 text-white">Remaining Percent</p>
+                            <h4 class="my-1 text-white">@ViewBag.RemainingTargetPercent %</h4>
+
+
+                        </div>
+                        <div>
+                            <h6 class="mb-0 text-white">Target Amount</h6>
+                            <h4 class="my-1 text-white">@ViewBag.TargetBusiness</h4>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-c-yellow" style="padding: 11px 10px">
+                        <div class="progress" style="width:100%;color: white;font-size: 10px;">
+                            <div class="progress-bar" role="progressbar" style="width: @ViewBag.TargetPercentage%" aria-valuenow="@ViewBag.TargetPercentage" aria-valuemin="0" aria-valuemax="100">@ViewBag.TargetPercentage %</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>*@<!--end row-->
+    @*<div class="row">
+            <div class="col-12 col-lg-12">
+                <div class="card radius-10">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h6 class="mb-0">Sales Overview</h6>
+                            </div>
+                            <div class="dropdown ms-auto">
+                                <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
+                                    <i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:;">Action</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:;">Another action</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:;">Something else here</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center ms-auto font-13 gap-2 mb-3">
+                            <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1 text-info"></i>Downloads</span>
+                            <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1 text-danger"></i>Earnings</span>
+                        </div>
+                        <div class="chart-container-9">
+                            <canvas id="chart5"></canvas>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-0 row-group text-center border-top">
+                        <div class="col">
+                            <div class="p-3">
+                                <h4 class="mb-0">$168</h4>
+                                <small class="mb-0">Today's Sales <span> <i class="bx bx-up-arrow-alt align-middle"></i> 2.43%</span></small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="p-3">
+                                <h4 class="mb-0">$856</h4>
+                                <small class="mb-0">This Week Sales <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.65%</span></small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="p-3">
+                                <h4 class="mb-0">$2400</h4>
+                                <small class="mb-0">This Month Sales <span> <i class="bx bx-up-arrow-alt align-middle"></i> 5.62%</span></small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="p-3">
+                                <h4 class="mb-0">$4,562</h4>
+                                <small class="mb-0">This Year Sales <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.62%</span></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@<!--end row-->
+
+
+
+
+
+
+    <div class="row row-cols-1 row-cols-lg-3">
+        <div class="col d-flex">
+            <div class="card radius-10 w-100">
+                <div class="card-header bg-transparent">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h6 class="mb-0 py-2">Booking Details</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container-1">
+                        <canvas id="chart16"></canvas>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                        Alloted Plots
+                        <span class="badge bg-warning rounded-pill">&nbsp;</span>
+                    </li>
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                        Booked Plots
+                        <span class="badge bg-gradient-ibiza rounded-pill">&nbsp;</span>
+                    </li>
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                        Total Booking <span class="badge bg-gradient-deepblue rounded-pill">&nbsp;</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col d-flex">
+            <div class="card radius-10 w-100">
+                <div class="card-header bg-transparent">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h6 class="mb-0 py-2">News</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-block">
+                    <div class="table-responsive" style="height:160px;">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr></tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.ListNEWS != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.ListNEWS)
+                                        {
+                                            <tr>
+                                                <marquee direction="up" scrolldelay="400">
+                                                    @Item.NewsBody
+                                                </marquee>
+
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+
+                            </tbody>
+
+
+                        </table>
+
+                    </div>
+                </div>
+
+               
+            </div>
+        </div>
+        <div class="col d-flex">
+            <div class="card radius-10 w-100">
+                <div class="card-header bg-transparent">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h6 class="mb-0 py-2">Monthly Bookings</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container-1">
+                        <canvas id="chart6"></canvas>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                        Jeans <span class="badge bg-gradient-quepal rounded-pill">&nbsp;</span>
+                    </li>
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                        T-Shirts <span class="badge bg-gradient-ibiza rounded-pill">&nbsp;</span>
+                    </li>
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                        Shoes
+                        <span class="badge bg-gradient-deepblue rounded-pill">&nbsp;</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-body">
+            <h5>Due Installment</h5>
+            <div class="table-responsive">
+                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr class="table-active">
+                            <th>Sr No.</th>
+                            <th>Customer ID</th>
+                            <th>Customer Name</th>
+                            <th>Installment No.</th>
+                            <th>Installment Amount</th>
+                            <th>Plot Details</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            if (Model.ListInstallment != null)
+                            {
+                                int i = 1;
+                                foreach (var Item in Model.ListInstallment)
+                                {
+                                    <tr>
+                                        <td>@i</td>
+
+                                        <td>@Item.CustomerLoginID</td>
+                                        <td>@Item.CustomerName</td>
+                                        <td>@Item.InstallmentNo</td>
+                                        <td>@Item.InstallmentAmount</td>
+                                        <td>@Item.PlotNumber</td>
+                                    </tr>
+                                    i++;
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+
+
+
+
+</div>
+
+
 
 
 
