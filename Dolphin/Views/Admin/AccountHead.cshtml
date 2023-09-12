@@ -24,57 +24,40 @@
 
 @using (Html.BeginForm("AccountHead", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">Account Head</h4>
-                    </div>
 
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Account Head</h5>
                 </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["msg"]
+                </p>
             </div>
         </div>
-    </div>
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
-                <div class="page-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Account Head</h5>
-                                    <p style="color: red">
-                                        @TempData["msg"]
-                                    </p>
-                                </div>
-                                <div class="card-block">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                Name <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name", @onkeypress = "return onlyAlphabets();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                Mobile No <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Mobile No", @Maxlength = "10", @onkeypress = "return isNumberKey(event);" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row ">
-                                        <div class="col-md-6 form-group">
-                                            <input type="submit" id="btnsave" class="btn btn-success" onclick="return Validation();" name="btnsave" value="Save">
-
-                                            <a href="/Admin/AccountHeadList" class="btn btn-primary">Back To List</a><br /><br />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label> Name <span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name", @onkeypress = "return onlyAlphabets();" })
                         </div>
                     </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label>Mobile No <span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Mobile No", @Maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group mb-3">
+                        <label class="d-block">&nbsp;</label>
+                        <input type="submit" id="btnsave" class="btn btn-success" onclick="return Validation();" name="btnsave" value="Save">
+
+                        <a href="/Admin/AccountHeadList" class="btn btn-info text-white">Back To List</a><br /><br />
+                    </div>
+
                 </div>
             </div>
         </div>

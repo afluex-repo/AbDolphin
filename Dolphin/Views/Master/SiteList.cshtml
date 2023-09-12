@@ -7,103 +7,81 @@
 @using (Html.BeginForm("SiteList", "Master", FormMethod.Post, new { @id = "form1" }))
 {
  
-    <p style="color: red">
-        @TempData["Site"]
-    </p>
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">Site List</h4>
-                    </div>
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Site List</h5>
+                    <button class="btn btn-primary repeater-add-btn px-4"><a href="/Master/SiteMaster" class="text-white">Add New</a></button>
+                </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["Site"]
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>SiteName</th>
+                                <th>Site Type</th>
+                                <th>Location</th>
+                                <th>Rate</th>
+                                <th>Unit</th>
+                                <th>Development Charge</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstSite != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstSite)
+                                    {
+                                        <tr class="text-left">
+                                            <td>@i</td>
+                                            <td>@Item.SiteName</td>
+                                            <td>@Item.SiteTypeName</td>
+                                            <td>@Item.Location</td>
+                                            <td>@Item.Rate</td>
+                                            <td>@Item.UnitName</td>
+                                            <td>@Item.DevelopmentCharge</td>
+                                            <td>
+                                                <a href="/Master/SiteMaster?SiteID=@Item.EncryptKey" class="btn btn-info btn-sm">Edit</a>
+                                                <a href="/Master/DeleteSite?id=@Item.SiteID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you wish to delete this Site?');">Delete</a>
+                                            </td>
 
+                                        </tr>
+
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>SiteName</th>
+                                <th>Site Type</th>
+                                <th>Location</th>
+                                <th>Rate</th>
+                                <th>Unit</th>
+                                <th>Development Charge</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
-                <div class="page-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- HTML5 Export Buttons table start -->
-                            <div class="card">
-                                <div class="card-header table-card-header">
-                                    <p style="color: red">
-                                        @TempData["Site"]
-                                    </p>
-                                    <a class="btn btn-primary btn-sm" style="margin-left:75%" href="/Master/SiteMaster">Add New</a>
-                                </div>
-                                <div class="card-block">
-                                    <div class="dt-responsive table-responsive">
-                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
-                                            <thead>
-                                                <tr>
-                                                    <th>S No.</th>
-                                                    <th>SiteName</th>
-                                                    <th>Site Type</th>
-                                                    <th>Location</th>
-                                                    <th>Rate</th>
-                                                    <th>Unit</th>
-                                                    <th>Development Charge</th>
-                                                    <th></th>
-                                                </tr>
-                                               
-                                            </thead>
-                                            <tbody>
-                                               @if (Model != null)
-                                               {
-                                                   if (Model.lstSite != null)
-                                                   {
-                                                       int i = 1;
-                                                       foreach (var Item in Model.lstSite)
-                                                       {
-                                                        <tr class="text-left">
-                                                            <td>@i</td>
-                                                            <td>@Item.SiteName</td>
-                                                            <td>@Item.SiteTypeName</td>
-                                                            <td>@Item.Location</td>
-                                                            <td>@Item.Rate</td>
-                                                            <td>@Item.UnitName</td>
-                                                            <td>@Item.DevelopmentCharge</td>
-                                                            <td>
-                                                                <a href="/Master/SiteMaster?SiteID=@Item.EncryptKey" class="btn btn-info btn-sm">Edit</a>
-                                                                <a href="/Master/DeleteSite?id=@Item.SiteID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you wish to delete this Site?');">Delete</a>
-                                                            </td>
 
-                                                        </tr>
-
-                                                           i++;
-                                                       }
-                                                   }
-                                               }
-
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>S No.</th>
-                                                    <th>SiteName</th>
-                                                    <th>Site Type</th>
-                                                    <th>Location</th>
-                                                    <th>Rate</th>
-                                                    <th>Unit</th>
-                                                    <th>Development Charge</th>
-                                                    <th></th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-       
-
-               
 }
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
