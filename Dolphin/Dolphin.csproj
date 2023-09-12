@@ -2567,7 +2567,7 @@
     <Content Include="Views\Setting\ChangeAssociatePassword.cshtml" />
     <Content Include="Views\Setting\ChangePassword.cshtml" />
     <Content Include="Views\Shared\AdminLayout.cshtml" />
-    <Content Include="Views\Shared\AssociateLayout.cshtml" />
+    <Content Include="Views\Shared\AssociateLayoutTesting.cshtml" />
     <Content Include="Views\Shared\CustomerLayout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
@@ -2645,6 +2645,7 @@
     <Content Include="Views\Website\PrivacyPolicy.cshtml" />
     <Content Include="Views\Shared\_AdminLayoutTesting.cshtml" />
     <Content Include="Views\Admin\Testing.cshtml" />
+    <Content Include="Views\Shared\AssociateLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
