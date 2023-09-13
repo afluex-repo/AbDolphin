@@ -6,156 +6,142 @@
 }
 @using (Html.BeginForm("RegistryReport", "AdminReports", FormMethod.Post, new { @id = "form1" }))
 {
+    
 
-
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">Registry Report</h4>
-                    </div>
-
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Registry Report</h5>
                 </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["RegistryReport"]
+                </p>
             </div>
         </div>
-    </div>
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
-                <div class="page-body">
+        <div class="items">
+            <div class="card">
+                <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12">
 
-                            <!-- HTML5 Export Buttons table start -->
-                            <div class="card">
-                                <div class="card-header table-card-header">
-                                    <p style="color:red">@TempData["RegistryReport"]</p>
-                                </div>
-                                <div class="card-block">
-                                    <div class="row">
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label> Login ID</label>
+                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Search by Login ID" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label>   Booking Number</label>
+                                @Html.TextBoxFor(m => m.BookingNo, new { @class = "form-control", @Placeholder = "Booking No" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label>    Plot Number</label>
+                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label>  From Date</label>
+                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                               <label> To Date</label>
+                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds" })
+                            </div>
+                        </div>
 
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                Login ID
-                                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Search by Login ID" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                Booking Number
-                                                @Html.TextBoxFor(m => m.BookingNo, new { @class = "form-control", @Placeholder = "Booking No" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                
-                                                Plot Number
-                                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                From Date
-                                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                To Date
-                                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds" })
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <br />
-                                                <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="Search" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="dt-responsive table-responsive">
-                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
-                                            <thead>
-                                                <tr>
-                                                    <th>S No.</th>
-                                                    <th>Login ID</th>
-                                                    <th>Name</th>
-                                                    <th>Registry Name</th>
-                                                    <th>Mobile No</th>
-                                                    <th>Plot Number</th>
-                                                    <th>Booking Number</th>
-                                                    <th>Payment Date</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @if (Model != null)
-                                                {
-                                                    if (Model.lstRegistry != null)
-                                                    {
-                                                        int i = 1;
-                                                        foreach (var Item in Model.lstRegistry)
-                                                        {
-                                                            <tr class="text-left">
-                                                                <td>@i</td>
-                                                                <td>@Item.LoginId</td>
-                                                                <td>@Item.Name</td>
-                                                                <td>@Item.RegistryName</td>
-                                                                <td>@Item.MobileNo</td>
-                                                                <td>@Item.PlotNumber</td>
-                                                                <td>@Item.BookingNo</td>
-                                                                <td>@Item.PaymentDate</td>
-                                                                @if (Item.Status == "R")
-                                                                {
-
-                                                                    <td>
-                                                                        Registered
-                                                                    </td>
-                                                                }
-                                                                <td>
-                                                                  @if (Item.FK_BookingId == "")
-                                                                  {
-
-                                                                  }
-                                                                  else
-                                                                  {
-                                                                    <a href="/AdminReports/editRegistryStatus?Fk_BookingId=@Item.FK_BookingId" class="btn btn-info btn-sm">Edit</a>
-                                                                  }
-                                                                </td>
-                                                            </tr>
-                                                            i++;
-                                                        }
-                                                    }
-                                                }
-
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>S No.</th>
-                                                    <th>Login ID</th>
-                                                    <th>Name</th>
-                                                    <th>Registry Name</th>
-                                                    <th>Mobile No</th>
-                                                    <th>Plot Number</th>
-                                                    <th>Booking Number</th>
-                                                    <th>Payment Date</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-
-                                </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="d-block">  &nbsp;</label>
+                                <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="Search" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Login ID</th>
+                                <th>Name</th>
+                                <th>Registry Name</th>
+                                <th>Mobile No</th>
+                                <th>Plot Number</th>
+                                <th>Booking Number</th>
+                                <th>Payment Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstRegistry != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstRegistry)
+                                    {
+                                        <tr class="text-left">
+                                            <td>@i</td>
+                                            <td>@Item.LoginId</td>
+                                            <td>@Item.Name</td>
+                                            <td>@Item.RegistryName</td>
+                                            <td>@Item.MobileNo</td>
+                                            <td>@Item.PlotNumber</td>
+                                            <td>@Item.BookingNo</td>
+                                            <td>@Item.PaymentDate</td>
+                                            @if (Item.Status == "R")
+                                            {
+
+                                                <td>
+                                                    Registered
+                                                </td>
+                                            }
+                                            <td>
+                                                @if (Item.FK_BookingId == "")
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    <a href="/AdminReports/editRegistryStatus?Fk_BookingId=@Item.FK_BookingId" class="btn btn-info btn-sm">Edit</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Login ID</th>
+                                <th>Name</th>
+                                <th>Registry Name</th>
+                                <th>Mobile No</th>
+                                <th>Plot Number</th>
+                                <th>Booking Number</th>
+                                <th>Payment Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 }
 

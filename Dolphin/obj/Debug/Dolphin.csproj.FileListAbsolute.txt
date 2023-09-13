@@ -263,7 +263,6 @@ D:\Devendra\AbDolphin\Dolphin\bin\Newtonsoft.Json.xml
 D:\Devendra\AbDolphin\Dolphin\bin\System.Net.Http.Formatting.xml
 D:\Devendra\AbDolphin\Dolphin\bin\System.Web.Http.xml
 D:\Devendra\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.xml
-D:\Devendra\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
 D:\Devendra\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
 D:\Devendra\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb
 E:\AbDolphin\AbDolphin\Dolphin\bin\ApplicationInsights.config
