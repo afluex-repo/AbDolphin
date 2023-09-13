@@ -21,9 +21,7 @@
         <div class="items">
             <div class="card">
                 <div class="card-body row">
-                    @using (Html.BeginForm("SaveBranch", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
-                    {
-                        <div class="col-md-6 mb-3">
+                   <div class="col-md-6 mb-3">
                             <div class="form-group form-default">
                                 <label class="float-label">Branch Name<span style="color:red">*</span></label>
                                 @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control" })
@@ -44,7 +42,7 @@
                             }
                             <a class="btn btn-info text-white" href="/Master/BranchList">Back To List</a>
                         </div>
-                    }
+                    
                 </div>
             </div>
         </div>
