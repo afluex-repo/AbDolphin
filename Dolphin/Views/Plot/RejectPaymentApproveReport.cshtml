@@ -7,159 +7,139 @@
 
 @using (Html.BeginForm("RejectPaymentApproveReport", "Plot", FormMethod.Post, new { @id = "form1" }))
 {
-
-    <p style="color: red">
-        @TempData["Plot"]
-    </p>
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">Approve Rejected Payment Report</h4>
-                    </div>
-
+    
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Approve Rejected Payment Report</h5>
                 </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["Plot"]
+                </p>
             </div>
         </div>
-    </div>
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
-                <div class="page-body">
+        <div class="items">
+            <div class="card">
+                <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12">
-                            <!-- HTML5 Export Buttons table start -->
-                            <div class="card">
-                                <div class="card-header table-card-header">
-
-                                </div>
-                                <div class="card-block">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                CustomerID
-                                                @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Search by CustomerID" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Payment Mode
-                                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control" })
-                                                @*   @Html.HiddenFor(m => m.UserID)*@
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                From Date
-                                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "Search From Date", @readonly = "readonly" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                To Date
-                                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "Search To Date", @readonly = "readonly" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="Search" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="dt-responsive table-responsive">
-                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
-                                            <thead>
-                                                <tr>
-                                                    <th>S No.</th>
-
-                                                    <th>Customer</th>
-                                                    <th>Affiliate</th>
-                                                    <th>Mode</th>
-                                                    <th>Date</th>
-                                                    <th>Transaction No.</th>
-                                                    <th>Amount</th>
-
-                                                    <th>Status</th>
-
-                                                    <th>ApprovedDate</th>
-                                                    <th>Description</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @if (Model != null)
-                                                {
-                                                    if (Model.lstPlot != null)
-                                                    {
-                                                        int i = 1;
-                                                        foreach (var Item in Model.lstPlot)
-                                                        {
-                                                            <tr class="text-left">
-                                                                @*  <td hidden>@Item.UserID</td>*@
-                                                                <td>@i</td>
-                                                                <td>@Item.CustomerID (@Item.CustomerName)</td>
-                                                                <td>@Item.AssociateID (@Item.AssociateName)</td>
-                                                                <td>@Item.PaymentMode</td>
-                                                                <td>@Item.TransactionDate</td>
-                                                                <td>@Item.TransactionNumber</td>
-
-                                                                <td>@Item.PaidAmount</td>
-
-                                                                <td>@Item.PaymentStatus</td>
-
-                                                                <td>@Item.ApprovedDate</td>
-                                                                <td>@Item.Remark</td>
-                                                                @*<td>@Item.RejectedDate</td>*@
-                                                            </tr>
-                                                            i++;
-                                                        }
-                                                    }
-                                                }
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    @*<th>S No.</th>
-                                                    <th>Customer</th>
-                                                    <th>Affiliate</th>
-                                                    <th>Mode</th>
-                                                    <th>Date</th>*@
-                                                    <th colspan="6" style="text-align:end;">Total</th>
-                                                    <th>@ViewBag.PaidAmount</th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                </tr>
-
-                                                <tr>
-                                                    <th>S No.</th>
-                                                    <th>Customer</th>
-                                                    <th>Affiliate</th>
-                                                    <th>Mode</th>
-                                                    <th>Date</th>
-                                                    <th>Transaction No.</th>
-                                                    <th>Amount</th>
-                                                    <th>Status</th>
-                                                    <th>ApprovedDate</th>
-                                                    <th>Description</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-
-
-
-                                </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>CustomerID</label>
+                                    @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Search by CustomerID" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Payment Mode</label>
+                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control" })
+                                @*   @Html.HiddenFor(m => m.UserID)*@
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>From Date</label>
+                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "Search From Date", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label> To Date</label>
+                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "Search To Date", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="Search" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+
+                                <th>Customer</th>
+                                <th>Affiliate</th>
+                                <th>Mode</th>
+                                <th>Date</th>
+                                <th>Transaction No.</th>
+                                <th>Amount</th>
+
+                                <th>Status</th>
+
+                                <th>ApprovedDate</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstPlot != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstPlot)
+                                    {
+                                        <tr class="text-left">
+                                            @*  <td hidden>@Item.UserID</td>*@
+                                            <td>@i</td>
+                                            <td>@Item.CustomerID (@Item.CustomerName)</td>
+                                            <td>@Item.AssociateID (@Item.AssociateName)</td>
+                                            <td>@Item.PaymentMode</td>
+                                            <td>@Item.TransactionDate</td>
+                                            <td>@Item.TransactionNumber</td>
+
+                                            <td>@Item.PaidAmount</td>
+
+                                            <td>@Item.PaymentStatus</td>
+
+                                            <td>@Item.ApprovedDate</td>
+                                            <td>@Item.Remark</td>
+                                            @*<td>@Item.RejectedDate</td>*@
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                @*<th>S No.</th>
+                                <th>Customer</th>
+                                <th>Affiliate</th>
+                                <th>Mode</th>
+                                <th>Date</th>*@
+                                <th colspan="6" style="text-align:end;">Total</th>
+                                <th>@ViewBag.PaidAmount</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+
+                            <tr class="table-active">
+                                <th>S No.</th>
+                                <th>Customer</th>
+                                <th>Affiliate</th>
+                                <th>Mode</th>
+                                <th>Date</th>
+                                <th>Transaction No.</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>ApprovedDate</th>
+                                <th>Description</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    
 
     <input type="hidden" id="txtdecription" />
 

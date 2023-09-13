@@ -7,247 +7,222 @@
 
 @using (Html.BeginForm("TransferPlotBooking", "Plot", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
+    
+    
 
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">Transfer Plot</h4>
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Transfer Plot</h5>
+                </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["TransferPlotBooking"]
+                </p>
+            </div>
+        </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>Select Site <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>Select Sector <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>Select Block <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label> Plot Number <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number" })
+                                @Html.HiddenFor(m => m.PlotID)
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label> Booking Number</label>
+                                @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Booking Number" })
+                                @Html.HiddenFor(m => m.PK_BookingId)
+                                @Html.HiddenFor(m => m.PK_BookingDetailsId)
+                                @Html.HiddenFor(m => m.PK_PlotID)
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="d-block"> &nbsp;</label>
+                                <input type="button" name="SearchPlot" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails(); " />
+                            </div>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
-                <div class="page-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Transfer Plot</h5>
-                                    <p style="color: red">
-                                        @TempData["TransferPlotBooking"]
-                                    </p>
+        <div class="card" id="Details1" style="display: none;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h5>Plot Details </h5>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Plot Rate :</label>
+                                        <label id="Plotrte"></label>
+                                    </div>
                                 </div>
-                                <div class="card-block">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Plot Area :</label>
+                                        <label id="Plotarea"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Actual Plot Amount :</label>
+                                        <label id="ActPlotAmt"></label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Discount :</label>
+                                        <label id="disct"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" hidden="hidden">
+                                    <div class="form-group">
+                                        <label>Booking Amount :</label>
+                                        <label id="bookingAmt"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Booking Date :</label>
+                                        <label id="Bookigdt"></label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Paid Amount:</label>
+                                        <label id="Payamt"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Payment Date:</label>
+                                        <label id="Paydt"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Payment Plan :</label>
+                                        <label id="Payplan"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" hidden="hidden">
+                                    <div class="form-group">
+                                        <label>Total Allotment Amount:</label>
+                                        <label id="totAlotamt"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" hidden="hidden">
+                                    <div class="form-group">
+                                        <label>Paid Allotment Amount:</label>
+                                        <label id="paidaltamt"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" hidden="hidden">
+                                    <div class="form-group">
+                                        <label>Balance Allotment Amount :</label>
+                                        <label id="balalotamt"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title mt-3">
+                                    <h5>Transfer Booking <small></small></h5>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Select Site <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Select Sector <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Select Block <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Plot Number <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number" })
-                                                @Html.HiddenFor(m => m.PlotID)
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Booking Number
-                                                @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Booking Number" })
-                                                @Html.HiddenFor(m => m.PK_BookingId)
-                                                @Html.HiddenFor(m => m.PK_BookingDetailsId) 
-                                                @Html.HiddenFor(m => m.PK_PlotID)
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row ">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <input type="button" name="SearchPlot" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails(); " />
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row" id="Details1" style="display: none;">
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <div class="x_panel">
-                                                <div class="x_title">
-                                                    <h2>Plot Details </h2>
-                                                    <ul class="nav navbar-right panel_toolbox">
-                                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                                                    </ul>
-                                                    <div class="clearfix"></div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label>Plot Rate :</label>
-                                                            <label id="Plotrte"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label>Plot Area :</label>
-                                                            <label id="Plotarea"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label>Actual Plot Amount :</label>
-                                                            <label id="ActPlotAmt"></label>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label>Discount :</label>
-                                                            <label id="disct"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4" hidden="hidden">
-                                                        <div class="form-group">
-                                                            <label>Booking Amount :</label>
-                                                            <label id="bookingAmt"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label>Booking Date :</label>
-                                                            <label id="Bookigdt"></label>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label>Paid Amount:</label>
-                                                            <label id="Payamt"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label>Payment Date:</label>
-                                                            <label id="Paydt"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label>Payment Plan :</label>
-                                                            <label id="Payplan"></label>
-                                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group">
+                                                       <label> Select Site <span style="color: red">*</span></label>
+                                                        @Html.DropDownListFor(m => m.SiteID1, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange1();" })
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-4" hidden="hidden">
-                                                        <div class="form-group">
-                                                            <label>Total Allotment Amount:</label>
-                                                            <label id="totAlotamt"></label>
-                                                        </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Select Sector <span style="color: red">*</span></label>
+                                                        @Html.DropDownListFor(m => m.SectorID1, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange1();" })
                                                     </div>
-                                                    <div class="col-md-4" hidden="hidden">
-                                                        <div class="form-group">
-                                                            <label>Paid Allotment Amount:</label>
-                                                            <label id="paidaltamt"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4" hidden="hidden">
-                                                        <div class="form-group">
-                                                            <label>Balance Allotment Amount :</label>
-                                                            <label id="balalotamt"></label>
-                                                        </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Select Block <span style="color: red">*</span></label>
+                                                        @Html.DropDownListFor(m => m.BlockID1, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <div class="x_panel">
-                                                <div class="x_title">
-                                                    <h2>Transfer Booking <small></small></h2>
-                                                    <ul class="nav navbar-right panel_toolbox">
-                                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                                                    </ul>
-                                                    <div class="clearfix"></div>
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Plot Number <span style="color: red">*</span></label>
+                                                        @Html.TextBoxFor(m => m.PlotNumber1, new { @class = "form-control", @Placeholder = "Plot Number", @onchange = "return CheckPlotStatus();", @style = "text-transform:uppercase" })
+                                                    </div>
                                                 </div>
-                                                <div class="x_content">
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        Select Site <span style="color: red">*</span>
-                                                                        @Html.DropDownListFor(m => m.SiteID1, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange1();" })
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        Select Sector <span style="color: red">*</span>
-                                                                        @Html.DropDownListFor(m => m.SectorID1, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange1();" })
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        Select Block <span style="color: red">*</span>
-                                                                        @Html.DropDownListFor(m => m.BlockID1, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        Plot Number <span style="color: red">*</span>
-                                                                        @Html.TextBoxFor(m => m.PlotNumber1, new { @class = "form-control", @Placeholder = "Plot Number", @onchange = "return CheckPlotStatus();", @style = "text-transform:uppercase" })
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        Plot Rate <span style="color: red">*</span>
-                                                                        @Html.TextBoxFor(m => m.PlotRate, new { @class = "form-control", @maxlength = "6", @Placeholder = "Plot Rate", @onchange = "return calculatePlotAmount();", onkeypress = "return isNumberOrDecimal(event);" })
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        Total PLC <span style="color: red">*</span>
-                                                                        @Html.TextBoxFor(m => m.TotalPLC, new { @class = "form-control", @Placeholder = "TotalPLC", onkeypress = "return isNumberOrDecimal(event);" })
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <input class="btn btn-success pull-right" type="submit" value="Transfer" id="btnTransfer" name="Transfer" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Plot Rate <span style="color: red">*</span></label>
+                                                        @Html.TextBoxFor(m => m.PlotRate, new { @class = "form-control", @maxlength = "6", @Placeholder = "Plot Rate", @onchange = "return calculatePlotAmount();", onkeypress = "return isNumberOrDecimal(event);" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Total PLC <span style="color: red">*</span></label>
+                                                        @Html.TextBoxFor(m => m.TotalPLC, new { @class = "form-control", @Placeholder = "TotalPLC", onkeypress = "return isNumberOrDecimal(event);" })
                                                     </div>
                                                 </div>
                                             </div>
+
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input class="btn btn-success pull-right" type="submit" value="Transfer" id="btnTransfer" name="Transfer" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -258,9 +233,7 @@
             </div>
         </div>
     </div>
-       
 
-                                    
 }
 
 <script>

@@ -6,120 +6,98 @@
 
 
 <style>
-    #divload {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        z-index: 9999;
-        background: url("../files/assets/images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
-    }
 
     .errortext {
         border: 1px solid red !important;
     }
 </style>
-@*<div class="loader" id="divload"></div>*@
 
 @using (Html.BeginForm("AdvancePaymentList", "Topup", FormMethod.Post, new { @id = "form1" }))
 {
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">Advance Payment List</h4>
-                    </div>
 
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Advance Payment List</h5>
                 </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["Topup"]
+                </p>
             </div>
         </div>
-    </div>
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
-                <div class="page-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Advance Payment List</h5>
-                                    <p style="color:red;text-align:center;">
-                                        @TempData["Topup"]
-                                    </p>
-                                </div>
-                                <div class="card-block">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                Login ID
-                                                @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @Placeholder = "Login ID"})
-                                      
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                From Date
-                                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = true })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                To Date
-                                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = true })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <br />
-                                                <input type="submit" value="Search" id="getData" name="getData" class="btn btn-success" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="card-block">
-                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
-                                            <thead>
-                                                <tr>
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-md-3 mb-3">
+                        <div class="form-group">
+                            <label>Login ID</label>
+                            @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @Placeholder = "Login ID" })
 
-                                                    <th>S No.</th>
-                                                    <th>Login Id</th>
-                                                    <th>Name</th>
-                                                    <th>Amount</th>
-                                                    <th>Payment Date</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @if (Model != null)
-                                                {
-                                                    if (Model.AdvancePaymentList != null)
-                                                    {
-                                                        int i = 1;
-                                                        foreach (var Item in Model.AdvancePaymentList)
-                                                        {
-                                                            <tr class="text-left">
-
-                                                                <td>@i</td>
-                                                                <td>@Item.LoginID</td>
-                                                                <td>@Item.Name</td>
-                                                                <td>@Item.Amount</td>
-                                                                <td>@Item.PaymentDate</td>
-                                                            </tr>
-                                                            i++;
-                                                        }
-                                                    }
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-group">
+                            <label> From Date</label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = true })
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-group">
+                            <label>To Date</label>
+                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = true })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="d-block">&nbsp;</label>
+                            <input type="submit" value="Search" id="getData" name="getData" class="btn btn-success" />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Login Id</th>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                <th>Payment Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.AdvancePaymentList != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.AdvancePaymentList)
+                                    {
+                                        <tr class="text-left">
+
+                                            <td>@i</td>
+                                            <td>@Item.LoginID</td>
+                                            <td>@Item.Name</td>
+                                            <td>@Item.Amount</td>
+                                            <td>@Item.PaymentDate</td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
+
 }
 
 

@@ -3442,7 +3442,7 @@ namespace Dolphin.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Plot obj = new Plot();
-                    obj.LoginId = r["LoginId"].ToString();
+                    //obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["FatherName"].ToString();
                     obj.Amount = double.Parse(r["CommissionPaid"].ToString()).ToString("n2");
                     obj.BookingPercent = double.Parse(r["TDS"].ToString()).ToString("n2");

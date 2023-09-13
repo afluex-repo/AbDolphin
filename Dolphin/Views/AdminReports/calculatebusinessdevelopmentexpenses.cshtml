@@ -7,51 +7,35 @@
 
 @using (Html.BeginForm("calculatebusinessdevelopmentexpenses", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
+   
 
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">Calculate Business Development Expenses</h4>
-                    </div>
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
-                <div class="page-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    @*<h5>Add New Employee</h5>*@
-                                    <p style="color: red">
-                                        @TempData["BusinessDevelopment"]
-                                    </p>
-                                </div>
-                                <div class="card-block">
-                                    <div class="form-group row">
-                                        <div class="col-sm-3">
-                                            <label class="float-label">Date</label>
-                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "Date", @readonly = true })
-                                        </div>
-                                        <div class="col-md-3-mb-4">
-                                            <br />
-                                            <input class="btn btn-success pull-left" type="submit" value="Calculate" onclick="return validateform()" id="btnSave" name="btnSave" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    	<div class="page-content">
+			<div class="card">
+				<div class="card-body">
+					<div class="d-flex align-items-center justify-content-between">
+						<h5 class="mb-0">Calculate Business Development Expenses</h5>
+					</div>
+					<p style="color: red;display: block; margin-bottom:0px; text-align:center">
+						@TempData["BusinessDevelopment"]
+					</p>
+				</div>
+			</div>
+			<div class="items">
+				<div class="card">
+					<div class="card-body row">
+                        <div class="col-md-3 mb-3">
+                            <label class="float-label">Date</label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "Date", @readonly = true })
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="float-label d-block">&nbsp;</label>
+                            <input class="btn btn-success pull-left" type="submit" value="Calculate" onclick="return validateform()" id="btnSave" name="btnSave" />
+                        </div>
+					</div>	
+				</div>
+			</div>
+		</div>
 }
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
