@@ -171,21 +171,24 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="chart-container-1">
+                        <div class="chart-container-2">
                             <canvas id="chart16"></canvas>
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
-                            Alloted Plots
-                            <span class="badge bg-warning rounded-pill">&nbsp;</span>
-                        </li>
-                        <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                            Booked Plots
+                            Alloted Plots &nbsp;
+                            <span class="badge rounded-pill" style="background-color: #B434FD;">&nbsp;</span>
+                            Booked Plots &nbsp;
                             <span class="badge bg-gradient-ibiza rounded-pill">&nbsp;</span>
                         </li>
+                        <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                            Hold Plots&nbsp;
+                            <span class="badge bg-warning rounded-pill">&nbsp;</span>
+                            @*Total Booking &nbsp;<span class="badge bg-gradient-deepblue rounded-pill">&nbsp;</span>*@
+                        </li>
                         <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                            Hold Plots <span class="badge bg-gradient-deepblue rounded-pill">&nbsp;</span>
+
                         </li>
                     </ul>
                 </div>
@@ -206,6 +209,22 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                            Total  &nbsp;
+                            <span class="badge rounded-pill" style="background-color:#3366cc;">&nbsp;</span>
+                            InActive &nbsp;
+                             <span class="badge rounded-pill" style="background-color:#ff9900">&nbsp;</span>
+                        </li>
+                        <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                            Active<span class="badge rounded-pill" style="background-color:#109618;">&nbsp;</span>
+                           Other &nbsp;<span class="badge rounded-pill" style="background-color:#ccc;">&nbsp;</span>
+                        </li>
+                        <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+
+                        </li>
+                    </ul>
+
+                    @*<ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
                             Total <span class="badge rounded-pill" style="background-color:#3366cc;">&nbsp;</span>
                         </li>
                         <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
@@ -217,10 +236,28 @@
                         <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
                             Other <span class="badge rounded-pill" style="background-color:#ccc;">&nbsp;</span>
                         </li>
-                    </ul>
+                    </ul>*@
                 </div>
             </div>
+
+
             <div class="col d-flex">
+                <div class="card radius-10 w-100">
+                    <div class="card-header bg-transparent">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h6 class="mb-0 py-2">Affiliate Joining Details</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container-0">
+                            <canvas id="chart6"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col d-flex">
                 <div class="card radius-10 w-100">
                     <div class="card-header bg-transparent">
                         <div class="d-flex align-items-center">
@@ -234,20 +271,8 @@
                             <canvas id="chart6"></canvas>
                         </div>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
-                            Jeans <span class="badge bg-gradient-quepal rounded-pill">&nbsp;</span>
-                        </li>
-                        <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                            T-Shirts <span class="badge bg-gradient-ibiza rounded-pill">&nbsp;</span>
-                        </li>
-                        <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                            Shoes
-                            <span class="badge bg-gradient-deepblue rounded-pill">&nbsp;</span>
-                        </li>
-                    </ul>
                 </div>
-            </div>
+            </div>*@
         </div>
 
 
@@ -633,146 +658,243 @@
 
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(bindusers);
-
-    function bindusers() {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            url: '/Admin/GetGraphDetails',
-            data: JSON.stringify(),
-            success:
-            function (response) {
-                var datare = response;
-                var data = new google.visualization.DataTable();
-
-                data.addColumn('string', 'Status');
-                data.addColumn('number', 'Total');
-                for (var i = 0; i < datare.length; i++) {
-                    data.addRow([datare[i].Status, parseInt(datare[i].Total)]);
-                }
-
-                var chart = new google.visualization.PieChart(document.getElementById('divusers'));
-                var options = {
-                    pieSliceText: 'value-and-percentage',
-                    format: 'decimal',
-                    is3D: true,
-                    legend: { position: 'bottom' },
-                    animation: {
-                        startup: true,
-                        duration: 1000,
-                        easing: 'out',
-                    }, chartArea: { width: "100%", height: "80%" }
-                };
-
-                chart.draw(data, options);
 
 
 
 
-            },
-            error: function () {
-            }
-        });
-    }
+
+<script>
+   window.onload = bindusers;
+   var ctx1 = document.getElementById("chart16").getContext('2d');
+   function bindusers() {
+       $.ajax({
+           type: 'POST',
+           dataType: 'json',
+           contentType: 'application/json',
+           url: '/Admin/GetGraphDetails',
+           data: JSON.stringify(),
+           success:
+           function (d) {
+               debugger;
+               var TotalB = [];
+               var TotalStatus = [];
+               var t = JSON.parse(JSON.stringify(d));
+               for (var i = 0; i < t.length; i++) {
+                   TotalB.push(t[i].Total);
+                   TotalStatus.push(t[i].Status);
+               }
+
+               var HoldPlot = ctx1.createLinearGradient(0, 0, 0, 300);
+               HoldPlot.addColorStop(0, '#ff9900');
+               HoldPlot.addColorStop(1, '#ff9900');
+
+
+               var BookedPlot = ctx1.createLinearGradient(0, 0, 0, 300);
+               BookedPlot.addColorStop(0, '#dc3912');
+               BookedPlot.addColorStop(1, '#dc3912');
+
+               var AllottedPlot = ctx1.createLinearGradient(0, 0, 0, 300);
+               AllottedPlot.addColorStop(0, '#e470e4');
+               AllottedPlot.addColorStop(1, '#e470e4');
+
+               var myChart = new Chart(ctx1, {
+                   type: 'pie',
+                   data: {
+                       labels: TotalStatus,
+                       datasets: [{
+                           backgroundColor: [
+                             HoldPlot,
+                             BookedPlot,
+                             AllottedPlot
+                           ],
+
+                           hoverBackgroundColor: [
+                             HoldPlot,
+                             BookedPlot,
+                             AllottedPlot
+                           ],
+
+                           data: TotalB
+                       }]
+                   },
+                   options: {
+                       maintainAspectRatio: false,
+                       plugins: {
+                           legend: {
+                               display: false,
+                               position: 'bottom'
+                           }
+                       }
+
+                   }
+               });
+
+           },
+           error: function () {
+           }
+       });
+
+       var ctx2 = document.getElementById("chart17").getContext('2d');
+       $.ajax({
+           type: 'POST',
+           dataType: 'json',
+           contentType: 'application/json',
+           url: '/Admin/GetGraphDetailsAssociate',
+           data: JSON.stringify(),
+           success:
+           function (d) {
+               debugger;
+               var TotalUsers = [];
+               var IsStatus = [];
+               var t = JSON.parse(JSON.stringify(d));
+               for (var i = 0; i < t.length; i++) {
+                   TotalUsers.push(t[i].Total);
+                   IsStatus.push(t[i].Status);
+               }
+               var Totalas = ctx2.createLinearGradient(0, 0, 0, 300);
+               Totalas.addColorStop(0, '#3366cc');
+               Totalas.addColorStop(1, '#3366cc');
+
+               var Blockeds = ctx2.createLinearGradient(0, 0, 0, 300);
+               Blockeds.addColorStop(0, '#000000');
+               Blockeds.addColorStop(1, '#000000');
+              
+               var Activea = ctx2.createLinearGradient(0, 0, 0, 300);
+               Activea.addColorStop(0, '#ff9900');
+               Activea.addColorStop(1, '#ff9900');
+
+               var InActivea = ctx2.createLinearGradient(0, 0, 0, 300);
+               InActivea.addColorStop(0, '#109618');
+               InActivea.addColorStop(1, '#109618');
+
+
+             
+
+               var myChart = new Chart(ctx2, {
+                   type: 'polarArea',
+                   data: {
+                       labels: IsStatus,
+                       datasets: [{
+                           backgroundColor: [
+                             Totalas,
+                             Blockeds,
+                             Activea,
+                             InActivea
+                      
+                           ],
+
+                           hoverBackgroundColor: [
+                             Totalas,
+                             Blockeds,
+                             Activea,
+                             InActivea
+                           ],
+                           data: TotalUsers
+                       }]
+                   },
+                   options: {
+                       maintainAspectRatio: false,
+                       plugins: {
+                           legend: {
+                               display: false,
+                               position: 'bottom'
+                           }
+                       }
+
+                   }
+               });
+           }
+       })
+
+       var ctx = document.getElementById("chart6").getContext('2d');
+       $.ajax({
+           type: 'POST',
+           dataType: 'json',
+           contentType: 'application/json',
+           url: '/Admin/GetAssociateJoiningDetails',
+           data: JSON.stringify(),
+           success:
+           function (d) {
+               debugger;
+               var Months = [];
+               var TotalUsers = [];
+               var t = JSON.parse(JSON.stringify(d));
+               for (var i = 0; i < t.length; i++) {
+                   TotalUsers.push(t[i].TotalUser);
+                   Months.push(t[i].Month);
+               }
+
+               var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
+               gradientStroke3.addColorStop(0, '#42e695');
+               gradientStroke3.addColorStop(1, '#3bb2b8');
+
+               var gradientStroke4 = ctx.createLinearGradient(0, 0, 0, 300);
+               gradientStroke4.addColorStop(0, ' #7f00ff');
+               gradientStroke4.addColorStop(0.5, '#e100ff');
+
+               var myChart = new Chart(ctx, {
+                   type: 'bar',
+                   data: {
+                       labels: Months,
+                       //data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Set", "Nov", "Dec"],
+                       datasets: [{
+                           label: 'Total Affiliate',
+                           data: TotalUsers,
+                           borderColor: gradientStroke3,
+                           backgroundColor: gradientStroke3,
+                           hoverBackgroundColor: gradientStroke3,
+                           pointRadius: 0,
+                           borderRadius: 20,
+                           fill: false,
+                           borderWidth: 1
+                       },
+                       //{
+                       //    label: 'mobiles',
+                       //    data: [50, 60, 40, 70, 35, 75, 30, 20],
+                       //    bordercolor: gradientstroke4,
+                       //    backgroundcolor: gradientstroke4,
+                       //    hoverbackgroundcolor: gradientstroke4,
+                       //    pointradius: 0,
+                       //    borderradius: 20,
+                       //    fill: false,
+                       //    borderwidth: 1
+                       //}
+
+                       ]
+                   },
+                   options: {
+                       maintainAspectRatio: false,
+                       barPercentage: 0.5,
+                       categoryPercentage: 0.8,
+                       plugins: {
+                           legend: {
+                               display: true,
+                               position: 'bottom'
+                           }
+                       },
+                       scales: {
+                           y: {
+                               beginAtZero: true
+                           }
+                       }
+                   }
+               });
+
+           },
+           error: function () {
+           }
+       });
+
+
+   }
+
+
+
+
 
 </script>
 
 
-<script type="text/javascript">
-
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(BindAssociates);
-
-    function BindAssociates() {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            url: '/Admin/GetGraphDetailsAssociate',
-            data: JSON.stringify(),
-            success:
-            function (response) {
-                var datare = response;
-                var data = new google.visualization.DataTable();
-
-                data.addColumn('string', 'Status');
-                data.addColumn('number', 'Total');
-                for (var i = 0; i < datare.length; i++) {
-                    data.addRow([datare[i].Status, parseInt(datare[i].Total)]);
-                }
-
-                var chart = new google.visualization.PieChart(document.getElementById('divpayout'));
-                var options = {
-                    pieSliceText: 'value-and-percentage',
-                    format: 'decimal',
-                    is3D: true,
-                    legend: { position: 'bottom' },
-                    animation: {
-                        startup: true,
-                        duration: 1000,
-                        easing: 'out',
-                    }, chartArea: { width: "100%", height: "80%" }
-                };
-
-                chart.draw(data, options);
 
 
-
-
-            },
-            error: function () {
-            }
-        });
-    }
-
-</script>
-
-<script type="text/javascript">
-
-    google.charts.load("current", { packages: ["imagebarchart"] });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            url: '/Admin/GetAssociateJoiningDetails',
-            data: JSON.stringify(),
-            success:
-            function (response) {
-                var datare = response;
-                var data = new google.visualization.DataTable();
-
-                data.addColumn('string', 'Month');
-                data.addColumn('number', 'TotalUser');
-                for (var i = 0; i < datare.length; i++) {
-                    data.addRow([datare[i].Month, parseInt(datare[i].TotalUser)]);
-                }
-
-                var chart = new google.visualization.ImageBarChart(document.getElementById('divinvestment'));
-                var options = {
-                    pieSliceText: 'value-and-percentage',
-                    format: 'decimal',
-                    is3D: true,
-                    legend: { position: 'bottom' },
-                    animation: {
-                        startup: true,
-                        duration: 1000,
-                        easing: 'out',
-                    }, chartArea: { width: "100%", height: "80%" }
-                };
-                chart.draw(data, options);
-            },
-            error: function () {
-            }
-        });
-    }
-
-</script>
 
