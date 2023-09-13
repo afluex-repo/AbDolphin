@@ -27,15 +27,15 @@
                 </div>
                 <div class="col-sm-3 mb-3">
                     <label class="float-label">Select Site<span style="color: red">*</span></label>
-                    @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                    @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
                 </div>
                 <div class="col-sm-3 mb-3">
                     <label class="float-label">Select Sector<span style="color:red">*</span></label>
-                    @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
+                    @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
                 </div>
                 <div class="col-sm-3 mb-3">
                     <label class="float-label">Select Block<span style="color:red">*</span></label>
-                    @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
                 </div>
                 <div class="col-sm-3 mb-3">
                     <label class="float-label">Plot Number</label>
