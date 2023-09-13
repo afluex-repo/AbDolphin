@@ -526,150 +526,147 @@
            </div>
         </div>
     *@<!--end row-->
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="col d-flex">
-                    <div class="card radius-10 w-100">
-                        <div class="card-header bg-transparent">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <h6 class="mb-0 py-2">Booking Details</h6>
-                                </div>
-                            </div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
+        <div class="col d-flex">
+            <div class="card radius-10 w-100">
+                <div class="card-header bg-transparent">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h6 class="mb-0 py-2">Booking Details</h6>
                         </div>
-                        <div class="card-body">
-                            <div class="chart-container-2">
-                                <canvas id="chart16"></canvas>
-                            </div>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
-                                Alloted Plots &nbsp;
-                                <span class="badge rounded-pill" style="background-color: #B434FD;">&nbsp;</span>
-                                Booked Plots &nbsp;
-                                <span class="badge bg-gradient-ibiza rounded-pill">&nbsp;</span>
-                            </li>
-                            @*<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                                Booked Plots
-                                <span class="badge bg-gradient-ibiza rounded-pill">&nbsp;</span>
-                            </li>*@
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
-                                Hold Plots&nbsp; &nbsp; &nbsp; &nbsp; 
-                                <span class="badge bg-warning rounded-pill">&nbsp;</span>
-                                Total Booking &nbsp;<span class="badge bg-gradient-deepblue rounded-pill">&nbsp;</span>
-                            </li>
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                                    
-                            </li>
-                        </ul>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="col d-flex">
-                    <div class="card radius-10 w-100">
-                        <div class="card-header bg-transparent">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <h6 class="mb-0 py-2">News</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-block">
-                            <marquee direction="up" scrolldelay="300" style="padding: 15px;">
-                                <div class="table-responsive" style="height:317px;">
+                <div class="card-body">
+                    <div class="chart-container-2">
+                        <canvas id="chart16"></canvas>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                        Alloted Plots &nbsp;
+                        <span class="badge rounded-pill" style="background-color: #B434FD;">&nbsp;</span>
+                        Booked Plots &nbsp;
+                        <span class="badge bg-gradient-ibiza rounded-pill">&nbsp;</span>
+                    </li>
+                    @*<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                            Booked Plots
+                            <span class="badge bg-gradient-ibiza rounded-pill">&nbsp;</span>
+                        </li>*@
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                        Hold Plots&nbsp; &nbsp; &nbsp; &nbsp;
+                        <span class="badge bg-warning rounded-pill">&nbsp;</span>
+                        Total Booking &nbsp;<span class="badge bg-gradient-deepblue rounded-pill">&nbsp;</span>
+                    </li>
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
 
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if (Model != null)
-                                            {
-                                            if (Model.ListNEWS != null)
-                                            {
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="col d-flex">
+            <div class="card radius-10 w-100">
+                <div class="card-header bg-transparent">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h6 class="mb-0 py-2">News</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-block">
+                    <marquee direction="up" scrolldelay="300" style="padding: 15px;">
+                        <div class="table-responsive" style="height:317px;">
+
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.ListNEWS != null)
+                                        {
                                             int i = 1;
                                             foreach (var Item in Model.ListNEWS)
                                             {
-                                            <tr>
-                                                
-                                                    @Item.NewsBody
-                                                
-                                            </tr>
-                                            i++;
-                                            }
-                                            }
-                                            }
-                                        </tbody>
-                                    </table>
+                                                <tr>
 
-                                </div>
-                            </marquee>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <div class="col-md-4">
-                <div class="col d-flex">
-                    <div class="card radius-10 w-100">
-                        <div class="card-header bg-transparent">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <h6 class="mb-0 py-2">Monthly Bookings</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-container-0">
-                                <canvas id="chart6"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @*<div class="col d-flex">
-                    <div class="card radius-10 w-100">
-                        <div class="card-header bg-transparent">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <h6 class="mb-0 py-2">News</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-block">
-                            <div class="table-responsive" style="height:160px;">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr></tr>
-                                    </thead>
-                                    <tbody>
-                                        @if (Model != null)
-                                        {
-                                            if (Model.ListNEWS != null)
-                                            {
-                                                int i = 1;
-                                                foreach (var Item in Model.ListNEWS)
-                                                {
-                                                    <tr>
-                                                        <marquee direction="up" scrolldelay="400">
-                                                            @Item.NewsBody
-                                                        </marquee>
-                                                    </tr>
-                                                    i++;
-                                                }
+                                                    @Item.NewsBody
+
+                                                </tr>
+                                                i++;
                                             }
                                         }
-                                    </tbody>
-                                </table>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </marquee>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col d-flex">
+            <div class="card radius-10 w-100">
+                <div class="card-header bg-transparent">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h6 class="mb-0 py-2">Monthly Bookings</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container-0">
+                        <canvas id="chart6"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="col d-flex">
+                <div class="card radius-10 w-100">
+                    <div class="card-header bg-transparent">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h6 class="mb-0 py-2">News</h6>
                             </div>
                         </div>
                     </div>
-                </div>*@
-            </div>
-        </div>
+                    <div class="card-block">
+                        <div class="table-responsive" style="height:160px;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.ListNEWS != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.ListNEWS)
+                                            {
+                                                <tr>
+                                                    <marquee direction="up" scrolldelay="400">
+                                                        @Item.NewsBody
+                                                    </marquee>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
     </div>
+
+
     <div class="card">
         <div class="card-body">
             <h5>Due Installment</h5>

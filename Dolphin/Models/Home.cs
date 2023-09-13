@@ -12,7 +12,7 @@ namespace Dolphin.Models
     public class Home : Common
     {
         public List<Home> lstMenu { get; set; }
-
+        public string Icon { get; set; }
         public string Password { get; set; }
         public string LoginId { get; set; }
         public string SponsorId { get; set; }
@@ -141,6 +141,7 @@ namespace Dolphin.Models
                         obj.MenuId = r["PK_FormTypeId"].ToString();
                         obj.MenuName = r["FormType"].ToString();
                         obj.Url = r["Url"].ToString();
+                        obj.Icon = r["Icon"].ToString();
                         lstmenu.Add(obj);
                     }
 

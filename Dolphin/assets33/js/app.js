@@ -164,52 +164,52 @@ $(function() {
     
 
 
-    // chart 17
-	var ctx = document.getElementById("chart17").getContext('2d');
+    //// chart 17
+	//var ctx = document.getElementById("chart17").getContext('2d');
 
-	var gradientStroke8 = ctx.createLinearGradient(0, 0, 0, 300);
-	gradientStroke8.addColorStop(0, '#3366cc');
-	gradientStroke8.addColorStop(1, '#3366cc');
+	//var gradientStroke8 = ctx.createLinearGradient(0, 0, 0, 300);
+	//gradientStroke8.addColorStop(0, '#3366cc');
+	//gradientStroke8.addColorStop(1, '#3366cc');
 
-	var gradientStroke9 = ctx.createLinearGradient(0, 0, 0, 300);
-	gradientStroke9.addColorStop(0, '#ff9900');
-	gradientStroke9.addColorStop(1, '#ff9900');
+	//var gradientStroke9 = ctx.createLinearGradient(0, 0, 0, 300);
+	//gradientStroke9.addColorStop(0, '#ff9900');
+	//gradientStroke9.addColorStop(1, '#ff9900');
 
 
-	var gradientStroke10 = ctx.createLinearGradient(0, 0, 0, 300);
-	gradientStroke10.addColorStop(0, '#109618');
-	gradientStroke10.addColorStop(1, '#109618');
+	//var gradientStroke10 = ctx.createLinearGradient(0, 0, 0, 300);
+	//gradientStroke10.addColorStop(0, '#109618');
+	//gradientStroke10.addColorStop(1, '#109618');
 
-	var myChart = new Chart(ctx, {
-	    type: 'polarArea',
-	    data: {
-	        labels: ["Total", "InActive", "Active"],
-	        datasets: [{
-	            backgroundColor: [
-                  gradientStroke8,
-                  gradientStroke9,
-                  gradientStroke10
-	            ],
+	//var myChart = new Chart(ctx, {
+	//    type: 'polarArea',
+	//    data: {
+	//        labels: ["Total", "InActive", "Active"],
+	//        datasets: [{
+	//            backgroundColor: [
+    //              gradientStroke8,
+    //              gradientStroke9,
+    //              gradientStroke10
+	//            ],
 
-	            hoverBackgroundColor: [
-                 gradientStroke8,
-                 gradientStroke9,
-                 gradientStroke10
-	            ],
-	            data: [5, 8, 7]
-	        }]
-	    },
-	    options: {
-	        maintainAspectRatio: false,
-	        plugins: {
-	            legend: {
-	                display: false,
-	                position: 'bottom'
-	            }
-	        }
+	//            hoverBackgroundColor: [
+    //             gradientStroke8,
+    //             gradientStroke9,
+    //             gradientStroke10
+	//            ],
+	//            data: [5, 8, 7]
+	//        }]
+	//    },
+	//    options: {
+	//        maintainAspectRatio: false,
+	//        plugins: {
+	//            legend: {
+	//                display: false,
+	//                position: 'bottom'
+	//            }
+	//        }
 
-	    }
-	});
+	//    }
+	//});
 
 
     // chart 18
