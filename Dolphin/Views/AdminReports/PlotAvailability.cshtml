@@ -129,7 +129,7 @@
 
                     
 
-                    <div class="row mt-4">
+                    <div class="row g-1 mt-4">
 
                             @if (Model != null)
                             {
@@ -139,14 +139,14 @@
                                     {
                        
                                         <div class="col-12 col-lg-3">
-                                            <div class="card border rounded-2 text-center shadow-none" style="background: @Item.ColorCSS">
+                                            <div class="card border mb-0 rounded-2 text-center shadow-none" style="background: @Item.ColorCSS">
                                                 <div class="card-body">
                                                     <input type="hidden" value="@Item.PlotID" />
                                                     <input type="hidden" value="@Item.SiteID" />
                                                     <input type="hidden" value="@Item.SectorID" />
                                                 
                                                     <ul class="ploatArea">
-                                                        <li><b>Plot Number :</b> <span>@Item.PlotNumber</span></li>
+                                                        <li><b>Plot Number :</b> <strong class="font-weight-bold d-block">@Item.PlotNumber</strong></li>
                                                         <li><b>Plot Area : </b> <span>@Item.PlotArea (@Item.SectorName,@Item.BlockName)</span></li>
                                                     </ul>
                                                 </div>
