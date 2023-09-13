@@ -3,8 +3,6 @@
     ViewBag.Title = "AssociateDashBoard";
     Layout = "~/Views/Shared/AssociateLayout.cshtml";
 }
-
-
 <div class="page-content">
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
         <div class="col">
@@ -178,7 +176,9 @@
                     <div class="d-flex align-items-center">
                         <div>
                             <p class="mb-0 text-secondary">Date Wise Business Check</p>
-                            <a href="/User/SummaryReport" class="text-white m-b-3"><h4 class="my-1 text-warning">View Details</h4></a>
+                            <a href="/User/SummaryReport" class="text-white m-b-3">
+                                <h4 class="my-1 text-warning">View Details</h4>
+                            </a>
                         </div>
                         <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto">
                             <a href="/User/SummaryReport" class="text-white m-b-3"><i class="bx bx-chevrons-down"></i></a>
@@ -202,7 +202,7 @@
                 </div>
             </div>
         </div>
-        <div class="col" >
+        <div class="col">
             <div class="card radius-10 border-start border-0 border-4 border-success">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -211,13 +211,13 @@
                             <h6 class="my-1 text-success">@ViewBag.UserRank</h6>
                         </div>
                         <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
-                            <i class="bx bx-user-check"></i>
+                            <i class="lni lni-certificate"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col" @*style="width:30%"*@>
             <div class="card radius-10 border-start border-0 border-4 border-info">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -233,10 +233,11 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        @*<div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
-                            <i class="bx bxs-bar-chart-alt-2"></i>
-                        </div>*@
+                        @*
+                            <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                               <i class="bx bxs-bar-chart-alt-2"></i>
+                            </div>
+                        *@
                     </div>
                     <div class="card-footer" style="padding: 11px 10px">
                         <div class="progress" style="width:100%;color: white;font-size: 10px;">
@@ -246,332 +247,286 @@
                 </div>
             </div>
         </div>
-       
     </div>
-    @*<div class="row row-cols-1 row-cols-md-2 row-cols-xl-2 row-cols-xxl-4">
-        <div class="col">
-            <div class="card radius-10 bg-gradient-cosmic">
-                <div class="card-body">
+    @*
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-2 row-cols-xxl-4">
+           <div class="col">
+              <div class="card radius-10 bg-gradient-cosmic">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Total Associates</p>
-                            <h4 class="my-1 text-white">@ViewBag.TotalAssociate</h4>
-                        </div>
-
-
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Total Associates</p>
+                          <h4 class="my-1 text-white">@ViewBag.TotalAssociate</h4>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card radius-10 bg-gradient-ibiza">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-ibiza">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Total Active Id</p>
-                            <h4 class="my-1 text-white">@ViewBag.TotalActiveId</h4>
-                        </div>
-                       
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Total Active Id</p>
+                          <h4 class="my-1 text-white">@ViewBag.TotalActiveId</h4>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-ohhappiness">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-ohhappiness">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Total Business</p>
-                            <h4 class="my-1 text-white">@ViewBag.TotalBusiness</h4>
-                        </div>
-                      
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Total Business</p>
+                          <h4 class="my-1 text-white">@ViewBag.TotalBusiness</h4>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-kyoto">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-kyoto">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Self Business</p>
-                            <h4 class="my-1 text-white">@ViewBag.SelfBusiness</h4>
-
-
-                        </div>
-                       
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Self Business</p>
+                          <h4 class="my-1 text-white">@ViewBag.SelfBusiness</h4>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-kyoto">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-kyoto">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Team Business</p>
-                            <h4 class="my-1 text-white">@ViewBag.TeamBusiness</h4>
-
-
-                        </div>
-                        
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Team Business</p>
+                          <h4 class="my-1 text-white">@ViewBag.TeamBusiness</h4>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-ohhappiness">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-ohhappiness">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Self Business</p>
-                            <h4 class="my-1 text-white">@ViewBag.SelfBusiness</h4>
-
-
-                        </div>
-                        
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Self Business</p>
+                          <h4 class="my-1 text-white">@ViewBag.SelfBusiness</h4>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-ibiza">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-ibiza">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Total Booking</p>
-                            <h4 class="my-1 text-white">@ViewBag.TotalBooking</h4>
-
-
-                        </div>
-                       
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Total Booking</p>
+                          <h4 class="my-1 text-white">@ViewBag.TotalBooking</h4>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-cosmic">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-cosmic">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Self Booking</p>
-                            <h4 class="my-1 text-white">@ViewBag.SelfBooking</h4>
-
-
-                        </div>
-                        
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Self Booking</p>
+                          <h4 class="my-1 text-white">@ViewBag.SelfBooking</h4>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-cosmic">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-cosmic">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Team Booking</p>
-                            <h4 class="my-1 text-white">@ViewBag.TeamBooking</h4>
-
-
-                        </div>
-                       
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Team Booking</p>
+                          <h4 class="my-1 text-white">@ViewBag.TeamBooking</h4>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-ibiza">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-ibiza">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Total Registry</p>
-                            <h4 class="my-1 text-white">@ViewBag.Totalregistry</h4>
-
-
-                        </div>
-                        
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Total Registry</p>
+                          <h4 class="my-1 text-white">@ViewBag.Totalregistry</h4>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-ohhappiness">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-ohhappiness">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Self Registry</p>
-                            <h4 class="my-1 text-white">@ViewBag.SelfRegistry</h4>
-
-
-                        </div>
-                       
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Self Registry</p>
+                          <h4 class="my-1 text-white">@ViewBag.SelfRegistry</h4>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-kyoto">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-kyoto">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Team Registry</p>
-                            <h4 class="my-1 text-white">@ViewBag.TeamRegistry</h4>
-
-
-                        </div>
-                        
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Team Registry</p>
+                          <h4 class="my-1 text-white">@ViewBag.TeamRegistry</h4>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-kyoto">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-kyoto">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Date Wise Business Check</p>
-
-
-                        </div>
-                        <div>
-                            <a href="/User/SummaryReport" class="text-white m-b-3">View Details</a>
-                        </div>
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Date Wise Business Check</p>
+                       </div>
+                       <div>
+                          <a href="/User/SummaryReport" class="text-white m-b-3">View Details</a>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-ohhappiness">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-ohhappiness">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Vistor Fund Paid</p>
-                            <h4 class="my-1 text-white">@ViewBag.VisitorFundpaid</h4>
-
-
-                        </div>
-                       
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Vistor Fund Paid</p>
+                          <h4 class="my-1 text-white">@ViewBag.VisitorFundpaid</h4>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-cosmic">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-cosmic">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Rank</p>
-                            <h4 class="my-1 text-white">@ViewBag.UserRank</h4>
-
-
-                        </div>
-                        <div>
-
-                        </div>
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Rank</p>
+                          <h4 class="my-1 text-white">@ViewBag.UserRank</h4>
+                       </div>
+                       <div>
+                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 bg-gradient-ibiza">
-                <div class="card-body">
+                 </div>
+              </div>
+           </div>
+           <div class="col">
+              <div class="card radius-10 bg-gradient-ibiza">
+                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="me-auto">
-                            <p class="mb-0 text-white">Remaining Percent</p>
-                            <h4 class="my-1 text-white">@ViewBag.RemainingTargetPercent %</h4>
-
-
-                        </div>
-                        <div>
-                            <h6 class="mb-0 text-white">Target Amount</h6>
-                            <h4 class="my-1 text-white">@ViewBag.TargetBusiness</h4>
-                        </div>
+                       <div class="me-auto">
+                          <p class="mb-0 text-white">Remaining Percent</p>
+                          <h4 class="my-1 text-white">@ViewBag.RemainingTargetPercent %</h4>
+                       </div>
+                       <div>
+                          <h6 class="mb-0 text-white">Target Amount</h6>
+                          <h4 class="my-1 text-white">@ViewBag.TargetBusiness</h4>
+                       </div>
                     </div>
                     <div class="card-footer bg-c-yellow" style="padding: 11px 10px">
-                        <div class="progress" style="width:100%;color: white;font-size: 10px;">
-                            <div class="progress-bar" role="progressbar" style="width: @ViewBag.TargetPercentage%" aria-valuenow="@ViewBag.TargetPercentage" aria-valuemin="0" aria-valuemax="100">@ViewBag.TargetPercentage %</div>
-                        </div>
+                       <div class="progress" style="width:100%;color: white;font-size: 10px;">
+                          <div class="progress-bar" role="progressbar" style="width: @ViewBag.TargetPercentage%" aria-valuenow="@ViewBag.TargetPercentage" aria-valuemin="0" aria-valuemax="100">@ViewBag.TargetPercentage %</div>
+                       </div>
                     </div>
-                </div>
-            </div>
+                 </div>
+              </div>
+           </div>
         </div>
-        
-    </div>*@<!--end row-->
-    @*<div class="row">
-            <div class="col-12 col-lg-12">
-                <div class="card radius-10">
-                    <div class="card-header">
-                        <div class="d-flex align-items-center">
-                            <div>
-                                <h6 class="mb-0">Sales Overview</h6>
-                            </div>
-                            <div class="dropdown ms-auto">
-                                <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
-                                    <i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:;">Action</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:;">Another action</a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:;">Something else here</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+    *@<!--end row-->
+    @*
+        <div class="row">
+           <div class="col-12 col-lg-12">
+              <div class="card radius-10">
+                 <div class="card-header">
+                    <div class="d-flex align-items-center">
+                       <div>
+                          <h6 class="mb-0">Sales Overview</h6>
+                       </div>
+                       <div class="dropdown ms-auto">
+                          <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
+                          <i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
+                          </a>
+                          <ul class="dropdown-menu">
+                             <li>
+                                <a class="dropdown-item" href="javascript:;">Action</a>
+                             </li>
+                             <li>
+                                <a class="dropdown-item" href="javascript:;">Another action</a>
+                             </li>
+                             <li>
+                                <hr class="dropdown-divider">
+                             </li>
+                             <li>
+                                <a class="dropdown-item" href="javascript:;">Something else here</a>
+                             </li>
+                          </ul>
+                       </div>
                     </div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center ms-auto font-13 gap-2 mb-3">
-                            <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1 text-info"></i>Downloads</span>
-                            <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1 text-danger"></i>Earnings</span>
-                        </div>
-                        <div class="chart-container-9">
-                            <canvas id="chart5"></canvas>
-                        </div>
+                 </div>
+                 <div class="card-body">
+                    <div class="d-flex align-items-center ms-auto font-13 gap-2 mb-3">
+                       <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1 text-info"></i>Downloads</span>
+                       <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1 text-danger"></i>Earnings</span>
                     </div>
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-0 row-group text-center border-top">
-                        <div class="col">
-                            <div class="p-3">
-                                <h4 class="mb-0">$168</h4>
-                                <small class="mb-0">Today's Sales <span> <i class="bx bx-up-arrow-alt align-middle"></i> 2.43%</span></small>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="p-3">
-                                <h4 class="mb-0">$856</h4>
-                                <small class="mb-0">This Week Sales <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.65%</span></small>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="p-3">
-                                <h4 class="mb-0">$2400</h4>
-                                <small class="mb-0">This Month Sales <span> <i class="bx bx-up-arrow-alt align-middle"></i> 5.62%</span></small>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="p-3">
-                                <h4 class="mb-0">$4,562</h4>
-                                <small class="mb-0">This Year Sales <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.62%</span></small>
-                            </div>
-                        </div>
+                    <div class="chart-container-9">
+                       <canvas id="chart5"></canvas>
                     </div>
-                </div>
-            </div>
-        </div>*@<!--end row-->
-
-
-
-
-
-
-    <div class="row row-cols-1 row-cols-lg-3">
+                 </div>
+                 <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-0 row-group text-center border-top">
+                    <div class="col">
+                       <div class="p-3">
+                          <h4 class="mb-0">$168</h4>
+                          <small class="mb-0">Today's Sales <span> <i class="bx bx-up-arrow-alt align-middle"></i> 2.43%</span></small>
+                       </div>
+                    </div>
+                    <div class="col">
+                       <div class="p-3">
+                          <h4 class="mb-0">$856</h4>
+                          <small class="mb-0">This Week Sales <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.65%</span></small>
+                       </div>
+                    </div>
+                    <div class="col">
+                       <div class="p-3">
+                          <h4 class="mb-0">$2400</h4>
+                          <small class="mb-0">This Month Sales <span> <i class="bx bx-up-arrow-alt align-middle"></i> 5.62%</span></small>
+                       </div>
+                    </div>
+                    <div class="col">
+                       <div class="p-3">
+                          <h4 class="mb-0">$4,562</h4>
+                          <small class="mb-0">This Year Sales <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.62%</span></small>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+    *@<!--end row-->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
         <div class="col d-flex">
             <div class="card radius-10 w-100">
                 <div class="card-header bg-transparent">
@@ -582,25 +537,34 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="chart-container-1">
+                    <div class="chart-container-2">
                         <canvas id="chart16"></canvas>
                     </div>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
-                        Alloted Plots
-                        <span class="badge bg-warning rounded-pill">&nbsp;</span>
-                    </li>
-                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                        Booked Plots
+                        Alloted Plots &nbsp;
+                        <span class="badge rounded-pill" style="background-color: #B434FD;">&nbsp;</span>
+                        Booked Plots &nbsp;
                         <span class="badge bg-gradient-ibiza rounded-pill">&nbsp;</span>
                     </li>
+                    @*<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+                            Booked Plots
+                            <span class="badge bg-gradient-ibiza rounded-pill">&nbsp;</span>
+                        </li>*@
+                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                        Hold Plots&nbsp; &nbsp; &nbsp; &nbsp;
+                        <span class="badge bg-warning rounded-pill">&nbsp;</span>
+                        Total Booking &nbsp;<span class="badge bg-gradient-deepblue rounded-pill">&nbsp;</span>
+                    </li>
                     <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                        Total Booking <span class="badge bg-gradient-deepblue rounded-pill">&nbsp;</span>
+
                     </li>
                 </ul>
             </div>
         </div>
+
+
         <div class="col d-flex">
             <div class="card radius-10 w-100">
                 <div class="card-header bg-transparent">
@@ -611,41 +575,40 @@
                     </div>
                 </div>
                 <div class="card-block">
-                    <div class="table-responsive" style="height:160px;">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr></tr>
-                            </thead>
-                            <tbody>
-                                @if (Model != null)
-                                {
-                                    if (Model.ListNEWS != null)
-                                    {
-                                        int i = 1;
-                                        foreach (var Item in Model.ListNEWS)
-                                        {
-                                            <tr>
-                                                <marquee direction="up" scrolldelay="400">
-                                                    @Item.NewsBody
-                                                </marquee>
+                    <marquee direction="up" scrolldelay="300" style="padding: 15px;">
+                        <div class="table-responsive" style="height:317px;">
 
-                                            </tr>
-                                            i++;
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.ListNEWS != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.ListNEWS)
+                                            {
+                                                <tr>
+
+                                                    @Item.NewsBody
+
+                                                </tr>
+                                                i++;
+                                            }
                                         }
                                     }
-                                }
+                                </tbody>
+                            </table>
 
-                            </tbody>
-
-
-                        </table>
-
-                    </div>
+                        </div>
+                    </marquee>
                 </div>
-
-               
             </div>
         </div>
+
+
         <div class="col d-flex">
             <div class="card radius-10 w-100">
                 <div class="card-header bg-transparent">
@@ -656,24 +619,51 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="chart-container-1">
+                    <div class="chart-container-0">
                         <canvas id="chart6"></canvas>
                     </div>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
-                        Jeans <span class="badge bg-gradient-quepal rounded-pill">&nbsp;</span>
-                    </li>
-                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                        T-Shirts <span class="badge bg-gradient-ibiza rounded-pill">&nbsp;</span>
-                    </li>
-                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                        Shoes
-                        <span class="badge bg-gradient-deepblue rounded-pill">&nbsp;</span>
-                    </li>
-                </ul>
             </div>
         </div>
+        @*<div class="col d-flex">
+                <div class="card radius-10 w-100">
+                    <div class="card-header bg-transparent">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h6 class="mb-0 py-2">News</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div class="table-responsive" style="height:160px;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.ListNEWS != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.ListNEWS)
+                                            {
+                                                <tr>
+                                                    <marquee direction="up" scrolldelay="400">
+                                                        @Item.NewsBody
+                                                    </marquee>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
     </div>
 
 
@@ -690,7 +680,6 @@
                             <th>Installment No.</th>
                             <th>Installment Amount</th>
                             <th>Plot Details</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -703,7 +692,6 @@
                                 {
                                     <tr>
                                         <td>@i</td>
-
                                         <td>@Item.CustomerLoginID</td>
                                         <td>@Item.CustomerName</td>
                                         <td>@Item.InstallmentNo</td>
@@ -719,120 +707,345 @@
             </div>
         </div>
     </div>
-
-    
-
-
-
-
-
-
-
 </div>
-
-
-
-
-
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+   google.charts.load('current', { 'packages': ['corechart'] });
+   google.charts.setOnLoadCallback(bindusers);
 
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(bindusers);
+   function bindusers() {
+       $.ajax({
+           type: 'POST',
+           dataType: 'json',
+           contentType: 'application/json',
+           url: '/AssociateDashboard/GetGraphDetailsOfPlot',
+           data: JSON.stringify(),
+           success:
+           function (response) {
+               var datare = response;
+               var data = new google.visualization.DataTable();
 
-    function bindusers() {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            url: '/AssociateDashboard/GetGraphDetailsOfPlot',
-            data: JSON.stringify(),
-            success:
-            function (response) {
-                var datare = response;
-                var data = new google.visualization.DataTable();
+               data.addColumn('string', 'Status');
+               data.addColumn('number', 'Total');
+               for (var i = 0; i < datare.length; i++) {
+                   data.addRow([datare[i].Status, parseInt(datare[i].Total)]);
+               }
 
-                data.addColumn('string', 'Status');
-                data.addColumn('number', 'Total');
-                for (var i = 0; i < datare.length; i++) {
-                    data.addRow([datare[i].Status, parseInt(datare[i].Total)]);
-                }
+               var chart = new google.visualization.PieChart(document.getElementById('divusers'));
+               var options = {
+                   pieSliceText: 'value-and-percentage',
+                   format: 'decimal',
+                   is3D: true,
+                   legend: { position: 'bottom' },
+                   animation: {
+                       startup: true,
+                       duration: 1000,
+                       easing: 'out',
+                   }, chartArea: { width: "100%", height: "80%" }
+               };
 
-                var chart = new google.visualization.PieChart(document.getElementById('divusers'));
-                var options = {
-                    pieSliceText: 'value-and-percentage',
-                    format: 'decimal',
-                    is3D: true,
-                    legend: { position: 'bottom' },
-                    animation: {
-                        startup: true,
-                        duration: 1000,
-                        easing: 'out',
-                    }, chartArea: { width: "100%", height: "80%" }
-                };
+               chart.draw(data, options);
 
-                chart.draw(data, options);
-
-            },
-            error: function () {
-            }
-        });
-    }
-
-</script>
-
-
-
-
-
-<script type="text/javascript">
-
-    google.charts.load("current", { packages: ["imagebarchart"] });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            url: '/AssociateDashboard/GetPlotBookingOnGraph',
-            data: JSON.stringify(),
-            success:
-            function (response) {
-                var datare = response;
-                var data = new google.visualization.DataTable();
-
-                data.addColumn('string', 'Month');
-                data.addColumn('number', 'TotalBooking');
-                for (var i = 0; i < datare.length; i++) {
-                    data.addRow([datare[i].Month, parseInt(datare[i].TotalBooking)]);
-                }
-
-                var chart = new google.visualization.ImageBarChart(document.getElementById('divinvestment'));
-                var options = {
-                    pieSliceText: 'value-and-percentage',
-                    format: 'decimal',
-                    is3D: true,
-                    legend: { position: 'bottom' },
-                    animation: {
-                        startup: true,
-                        duration: 1000,
-                        easing: 'out',
-                    }, chartArea: { width: "100%", height: "80%" }
-                };
-                chart.draw(data, options);
-            },
-            error: function () {
-            }
-        });
-    }
+           },
+           error: function () {
+           }
+       });
+   }
 
 </script>
 <script>
-    $("#DivAssociates").click(function () {
-        alert("ghgf")
+   window.onload = bindusers;
+   var ctx1 = document.getElementById("chart16").getContext('2d');
+   function bindusers() {
+       $.ajax({
+           type: 'POST',
+           dataType: 'json',
+           contentType: 'application/json',
+           url: '/AssociateDashboard/GetGraphDetailsOfPlot',
+           data: JSON.stringify(),
+           success:
+           function (d) {
+               debugger;
+               var TotalB = [];
+               var TotalStatus = [];
+               var t = JSON.parse(JSON.stringify(d));
+               for (var i = 0; i < t.length; i++) {
+                   TotalB.push(t[i].Total);
+                   TotalStatus.push(t[i].Status);
+               }
 
-    });
+               var TotalBooking = ctx1.createLinearGradient(0, 0, 0, 300);
+               TotalBooking.addColorStop(0, '#3366cc');
+               TotalBooking.addColorStop(1, '#3366cc');
+
+               var HoldPlot = ctx1.createLinearGradient(0, 0, 0, 300);
+               HoldPlot.addColorStop(0, '#ff9900');
+               HoldPlot.addColorStop(1, '#ff9900');
+
+
+               var BookedPlot = ctx1.createLinearGradient(0, 0, 0, 300);
+               BookedPlot.addColorStop(0, '#dc3912');
+               BookedPlot.addColorStop(1, '#dc3912');
+
+               var AllottedPlot = ctx1.createLinearGradient(0, 0, 0, 300);
+               AllottedPlot.addColorStop(0, '#e470e4');
+               AllottedPlot.addColorStop(1, '#e470e4');
+
+               var myChart = new Chart(ctx1, {
+                   type: 'pie',
+                   data: {
+                       labels: TotalStatus,
+                       datasets: [{
+                           backgroundColor: [
+                             TotalBooking,
+                             HoldPlot,
+                             BookedPlot,
+                             AllottedPlot
+                           ],
+
+                           hoverBackgroundColor: [
+                             TotalBooking,
+                             HoldPlot,
+                             BookedPlot,
+                             AllottedPlot
+                           ],
+
+                           data: TotalB
+                       }]
+                   },
+                   options: {
+                       maintainAspectRatio: false,
+                       plugins: {
+                           legend: {
+                               display: false,
+                               position: 'bottom'
+                           }
+                       }
+
+                   }
+               });
+
+           },
+           error: function () {
+           }
+       });
+
+       var ctx = document.getElementById("chart6").getContext('2d');
+       $.ajax({
+           type: 'POST',
+           dataType: 'json',
+           contentType: 'application/json',
+           url: '/AssociateDashboard/GetPlotBookingOnGraph',
+           data: JSON.stringify(),
+           success:
+           function (d) {
+               debugger;
+               var TotalBookings = [];
+               var Months = [];
+               var t = JSON.parse(JSON.stringify(d));
+               for (var i = 0; i < t.length; i++) {
+                   TotalBookings.push(t[i].TotalBooking);
+                   Months.push(t[i].Month);
+               }
+
+               var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
+               gradientStroke3.addColorStop(0, '#42e695');
+               gradientStroke3.addColorStop(1, '#3bb2b8');
+
+               var gradientStroke4 = ctx.createLinearGradient(0, 0, 0, 300);
+               gradientStroke4.addColorStop(0, ' #7f00ff');
+               gradientStroke4.addColorStop(0.5, '#e100ff');
+
+               var myChart = new Chart(ctx, {
+                   type: 'bar',
+                   data: {
+                       labels: Months,
+                       //data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Set", "Nov", "Dec"],
+                       datasets: [{
+                           label: 'Total Booking',
+                           data: TotalBookings,
+                           borderColor: gradientStroke3,
+                           backgroundColor: gradientStroke3,
+                           hoverBackgroundColor: gradientStroke3,
+                           pointRadius: 0,
+                           borderRadius: 20,
+                           fill: false,
+                           borderWidth: 1
+                       },
+                       //{
+                       //    label: 'mobiles',
+                       //    data: [50, 60, 40, 70, 35, 75, 30, 20],
+                       //    bordercolor: gradientstroke4,
+                       //    backgroundcolor: gradientstroke4,
+                       //    hoverbackgroundcolor: gradientstroke4,
+                       //    pointradius: 0,
+                       //    borderradius: 20,
+                       //    fill: false,
+                       //    borderwidth: 1
+                       //}
+
+                       ]
+                   },
+                   options: {
+                       maintainAspectRatio: false,
+                       barPercentage: 0.5,
+                       categoryPercentage: 0.8,
+                       plugins: {
+                           legend: {
+                               display: true,
+                               position: 'bottom'
+                           }
+                       },
+                       scales: {
+                           y: {
+                               beginAtZero: true
+                           }
+                       }
+                   }
+               });
+
+           },
+           error: function () {
+           }
+       });
+
+
+   }
+
+
+
+
+
 </script>
+@*<script>
+       window.onload = bookingmonth;
+       var ctx = document.getElementById("chart6").getContext('2d');
+       function bookingmonth() {
+           $.ajax({
+               type: 'POST',
+               dataType: 'json',
+               contentType: 'application/json',
+               url: '/AssociateDashboard/GetPlotBookingOnGraph',
+               data: JSON.stringify(),
+               success:
+               function (d) {
+                   debugger;
+                   var TotalBookings = [];
+                   var Months = [];
+                   var t = JSON.parse(JSON.stringify(d));
+                   for (var i = 0; i < t.length; i++) {
+                       TotalBookings.push(t[i].TotalBooking);
+                       Months.push(t[i].Month);
+                   }
 
+                   var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
+                   gradientStroke3.addColorStop(0, '#42e695');
+                   gradientStroke3.addColorStop(1, '#3bb2b8');
+
+                   var gradientStroke4 = ctx.createLinearGradient(0, 0, 0, 300);
+                   gradientStroke4.addColorStop(0, ' #7f00ff');
+                   gradientStroke4.addColorStop(0.5, '#e100ff');
+
+                   var myChart = new Chart(ctx, {
+                       type: 'bar',
+                       data: {
+                           labels: Months,
+                           //data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Set", "Nov", "Dec"],
+                           datasets: [{
+                               label: 'Total Booking',
+                               data: TotalBookings,
+                               borderColor: gradientStroke3,
+                               backgroundColor: gradientStroke3,
+                               hoverBackgroundColor: gradientStroke3,
+                               pointRadius: 0,
+                               borderRadius: 20,
+                               fill: false,
+                               borderWidth: 1
+                           },
+                           //{
+                           //    label: 'mobiles',
+                           //    data: [50, 60, 40, 70, 35, 75, 30, 20],
+                           //    bordercolor: gradientstroke4,
+                           //    backgroundcolor: gradientstroke4,
+                           //    hoverbackgroundcolor: gradientstroke4,
+                           //    pointradius: 0,
+                           //    borderradius: 20,
+                           //    fill: false,
+                           //    borderwidth: 1
+                           //}
+
+                           ]
+                       },
+                       options: {
+                           maintainAspectRatio: false,
+                           barPercentage: 0.5,
+                           categoryPercentage: 0.8,
+                           plugins: {
+                               legend: {
+                                   display: true,
+                                   position: 'bottom'
+                               }
+                           },
+                           scales: {
+                               y: {
+                                   beginAtZero: true
+                               }
+                           }
+                       }
+                   });
+
+               },
+               error: function () {
+               }
+           });
+       }
+    </script>*@
+@*<script type="text/javascript">
+       google.charts.load("current", { packages: ["imagebarchart"] });
+       google.charts.setOnLoadCallback(drawChart);
+
+       function drawChart() {
+           $.ajax({
+               type: 'POST',
+               dataType: 'json',
+               contentType: 'application/json',
+               url: '/AssociateDashboard/GetPlotBookingOnGraph',
+               data: JSON.stringify(),
+               success:
+               function (response) {
+                   var datare = response;
+                   var data = new google.visualization.DataTable();
+
+                   data.addColumn('string', 'Month');
+                   data.addColumn('number', 'TotalBooking');
+                   for (var i = 0; i < datare.length; i++) {
+                       data.addRow([datare[i].Month, parseInt(datare[i].TotalBooking)]);
+                   }
+
+                   var chart = new google.visualization.ImageBarChart(document.getElementById('divinvestment'));
+                   var options = {
+                       pieSliceText: 'value-and-percentage',
+                       format: 'decimal',
+                       is3D: true,
+                       legend: { position: 'bottom' },
+                       animation: {
+                           startup: true,
+                           duration: 1000,
+                           easing: 'out',
+                       }, chartArea: { width: "100%", height: "80%" }
+                   };
+                   chart.draw(data, options);
+               },
+               error: function () {
+               }
+           });
+       }
+
+    </script>*@
+<script>
+   $("#DivAssociates").click(function () {
+       alert("ghgf")
+
+   });
+</script>
