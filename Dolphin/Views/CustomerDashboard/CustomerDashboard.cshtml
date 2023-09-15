@@ -9,10 +9,10 @@
 <body class="nav-md">
     @using (Html.BeginForm("CustomerDashboard", "CustomerDashboard", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
     {
-        <p style="color: red">
+        @*<p style="color: red">
             @TempData["Dashboard"]
-        </p>
-        <div class="page-header">
+        </p>*@
+        @*<div class="page-header">
             <div class="page-block">
                 <div class="row align-items-center">
                     <div class="col-md-8">
@@ -23,8 +23,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="pcoded-inner-content">
+        </div>*@
+        @*<div class="pcoded-inner-content">
             <div class="main-body">
                 <div class="page-wrapper">
                     <div class="page-body">
@@ -97,7 +97,7 @@
                                     <div class="card-header borderless ">
                                         <h5>Due Installment</h5>
 
-                                    </div>
+                                    </div>*@
                                     @*<div class="card-block">
                                         <div class="table-responsive">
                                             <table class="table table-hover">
@@ -140,14 +140,14 @@
 
                                         </div>
                                     </div>*@
-                                </div>
+                                @*</div>
                             </div>
                         </div>
 
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
 
 
 
@@ -179,15 +179,6 @@
                     </p>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
             <!--end row-->
             <div class="row">
                 <div class="col d-flex">
@@ -352,31 +343,12 @@
 
             </div>
 
-
-
-
-
+            
         @*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
-
-
-
-
-
-
-
-
-
-
-
+        
     }
 </body>
 </html>
-
-
-
-
-
-
 
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -478,5 +450,62 @@
         alert("ghgf")
 
     });
+
+
+
+
+
+
+
+
+    // chart 16
+    var ctx = document.getElementById("chart16").getContext('2d');
+
+    var gradientStroke5 = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientStroke5.addColorStop(0, '#7f00ff');
+    gradientStroke5.addColorStop(1, '#e100ff');
+
+    var gradientStroke6 = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientStroke6.addColorStop(0, '#fc4a1a');
+    gradientStroke6.addColorStop(1, '#f7b733');
+
+
+    var gradientStroke7 = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientStroke7.addColorStop(0, '#283c86');
+    gradientStroke7.addColorStop(1, '#45a247');
+
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ["Samsung", "Apple", "Nokia"],
+            datasets: [{
+                backgroundColor: [
+                  gradientStroke5,
+                  gradientStroke6,
+                  gradientStroke7
+                ],
+
+                hoverBackgroundColor: [
+                 gradientStroke5,
+                 gradientStroke6,
+                 gradientStroke7
+                ],
+
+                data: [50, 50, 50]
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                    position: 'bottom'
+                }
+            }
+
+        }
+    });
+
+
 </script>
 
