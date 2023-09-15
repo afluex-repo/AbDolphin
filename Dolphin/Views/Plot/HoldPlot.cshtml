@@ -4,147 +4,109 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 <style>
-    #divload {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        z-index: 9999;
-        background: url("../files/assets/images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
-    }
-
     .errortext {
         border: 1px solid red !important;
     }
 </style>
-<div class="loader" id="divload"></div>
 @using (Html.BeginForm("SavePlotHold", "Plot", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">Hold Plot</h4>
-                    </div>
-
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Hold Plot</h5>
                 </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["Plot"]
+                </p>
             </div>
         </div>
-    </div>
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
-                <div class="page-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Hold Plot</h5>
-                                    <p style="color: red">
-                                        @TempData["Plot"]
-                                    </p>
-                                </div>
-                                <div class="card-block">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Select Site <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Select Sector <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Select Block <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                    </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>Select Site <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>Select Sector <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>Select Block <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>Plot Number <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number", @onchange = "return CheckPlotStatus();", @style = "text-transform:uppercase" })
+                                @Html.HiddenFor(m => m.PlotID)
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>Hold From Date <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.HoldFrom, new { @class = "form-control", @Placeholder = "Select Hold From Date", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>Hold To Date<span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.HoldTo, new { @class = "form-control", @Placeholder = "Select Hold To Date", @readonly = "readonly", @onchange = "return  CheckDate() ;" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>Name <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name" })
 
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Plot Number <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number", @onchange = "return CheckPlotStatus();", @style = "text-transform:uppercase" })
-                                                @Html.HiddenFor(m => m.PlotID)
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Hold From Date <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.HoldFrom, new { @class = "form-control", @Placeholder = "Select Hold From Date", @readonly = "readonly" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Hold To Date<span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.HoldTo, new { @class = "form-control", @Placeholder = "Select Hold To Date", @readonly = "readonly", @onchange = "return  CheckDate() ;" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Name <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label> Mobile <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Mobile", onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
 
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Mobile <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Mobile", onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>  Remark</label>
+                                @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", @Placeholder = "Remark" })
 
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Remark
-                                                @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", @Placeholder = "Remark" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>Amount<span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "Amount" })
 
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                Amount<span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "Amount" })
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                @if (Model.PK_PlotHoldID == null)
-                                                {
-                                                    <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="Save" />
-                                                }
-                                                else
-                                                {
-                                                    @Html.HiddenFor(m => m.PK_PlotHoldID, new { @Value = @Model.PK_PlotHoldID })
-                                                    <input class="btn btn-success pull-right" type="submit" value="Update" id="btnUpdate" name="Update" />
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="d-block">&nbsp;</label>
+                                @if (Model.PK_PlotHoldID == null)
+                                {
+                                    <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="Save" />
+                                }
+                                else
+                                {
+                                    @Html.HiddenFor(m => m.PK_PlotHoldID, new { @Value = @Model.PK_PlotHoldID })
+                                    <input class="btn btn-success pull-right" type="submit" value="Update" id="btnUpdate" name="Update" />
+                                }
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
-
-
 
 }
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>

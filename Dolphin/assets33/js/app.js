@@ -159,162 +159,57 @@ $(function() {
 
     //custom js start here
 
-    // chart 6
-	var ctx = document.getElementById("chart6").getContext('2d');
+   
 
-	var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
-	gradientStroke3.addColorStop(0, '#42e695');
-	gradientStroke3.addColorStop(1, '#3bb2b8');
-
-	var gradientStroke4 = ctx.createLinearGradient(0, 0, 0, 300);
-	gradientStroke4.addColorStop(0, ' #7f00ff');
-	gradientStroke4.addColorStop(0.5, '#e100ff');
-
-	var myChart = new Chart(ctx, {
-	    type: 'bar',
-	    data: {
-	        labels: [1, 2, 3, 4, 5, 6, 7, 8],
-	        //data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Set", "Nov", "Dec"],
-	        datasets: [{
-	            label: 'Total Users',
-	            data: [40, 30, 60, 35, 60, 25, 50, 40],
-	            borderColor: gradientStroke3,
-	            backgroundColor: gradientStroke3,
-	            hoverBackgroundColor: gradientStroke3,
-	            pointRadius: 0,
-	            borderRadius: 20,
-	            fill: false,
-	            borderWidth: 1
-	        },
-            //{
-	        //    label: 'mobiles',
-	        //    data: [50, 60, 40, 70, 35, 75, 30, 20],
-	        //    bordercolor: gradientstroke4,
-	        //    backgroundcolor: gradientstroke4,
-	        //    hoverbackgroundcolor: gradientstroke4,
-	        //    pointradius: 0,
-	        //    borderradius: 20,
-	        //    fill: false,
-	        //    borderwidth: 1
-	        //}
-
-	        ]
-	    },
-	    options: {
-	        maintainAspectRatio: false,
-	        barPercentage: 0.5,
-	        categoryPercentage: 0.8,
-	        plugins: {
-	            legend: {
-	                display: true,
-	                position: 'bottom'
-	            }
-	        },
-	        scales: {
-	            y: {
-	                beginAtZero: true
-	            }
-	        }
-	    }
-	});
-	
-
-    // chart 16
-	var ctx = document.getElementById("chart16").getContext('2d');
-
-	var gradientStroke5 = ctx.createLinearGradient(0, 0, 0, 300);
-	gradientStroke5.addColorStop(0, '#3366cc');
-	gradientStroke5.addColorStop(1, '#3366cc');
-
-	var gradientStroke6 = ctx.createLinearGradient(0, 0, 0, 300);
-	gradientStroke6.addColorStop(0, '#dc3912');
-	gradientStroke6.addColorStop(1, '#dc3912');
+    
 
 
-	var gradientStroke7 = ctx.createLinearGradient(0, 0, 0, 300);
-	gradientStroke7.addColorStop(0, '#ff9900');
-	gradientStroke7.addColorStop(1, '#ff9900');
+    //// chart 17
+	//var ctx = document.getElementById("chart17").getContext('2d');
 
-	var myChart = new Chart(ctx, {
-	    type: 'pie',
-	    data: {
-	        labels: ["Hold Plots", "Booked Plots", "Alloted Plots"],
-	        datasets: [{
-	            backgroundColor: [
-                  gradientStroke5,
-                  gradientStroke6,
-                  gradientStroke7
-	            ],
+	//var gradientStroke8 = ctx.createLinearGradient(0, 0, 0, 300);
+	//gradientStroke8.addColorStop(0, '#3366cc');
+	//gradientStroke8.addColorStop(1, '#3366cc');
 
-	            hoverBackgroundColor: [
-                 gradientStroke5,
-                 gradientStroke6,
-                 gradientStroke7
-	            ],
-
-	            data: [50, 50, 50]
-	        }]
-	    },
-	    options: {
-	        maintainAspectRatio: false,
-	        plugins: {
-	            legend: {
-	                display: false,
-	                position: 'bottom'
-	            }
-	        }
-
-	    }
-	});
+	//var gradientStroke9 = ctx.createLinearGradient(0, 0, 0, 300);
+	//gradientStroke9.addColorStop(0, '#ff9900');
+	//gradientStroke9.addColorStop(1, '#ff9900');
 
 
+	//var gradientStroke10 = ctx.createLinearGradient(0, 0, 0, 300);
+	//gradientStroke10.addColorStop(0, '#109618');
+	//gradientStroke10.addColorStop(1, '#109618');
 
-    // chart 17
-	var ctx = document.getElementById("chart17").getContext('2d');
+	//var myChart = new Chart(ctx, {
+	//    type: 'polarArea',
+	//    data: {
+	//        labels: ["Total", "InActive", "Active"],
+	//        datasets: [{
+	//            backgroundColor: [
+    //              gradientStroke8,
+    //              gradientStroke9,
+    //              gradientStroke10
+	//            ],
 
-	var gradientStroke8 = ctx.createLinearGradient(0, 0, 0, 300);
-	gradientStroke8.addColorStop(0, '#3366cc');
-	gradientStroke8.addColorStop(1, '#3366cc');
+	//            hoverBackgroundColor: [
+    //             gradientStroke8,
+    //             gradientStroke9,
+    //             gradientStroke10
+	//            ],
+	//            data: [5, 8, 7]
+	//        }]
+	//    },
+	//    options: {
+	//        maintainAspectRatio: false,
+	//        plugins: {
+	//            legend: {
+	//                display: false,
+	//                position: 'bottom'
+	//            }
+	//        }
 
-	var gradientStroke9 = ctx.createLinearGradient(0, 0, 0, 300);
-	gradientStroke9.addColorStop(0, '#ff9900');
-	gradientStroke9.addColorStop(1, '#ff9900');
-
-
-	var gradientStroke10 = ctx.createLinearGradient(0, 0, 0, 300);
-	gradientStroke10.addColorStop(0, '#109618');
-	gradientStroke10.addColorStop(1, '#109618');
-
-	var myChart = new Chart(ctx, {
-	    type: 'polarArea',
-	    data: {
-	        labels: ["Total", "InActive", "Active"],
-	        datasets: [{
-	            backgroundColor: [
-                  gradientStroke8,
-                  gradientStroke9,
-                  gradientStroke10
-	            ],
-
-	            hoverBackgroundColor: [
-                 gradientStroke8,
-                 gradientStroke9,
-                 gradientStroke10
-	            ],
-	            data: [5, 8, 7]
-	        }]
-	    },
-	    options: {
-	        maintainAspectRatio: false,
-	        plugins: {
-	            legend: {
-	                display: false,
-	                position: 'bottom'
-	            }
-	        }
-
-	    }
-	});
+	//    }
+	//});
 
 
     // chart 18

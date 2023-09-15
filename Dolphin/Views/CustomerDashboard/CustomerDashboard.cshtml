@@ -9,166 +9,10 @@
 <body class="nav-md">
     @using (Html.BeginForm("CustomerDashboard", "CustomerDashboard", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
     {
-        @*<p style="color: red">
-            @TempData["Dashboard"]
-        </p>*@
-        @*<div class="page-header">
-            <div class="page-block">
-                <div class="row align-items-center">
-                    <div class="col-md-8">
-                        <div class="page-header-title">
-                            <h4 class="m-b-10">Dashboard</h4>
-                        </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>*@
-        @*<div class="pcoded-inner-content">
-            <div class="main-body">
-                <div class="page-wrapper">
-                    <div class="page-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card user-card2">
-                                    <div class="card-block text-center">
-                                        <h6 class="m-b-15">Booking Details</h6>
-                                        <div id="divusers"></div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card user-card2">
-                                    <div class="card-block text-center">
-                                        <h5>News</h5>
-                                    </div>
-                                    <div class="card-block">
-                                        <div class="table-responsive" style="height:160px;">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr></tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if (Model != null)
-                                                    {
-                                                        if (Model.ListNEWS != null)
-                                                        {
-                                                            int i = 1;
-                                                            foreach (var Item in Model.ListNEWS)
-                                                            {
-                                                                <tr>
-                                                                    <marquee direction="up" scrolldelay="400">
-                                                                        @Item.NewsBody
-                                                                    </marquee>
-
-                                                                </tr>
-                                                                i++;
-                                                            }
-                                                        }
-                                                    }
-
-                                                </tbody>
-
-
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                           
-
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card user-card2">
-                                    <div class="card-block text-center">
-                                        <h6 class="m-b-15">Monthly Bookings</h6>
-                                        <div id="divinvestment"></div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card table-card">
-                                    <div class="card-header borderless ">
-                                        <h5>Due Installment</h5>
-
-                                    </div>*@
-                                    @*<div class="card-block">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-
-                                                        <th>Sr No.</th>
-                                                        <th>Customer ID</th>
-                                                        <th>Customer Name</th>
-                                                        <th>Installment No.</th>
-                                                        <th>Installment Amount</th>
-                                                        <th>Plot Details</th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if (Model != null)
-                                                    {
-                                                        if (Model.ListInstallment != null)
-                                                        {
-                                                            int i = 1;
-                                                            foreach (var Item in Model.ListInstallment)
-                                                            {
-                                                                <tr>
-                                                                    <td>@i</td>
-
-                                                                    <td>@Item.CustomerLoginID</td>
-                                                                    <td>@Item.CustomerName</td>
-                                                                    <td>@Item.InstallmentNo</td>
-                                                                    <td>@Item.InstallmentAmount</td>
-                                                                    <td>@Item.PlotNumber</td>
-                                                                </tr>
-                                                                i++;
-                                                            }
-                                                        }
-                                                    }
-
-                                                </tbody>
-                                            </table>
-
-                                        </div>
-                                    </div>*@
-                                @*</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        @*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
 
 
         <div class="page-content">
-
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between">
@@ -179,6 +23,7 @@
                     </p>
                 </div>
             </div>
+
             <!--end row-->
             <div class="row">
                 <div class="col d-flex">
@@ -197,15 +42,18 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
-                                Alloted Plots
-                                <span class="badge bg-warning rounded-pill">&nbsp;</span>
-                            </li>
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                                Booked Plots
+                                Alloted Plots &nbsp;
+                                <span class="badge rounded-pill" style="background-color: #B434FD;">&nbsp;</span>
+                                Booked Plots &nbsp;
                                 <span class="badge bg-gradient-ibiza rounded-pill">&nbsp;</span>
                             </li>
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+                                Hold Plots&nbsp; &nbsp; &nbsp; &nbsp;
+                                <span class="badge bg-warning rounded-pill">&nbsp;</span>
+                                Total Booking &nbsp;<span class="badge bg-gradient-deepblue rounded-pill">&nbsp;</span>
+                            </li>
                             <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                                Hold Plots <span class="badge bg-gradient-deepblue rounded-pill">&nbsp;</span>
+
                             </li>
                         </ul>
                     </div>
@@ -221,27 +69,56 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card-block">
+                            <marquee direction="up" scrolldelay="300" style="padding: 15px;">
+                                <div class="table-responsive" style="height:317px;">
+
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr></tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.ListNEWS != null)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var Item in Model.ListNEWS)
+                                                    {
+                                                        <tr>
+
+                                                            @Item.NewsBody
+
+                                                        </tr>
+                                                        i++;
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </marquee>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col d-flex">
+                    <div class="card radius-10 w-100">
+                        <div class="card-header bg-transparent">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h6 class="mb-0 py-2">News</h6>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <div class="chart-container-1">
                                 <canvas id="chart17"></canvas>
                             </div>
                         </div>
-                        @*<ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
-                                Total <span class="badge rounded-pill" style="background-color:#3366cc;">&nbsp;</span>
-                            </li>
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                                InActive <span class="badge rounded-pill" style="background-color:#ff9900">&nbsp;</span>
-                            </li>
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                                Active <span class="badge rounded-pill" style="background-color:#109618;">&nbsp;</span>
-                            </li>
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                                Other <span class="badge rounded-pill" style="background-color:#ccc;">&nbsp;</span>
-                            </li>
-                        </ul>*@
+                        
                     </div>
-                </div>
+                </div>*@
                 
 
 
@@ -258,24 +135,10 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="chart-container-1">
-                                <canvas id="chart17"></canvas>
+                            <div class="chart-container-0">
+                                <canvas id="chart6"></canvas>
                             </div>
                         </div>
-                        @*<ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
-                                Total <span class="badge rounded-pill" style="background-color:#3366cc;">&nbsp;</span>
-                            </li>
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                                InActive <span class="badge rounded-pill" style="background-color:#ff9900">&nbsp;</span>
-                            </li>
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                                Active <span class="badge rounded-pill" style="background-color:#109618;">&nbsp;</span>
-                            </li>
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
-                                Other <span class="badge rounded-pill" style="background-color:#ccc;">&nbsp;</span>
-                            </li>
-                        </ul>*@
                     </div>
                 </div>
 
@@ -352,7 +215,173 @@
 
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
+
+
+<script>
+   window.onload = bindusers;
+   var ctx1 = document.getElementById("chart16").getContext('2d');
+   function bindusers() {
+       $.ajax({
+           type: 'POST',
+           dataType: 'json',
+           contentType: 'application/json',
+           url: '/CustomerDashboard/GetGraphDetailsOfPlot',
+           data: JSON.stringify(),
+           success:
+           function (d) {
+               debugger;
+               var TotalB = [];
+               var TotalStatus = [];
+               var t = JSON.parse(JSON.stringify(d));
+               for (var i = 0; i < t.length; i++) {
+                   TotalB.push(t[i].Total);
+                   TotalStatus.push(t[i].Status);
+               }
+
+               var TotalBooking = ctx1.createLinearGradient(0, 0, 0, 300);
+               TotalBooking.addColorStop(0, '#3366cc');
+               TotalBooking.addColorStop(1, '#3366cc');
+
+               var HoldPlot = ctx1.createLinearGradient(0, 0, 0, 300);
+               HoldPlot.addColorStop(0, '#ff9900');
+               HoldPlot.addColorStop(1, '#ff9900');
+
+
+               var BookedPlot = ctx1.createLinearGradient(0, 0, 0, 300);
+               BookedPlot.addColorStop(0, '#dc3912');
+               BookedPlot.addColorStop(1, '#dc3912');
+
+               var AllottedPlot = ctx1.createLinearGradient(0, 0, 0, 300);
+               AllottedPlot.addColorStop(0, '#e470e4');
+               AllottedPlot.addColorStop(1, '#e470e4');
+
+               var myChart = new Chart(ctx1, {
+                   type: 'pie',
+                   data: {
+                       labels: TotalStatus,
+                       datasets: [{
+                           backgroundColor: [
+                             TotalBooking,
+                             HoldPlot,
+                             BookedPlot,
+                             AllottedPlot
+                           ],
+
+                           hoverBackgroundColor: [
+                             TotalBooking,
+                             HoldPlot,
+                             BookedPlot,
+                             AllottedPlot
+                           ],
+
+                           data: TotalB
+                       }]
+                   },
+                   options: {
+                       maintainAspectRatio: false,
+                       plugins: {
+                           legend: {
+                               display: false,
+                               position: 'bottom'
+                           }
+                       }
+
+                   }
+               });
+
+           },
+           error: function () {
+           }
+       });
+
+       var ctx = document.getElementById("chart6").getContext('2d');
+       $.ajax({
+           type: 'POST',
+           dataType: 'json',
+           contentType: 'application/json',
+           url: '/CustomerDashboard/GetPlotBookingOnGraph',
+           data: JSON.stringify(),
+           success:
+           function (d) {
+               debugger;
+               var TotalBookings = [];
+               var Months = [];
+               var t = JSON.parse(JSON.stringify(d));
+               for (var i = 0; i < t.length; i++) {
+                   TotalBookings.push(t[i].TotalBooking);
+                   Months.push(t[i].Month);
+               }
+
+               var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
+               gradientStroke3.addColorStop(0, '#42e695');
+               gradientStroke3.addColorStop(1, '#3bb2b8');
+
+               var gradientStroke4 = ctx.createLinearGradient(0, 0, 0, 300);
+               gradientStroke4.addColorStop(0, ' #7f00ff');
+               gradientStroke4.addColorStop(0.5, '#e100ff');
+
+               var myChart = new Chart(ctx, {
+                   type: 'bar',
+                   data: {
+                       labels: Months,
+                       //data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Set", "Nov", "Dec"],
+                       datasets: [{
+                           label: 'Total Booking',
+                           data: TotalBookings,
+                           borderColor: gradientStroke3,
+                           backgroundColor: gradientStroke3,
+                           hoverBackgroundColor: gradientStroke3,
+                           pointRadius: 0,
+                           borderRadius: 20,
+                           fill: false,
+                           borderWidth: 1
+                       },
+                       //{
+                       //    label: 'mobiles',
+                       //    data: [50, 60, 40, 70, 35, 75, 30, 20],
+                       //    bordercolor: gradientstroke4,
+                       //    backgroundcolor: gradientstroke4,
+                       //    hoverbackgroundcolor: gradientstroke4,
+                       //    pointradius: 0,
+                       //    borderradius: 20,
+                       //    fill: false,
+                       //    borderwidth: 1
+                       //}
+
+                       ]
+                   },
+                   options: {
+                       maintainAspectRatio: false,
+                       barPercentage: 0.5,
+                       categoryPercentage: 0.8,
+                       plugins: {
+                           legend: {
+                               display: true,
+                               position: 'bottom'
+                           }
+                       },
+                       scales: {
+                           y: {
+                               beginAtZero: true
+                           }
+                       }
+                   }
+               });
+
+           },
+           error: function () {
+           }
+       });
+
+
+   }
+
+
+
+
+
+</script>
+@*<script type="text/javascript">
 
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(bindusers);
@@ -444,7 +473,7 @@
         });
     }
 
-</script>
+</script>*@
 <script>
     $("#DivAssociates").click(function () {
         alert("ghgf")

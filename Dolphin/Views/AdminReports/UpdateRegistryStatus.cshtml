@@ -7,323 +7,217 @@
 
 
 <style>
-    #divload {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        z-index: 9999;
-        background: url("../files/assets/images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
-    }
 
     .errortext {
         border: 1px solid red !important;
     }
 </style>
-<div class="loader" id="divload"></div>
 
 @using (Html.BeginForm("UpdateRegistryStatus", "AdminReports", FormMethod.Post, new { @id = "form1" }))
 {
 
-   
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">Update Registry Status</h4>
-                    </div>
-
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Update Registry Status</h5>
                 </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["UpdateRegistryStatus"]
+                </p>
             </div>
         </div>
-    </div>
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
-                <div class="page-body">
+        <div class="items">
+            <div class="card">
+                <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12">
-                            <!-- HTML5 Export Buttons table start -->
-                            <div class="card">
-                                <div class="card-header table-card-header">
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label>Select Site <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label>Select Sector <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label> Select Block <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
+                            </div>
+                        </div>
 
-                                </div>
-                                <p style="color: red">
-                                    @TempData["UpdateRegistryStatus"]
-                                </p>
-                                <div class="card-block">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                Select Site <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                Select Sector <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                Select Block <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                Plot Number <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number" })
-                                                @Html.HiddenFor(m => m.PlotID)
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                Booking Number
-                                                @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Booking Number" })
-                                                @Html.HiddenFor(m => m.PK_BookingId)
-                                                @Html.HiddenFor(m => m.BookingNo)
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <br />
-                                            <div class="form-group">
-                                                <input type="button" name="SearchPlot" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails(); " />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row" id="Details1" style="display: none;">
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <div class="x_panel">
-                                                <div class="x_title">
-                                                    <h2>Plot Details @*<small>List Of Sites</small>*@</h2>
-                                                    <ul class="nav navbar-right panel_toolbox">
-                                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                                                    </ul>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="row ">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label><b>Branch :</b></label>
-                                                            <label id="BranchName"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label><b>Booking No :</b></label>
-                                                            <label id="BookingNo1"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label><b> Booking Date :</b></label>
-                                                            <label id="BookingDate"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label> <b>Plot No :</b></label>
-                                                            <label id="PlotNo"></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label><b>Payment Plan :</b></label>
-                                                            <label id="Payplan"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label><b>Customer Name :</b></label>
-                                                            <label id="CustomerName"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label><b>Associate Name :</b></label>
-                                                            <label id="AssociateName"></label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label><b>Plot Amount :</b></label>
-                                                            <label id="PlotAmount"></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-
-                                                    <div class="col-md-3" >
-                                                        <div class="form-group">
-                                                            <label><b>PLC Charges :</b></label>
-                                                            <label id="PK_PLCCharge"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3" >
-                                                        <div class="form-group">
-                                                            <label><b>Net Plot Amount :</b></label>
-                                                            <label id="NetPlotAmount"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3" hidden="hidden">
-                                                        <div class="form-group">
-                                                            <label><b>BookingAmount :</b></label>
-                                                            <label id="BookingAmount"></label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3" hidden="hidden">
-                                                        <div class="form-group">
-                                                            <label><b>Fk_UserId:</b></label>
-                                                            @Html.HiddenFor(m => m.Fk_UserId)
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label><b>Paid Amount:</b></label>
-                                                            <label id="PaidAmount"></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label><b>Booking Status :</b></label>
-                                                            <label id="BookingStatus"></label>
-
-                                                        </div>
-
-                                                    </div>
-                                                   
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            isRegistry<span style="color: red">*</span>
-                                                            <input type="checkbox" id="chkisRegistry" onchange="openpop();" />
-                                                            @Html.HiddenFor(m => m.isRegistry)</div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            Registry Name
-                                                            @Html.TextBoxFor(m => m.RegistryName)
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            Gata No. 
-                                                            @Html.TextBoxFor(m => m.gata)
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            Rakba No.
-                                                            @Html.TextBoxFor(m => m.Rakbano)
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            Registry Date
-                                                            @Html.TextBoxFor(m => m.RegistryDate, new { @class = "form-control", @readonly = "ds" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            Dakhil Kharij Date
-                                                            @Html.TextBoxFor(m => m.kharijdate, new { @class = "form-control", @readonly = "ds" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                           Remark<span style="color: red">*</span>
-                                                          @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control", @Placeholder = "Remarks",                     @onchange = "getLoggerName();", @rows = "7", @col = "20" })
-                                                        </div>
-
-                                                    </div>
-                                                 
-                                                </div>
-                                                @*<div class="row ">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <input type="submit" name="btnSave" value="Save" id="btnSave" class="btn btn-success" onclick="return validateform();" />
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>*@
-
-                                               
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    @*<div class="form-group row">
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group">
-                                                <label>
-                                                    isRegistry
-                                                </label>
-                                                <input type="checkbox" id="chkisRegistry" onchange="openpop();" />
-                                                @Html.HiddenFor(m => m.isRegistry)
-
-
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group">
-                                                <label>
-                                                   Remarks
-                                                </label>
-                                                @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control", @Placeholder = "Remarks", @onchange = "getLoggerName();",@rows = "7", @col="20" })
-
-                                            </div>
-                                        </div>
-                                       
-                                    </div>*@
-                                    @*<div class="form-group row">
-                                      
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <br />
-                                                <input class="btn btn-success" type="submit" value="Save" id="btnSave" name="btnSave" />
-                                            </div>
-                                        </div>
-
-                                    </div>*@
-
-                                    @*change btn on pageload*@
-                                    <div class="form-group row">
-                                        <div class="col-md-6">
-                                          
-                                                <input type="submit" name="btnSave" value="Save" id="btnSave" class="btn btn-success" onclick="return validateform();" />
-                                          
-                                           
-                                        </div>
-
-
-                                    </div>
-
-                                </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label> Plot Number <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number" })
+                                @Html.HiddenFor(m => m.PlotID)
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label> Booking Number</label>
+                                @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Booking Number" })
+                                @Html.HiddenFor(m => m.PK_BookingId)
+                                @Html.HiddenFor(m => m.BookingNo)
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label class="d-block">  &nbsp;</label>
+                            <div class="form-group">
+                                <input type="button" name="SearchPlot" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails(); " />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="card" id="Details1" style="display: none;">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label><b>Branch :</b></label>
+                            <label id="BranchName"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label><b>Booking No :</b></label>
+                            <label id="BookingNo1"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label><b> Booking Date :</b></label>
+                            <label id="BookingDate"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label> <b>Plot No :</b></label>
+                            <label id="PlotNo"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label><b>Payment Plan :</b></label>
+                            <label id="Payplan"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label><b>Customer Name :</b></label>
+                            <label id="CustomerName"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label><b>Associate Name :</b></label>
+                            <label id="AssociateName"></label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label><b>Plot Amount :</b></label>
+                            <label id="PlotAmount"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label><b>PLC Charges :</b></label>
+                            <label id="PK_PLCCharge"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label><b>Net Plot Amount :</b></label>
+                            <label id="NetPlotAmount"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3" hidden="hidden">
+                        <div class="form-group">
+                            <label><b>BookingAmount :</b></label>
+                            <label id="BookingAmount"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3" hidden="hidden">
+                        <div class="form-group">
+                            <label><b>Fk_UserId:</b></label>
+                            @Html.HiddenFor(m => m.Fk_UserId)
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label><b>Paid Amount:</b></label>
+                            <label id="PaidAmount"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label><b>Booking Status :</b></label>
+                            <label id="BookingStatus"></label>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="form-group">
+                            <label> isRegistry<span style="color: red">*</span></label>
+                            <input type="checkbox" id="chkisRegistry" onchange="openpop();" />
+                            @Html.HiddenFor(m => m.isRegistry)
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-group">
+                            <label>  Registry Name</label>
+                            @Html.TextBoxFor(m => m.RegistryName)
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-group">
+                            <label> Gata No.</label>
+                            @Html.TextBoxFor(m => m.gata)
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-group">
+                            <label> Rakba No.</label>
+                            @Html.TextBoxFor(m => m.Rakbano)
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>  Registry Date</label>
+                            @Html.TextBoxFor(m => m.RegistryDate, new { @class = "form-control", @readonly = "ds" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                           <label> Dakhil Kharij Date</label>
+                            @Html.TextBoxFor(m => m.kharijdate, new { @class = "form-control", @readonly = "ds" })
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label>  Remark<span style="color: red">*</span></label>
+                            @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control", @Placeholder = "Remarks", @onchange = "getLoggerName();", @rows = "3", @col = "10" })
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="d-block">  &nbsp;</label>
+                        <input type="submit" name="btnSave" value="Save" id="btnSave" class="btn btn-success" onclick="return validateform();" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-
 
 }
 

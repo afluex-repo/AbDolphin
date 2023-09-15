@@ -5,42 +5,20 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 <style>
-    #divload {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        z-index: 9999;
-        background: url("../../images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
-    }
-
     .errortext {
         border: 1px solid red !important;
     }
 </style>
-<div class="loader" id="divload"></div>
 @using (Html.BeginForm("PaymentReturn", "AdminReports", FormMethod.Post, new { @id = "form1" }))
 {
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="page-header-title">
-                        <h4 class="m-b-10">Payment Return </h4>
-                    </div>
-                    <p style="color: red">
-                        @TempData["Plot"]
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pcoded-inner-content">
+
+
+    @*<div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
                 <div class="page-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <!-- HTML5 Export Buttons table start -->
                             <div class="card">
                                 <div class="card-header table-card-header">
                                 </div>
@@ -49,31 +27,31 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 Booking Number
-                                                @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Booking Number" })
+                                                @/*Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @/*Placeholder*/ = "Booking Number" })*/
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 Select Site
-                                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                                                @/*Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @/*onchange*/ = "return onSiteChange();" })*/
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 Select Sector
-                                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
+                                                @/*Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @/*onchange*/ = "return onSectorChange();" })*/
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 Select Block
-                                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
+                                                @/*Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })*/
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 Plot Number
-                                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "PlotNumber" })
+                                                @/*Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @/*Placeholder*/ = "PlotNumber" })*/
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -82,67 +60,177 @@
                                                 <input class="btn btn-success" type="submit" value="Search" id="btnSearch" onclick="return Validate();" name="btnSearch" />
                                             </div>
                                         </div>
-                                    </div> 
-                                 </div>
+                                    </div>
+                                </div>
                                 <div class="card-block">
                                     <div class="form-group row">
                                         <div class="col-sm-3">
-                                            <label class="float-labelv text-danger" >Paid Amount:</label>
-                                            <span class="form-bar " style="color:darkblue"><b>@ViewBag.Balance</b></span>
-                                            <input type="hidden" id="Balance" value="@ViewBag.Balance" />
+                                            <label class="float-labelv text-danger">Paid Amount:</label>
+                                            <span class="form-bar " style="color:darkblue"><b>@/*ViewBag.Balance*/</b></span>
+                                            <input type="hidden" id="Balance" value="@/*ViewBag.Balance*/" />
                                         </div>
                                     </div>
                                     <div class="form-group row" id="paymentdiv" style="display:none;">
                                         <div class="col-md-3">
                                             <label class="float-label">Return Amount<span style="color:red">*</span></label>
-                                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "Enter Amount", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return Check();" })
+                                            @/*Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @/*Placeholder*/ = "Enter Amount", @/*onkeypress*/ = "return isNumberOrDecimal(event);", @/*onchange*/ = "return Check();" })*/
                                             <span class="form-bar"></span>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 Payment Mode <span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode()" })
+                                                @/*Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", @/*onchange*/ = "return CheckPayMode()" })*/
                                             </div>
                                         </div>
                                         <div class="col-md-3" id="divtransactiono" style="display: none">
                                             <div class="form-group">
                                                 <span id="txnNo"></span> <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50" })
+                                                @/*Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @/*Placeholder*/ = "Mobile Number", @/*maxlength*/ = "50" })*/
                                             </div>
                                         </div>
                                         <div class="col-md-3" id="divPaymentMode" style="display: none">
                                             <div class="form-group">
                                                 <span id="txndt"></span><span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Date", @Readonly = "readonly" })
+                                                @/*Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @/*Placeholder*/ = "Date", @/*Readonly*/ = "readonly" })*/
                                             </div>
                                         </div>
                                         <div class="col-md-3" id="divbankname" style="display: none">
                                             <div class="form-group">
                                                 Bank Name <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Name" })
+                                                @/*Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @/*maxlength*/ = "100", @/*Placeholder*/ = "Bank Name" })*/
                                             </div>
                                         </div>
                                         <div class="col-md-3" id="divbankbranch" style="display: none">
                                             <div class="form-group">
                                                 Bank Branch <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
+                                                @/*Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @/*maxlength*/ = "100", @/*Placeholder*/ = "Bank Branch" })*/
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <span id="txtpremarks">Payment Remarks</span>
-                                                @Html.TextBoxFor(m => m.PaymentRemarks, new { @class = "form-control", @maxlength = "100", @Placeholder = "Payment Remarks" })
+                                                @/*Html.TextBoxFor(m => m.PaymentRemarks, new { @class = "form-control", @/*maxlength*/ = "100", @/*Placeholder*/ = "Payment Remarks" })*/
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <br />
                                             <input class="btn btn-success pull-left" type="submit" onclick="return ValidateTransfer();" value="Save" id="btnSave" name="btnSave" />
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Payment Return</h5>
+                </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["Plot"]
+                </p>
+            </div>
+        </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label> Booking Number</label>
+                            @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Booking Number" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label> Select Site</label>
+                            @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label> Select Sector</label>
+                            @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>  Select Block</label>
+                            @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>  Plot Number</label>
+                            @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "PlotNumber" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label class="d-block">&nbsp;</label>
+                            <input class="btn btn-success" type="submit" value="Search" id="btnSearch" onclick="return Validate();" name="btnSearch" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label class="float-labelv text-danger">Paid Amount:</label>
+                            <span class="form-bar " style="color:darkblue"><b>@ViewBag.Balance</b></span>
+                            <input type="hidden" id="Balance" value="@ViewBag.Balance" />
+                        </div>
+                    </div>
+                    <div class="form-group row" id="paymentdiv" style="display:none;">
+                        <div class="col-md-3 mb-3">
+                            <label class="float-label">Return Amount<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "Enter Amount", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return Check();" })
+                            <span class="form-bar"></span>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Payment Mode <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode()" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3" id="divtransactiono" style="display: none">
+                            <div class="form-group">
+                                <label>    <span id="txnNo"></span> <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3" id="divPaymentMode" style="display: none">
+                            <div class="form-group">
+                                <label>  <span id="txndt"></span><span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Date", @Readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3" id="divbankname" style="display: none">
+                            <div class="form-group">
+                                <label> Bank Name <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Name" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3" id="divbankbranch" style="display: none">
+                            <div class="form-group">
+                                <label>  Bank Branch <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>  <span id="txtpremarks">Payment Remarks</span></label>
+                                @Html.TextBoxFor(m => m.PaymentRemarks, new { @class = "form-control", @maxlength = "100", @Placeholder = "Payment Remarks" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label class="d-block">&nbsp;</label>
+                            <input class="btn btn-success pull-left" type="submit" onclick="return ValidateTransfer();" value="Save" id="btnSave" name="btnSave" />
+                        </div>
+
                     </div>
                 </div>
             </div>

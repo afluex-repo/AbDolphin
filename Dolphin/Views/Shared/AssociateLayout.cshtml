@@ -39,9 +39,10 @@
         <!--sidebar wrapper -->
         <div class="sidebar-wrapper" data-simplebar="true">
          
-                <div class="sidebar-header">
+                <div class="sidebar-header" style="background-color:#000;">
                     <div>
-                        <img src="/assets/img/dolphin.png" class="logo-icon" alt="logo icon">
+                        @*<img src="/assets/img/dolphin.png" class="logo-icon" alt="logo icon">*@
+                        <img src="~/assets/img/logo.png" class="logo-icon" alt="logo icon"/>
                         </div>
                     <div>
                         <h4 class="logo-text">Dolphin Infra</h4>
@@ -52,7 +53,7 @@
                 </div>
             
             <ul class="metismenu" id="menu">
-                <li>
+                <li >
                     <a href="/AssociateDashboard/AssociateDashBoard" class="has-arrow">
                         <div class="parent-icon">
                             <i class='bx bx-home'></i>
@@ -63,11 +64,11 @@
                 <li>
                     <a href="#" class="has-arrow">
                         <div class="parent-icon">
-                            <i class='lni lni-tree'></i>
+                            <i class='lni lni-network'></i>
                         </div>
                         <div class="menu-title">Tree</div>
                     </a>
-                        <ul>
+                        <ul >
                             <li>
                                 <a href="/AssociateDashboard/Tree"><i class='bx bx-category'></i>Level Tree</a>
                             </li>
@@ -78,7 +79,7 @@
                         </ul>
                 </li>
                 <li>
-                    <a href="/AssociateDashboard/ChangePasswordAssociate" class="has-arrow">
+                    <a href="/AssociateDashboard/ChangePasswordAssociate">
                         <div class="parent-icon">
                             <i class='bx bxs-key'></i>
                         </div>
@@ -120,7 +121,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="/AssociateDashboard/KYCDocuments" class="has-arrow">
+                    <a href="/AssociateDashboard/KYCDocuments">
                         <div class="parent-icon">
                             <i class='bx bx-food-menu'></i>
                         </div>
@@ -128,7 +129,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/AssociateDashboard/VisitorListForAssociate" class="has-arrow">
+                    <a href="/AssociateDashboard/VisitorListForAssociate">
                         <div class="parent-icon">
                             <i class='bx bx-receipt'></i>
                         </div>
@@ -245,10 +246,17 @@
                     </div>
                     <div class="user-box dropdown px-3">
                         <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="../../files/assets/images/no_avatar.jpg" class="user-img" alt="user avatar">
+                            <img src="@Session["ProfilePic"]" class="user-img" alt="user avatar">
                             <div class="user-info">
                                 <p class="user-name mb-0"><span>@Session["FullName"]</span></p>
-                                <p class="designattion mb-0">@Session["Status"] </p>
+                                @if (Session["Status"].ToString() == "Active")
+                                {
+                                    <p class="designattion mb-0" style="color:#1c8d17">@Session["Status"] </p>
+                                }
+                                else
+                                {
+                                    <p class="designattion mb-0" style="color:red">@Session["Status"] </p>
+                                }
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
