@@ -61,17 +61,19 @@
                 </div>
                 <div class="col-sm-3 mb-3">
                     <label class="float-label">From Date</label>
-                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds" })
+                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds", @placeholder = "From Date" })
                 </div>
                 <div class="col-sm-3 mb-3">
                     <label class="float-label">To Date</label>
-                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds" })
+                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds", @placeholder = "To Date" })
                 </div>
                 <div class="col-sm-2 mb-3">
+                    <label class="float-label d-block">&nbsp;</label>
                     <label class="float-label">Is DownLine</label>
                     @Html.CheckBoxFor(m => m.IsDownline)
                 </div>
                 <div class="col-md-3 mb-3">
+                    <label class="float-label d-block">&nbsp;</label>
                     <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="Search" />
                 </div>
 
@@ -191,7 +193,7 @@
         var values = $('#SectorID').val();
         var tr = [];
         $.ajax({
-            url: "/Plot/GetSiteDetails",
+            url: "/AssociateDashboard/GetSiteDetails",
             Type: "Get",
             DataType: "JSON",
             data: { SiteID: value },
@@ -229,7 +231,7 @@
         var siteID = $('#SiteID').val();
         var sectorID = $('#SectorID').val();
         $.ajax({
-            url: '/Plot/GetBlockList', type: 'post', dataType: 'json',
+            url: '/AssociateDashboard/GetBlockList', type: 'post', dataType: 'json',
             data: { 'SiteID': siteID, 'sectorID': sectorID },
             success: function (data) {
                 $("#divload").css({ 'display': 'none' });

@@ -124,7 +124,7 @@
                         <thead>
                             <tr class="table-active">
                                 <th hidden>PK_BookingID</th>
-                                <th>S No.</th>
+                                <th>Sr No.</th>
                                 <th>Branch Name</th>
                                 <th>Booking Number</th>
                                 <th>Affiliate Info</th>
@@ -147,7 +147,7 @@
                                     foreach (var Item in Model.lstPlot)
                                     {
                                         <tr class="text-left">
-
+                                            <th hidden>@Item.PK_BookingId</th>
                                             <td>@i</td>
                                             <td>@Item.BranchName</td>
                                             <td>@Item.BookingNumber</td>
@@ -185,7 +185,7 @@
                             </tr>
                             <tr class="table-active">
                                 <th hidden>PK_BookingID</th>
-                                <th>S No.</th>
+                                <th>Sr No.</th>
                                 <th>Branch Name</th>
                                 <th>Booking Number</th>
                                 <th>Affiliate Info</th>
