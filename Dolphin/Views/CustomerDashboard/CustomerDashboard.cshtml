@@ -9,9 +9,6 @@
 <body class="nav-md">
     @using (Html.BeginForm("CustomerDashboard", "CustomerDashboard", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
     {
-
-
-
         <div class="page-content">
             <div class="card">
                 <div class="card-body">
@@ -23,7 +20,6 @@
                     </p>
                 </div>
             </div>
-
             <!--end row-->
             <div class="row">
                 <div class="col d-flex">
@@ -33,7 +29,7 @@
                                 <div>
                                     <h6 class="mb-0 py-2">Booking Details</h6>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                         <div class="card-body">
                             <div class="chart-container-1">
@@ -58,8 +54,6 @@
                         </ul>
                     </div>
                 </div>
-
-
                 <div class="col d-flex">
                     <div class="card radius-10 w-100">
                         <div class="card-header bg-transparent">
@@ -96,7 +90,6 @@
                                             }
                                         </tbody>
                                     </table>
-
                                 </div>
                             </marquee>
                         </div>
@@ -119,12 +112,6 @@
                         
                     </div>
                 </div>*@
-                
-
-
-
-
-
                 <div class="col d-flex">
                     <div class="card radius-10 w-100">
                         <div class="card-header bg-transparent">
@@ -141,21 +128,7 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
             </div>
-
-
-
-
-
-
-
-
-
                 <div class="card">
                     <div class="card-body">
                         <h5>Due Installment</h5>
@@ -169,7 +142,6 @@
                                         <th>Installment No.</th>
                                         <th>Installment Amount</th>
                                         <th>Plot Details</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -193,9 +165,7 @@
                                         }
                                     }
                                 }
-
                                 </tbody>
-
                             </table>
                             @*<div class="text-end m-r-20">
                                 <a href="/Plot/PlotBookingList" class="b-b-primary btn btn-dark text-white">View all Bookings</a>
@@ -203,20 +173,13 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
-            
         @*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
-        
     }
 </body>
 </html>
-
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-
 <script>
    window.onload = bindusers;
    var ctx1 = document.getElementById("chart16").getContext('2d');
