@@ -55,16 +55,19 @@
                                         <td>@Item.Contact</td>
                                         @if (Item.Status == "Active")
                                         {
-                                            <td><span class="label label-success">@Item.Status</span></td>
+                                            <td><span class="badge bg-success">@Item.Status</span></td>
                                         }
                                         else if (Item.Status == "InActive")
                                         {
 
-                                            <td><span class="label label-danger">@Item.Status</span></td>
+                                            <td><span class="badge bg-danger">@Item.Status</span></td>
                                         }
                                         else
                                         {
+
                                         }
+
+                                       
                                     </tr>
                                       i++;
                                   }

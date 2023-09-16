@@ -12,21 +12,25 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="row ">
+            <div class="page-content">
+                <div class="items mb-3">
+                    <div class="card">
+                        <div class="card-body row">
+                            <div class="col-md-3 mb-3">
+                                <div class="form-group">
+                                    <label class="float-label d-block mb-2"> Login Id </label>
+                                    <asp:TextBox ID="txtloginid" runat="server" CssClass="form-control"></asp:TextBox>
+                                 </div>
+                            </div>
+                            <div class="col-sm-3 mb-3  mb-3 ">
+                                <label class="float-label d-block  mb-2">&nbsp;</label>
+                                <asp:Button ID="btnsearch" runat="server" Text="Get Details" CssClass="btn btn-success" OnClick="btnsearch_Click" />
+                            </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                   Login Id
-                    <asp:TextBox ID="txtloginid" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <br />
-                   <asp:Button ID="btnsearch" runat="server" Text="Get Details" CssClass="btn btn-success" OnClick="btnsearch_Click" />
-                </div>
-            </div>
-        </div>
         <div id="BrokerTree">
             <asp:TreeView ID="trvBroker" runat="server" ExpandDepth="1" ImageSet="Simple" ShowLines="True">
                 <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
