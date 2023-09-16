@@ -30,11 +30,11 @@
                 </div>
                 <div class="col-md-2 mb-3">
                     <label class="float-label">From Date</label>
-                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds" })
+                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds", @placeholder = "From Date" })
                 </div>
                 <div class="col-md-2 mb-3">
                     <label class="float-label">To Date</label>
-                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds" })
+                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds", @placeholder = "To Date" })
                 </div>
 
                 <div class="col-md-2 mb-3">
@@ -97,7 +97,7 @@
                                 <th>@ViewBag.Income</th>
                             </tr>
                             <tr class="table-active">
-                                <th>S No.</th>
+                                <th>Sr No.</th>
                                 <th>Cosing Date</th>
                                 <th>From ID</th>
                                 <th>From Name</th>

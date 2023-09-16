@@ -9,9 +9,6 @@
 <body class="nav-md">
     @using (Html.BeginForm("CustomerDashboard", "CustomerDashboard", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
     {
-
-
-
         <div class="page-content">
             <div class="card">
                 <div class="card-body">
@@ -23,7 +20,6 @@
                     </p>
                 </div>
             </div>
-
             <!--end row-->
             <div class="row">
                 <div class="col d-flex">
@@ -33,7 +29,7 @@
                                 <div>
                                     <h6 class="mb-0 py-2">Booking Details</h6>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                         <div class="card-body">
                             <div class="chart-container-1">
@@ -58,8 +54,6 @@
                         </ul>
                     </div>
                 </div>
-
-
                 <div class="col d-flex">
                     <div class="card radius-10 w-100">
                         <div class="card-header bg-transparent">
@@ -96,7 +90,6 @@
                                             }
                                         </tbody>
                                     </table>
-
                                 </div>
                             </marquee>
                         </div>
@@ -119,12 +112,6 @@
                         
                     </div>
                 </div>*@
-                
-
-
-
-
-
                 <div class="col d-flex">
                     <div class="card radius-10 w-100">
                         <div class="card-header bg-transparent">
@@ -141,21 +128,7 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
             </div>
-
-
-
-
-
-
-
-
-
                 <div class="card">
                     <div class="card-body">
                         <h5>Due Installment</h5>
@@ -169,7 +142,6 @@
                                         <th>Installment No.</th>
                                         <th>Installment Amount</th>
                                         <th>Plot Details</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -193,9 +165,7 @@
                                         }
                                     }
                                 }
-
                                 </tbody>
-
                             </table>
                             @*<div class="text-end m-r-20">
                                 <a href="/Plot/PlotBookingList" class="b-b-primary btn btn-dark text-white">View all Bookings</a>
@@ -203,43 +173,18 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
-
-
-
-
         @*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
-
-
-
-
-
-
-
-
-
-
-
     }
 </body>
 </html>
-
-
-
-
-
-
-
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-
 <script>
    window.onload = bindusers;
    var ctx1 = document.getElementById("chart16").getContext('2d');
    function bindusers() {
+       /// For Booking Details Graph
        $.ajax({
            type: 'POST',
            dataType: 'json',
@@ -313,6 +258,7 @@
            }
        });
 
+       // For Monthly Bookings Graph
        var ctx = document.getElementById("chart6").getContext('2d');
        $.ajax({
            type: 'POST',
@@ -396,107 +342,69 @@
    }
 
 
-
-
-
-</script>
-@*<script type="text/javascript">
-
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(bindusers);
-
-    function bindusers() {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            url: '/CustomerDashboard/GetGraphDetailsOfPlot',
-            data: JSON.stringify(),
-            success:
-            function (response) {
-                var datare = response;
-                var data = new google.visualization.DataTable();
-
-                data.addColumn('string', 'Status');
-                data.addColumn('number', 'Total');
-                for (var i = 0; i < datare.length; i++) {
-                    data.addRow([datare[i].Status, parseInt(datare[i].Total)]);
-                }
-
-                var chart = new google.visualization.PieChart(document.getElementById('divusers'));
-                var options = {
-                    pieSliceText: 'value-and-percentage',
-                    format: 'decimal',
-                    is3D: true,
-                    legend: { position: 'bottom' },
-                    animation: {
-                        startup: true,
-                        duration: 1000,
-                        easing: 'out',
-                    }, chartArea: { width: "100%", height: "80%" }
-                };
-
-                chart.draw(data, options);
-
-            },
-            error: function () {
-            }
-        });
-    }
-
 </script>
 
-
-
-
-
-<script type="text/javascript">
-
-    google.charts.load("current", { packages: ["imagebarchart"] });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            url: '/CustomerDashboard/GetPlotBookingOnGraph',
-            data: JSON.stringify(),
-            success:
-            function (response) {
-                var datare = response;
-                var data = new google.visualization.DataTable();
-
-                data.addColumn('string', 'Month');
-                data.addColumn('number', 'TotalBooking');
-                for (var i = 0; i < datare.length; i++) {
-                    data.addRow([datare[i].Month, parseInt(datare[i].TotalBooking)]);
-                }
-
-                var chart = new google.visualization.ImageBarChart(document.getElementById('divinvestment'));
-                var options = {
-                    pieSliceText: 'value-and-percentage',
-                    format: 'decimal',
-                    is3D: true,
-                    legend: { position: 'bottom' },
-                    animation: {
-                        startup: true,
-                        duration: 1000,
-                        easing: 'out',
-                    }, chartArea: { width: "100%", height: "80%" }
-                };
-                chart.draw(data, options);
-            },
-            error: function () {
-            }
-        });
-    }
-
-</script>*@
 <script>
     $("#DivAssociates").click(function () {
         alert("ghgf")
 
     });
+
+
+
+
+
+
+
+
+    // chart 16
+    var ctx = document.getElementById("chart16").getContext('2d');
+
+    var gradientStroke5 = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientStroke5.addColorStop(0, '#7f00ff');
+    gradientStroke5.addColorStop(1, '#e100ff');
+
+    var gradientStroke6 = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientStroke6.addColorStop(0, '#fc4a1a');
+    gradientStroke6.addColorStop(1, '#f7b733');
+
+
+    var gradientStroke7 = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientStroke7.addColorStop(0, '#283c86');
+    gradientStroke7.addColorStop(1, '#45a247');
+
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ["Samsung", "Apple", "Nokia"],
+            datasets: [{
+                backgroundColor: [
+                  gradientStroke5,
+                  gradientStroke6,
+                  gradientStroke7
+                ],
+
+                hoverBackgroundColor: [
+                 gradientStroke5,
+                 gradientStroke6,
+                 gradientStroke7
+                ],
+
+                data: [50, 50, 50]
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                    position: 'bottom'
+                }
+            }
+
+        }
+    });
+
+
 </script>
 

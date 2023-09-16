@@ -10,10 +10,7 @@
 @using (Html.BeginForm("AssociateUplineDetail", "TraditionalAssociate", FormMethod.Post, new { @id = "form1" }))
 {
  
-    <p style="color: red">
-        @TempData["Registration"]
-    </p>
-    
+   
     
     <div class="page-header">
         <div class="page-block">
@@ -21,6 +18,10 @@
                 <div class="col-md-8">
                     <div class="page-header-title">
                         <h4 class="m-b-10">Affiliate Upline</h4>
+                        <p style="color: red">
+                            @TempData["Registration"]
+                        </p>
+
                     </div>
 
                 </div>

@@ -13,20 +13,20 @@
 @using (Html.BeginForm("AssociateRegistration", "TraditionalAssociate", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
 
-    <p style="color: red">
+    @*<p style="color: red">
         @TempData["Registration"]
         <br />
         @TempData["AssociateDetails"]
-    </p>
+    </p>*@
 
     <div class="page-content">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between">
                     <h5 class="mb-0">Add New Affiliate</h5>
-                    <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @*<p style="color: red;display: block; margin-bottom:0px; text-align:center">
                          @TempData["Registration"]
-                    </p>
+                    </p>*@
                 </div>
             </div>
         </div>
@@ -381,6 +381,24 @@
         });
     }
 </script>
+@if (TempData["Registration"] != null)
+{
+    <script>
+        debugger;
+    window.onload = success_noti;
+        function success_noti() {
+        Lobibox.notify('success', {
+        pauseDelayOnHover: true,
+            continueDelayOnInactiveTab: false,
+            position: 'top right',
+            icon: 'bx bx-check-circle',
+            msg: '@TempData["Registration"] ,  @TempData["AssociateDetails"]'
+                });
+        }
+    </script>
+}
+
+
 
 
 <style>
