@@ -710,54 +710,12 @@
 </div>
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-   google.charts.load('current', { 'packages': ['corechart'] });
-   google.charts.setOnLoadCallback(bindusers);
 
-   function bindusers() {
-       $.ajax({
-           type: 'POST',
-           dataType: 'json',
-           contentType: 'application/json',
-           url: '/AssociateDashboard/GetGraphDetailsOfPlot',
-           data: JSON.stringify(),
-           success:
-           function (response) {
-               var datare = response;
-               var data = new google.visualization.DataTable();
-
-               data.addColumn('string', 'Status');
-               data.addColumn('number', 'Total');
-               for (var i = 0; i < datare.length; i++) {
-                   data.addRow([datare[i].Status, parseInt(datare[i].Total)]);
-               }
-
-               var chart = new google.visualization.PieChart(document.getElementById('divusers'));
-               var options = {
-                   pieSliceText: 'value-and-percentage',
-                   format: 'decimal',
-                   is3D: true,
-                   legend: { position: 'bottom' },
-                   animation: {
-                       startup: true,
-                       duration: 1000,
-                       easing: 'out',
-                   }, chartArea: { width: "100%", height: "80%" }
-               };
-
-               chart.draw(data, options);
-
-           },
-           error: function () {
-           }
-       });
-   }
-
-</script>
 <script>
    window.onload = bindusers;
    var ctx1 = document.getElementById("chart16").getContext('2d');
    function bindusers() {
+       // For Booking Details Graph
        $.ajax({
            type: 'POST',
            dataType: 'json',
@@ -830,7 +788,7 @@
            error: function () {
            }
        });
-
+      // For Monthly Bookings Graph
        var ctx = document.getElementById("chart6").getContext('2d');
        $.ajax({
            type: 'POST',
@@ -918,131 +876,7 @@
 
 
 </script>
-@*<script>
-       window.onload = bookingmonth;
-       var ctx = document.getElementById("chart6").getContext('2d');
-       function bookingmonth() {
-           $.ajax({
-               type: 'POST',
-               dataType: 'json',
-               contentType: 'application/json',
-               url: '/AssociateDashboard/GetPlotBookingOnGraph',
-               data: JSON.stringify(),
-               success:
-               function (d) {
-                   debugger;
-                   var TotalBookings = [];
-                   var Months = [];
-                   var t = JSON.parse(JSON.stringify(d));
-                   for (var i = 0; i < t.length; i++) {
-                       TotalBookings.push(t[i].TotalBooking);
-                       Months.push(t[i].Month);
-                   }
 
-                   var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
-                   gradientStroke3.addColorStop(0, '#42e695');
-                   gradientStroke3.addColorStop(1, '#3bb2b8');
-
-                   var gradientStroke4 = ctx.createLinearGradient(0, 0, 0, 300);
-                   gradientStroke4.addColorStop(0, ' #7f00ff');
-                   gradientStroke4.addColorStop(0.5, '#e100ff');
-
-                   var myChart = new Chart(ctx, {
-                       type: 'bar',
-                       data: {
-                           labels: Months,
-                           //data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Set", "Nov", "Dec"],
-                           datasets: [{
-                               label: 'Total Booking',
-                               data: TotalBookings,
-                               borderColor: gradientStroke3,
-                               backgroundColor: gradientStroke3,
-                               hoverBackgroundColor: gradientStroke3,
-                               pointRadius: 0,
-                               borderRadius: 20,
-                               fill: false,
-                               borderWidth: 1
-                           },
-                           //{
-                           //    label: 'mobiles',
-                           //    data: [50, 60, 40, 70, 35, 75, 30, 20],
-                           //    bordercolor: gradientstroke4,
-                           //    backgroundcolor: gradientstroke4,
-                           //    hoverbackgroundcolor: gradientstroke4,
-                           //    pointradius: 0,
-                           //    borderradius: 20,
-                           //    fill: false,
-                           //    borderwidth: 1
-                           //}
-
-                           ]
-                       },
-                       options: {
-                           maintainAspectRatio: false,
-                           barPercentage: 0.5,
-                           categoryPercentage: 0.8,
-                           plugins: {
-                               legend: {
-                                   display: true,
-                                   position: 'bottom'
-                               }
-                           },
-                           scales: {
-                               y: {
-                                   beginAtZero: true
-                               }
-                           }
-                       }
-                   });
-
-               },
-               error: function () {
-               }
-           });
-       }
-    </script>*@
-@*<script type="text/javascript">
-       google.charts.load("current", { packages: ["imagebarchart"] });
-       google.charts.setOnLoadCallback(drawChart);
-
-       function drawChart() {
-           $.ajax({
-               type: 'POST',
-               dataType: 'json',
-               contentType: 'application/json',
-               url: '/AssociateDashboard/GetPlotBookingOnGraph',
-               data: JSON.stringify(),
-               success:
-               function (response) {
-                   var datare = response;
-                   var data = new google.visualization.DataTable();
-
-                   data.addColumn('string', 'Month');
-                   data.addColumn('number', 'TotalBooking');
-                   for (var i = 0; i < datare.length; i++) {
-                       data.addRow([datare[i].Month, parseInt(datare[i].TotalBooking)]);
-                   }
-
-                   var chart = new google.visualization.ImageBarChart(document.getElementById('divinvestment'));
-                   var options = {
-                       pieSliceText: 'value-and-percentage',
-                       format: 'decimal',
-                       is3D: true,
-                       legend: { position: 'bottom' },
-                       animation: {
-                           startup: true,
-                           duration: 1000,
-                           easing: 'out',
-                       }, chartArea: { width: "100%", height: "80%" }
-                   };
-                   chart.draw(data, options);
-               },
-               error: function () {
-               }
-           });
-       }
-
-    </script>*@
 <script>
    $("#DivAssociates").click(function () {
        alert("ghgf")
