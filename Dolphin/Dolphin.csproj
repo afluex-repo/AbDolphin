@@ -2659,6 +2659,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="assets2\img\sub-properties\" />
     <Folder Include="files\assets\pages\ace-editor\build\aui\" />
+    <Folder Include="PlotHouseDocument\" />
     <Folder Include="ProfilePic\" />
   </ItemGroup>
   <PropertyGroup>
