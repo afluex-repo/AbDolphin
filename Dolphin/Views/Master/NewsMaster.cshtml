@@ -63,7 +63,11 @@
     function validateform() {
         $(".errortext").removeClass("errortext");
 
-
+        if ($('#NewsFor').val() == '') {
+            $("#NewsFor").addClass('errortext');
+            $('#NewsFor').focus();
+            return false;
+        }
         if ($('#NewsHeading').val() == '') {
             $("#NewsHeading").addClass('errortext');
             $('#NewsHeading').focus();
@@ -75,11 +79,7 @@
             $('#NewsBody').focus();
             return false;
         }
-        if ($('#NewsFor').val() == '') {
-            $("#NewsFor").addClass('errortext');
-            $('#NewsFor').focus();
-            return false;
-        }
+      
         return true;
     }
 

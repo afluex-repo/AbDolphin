@@ -85,7 +85,7 @@
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
                                 <label>   Select Sector</label>
-                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
+                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
@@ -147,7 +147,7 @@
                                     foreach (var Item in Model.lstPlot)
                                     {
                                         <tr class="text-left">
-                                            <th hidden>@Item.PK_BookingId</th>
+                                            <td hidden></td>
                                             <td>@i</td>
                                             <td>@Item.BranchName</td>
                                             <td>@Item.BookingNumber</td>
