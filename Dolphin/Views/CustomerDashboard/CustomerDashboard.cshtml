@@ -184,6 +184,7 @@
    window.onload = bindusers;
    var ctx1 = document.getElementById("chart16").getContext('2d');
    function bindusers() {
+       /// For Booking Details Graph
        $.ajax({
            type: 'POST',
            dataType: 'json',
@@ -257,6 +258,7 @@
            }
        });
 
+       // For Monthly Bookings Graph
        var ctx = document.getElementById("chart6").getContext('2d');
        $.ajax({
            type: 'POST',
@@ -340,103 +342,8 @@
    }
 
 
-
-
-
-</script>
-@*<script type="text/javascript">
-
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(bindusers);
-
-    function bindusers() {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            url: '/CustomerDashboard/GetGraphDetailsOfPlot',
-            data: JSON.stringify(),
-            success:
-            function (response) {
-                var datare = response;
-                var data = new google.visualization.DataTable();
-
-                data.addColumn('string', 'Status');
-                data.addColumn('number', 'Total');
-                for (var i = 0; i < datare.length; i++) {
-                    data.addRow([datare[i].Status, parseInt(datare[i].Total)]);
-                }
-
-                var chart = new google.visualization.PieChart(document.getElementById('divusers'));
-                var options = {
-                    pieSliceText: 'value-and-percentage',
-                    format: 'decimal',
-                    is3D: true,
-                    legend: { position: 'bottom' },
-                    animation: {
-                        startup: true,
-                        duration: 1000,
-                        easing: 'out',
-                    }, chartArea: { width: "100%", height: "80%" }
-                };
-
-                chart.draw(data, options);
-
-            },
-            error: function () {
-            }
-        });
-    }
-
 </script>
 
-
-
-
-
-<script type="text/javascript">
-
-    google.charts.load("current", { packages: ["imagebarchart"] });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            url: '/CustomerDashboard/GetPlotBookingOnGraph',
-            data: JSON.stringify(),
-            success:
-            function (response) {
-                var datare = response;
-                var data = new google.visualization.DataTable();
-
-                data.addColumn('string', 'Month');
-                data.addColumn('number', 'TotalBooking');
-                for (var i = 0; i < datare.length; i++) {
-                    data.addRow([datare[i].Month, parseInt(datare[i].TotalBooking)]);
-                }
-
-                var chart = new google.visualization.ImageBarChart(document.getElementById('divinvestment'));
-                var options = {
-                    pieSliceText: 'value-and-percentage',
-                    format: 'decimal',
-                    is3D: true,
-                    legend: { position: 'bottom' },
-                    animation: {
-                        startup: true,
-                        duration: 1000,
-                        easing: 'out',
-                    }, chartArea: { width: "100%", height: "80%" }
-                };
-                chart.draw(data, options);
-            },
-            error: function () {
-            }
-        });
-    }
-
-</script>*@
 <script>
     $("#DivAssociates").click(function () {
         alert("ghgf")
