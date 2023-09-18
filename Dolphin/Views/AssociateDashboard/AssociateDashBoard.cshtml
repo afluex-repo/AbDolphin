@@ -217,7 +217,7 @@
                 </div>
             </div>
         </div>
-        <div class="col" @*style="width:30%"*@>
+        <div class="col col-xl-6" @*style="width:30%"*@>
             <div class="card radius-10 border-start border-0 border-4 border-info">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -576,11 +576,13 @@
                 </div>
                 <div class="card-block">
                     <marquee direction="up" scrolldelay="300" style="padding: 15px;">
-                        <div class="table-responsive" style="height:317px;">
+                        <div  style="height:317px;">
 
                             <table class="table table-hover">
                                 <thead>
-                                    <tr></tr>
+                                    <tr>
+                                        <th></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     @if (Model != null)
@@ -591,9 +593,7 @@
                                             foreach (var Item in Model.ListNEWS)
                                             {
                                                 <tr>
-
-                                                    @Item.NewsBody
-
+                                                    <td><strong>@Item.NewsHeading : </strong>@Item.NewsBody</td>
                                                 </tr>
                                                 i++;
                                             }

@@ -54,7 +54,7 @@
                             <div class="col-md-2 mb-3">
                                 <div class="form-group">
                                     <label>Select Branch</label>
-                                    @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control form-select" })
                                 </div>
                             </div>
                             <div class="col-md-2 mb-3">
@@ -66,19 +66,19 @@
                             <div class="col-md-2 mb-3">
                                 <div class="form-group">
                                    <label> Select Site</label>
-                                    @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                                    @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
                                 </div>
                             </div>
                             <div class="col-md-2 mb-3">
                                 <div class="form-group">
                                     <label>Select Sector</label>
-                                    @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
+                                    @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
                                 </div>
                             </div>
                             <div class="col-md-2 mb-3">
                                 <div class="form-group">
                                     <label>Select Block</label>
-                                    @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
                                 </div>
                             </div>
                             <div class="col-md-2 mb-3">
