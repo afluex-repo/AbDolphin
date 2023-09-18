@@ -14,6 +14,7 @@ namespace Dolphin.Controllers
         // GET: Website
         public ActionResult Index()
         {
+
             Website model = new Website();
             try
             {
@@ -48,6 +49,57 @@ namespace Dolphin.Controllers
             {
                 TempData["Dashboard"] = ex.Message;
             }
+
+
+
+
+
+
+
+
+
+            #region ddlSiteType
+            Master objSiteType = new Master();
+            int count1 = 0;
+            List<SelectListItem> ddlSiteType = new List<SelectListItem>();
+            DataSet ds2 = objSiteType.GetSiteTypeList();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSiteType.Add(new SelectListItem { Text = "Select Site Type", Value = "0" });
+                    }
+                    ddlSiteType.Add(new SelectListItem { Text = r["SiteTypeName"].ToString(), Value = r["PK_SiteTypeID"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+
+            ViewBag.ddlSiteType = ddlSiteType;
+
+            #endregion
+
+
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+            ViewBag.ddlSite = ddlSite;
+
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+
+
+
+
+
+
+
+
             return View(model);
         }
 
