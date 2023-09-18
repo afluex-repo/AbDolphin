@@ -74,6 +74,9 @@ namespace Dolphin.Controllers
             string Controller = "";
             try
             {
+                
+                obj.Password = Crypto.Encrypt(obj.Password);
+                obj.NewPassword = Crypto.Encrypt(obj.NewPassword);
                 obj.UpdatedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = obj.UpdateAssociatePassword();
                 if (ds != null && ds.Tables.Count > 0)

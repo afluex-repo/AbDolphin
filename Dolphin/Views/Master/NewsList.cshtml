@@ -11,9 +11,9 @@ Layout = "~/Views/Shared/AdminLayout.cshtml";
 @using (Html.BeginForm("NewsList", "Master", FormMethod.Post, new { @id = "form1" }))
 {
  
-    <p style="color: red">
+    @*<p style="color: red">
         @TempData["News"]
-    </p>
+    </p>*@
     <div class="page-content">
         <div class="card">
             <div class="card-body">
@@ -21,6 +21,9 @@ Layout = "~/Views/Shared/AdminLayout.cshtml";
                     <h5 class="mb-0">News List</h5>
                     <button class="btn btn-primary repeater-add-btn px-4"><a href="/Master/NewsMaster" class="text-white">Add New</a></button>
                 </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["News"]
+                </p>
             </div>
         </div>
         <div class="card">
@@ -83,14 +86,14 @@ Layout = "~/Views/Shared/AdminLayout.cshtml";
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
 
-    $(document).ready(function () {
-        var table = $('#example2').DataTable({
-            lengthChange: false,
-            buttons: ['copy', 'excel', 'pdf', 'print', 'csv']
-        });
+    //$(document).ready(function () {
+    //    var table = $('#example2').DataTable({
+    //        lengthChange: false,
+    //        buttons: ['copy', 'excel', 'pdf', 'print', 'csv']
+    //    });
 
-        table.buttons().container()
-            .appendTo('#example2_wrapper .col-md-6:eq(0)');
-    });
+    //    table.buttons().container()
+    //        .appendTo('#example2_wrapper .col-md-6:eq(0)');
+    //});
 </script>
 
