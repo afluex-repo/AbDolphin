@@ -4,261 +4,134 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    a.instagram .fa-instagram:hover {
-        color: red !important;
-    }
 
-    p.testim {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
-        -webkit-box-orient: vertical;
-    }
-</style>
-<style>
-    #offerBody {
-        background: url(../../assets2/img/offer.gif);
-        background-size: 100% 100%;
-        height: 493px;
-    }
+<section class="hero-wrap style2">
+    <div class="hero-slider-one owl-carousel">
+        <div class="hero-slide-item hero-slide-1 bg-f">
+            <div class="container">
+                <div class="row">
 
-    @@media (max-width:767px) {
-        #offerBody {
-            height: 383px;
+                    <div class="col-lg-6 col-md-8 col-sm-10">
+                        <div class="hero-content">
+                            <h1>
+                                Find   <span>
+                                                        Your<img src="~/assetsWeb/img/hero/hero-shape-2.png"
+                                              alt="Image">
+                                </span> Perfect Home
+                            </h1>
+                            <p>Discover a range of homes to match your lifestyle. From cozy condos to spacious estates, we have it all.</p>
+                            <a href="CompanyOverview" class="btn style2">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide-item hero-slide-2 bg-f">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-8 col-sm-10">
+                        <div class="hero-content">
+                            <h1>
+                                Your   <span>Home,<img src="~/assetsWeb/img/hero/hero-shape-2.png"
+                                              alt="Image">
+                                </span>Our Expertise
+                            </h1>
+                            <p>
+                                Let our experienced agents guide you to your ideal home. Trust us for a seamless buying experience.
+                            </p>
+                            <a href="CompanyOverview" class="btn style2">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide-item hero-slide-3 bg-f">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-8 col-sm-10">
+                        <div class="hero-content">
+                            <h1>
+                                Luxury  <span>Living,<img src="~/assetsWeb/img/hero/hero-shape-2.png"
+                                              alt="Image"> </span>  Prime Location
+                            </h1>
+                            <p>
+                                Discover elegant homes in sought-after neighborhoods. Experience the pinnacle of comfort, style, and convenience in every residence.
+                            </p>
+                            <a href="CompanyOverview" class="btn style2">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="search-property style1">
+        @using (Html.BeginForm("UnitAvailability", "Website", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data", @class="property-search-form justify-content-center"}))
+{
+            
+        <div class="form-group">
+       
+                 @Html.DropDownListFor(m => m.SiteTypeID, new SelectList(ViewBag.ddlSiteType, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteTypeChange();" })
+        </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @placeholder = "Plot Number" })
+                        </div>
+                        <div class="form-group">
+                            <button type="buttom" class="btn style2 clearProper" style="background: #2c3240;">
+                            
+
+                                <a class="text-white" href="/Website/UnitAvailability">Clear Property</a>
+                            
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn style2" name="Search" value="Search" id="btnSearchPlot" onclick="return GetDetails(); ">Search Property</button>
+                            @*<input type="submit" name="Search" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails(); " />*@
+                        </div>
         }
-    }
-
-    #offerBody .offerContentArea {
-        position: absolute;
-        bottom: 15%;
-    }
-
-    #myOffer button {
-        background: #000;
-        color: #fff;
-        border-radius: 8px;
-        z-index: 99;
-        padding: 10px;
-    }
-
-    #myOffer .modal-content {
-        border: 6px solid #fff;
-    }
-
-    .secondPopup button {
-        background: #000;
-        color: #fff;
-        border-radius: 8px;
-        padding: 10px !important;
-    }
-
-    #myElem {
-        color: #fb9f03;
-        font-weight: bold;
-        font-size: 66px;
-        font-family: inherit;
-    }
-</style>
-
-<!-- Banner start -->
-<div class="banner" id="banner">
-    <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item banner-max-height item-bg active">
-                <img class="d-block w-100 h-100" src="~/assets2/img/banner/abBanner1.PNG" alt="banner">
-                <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
-                    <div class="carousel-content container">
-                        @*<div class="text-center">
-                                <div class="text-sections">
-                                    <h3 class="text-uppercase">Your Dream Luxury Apartments</h3>
-                                    <p>Allow us to guide you through the innovative stress free approach in finding your dream Properties.</p>
-                                </div>
-                                <div class="btn-sections">
-                                    <a href="~/Website/CompanyOverview" class="btn btn-lg btn-theme">Get Started Now</a>
-                                    <a href="~/Home/LoginWeb" class="btn btn-lg btn-white-lg-outline">Learn More</a>
-                                </div>
-                            </div>*@
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item banner-max-height item-bg">
-                <img class="d-block w-100 h-100" src="~/assets2/img/banner/abBanner2.PNG" alt="banner">
-                <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
-                    <div class="carousel-content container">
-                        @*<div class="text-center">
-                                <div class="text-sections">
-                                    <h3 class="text-uppercase">Your Dream Luxury Apartments</h3>
-                                    <p>Allow us to guide you through the innovative stress free approach in finding your dream Properties.</p>
-                                </div>
-                                <div class="btn-sections">
-                                    <a href="~/Website/CompanyOverview" class="btn btn-lg btn-theme">Get Started Now</a>
-                                    <a href="~/Home/LoginWeb" class="btn btn-lg btn-white-lg-outline">Learn More</a>
-                                </div>
-                            </div>*@
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item banner-max-height item-bg">
-                <img class="d-block w-100 h-100" src="~/assets2/img/banner/banner-2.jpg" alt="banner">
-                <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
-                    <div class="carousel-content container">
-                        <div class="text-center">
-                            <div class="text-sections">
-                                <h3 class="text-uppercase">Your Dream Luxury Apartments</h3>
-                                <p>Allow us to guide you through the innovative stress free approach in finding your dream Properties.</p>
-                            </div>
-                            <div class="btn-sections">
-                                <a href="~/Website/CompanyOverview" class="btn btn-lg btn-theme">Get Started Now</a>
-                                <a href="~/Home/LoginWeb" class="btn btn-lg btn-white-lg-outline">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item banner-max-height item-bg">
-                <img class="d-block w-100 h-100" src="~/assets2/img/banner/banner-3.jpg" alt="banner">
-                <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
-                    <div class="carousel-content container">
-                        <div class="text-center">
-                            <div class="text-sections">
-                                <h3 class="text-uppercase">Best Place to find home</h3>
-                                <p>Allow us to guide you through the innovative stress free approach in finding your dream Properties.</p>
-                            </div>
-                            <div class="btn-sections">
-                                <a href="~/Website/CompanyOverview" class="btn btn-lg btn-theme">Get Started Now</a>
-                                <a href="~/Home/LoginWeb" class="btn btn-lg btn-white-lg-outline">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item banner-max-height item-bg">
-                <img class="d-block w-100 h-100" src="~/assets2/img/banner/banner-1.jpg" alt="banner">
-                <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
-                    <div class="carousel-content container">
-                        <div class="text-center">
-                            <div class="btn-sections">
-                                <h3 class="text-uppercase">Sweet Home For Small Family</h3>
-                                <p>Allow us to guide you through the innovative stress free approach in finding your dream Properties.</p>
-                            </div>
-                            <div class="btn-sections">
-                                <a href="~/Website/CompanyOverview" class="btn btn-lg btn-theme">Get Started Now</a>
-                                <a href="~/Home/LoginWeb" class="btn btn-lg btn-white-lg-outline">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#bannerCarousole" role="button" data-slide="prev">
-            <span class="slider-mover-left" aria-hidden="true">
-                <i class="fa fa-angle-left"></i>
-            </span>
-        </a>
-        <a class="carousel-control-next" href="#bannerCarousole" role="button" data-slide="next">
-            <span class="slider-mover-right" aria-hidden="true">
-                <i class="fa fa-angle-right"></i>
-            </span>
-        </a>
-    </div>
-</div>
-
-<!-- About city estate start -->
-<div class="about-real-estate content-area-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                <div class="about-slider-box">
-                    <img src="~/assets2/img/about.jpg" alt="Second" class="img-fluid">
-                </div>
-            </div>
-            <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12 align-self-center">
-                <div class="about-text">
-                    <p class="tagline">Welcome To</p>
-                    <h3>ABDOLPHIN Infratech</h3>
-                    <p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could</p>
-                    <p class="mb-0">morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Services start -->
-<div class="services-2 content-area-5">
-    <div class="container">
-        <!-- Main title -->
-        <div class="main-title">
-            <h1>Service We Provide</h1>
-            <p>Partner with a top neighborhood specialist to sell your home. Combined with our high level marketing approach, negotiation skills,</p>
-        </div>
-        <div class="row wow">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="service-info-5">
-                    <i class="flaticon-apartment"></i>
-                    <h4>Business planing</h4>
-                    <p>Describe your home online and get your appraisal in 5 minutes</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="service-info-5">
-                    <i class="flaticon-internet"></i>
-                    <h4>Marketing Analaysis</h4>
-                    <p>Describe your home online and get your appraisal in 5 minutes</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="service-info-5">
-                    <i class="flaticon-vehicle"></i>
-                    <h4>Business Consultancy</h4>
-                    <p>Describe your home online and get your appraisal in 5 minutes</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="service-info-5">
-                    <i class="flaticon-coins"></i>
-                    <h4>Commercial</h4>
-                    <p>Describe your home online and get your appraisal in 5 minutes</p>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
 
-<section class="py-4" style="background: rgb(251, 251, 251);">
+
+<section class="about-wrap style2  pt-100 pb-100 bg-seashell">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="utf-section-headline-item centered margin-bottom-30 margin-top-0">
-                    <h3 class="headline"><span>What are you looking for?</span> Properties In Most Popular Places</h3>
-                    <div class="utf-headline-display-inner-item">What are you looking for?</div>
-                    <p class="utf-slogan-text">"Desirable properties in prime locations worldwide. From bustling city centers to serene coastal escapes, find your dream home in iconic destinations."</p>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-md-4 col-sm-6">
-                    <div class="utf-icon-box-item-area">
-                        <div class="icon-container"><i class="fa fa-institution"></i></div>
-                        <h3>Family House</h3>
-                        <p>Spacious family house with modern amenities, ample bedrooms, lush garden, and nearby schools. Perfect for family living.</p>
+        <div class="about-box">
+            <img src="~/assetsWeb/img/about/about-shape-3.png" alt="Image" class="about-shape-three">
+            <div class="row gx-5 align-items-center">
+                <div class="col-lg-5" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="200">
+                    <div class="">
+                        <img src="~/assetsWeb/img/gallery/g4.jpg" class="rounded" alt="">
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="utf-icon-box-item-area">
-                        <div class="icon-container"><i class="fa fa-home" aria-hidden="true"></i></div>
-                        <h3>Town House</h3>
-                        <p>Charming townhouse: historic architecture, modern comfort. Ideal urban living with shops, dining, and culture at your doorstep.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="utf-icon-box-item-area">
-                        <div class="icon-container"><i class="fa fa-building"></i></div>
-                        <h3>Apartment</h3>
-                        <p>Stylish urban apartment, modern amenities, prime location. Your ideal city living space awaits. Explore convenience and comfort.</p>
+                <div class="col-lg-7" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                    <div class="about-content">
+                        <div class="content-title style2">
+                            <span>Welcome To</span>
+                            <h2>Abdolphin Infratech</h2>
+                            <p>
+                                One morning, when Gregor Samsa woke from troubled dreams, he found himself
+                                transformed in his bed into a horrible vermin. He lay on his armour-like back,
+                                and if he lifted his head a little he could
+                            </p>
+                            <p>
+                                morning, when Gregor Samsa woke from troubled dreams, he found himself
+                                transformed in his bed into a horrible vermin. He lay on his armour-like back,
+                                and if he lifted his head a little he could see
+                            </p>
+                        </div>
+                        <a href="#!" class="btn style2">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -269,630 +142,558 @@
 
 
 
-<!-- Recently properties start -->
-@*<div class="recently-properties content-area-12">
+<section class="ptb-50" style="background: rgb(251, 251, 251);">
     <div class="container">
-        <div class="main-title">
-            <h1>Recently Properties</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+        <div class="section-title style1 text-center mb-40">
+            <span>What are you looking for?</span>
+            <h2>Properties In Most Popular Places</h2>
+            <p>
+                "Desirable properties in prime locations worldwide. From bustling city centers to serene coastal
+                escapes, find your dream home in iconic destinations."
+            </p>
         </div>
-        <div class="slick-slider-area">
-            <div class="row slick-carousel" data-slick='{"slidesToShow": 4, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
-                <div class="slick-slide-item">
-                    <div class="property-box-5">
-                        <div class="property-photo">
-                            <img class="img-fluid" src="~/assets2/img/properties/ab1.jpg" alt="properties">
-                            <div class="date-box">For Rent</div>
-                        </div>
-                        <div class="detail">
-                            <div class="heading">
-                                <h3>
-                                    <a href="#">Flats for rent in Thane West Mumbai</a>
-                                </h3>
-                                <div class="location">
-                                    <a href="#">
-                                        <i class="fa fa-map-marker"></i>Mumbai
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="properties-listing">
-                                <span>3 Beds</span>
-                                <span>2 Baths</span>
-                                <span>980 sqft</span>
-                            </div>
-                        </div>
+        <div class="row">
+            <div class="row mt-4">
+                <div class="col-md-4 col-sm-6">
+                    <div class="utf-icon-box-item-area">
+                        <div class="icon-container"><i class="flaticon-home"></i></div>
+                        <h3>Family House</h3>
+                        <p>
+                            Spacious family house with modern amenities, ample bedrooms, lush garden, and nearby
+                            schools. Perfect for family living.
+                        </p>
                     </div>
                 </div>
-                <div class="slick-slide-item">
-                    <div class="property-box-5">
-                        <div class="property-photo">
-                            <img class="img-fluid" src="~/assets2/img/properties/ab2.jpg" alt="properties">
-                            <div class="date-box">For Rent</div>
-                        </div>
-                        <div class="detail">
-                            <div class="heading">
-                                <h3>
-                                    <a href="#">Flats for rent in Chembur Mumbai</a>
-                                </h3>
-                                <div class="location">
-                                    <a href="#">
-                                        <i class="fa fa-map-marker"></i>Mumbai
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="properties-listing">
-                                <span>3 Beds</span>
-                                <span>2 Baths</span>
-                                <span>980 sqft</span>
-                            </div>
-                        </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="utf-icon-box-item-area">
+                        <div class="icon-container"><i class="flaticon-apartment"></i></div>
+                        <h3>Town House</h3>
+                        <p>
+                            Charming townhouse: historic architecture, modern comfort. Ideal urban living with
+                            shops, dining, and culture at your doorstep.
+                        </p>
                     </div>
                 </div>
-                <div class="slick-slide-item">
-                    <div class="property-box-5">
-                        <div class="property-photo">
-                            <img class="img-fluid" src="~/assets2/img/properties/ab3.jpg" alt="properties">
-                            <div class="date-box">For Rent</div>
-                        </div>
-                        <div class="detail">
-                            <div class="heading">
-                                <h3>
-                                    <a href="#">Flats for rent in Andheri East Mumbai</a>
-                                </h3>
-                                <div class="location">
-                                    <a href="#">
-                                        <i class="fa fa-map-marker"></i>Mumbai
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="properties-listing">
-                                <span>3 Beds</span>
-                                <span>2 Baths</span>
-                                <span>980 sqft</span>
-                            </div>
-                        </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="utf-icon-box-item-area">
+                        <div class="icon-container"><i class="flaticon-home"></i></div>
+                        <h3>Apartment</h3>
+                        <p>
+                            Stylish urban apartment, modern amenities, prime location. Your ideal city living
+                            space awaits. Explore convenience and comfort.
+                        </p>
                     </div>
                 </div>
-                <div class="slick-slide-item">
-                    <div class="property-box-5">
-                        <div class="property-photo">
-                            <img class="img-fluid" src="~/assets2/img/properties/ab4.jpg" alt="properties">
-                            <div class="date-box">For Rent</div>
-                        </div>
-                        <div class="detail">
-                            <div class="heading">
-                                <h3>
-                                    <a href="#">Flats for rent in Goregaon East Mumbai</a>
-                                </h3>
-                                <div class="location">
-                                    <a href="#">
-                                        <i class="fa fa-map-marker"></i>Mumbai
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="properties-listing">
-                                <span>3 Beds</span>
-                                <span>2 Baths</span>
-                                <span>980 sqft</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="property-box-5">
-                        <div class="property-photo">
-                            <img class="img-fluid" src="~/assets2/img/properties/ab5.jpg" alt="properties">
-                            <div class="date-box">For Rent</div>
-                        </div>
-                        <div class="detail">
-                            <div class="heading">
-                                <h3>
-                                    <a href="#">Flats for rent in Chattarpur Delhi</a>
-                                </h3>
-                                <div class="location">
-                                    <a href="#">
-                                        <i class="fa fa-map-marker"></i>Mumbai
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="properties-listing">
-                                <span>3 Beds</span>
-                                <span>2 Baths</span>
-                                <span>980 sqft</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="property-box-5">
-                        <div class="property-photo">
-                            <img class="img-fluid" src="~/assets2/img/properties/ab6.jpg" alt="properties">
-                            <div class="date-box">For Rent</div>
-                        </div>
-                        <div class="detail">
-                            <div class="heading">
-                                <h3>
-                                    <a href="#">Flats for rent in Kandivali East Mumbai</a>
-                                </h3>
-                                <div class="location">
-                                    <a href="#">
-                                        <i class="fa fa-map-marker"></i>Mumbai
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="properties-listing">
-                                <span>3 Beds</span>
-                                <span>2 Baths</span>
-                                <span>980 sqft</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="property-box-5">
-                        <div class="property-photo">
-                            <img class="img-fluid" src="~/assets2/img/properties/ab7.jpg" alt="properties">
-                            <div class="date-box">For Rent</div>
-                        </div>
-                        <div class="detail">
-                            <div class="heading">
-                                <h3>
-                                    <a href="#">Rental Apartments in Mumbai Harbour</a>
-                                </h3>
-                                <div class="location">
-                                    <a href="#">
-                                        <i class="fa fa-map-marker"></i>Mumbai
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="properties-listing">
-                                <span>3 Beds</span>
-                                <span>2 Baths</span>
-                                <span>980 sqft</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="property-box-5">
-                        <div class="property-photo">
-                            <img class="img-fluid" src="~/assets2/img/properties/ab8.jpg" alt="properties">
-                            <div class="date-box">For Rent</div>
-                        </div>
-                        <div class="detail">
-                            <div class="heading">
-                                <h3>
-                                    <a href="#">Flats for rent in Bandra West Mumbai</a>
-                                </h3>
-                                <div class="location">
-                                    <a href="#">
-                                        <i class="fa fa-map-marker"></i>Mumbai
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="properties-listing">
-                                <span>3 Beds</span>
-                                <span>2 Baths</span>
-                                <span>980 sqft</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="property-box-5">
-                        <div class="property-photo">
-                            <img class="img-fluid" src="~/assets2/img/properties/ab9.jpg" alt="properties">
-                            <div class="date-box">For Rent</div>
-                        </div>
-                        <div class="detail">
-                            <div class="heading">
-                                <h3>
-                                    <a href="#">Flats for rent in Bandra East Mumbai</a>
-                                </h3>
-                                <div class="location">
-                                    <a href="#">
-                                        <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="properties-listing">
-                                <span>3 Beds</span>
-                                <span>2 Baths</span>
-                                <span>980 sqft</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slick-btn">
-                <div class="slick-prev slick-arrow-buton-2"></div>
-                <div class="slick-next slick-arrow-buton-2"></div>
             </div>
         </div>
     </div>
-</div>*@
+</section>
 
-<!-- Categories strat -->
-<div class="categories content-area-8 bg-grea-3">
+
+<section class="city-wrap  pb-50 pt-50 bg-seashell">
+    <img src="~/assetsWeb/img/shape-2.png" alt="Image" class="city-shape-one">
     <div class="container">
-        <!-- Main title -->
-        <div class="main-title">
-            <h1>Most Popular Places</h1>
+        <div class="section-title style1 text-center mb-40">
+            <span>Choose A Popular City</span>
+            <h2>Most Popular Places</h2>
         </div>
-        <div class="row wow">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-pad">
-                        <div class="category">
-                            <div class="category_bg_box cat-1-bg">
-                                <div class="category-overlay">
-                                    <div class="category-content">
-                                        <h3 class="category-title">
-                                            <a href="#">Deoria</a>
-                                        </h3>
-                                        <div class="category-subtitle">14 Properties</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="row justify-content-center">
+            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="200">
+                <div class="city-card style1">
+                    <img src="~/assetsWeb/img/city/city-1.jpg" alt="Image">
+                    <div class="city-info">
+                        <h3><a href="#!">Dolphin</a></h3>
+                        <p>properties</p>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-pad">
-                        <div class="category">
-                            <div class="category_bg_box cat-2-bg">
-                                <div class="category-overlay">
-                                    <div class="category-content">
-                                        <h3 class="category-title">
-                                            <a href="#">Gorakhpur</a>
-                                        </h3>
-                                        <div class="category-subtitle">98 Properties</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="300">
+                <div class="city-card style1">
+                    <img src="~/assetsWeb/img/city/city-2.jpg" alt="Image">
+                    <div class="city-info">
+                        <h3><a href="#!">Real Estate</a></h3>
+                        <p>properties</p>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-pad">
-                        <div class="category">
-                            <div class="category_bg_box cat-6-bg">
-                                <div class="category-overlay">
-                                    <div class="category-content">
-                                        <h3 class="category-title">
-                                            <a href="#">Maniram</a>
-                                        </h3>
-                                        <div class="category-subtitle">98 Properties</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="400">
+                <div class="city-card style1">
+                    <img src="~/assetsWeb/img/city/city-3.jpg" alt="Image">
+                    <div class="city-info">
+                        <h3><a href="#!">Real Estate</a></h3>
+                        <p> properties</p>
                     </div>
-                    <div class="col-lg-8 col-md-8 col-sm-6 col-pad none-992">
-                        <div class="category">
-                            <div class="category_bg_box cat-3-bg">
-                                <div class="category-overlay">
-                                    <div class="category-content">
-                                        <h3 class="category-title">
-                                            <a href="#">Lucknow</a>
-                                        </h3>
-                                        <div class="category-subtitle">98 Properties</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="500">
+                <div class="city-card style1">
+                    <img src="~/assetsWeb/img/city/city-4.jpg" alt="Image">
+                    <div class="city-info">
+                        <h3><a href="#!">Real Estate</a></h3>
+                        <p> properties</p>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-pad">
-                        <div class="category">
-                            <div class="category_bg_box cat-5-bg">
-                                <div class="category-overlay">
-                                    <div class="category-content">
-                                        <h3 class="category-title">
-                                            <a href="#">Mumbai</a>
-                                        </h3>
-                                        <div class="category-subtitle">98 Properties</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+
+
+
+
+            @*<div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="200">
+                <div class="city-card style1">
+                    <img src="~/assetsWeb/img/city/city-5.jpg" alt="Image">
+                    <div class="city-info">
+                        <h3><a href="#!">San Fransisco</a></h3>
+                        <p>+231 properties</p>
                     </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="300">
+                <div class="city-card style1">
+                    <img src="~/assetsWeb/img/city/city-6.jpg" alt="Image">
+                    <div class="city-info">
+                        <h3><a href="#!">Torento City</a></h3>
+                        <p>+1222 properties</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="400">
+                <div class="city-card style1">
+                    <img src="~/assetsWeb/img/city/city-7.jpg" alt="Image">
+                    <div class="city-info">
+                        <h3><a href="#!">Vancuver City</a></h3>
+                        <p>+151 properties</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="500">
+                <div class="city-card style1">
+                    <img src="~/assetsWeb/img/city/city-8.jpg" alt="Image">
+                    <div class="city-info">
+                        <h3><a href="#!">Montreal City</a></h3>
+                        <p>+232 properties</p>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+    </div>
+</section>
+
+
+
+<div class="counter-area position-relative counterBg pb-50 pt-50">
+    <div class="container">
+        <div class="counter-card-wrap style1">
+            <div class="counter-card">
+                <span class="counter-icon">
+                    <i class="flaticon-customer"></i>
+                </span>
+                <div class="counter-text">
+                    <h2 class="counter-num">
+                        <span class="odometer" data-count="967"></span>
+                        <span class="target">+</span>
+                    </h2>
+                    <p>Listings For Sale</p>
+                </div>
+            </div>
+            <div class="counter-card">
+                <span class="counter-icon">
+                    <i class="flaticon-apartment"></i>
+                </span>
+                <div class="counter-text">
+                    <h2 class="counter-num">
+                        <span class="odometer" data-count="1276"></span>
+                        <span class="target">+</span>
+                    </h2>
+                    <p>Listings For Rent</p>
+                </div>
+            </div>
+            <div class="counter-card">
+                <span class="counter-icon">
+                    <i class="flaticon-user-avatar"></i>
+                </span>
+                <div class="counter-text">
+                    <h2 class="counter-num">
+                        <span class="odometer" data-count="396"></span>
+                        <span class="target">+</span>
+                    </h2>
+                    <p>Our Agents</p>
+                </div>
+            </div>
+            <div class="counter-card">
+                <span class="counter-icon">
+                    <i class="flaticon-quality-control"></i>
+                </span>
+                <div class="counter-text">
+                    <h2 class="counter-num">
+                        <span class="odometer" data-count="177"></span>
+                        <span class="target">+</span>
+                    </h2>
+                    <p>Computer Brokers</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Counters strat -->
-<div class="counters">
+
+<section class="agent-wrap  pb-50 pt-50">
+    <div class="container">
+        <div class="section-title style1 text-center mb-40">
+            <span>Choose A Popular City</span>
+            <h2>Our Team</h2>
+        </div>
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-6">
+                <div class="agent-card style1">
+                    <div class="agent-img">
+                        <img src="~/assetsWeb/img/agents/agent-1.jpg" alt="Image">
+                    </div>
+                    <div class="agent-info-wrap">
+                        <div class="agent-info">
+                            <h3><a href="#!">Jitendra Kumar Gupta</a></h3>
+                            <span>Direactor</span>
+                            <ul class="social-profile list-style style1">
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-instagram"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-linkedin-1"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6">
+                <div class="agent-card style1">
+                    <div class="agent-img">
+                        <img src="~/assetsWeb/img/agents/agent-2.jpg" alt="Image">
+                    </div>
+                    <div class="agent-info-wrap">
+                        <div class="agent-info">
+                            <h3><a href="#!">Sunil Kumar Yadav</a></h3>
+                            <span>Direactor</span>
+                            <ul class="social-profile list-style style1">
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-instagram"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-linkedin-1"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6">
+                <div class="agent-card style1">
+                    <div class="agent-img">
+                        <img src="~/assetsWeb/img/agents/agent-3.jpg" alt="Image">
+                    </div>
+                    <div class="agent-info-wrap">
+                        <div class="agent-info">
+                            <h3><a href="#!">kifayatullah Khan</a></h3>
+                            <span>Direactor</span>
+                            <ul class="social-profile list-style style1">
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-instagram"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-linkedin-1"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6">
+                <div class="agent-card style1">
+                    <div class="agent-img">
+                        <img src="~/assetsWeb/img/agents/agent-4.jpg" alt="Image">
+                    </div>
+                    <div class="agent-info-wrap">
+                        <div class="agent-info">
+                            <h3><a href="#!">Kunj Bihari Tiwari</a></h3>
+                            <span>Direactor</span>
+                            <ul class="social-profile list-style style1">
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-instagram"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#!">
+                                        <i class="flaticon-linkedin-1"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="hw-wrap bg-seashell ptb-100">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="media counter-box">
-                    <div class="media-left">
-                        <i class="flaticon-tag"></i>
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+                <div class="section-title style2 text-center mb-40">
+                    <span>HOW IT WORKS</span>
+                    <h2>3 Steps To Book Your Home</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="200">
+                <div class="hw-card">
+                    <div class="hw-img">
+                        <img src="~/assetsWeb/img/how-it-works/hw-shape-1.png" alt="Image" class="hw-shape-one">
+                        <img src="~/assetsWeb/img/how-it-works/hw-1.png" alt="Image">
+                        <span>01</span>
                     </div>
-                    <div class="media-body">
-                        <h1 class="counter">967</h1>
-                        <p>Listings For Sale</p>
+                    <div class="hw-info">
+                        <h3>Search &amp; Select</h3>
+                        <p>Effortlessly search and select your ideal property. Our sorting options ensure you find the perfect home with ease. </p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="media counter-box">
-                    <div class="media-left">
-                        <i class="flaticon-business"></i>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="300">
+                <div class="hw-card">
+                    <div class="hw-img">
+                        <img src="~/assetsWeb/img/how-it-works/hw-shape-1.png" alt="Image" class="hw-shape-one">
+                        <img src="~/assetsWeb/img/how-it-works/hw-2.png" alt="Image">
+                        <span>02</span>
                     </div>
-                    <div class="media-body">
-                        <h1 class="counter">1276</h1>
-                        <p>Listings For Rent</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="media counter-box">
-                    <div class="media-left">
-                        <i class="flaticon-people"></i>
-                    </div>
-                    <div class="media-body">
-                        <h1 class="counter">396</h1>
-                        <p>Our Agents</p>
+                    <div class="hw-info">
+                        <h3>Reserve The Property</h3>
+                        <p>Secure your future today. Reserve your dream property now and take the first step toward the home you've always wanted. </p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="media counter-box">
-                    <div class="media-left">
-                        <i class="flaticon-people-1"></i>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="400">
+                <div class="hw-card">
+                    <div class="hw-img">
+                        <img src="~/assetsWeb/img/how-it-works/hw-shape-1.png" alt="Image" class="hw-shape-one">
+                        <img src="~/assetsWeb/img/how-it-works/hw-3.png" alt="Image">
+                        <span>03</span>
                     </div>
-                    <div class="media-body">
-                        <h1 class="counter">177</h1>
-                        <p>Computer Brokers</p>
+                    <div class="hw-info">
+                        <h3>Confirm Reservation</h3>
+                        <p>Reservation Confirmed! Your booking is complete. We look forward to welcoming you. Thank you for choosing us!</p>
+                    
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-<!-- Our team 2 start -->
-<div class="our-team-2 content-area">
+
+
+<section class="testimonial-wrap style2 ptb-100 bg-seashell">
     <div class="container">
-        <!-- Main title -->
-        <div class="main-title">
-            <h1>Our Team Members</h1>
-        </div>
-        <div class="slick-slider-area">
-            <div class="row slick-carousel" data-slick='{"slidesToShow": 4, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
-                <div class="slick-slide-item">
-                    <div class="team-1">
-                        <div class="team-photo">
-                            <a href="#">
-                                <img src="~/assets2/img/avatar/jitender.jpg" alt="team" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="team-details">
-                            <h5>Jitendra Kumar Gupta</h5>
-                            <h6>Director</h6>
-                            <ul class="social-list clearfix">
-                                <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
+        <div class="row">
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+                <div class="section-title style1 text-center mb-40">
+                    <h2>What Our Client's Say</h2>
+                    <p>OUR CLIENTS ARE IMPORTANT TO US, HERE'S WHAT THEY HAVE TO SAY: </p>
                 </div>
-                <div class="slick-slide-item">
-                    <div class="team-1">
-                        <div class="team-photo">
-                            <a href="#">
-                                <img src="~/assets2/img/avatar/sunil.jpg" alt="team" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="team-details">
-                            <h5>Sunil Kumar Yadav</h5>
-                            <h6>Director</h6>
-                            <ul class="social-list clearfix">
-                                <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="team-1">
-                        <div class="team-photo">
-                            <a href="#">
-                                <img src="~/assets2/img/avatar/kifayatullah.jpg" alt="team" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="team-details">
-                            <h5>kifayatullah Khan</h5>
-                            <h6>Director</h6>
-                            <ul class="social-list clearfix">
-                                <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="team-1">
-                        <div class="team-photo">
-                            <a href="#">
-                                <img src="~/assets2/img/avatar/kunj.jpg" alt="team" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="team-details">
-                            <h5>Kunj Bihari Tiwari</h5>
-                            <h6>Director</h6>
-                            <ul class="social-list clearfix">
-                                <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
-</div>
+    <div class="container-fluid">
+        <div class="testimonial-slider-two owl-carousel">
+            <div class="testimonial-card style2">
+                <p class="client-quote">
+                    I used ABdolphin to sell my property in early 2021. I found ABdolphin to be straight down
+                    the line and honest with her approach to selling. I followed her advice and judgment and
+                    presented the property as we agreed to give it the best chance of selling. I was very
+                    pleasantly surprised when we received a decent strong offer in the first 48 hours of home
+                    opens and we accepted the offer. Everything went smoothly and the property sold in 4 weeks.
+                    All up start to finish took no more than 6 weeks and that’s because I listened to the advice
+                    and was realistic on were the market was at and ABdolphin delivered.
+                </p>
+                <div class="client-info-wrap">
+                    <div class="client-img">
+                        <img src="~/assetsWeb/img/clients/user.jpg" alt="Image">
+                    </div>
+                    <div class="client-info">
+                        <h5> Varun Vacchar</h5>
+                        @*<span>Director, BAT</span>*@
+                    </div>
+                    <div class="ratings">
+                        <i class="flaticon-star"></i>
+                        4.8
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card style2">
+                <p class="client-quote">
+                    ABdolphin Homes and her team are a different type of real estate people in India. They are
+                    frank, friendly and open. They understand the needs of the customer and advise. They don’t
+                    push you to buy the property. Or to say that they’re not behind the commission from the
+                    customer at any cost. In one word, they are honest in their approach and dealings. I
+                    purchased a villa though them and I am satisfied. Best wishes to them.
+                </p>
+                <div class="client-info-wrap">
+                    <div class="client-img">
+                        <img src="~/assetsWeb/img/clients/user.jpg" alt="Image">
+                    </div>
+                    <div class="client-info">
+                        <h5>Fahim</h5>
+                        @*<span>Civil Engineer, Olleo</span>*@
+                    </div>
+                    <div class="ratings">
+                        <i class="flaticon-star"></i>
+                        4.5
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card style2">
+                <p class="client-quote">
+                    ABdolphin has represented us on numerous real estate deals both buying and selling. He has
+                    shown right from the start that he is extremely competent in real estate transactions. We
+                    loved how he quickly responded to all of our questions as well as his knowledge of the whole
+                    process from start to finish. Finally, ABdolphin is very well respected in the real estate
+                    community and I think that goes a long way when it comes to negotiations.
+                </p>
+                <div class="client-info-wrap">
+                    <div class="client-img">
+                        <img src="~/assetsWeb/img/clients/user.jpg" alt="Image">
+                    </div>
+                    <div class="client-info">
+                        <h5>Khalid</h5>
+                        @*<span>Enterpreneur</span>*@
+                    </div>
+                    <div class="ratings">
+                        <i class="flaticon-star"></i>
+                        4.5
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card style2">
+                <p class="client-quote">
+                    I recently sold a house with ABdolphin and while this can be a very stressful process, I
+                    felt 110% confident by partnering with ABdolphin. He was candid, provided great feedback,
+                    helped explain clearly all details and managed the actual sale negotiation brilliantly. In
+                    addition, he was extremely responsive to every one of my questions, no matter how small. As
+                    I move forward to now BUY my next house, I am extremely certain Dave will be the right
+                    partner to help me navigate this process.
+                </p>
+                <div class="client-info-wrap">
+                    <div class="client-img">
+                        <img src="~/assetsWeb/img/clients/user.jpg" alt="Image">
+                    </div>
+                    <div class="client-info">
+                        <h5>Amit Goyal</h5>
+                        @*<span>MD, ITec</span>*@
+                    </div>
+                    <div class="ratings">
+                        <i class="flaticon-star"></i>
+                        4.5
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<!-- Testimonial 3 start -->
-<div class="testimonial-3">
+
+
+<div class="partner-wrap ptb-50">
     <div class="container">
-        <div class="main-title-2">
-            <h1>Our Testimonial</h1>
-            <p>OUR CLIENTS ARE IMPORTANT TO US, HERE'S WHAT THEY HAVE TO SAY:</p>
+        <div class="section-title style1 text-center mb-40">
+            <h2>Brand And Partners</h2>
         </div>
-        <div class="slick-slider-area">
-            <div class="row slick-carousel" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
-                <div class="slick-slide-item">
-                    <div class="testimonial-inner">
-                        <div class="content-box">
-                            <div class="profile-user">
-                                <div class="avatar">
-                                    <img src="~/assets/img/client/5.png" alt="testimonial-avatar" class="img-fluid">
-                                </div>
-                            </div>
-                            <h5>
-                                Varun Vacchar
-                            </h5>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-full"></i>
-                                <span>( 4.5 Reviews )</span>
-                            </div>
-
-                            <p class="testim">“I used ABdolphin to sell my property in early 2021.  I found ABdolphin to be straight down the line and honest with her approach to selling.  I followed her advice and judgment and presented the property as we agreed to give it the best chance of selling.  I was very pleasantly surprised when we received a decent strong offer in the first 48 hours of home opens and we accepted the offer.  Everything went smoothly and the property sold in 4 weeks.  All up start to finish took no more than 6 weeks and that’s because I listened to the advice and was realistic on were the market was at and ABdolphin delivered.”</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="testimonial-inner">
-                        <div class="content-box">
-                            <div class="profile-user">
-                                <div class="avatar">
-                                    <img src="~/assets/img/client/5.png" alt="testimonial-avatar" class="img-fluid">
-                                </div>
-                            </div>
-                            <h5>
-                                Fahim
-                            </h5>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-full"></i>
-                                <span>( 4.5 Reviews )</span>
-                            </div>
-                            <p class="testim">ABdolphin Homes and her team are a different type of real estate people in India. They are frank, friendly and open. They understand the needs of the customer and advise. They don’t push you to buy the property. Or to say that they’re not behind the commission from the customer at any cost. In one word, they are honest in their approach and dealings. I purchased a villa though them and I am satisfied. Best wishes to them.</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="testimonial-inner">
-                        <div class="content-box">
-                            <div class="profile-user">
-                                <div class="avatar">
-                                    <img src="~/assets/img/client/5.png" alt="testimonial-avatar" class="img-fluid">
-                                </div>
-                            </div>
-                            <h5>
-                                Khalid
-                            </h5>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-full"></i>
-                                <span>( 4.5 Reviews )</span>
-                            </div>
-                            <p class="testim">ABdolphin has represented us on numerous real estate deals both buying and selling. He has shown right from the start that he is extremely competent in real estate transactions. We loved how he quickly responded to all of our questions as well as his knowledge of the whole process from start to finish. Finally, ABdolphin is very well respected in the real estate community and I think that goes a long way when it comes to negotiations.</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="testimonial-inner">
-                        <div class="content-box">
-                            <div class="profile-user">
-                                <div class="avatar">
-                                    <img src="~/assets/img/client/5.png" alt="testimonial-avatar" class="img-fluid">
-                                </div>
-                            </div>
-                            <h5>
-                                Amit Goyal
-                            </h5>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-full"></i>
-                                <span>( 4.5 Reviews )</span>
-                            </div>
-                            <p class="testim">I recently sold a house with ABdolphin and while this can be a very stressful process, I felt 110% confident by partnering with ABdolphin. He was candid, provided great feedback, helped explain clearly all details and managed the actual sale negotiation brilliantly. In addition, he was extremely responsive  to every one of my questions, no matter how small. As I move forward to now BUY my next house, I am extremely certain Dave will be the right partner to help me navigate this process.</p>
-
-                        </div>
-                    </div>
-                </div>
+        <div class="partner-slider owl-carousel">
+            <div class="partner-item">
+                <img src="~/assetsWeb/img/partner/partner-1.png" alt="Image">
+            </div>
+            <div class="partner-item">
+                <img src="~/assetsWeb/img/partner/partner-2.png" alt="Image">
+            </div>
+            <div class="partner-item">
+                <img src="~/assetsWeb/img/partner/partner-3.png" alt="Image">
+            </div>
+            <div class="partner-item">
+                <img src="~/assetsWeb/img/partner/partner-4.png" alt="Image">
+            </div>
+            <div class="partner-item">
+                <img src="~/assetsWeb/img/partner/partner-5.png" alt="Image">
+            </div>
+            <div class="partner-item">
+                <img src="~/assetsWeb/img/partner/partner-6.png" alt="Image">
             </div>
         </div>
     </div>
 </div>
-
-<!-- Partners strat -->
-<div class="partners">
-    <div class="container">
-        <h4>Brands and Partners</h4>
-        <div class="slick-slider-area">
-            <div class="row slick-carousel" data-slick='{"slidesToShow": 5, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 3}}, {"breakpoint": 768,"settings":{"slidesToShow": 2}}]}'>
-                <div class="slick-slide-item"><img src="~/assets2/img/brand/brand-1.png" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="~/assets2/img/brand/brand-2.png" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="~/assets2/img/brand/brand-3.png" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="~/assets2/img/brand/brand-4.png" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="~/assets2/img/brand/brand-5.png" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="~/assets2/img/brand/brand-6.png" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="~/assets2/img/brand/brand-2.png" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="~/assets2/img/brand/brand-4.png" alt="brand" class="img-fluid"></div>
-            </div>
-            <div class="slick-prev slick-arrow-buton">
-                <i class="fa fa-angle-left"></i>
-            </div>
-            <div class="slick-next slick-arrow-buton">
-                <i class="fa fa-angle-right"></i>
-            </div>
-        </div>
-    </div>
-</div>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-       $("#myModal").modal('show');
-
-    });
-    $(document).ready(function () {
-        $("#myOffer").modal('show');
-        setTimeout(function () {
-            $("#myElem").css("display", "block");
-            $("#myElem").fadeIn(1000);
-        }, 3500);
-
-    });
-
-
-</script>
 
 
 <div id="myModal" class="modal fade " role="dialog">
@@ -900,8 +701,9 @@
         <!-- Modal content-->
         <div class="modal-content secondPopup" style="top:100px">
             <div class="modal-header p-0">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ri-close-line"></i>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -917,10 +719,8 @@
 </div>
 
 
-
-<div id="myOffer" class="modal fade" role="dialog">
+@*<div id="myOffer" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
         <div class="modal-content" style="top:100px">
             <div class="modal-header p-0">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -930,9 +730,60 @@
                 <div class="row">
                     <div class="col-md-12 offerContentArea">
                         <div class="text-center">
-                            @*<h2>New Township Booking</h2>*@
                             <h1 id="myElem" style="display:none">@ViewBag.BookingId</h1>
-                            @*<img style="width:100%" src="~/assets2/img/banner-popup.jpeg" class="img-responsive" />*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+===================================================================================
+
+<style>
+    @@media (max-width:767px) {
+        #offerBody {
+            height: 383px;
+        }
+    }
+
+    #offerBody .offerContentArea {
+        position: absolute;
+        bottom: 15%;
+    }
+
+  
+
+    #myElem {
+            display: block;
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+        color: #fb9f03;
+        font-weight: bold;
+        font-size: 66px;
+        font-family: inherit;
+    }
+</style>
+
+
+<div class="modal fade show" id="signUp" tabindex="-1" role="dialog" aria-modal="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ri-close-line text-white"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row align-items-center gx-5">
+                    <div class="col-md-12">
+                        <div class="login-bg bg-f offerContentArea position-relative">
+                            <div class="text-center">
+                                <h1 id="myElem" style="display:none">@ViewBag.BookingId</h1>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -940,3 +791,139 @@
         </div>
     </div>
 </div>
+===========================================================================
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myModal").modal('show');
+
+        $("#myBtn").click(function () {
+            alert("okkk");
+        })
+
+    });
+    $(document).ready(function () {
+        $("#signUp").modal('show');
+        setTimeout(function () {
+            $("#myElem").css("display", "block");
+            $("#myElem").fadeIn(1000);
+        }, 3500);
+
+    });
+
+
+</script>
+
+
+<script>
+    function GetDetails() {
+
+        $(".errortext").removeClass("errortext");
+        if ($('#SiteTypeID').val() == '0') {
+            $("#SiteTypeID").addClass('errortext');
+            $('#SiteTypeID').focus();
+            return false;
+        }
+
+        if ($('#SiteID').val() == '0') {
+            $("#SiteID").addClass('errortext');
+            $('#SiteID').focus();
+            return false;
+        }
+        return true;
+    }
+    function onSiteTypeChange() {
+        //  $("#divload").css({ 'display': '' });
+
+        var value = $('#SiteTypeID').val();
+        var values = $('#SiteID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Website/GetSiteBySiteType",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteTypeID: value },
+            success: function (data) {
+                var j = 1;
+
+                //   $("#divload").css({ 'display': 'none' });
+
+                $("#SiteID").html(""); // clear before appending new list
+                $("#SiteID").empty();
+                $("#SiteID").append(
+                      $('<option></option>').val(0).html('Select Site'));
+                $.each(data.ddlSite, function (index, Sectorcount) {
+                    $("#SiteID").append(
+                          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                });
+
+            }
+
+        });
+
+    }
+    function onSiteChange() {
+        $("#divload").css({ 'display': '' });
+
+        var value = $('#SiteID').val();
+        var values = $('#SectorID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Website/GetSitesDetails",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+                var j = 1;
+                if (data.Result == "yes") {
+                    $("#divload").css({ 'display': 'none' });
+                    $('#Rate').val(data.Rate);
+                    $("#SectorID").html(""); // clear before appending new list
+                    $("#SectorID").empty();
+                    $("#SectorID").append(
+                          $('<option></option>').val(0).html('Select Sector'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#SectorID").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                    });
+
+                }
+                else {
+                    $("#SectorID").empty();
+                    $('#Rate').val('');
+                }
+            }
+
+        });
+
+    }
+
+    function onSectorChange() {
+
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#SiteID').val();
+        var sectorID = $('#SectorID').val();
+        $.ajax({
+            url: '/Website/GetBlockList', type: 'post', dataType: 'json',
+            data: { 'SiteID': siteID, 'sectorID': sectorID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                $("#BlockID").html(""); // clear before appending new list
+                $("#BlockID").empty();
+                $("#BlockID").append(
+                      $('<option></option>').val(0).html('Select Block'));
+                $.each(data.lstBlock, function (index, BlockCount) {
+                    $("#BlockID").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+
+            }
+
+        });
+    }
+
+
+</script>
