@@ -6,6 +6,7 @@
 }
 
 
+
 @using (Html.BeginForm("EditProfile", "CustomerDashboard", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="page-content">
@@ -27,6 +28,7 @@
                     <div class="card-body row">
                         <div class="col-md-12 mb-3">
                             <div class="form-group form-default">
+                            
                                 <img src="@Session["ProfilePic"]" alt="..." class="img-circle profile_img" style="height: 50px;width: 50px;"/>
                             </div>
                         </div>
@@ -138,6 +140,8 @@
 }
 
 <script>
+    
+   
 
     function getStateCity() {
         debugger
