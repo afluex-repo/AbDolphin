@@ -275,7 +275,7 @@
                 <div class="user-box dropdown px-3">
                     <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-                        @if (Session["ProfilePic"].ToString() == "../files/assets/images/no_avatar.jpg")
+                        @if (Session["ProfilePic"].ToString() == "../../images/no-profile.png" || Session["ProfilePic"].ToString() == "../files/assets/images/no_avatar.jpg")
                         {
                             <div id="profileImage"></div>
 
