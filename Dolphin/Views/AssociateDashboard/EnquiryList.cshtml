@@ -92,3 +92,31 @@
         </div>
  }
 
+<script>
+    function validateform() {
+        if ($('#Name').val() == '') {
+            $("#Name").addClass('errortext');
+            $('#Name').focus();
+            $('#Name').val('');
+           return false;
+       }
+        if ($('#Details').val() == '') {
+            $("#Details").addClass('errortext');
+            $('#Details').focus();
+            $('#Details').val('');
+           return false;
+       }
+       return true;
+   }
+</script>
+<style>
+    .errortext {
+        border: 2px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+
+    .successtext {
+        border: 2px solid red !important;
+        background-color: #808080 !important;
+    }
+</style>
