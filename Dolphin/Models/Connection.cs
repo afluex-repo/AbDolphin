@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace Dolphin.Models
 {
     public class Connection
-    {
+    {  
         private static string connectionString = string.Empty;
 
         static Connection()
