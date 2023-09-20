@@ -1,0 +1,88 @@
+﻿@model Dolphin.Models.AssociateBooking
+
+@{
+    ViewBag.Title = "PayoutLedger";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
+}
+
+ 
+@using (Html.BeginForm("PayoutLedger", "AssociateDashboard", FormMethod.Post, new { @id = "form1" }))
+{
+
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Payout Ledger</h5>
+                    <span style="color: red">
+                        @TempData[""]
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-bordered table-striped mb-0">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Transaction Date</th>
+                                <th>Narration</th>
+                                <th>Credit Amount</th>
+                                <th>Debit</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstPlot != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstPlot)
+                                    {
+                                        <tr class="text-left">
+                                            <td>@i</td>
+                                            <td>@Item.TransactionDate</td>
+                                            <td>@Item.Narration</td>
+                                            <td>@Item.Credit</td>
+
+                                            <td>@Item.Debit</td>
+
+                                        </tr>
+
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>@ViewBag.Credit</th>
+                                <th>@ViewBag.Debit</th>
+                            </tr>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Transaction Date</th>
+                                <th>Narration</th>
+                                <th>Credit Amount</th>
+                                <th>Debit</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+}
+
+
+
+
+

@@ -1,0 +1,454 @@
+﻿@model Dolphin.Models.Home
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Abdolphin - Real Estate</title>
+    <!-- favicon -->
+    <link rel=icon href=../assets/img/favicon.png sizes="20x20" type="image/png">
+    <!-- Vendor Stylesheet -->
+    <link rel="stylesheet" href="../assets/css/vendor.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- responsive Stylesheet -->
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader area end -->
+    <div class="body-overlay" id="body-overlay"></div>
+    <!-- navbar start -->
+    <div class="navbar-area">
+        <nav class="navbar navbar-area navbar-expand-lg">
+            <div class="container nav-container">
+                <div class="responsive-mobile-menu">
+                    <button class="menu toggle-btn d-block d-lg-none" data-toggle="collapse"
+                            data-target="#realdeal_main_menu" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-left"></span>
+                        <span class="icon-right"></span>
+                    </button>
+                </div>
+                <div class="logo">
+                    <a href="index.html"><img src="../assets/img/dolphin.png" alt="logo"></a>
+                </div>
+                <div class="nav-right-part nav-right-part-mobile">
+                    <a class="btn btn-yellow" href="/Home/LoginWeb">
+                        Login <span class="right">
+                            <i class="la la-plus"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="realdeal_main_menu">
+                    <ul class="navbar-nav menu-open">
+                        <li class="current-menu-item"><a href="/Website/Index">Home</a></li>
+                        <li class="menu-item-has-children">
+                            <a href="#">About Us</a>
+                            <ul class="sub-menu">
+                                <li><a href="/Website/CompanyOverview">Company Overview</a></li>
+                                <li><a href="/Website/OurTeam">Our Team</a></li>
+                                <li><a href="/Website/VisionAndMission">Vision & Mission</a></li>
+                                <li><a href="/Website/QualityPolicy">Quality Policy</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/Website/UnitAvailability">Unit Availability</a></li>
+                        <li><a href="/Website/Gallery">Gallery</a></li>
+                        <li><a href="/Website/Contact">Contact Us</a></li>
+                       
+                    </ul>
+                </div>
+                <div class="nav-right-part nav-right-part-desktop">
+                    <a class="btn btn-yellow" href="/Home/LoginWeb">Login <span class="right"><i class="la la-plus"></i></span></a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- navbar end -->
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb-area jarallax" style="background-image:url(../assets/img/bg/4.png);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-inner">
+                        <h1 class="page-title">Login</h1>
+                        <ul class="page-list">
+                            <li><a href="/Website/Index">Home</a></li>
+                            <li>Login</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content-body" style="margin-top:15px;margin-bottom:15px;">
+        <section class="row flexbox-container loginspace">
+            <div class="col-xl-12 col-12 justify-content-center">
+                <div class="card bg-authentication rounded-0 mb-0">
+                    <div class="row m-0">
+                        <div class="col-lg-12 col-12 p-0">
+                            <div class="card rounded-0 mb-0 px-2 cardro">
+                                
+                               
+                                <div class="card-content">
+                                    <div class="card-body pt-2">
+                                        @using (Html.BeginForm("LoginActionWeb", "Home", FormMethod.Post, new { @id = "signupForm" }))
+                                        {
+                                            <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                <input class="form-control" type="text" id="txtLoginID" name="LoginID" placeholder="Login Id">
+                                                <div class="form-control-position">
+                                                    <i class="feather icon-user" style="top: 10px;"></i>
+                                                </div>
+                                                <label for="user-name">Username</label>
+                                            </fieldset>
+                                            <fieldset class="form-label-group position-relative has-icon-left">
+
+                                                <input class="form-control" type="password" id="txtPassword" name="password" placeholder="Password">
+                                                <div class="form-control-position">
+                                                    <i class="feather icon-lock" style="top: 10px;"></i>
+                                                </div>
+                                                <label for="user-password">Password</label>
+                                            </fieldset>
+
+                                                    <a href="/ForgotPassword/ForgotPassword" style="color:black;">Forgot Password?</a>
+                                                    <input type="submit" value="Login" class="btn float-right login_btn" style="background-color: #ff6e63;" name="btnLogin" onclick="return validateform();" />
+                                                    <br />
+
+                                        }
+                                    </div>
+                                    <div class="form-group no-margin">
+                                        <p style="color:red;"> @TempData["Login"] </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+    @*<div class="row" style="margin-top:10px;margin-bottom:10px;align-content:center">
+
+
+            <div class="col-lg-6 col-md-12">
+                @using (Html.BeginForm("LoginActionWeb", "Home", FormMethod.Post, new { @id = "signupForm", @class = "md-float-material form-material" }))
+                {
+
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="txtLoginID" name="LoginID" placeholder="Login Id">
+                    </div>
+
+                    <div class="form-group">
+                        <input class="form-control" type="password" id="txtPassword" name="password" placeholder="Password">
+                    </div>
+
+                    <p style="color: red">
+                        @TempData["Login"]
+                    </p>
+                    <br />
+                    <a href="/ForgotPassword/ForgotPassword" style="color:white;">Forgot Password?</a>
+                    <input type="submit" value="Login" class="btn float-right login_btn" style="background-color: beige;" name="btnLogin" onclick="return validateform();" />
+
+                }
+            </div>
+
+
+
+            @*<div class="col-md-12 col-lg-12">
+                    @using (Html.BeginForm("LoginActionWeb", "Home", FormMethod.Post, new { @id = "signupForm", @class = "md-float-material form-material" }))
+                {
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="txtLoginID" name="LoginID" placeholder="Login Id">
+
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input class="form-control" type="password" id="txtPassword" name="password" placeholder="Password">
+                        </div>
+                        <br>
+                        <p style="color: red">
+                            @TempData["Login"]
+                        </p>
+                        <br />
+                        <a href="/ForgotPassword/ForgotPassword" style="color:white;">Forgot Password?</a>
+                        <input type="submit" value="Login" class="btn float-right login_btn" style="background-color: beige;" name="btnLogin" onclick="return validateform();" />
+                }
+                </div>
+        </div>*@
+
+
+
+
+
+
+    <footer class="footer-area">
+        <div class="container">
+            <div class="footer-top">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a class="footer-logo" href="#"><img src="../assets/img/dolphin.png" alt="logo"></a>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="footer-social text-sm-right">
+                            <span>FOLLOW US</span>
+                            <ul class="social-icon">
+                                <li>
+                                    <a href="#" target="_blank"><i class="fa fa-facebook  "></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank"><i class="fa fa-twitter  "></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="widget widget_nav_menu">
+                            <h4 class="widget-title">About Us</h4>
+                            <p>
+                                Hand selected, local experienced agents, and neighborhood specialists, work with you to
+                                achieve your goals. The highest level of market knowledge.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="widget widget_nav_menu">
+                            <h4 class="widget-title">Quick Links</h4>
+                            <ul>
+
+                                <li><a href="/Website/Index">Home</a></li>
+                                <li><a href="/Website/CompanyOverview">Company Overview</a></li>
+                                <li><a href="/Website/VisionAndMission">Mission & Vision</a></li>
+                                <li><a href="/Website/UnitAvailability">Unit Availability</a></li>
+                                <li><a href="/Website/Contact">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="widget widget_nav_menu">
+                            <h4 class="widget-title">Contact Info</h4>
+                            <ul>
+                                <li>
+                                    <i class="fa fa-home" aria-hidden="true"></i> <strong>
+                                        Khajanchi Chauraha Padri Bazar Road, Gorakhpur
+                                    </strong>
+                                </li>
+                                <li>
+                                    <i class="fa fa-phone" aria-hidden="true"></i> <strong>+91 6389 002 500</strong>
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                    <strong> info@dolphininfratech.com</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <form class="widget widget-subscribe">
+                            <div class="rld-single-input">
+                                <input type="text" placeholder="Full Name">
+                            </div>
+                            <div class="rld-single-input">
+                                <input type="text" placeholder="Your@email.com">
+                            </div>
+                            <button class="btn btn-yellow w-100">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="copy-right text-center">
+                © Copyright 2020 Abdolphin All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    <!-- footer area end -->
+    <!-- back to top area start -->
+    <div class="back-to-top">
+        <span class="back-top"><i class="fa fa-angle-up"></i></span>
+    </div>
+    <!-- back to top area end -->
+    <!-- all plugins here -->
+    <script src="../assets/js/vendor.js"></script>
+    <!-- main js  -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/gallery.js"></script>
+
+    @*<div class="main-page1">
+            <div class="main-page" style="background-image:url(http://images6.fanpop.com/image/photos/32800000/London-flats-for-students-real-estate-32827032-1109-765.jpg);">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-4">
+                            <div class="logo">
+                                <img src="../files/assets/images/Dolphinlogo.png" class="img-responsive" alt="logo">
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-lg-8">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 col-lg-8">
+                            <div class="content">
+                                <h1>Cost Effective & Ease of use </h1>
+                                <p class="text-justify">
+                                    Real estate is "property consisting of land and the buildings on it,
+                                    along with its natural resources such as crops, minerals or water;
+                                    immovable property of this nature; an interest vested in this (also)
+                                    an item of real property, (more generally) buildings or housing in general
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <div class="main-form">
+                                <h2 class="text-center">Login</h2>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12">
+                                            @using (Html.BeginForm("LoginActionWeb", "Home", FormMethod.Post, new { @id = "signupForm", @class = "md-float-material form-material" }))
+                                            {
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" id="txtLoginID" name="LoginID" placeholder="Login Id">
+
+                                            </div>
+                                            <br>
+                                            <div class="form-group">
+                                                <input class="form-control" type="password" id="txtPassword" name="password" placeholder="Password">
+                                            </div>
+                                            <br>
+                                            <p style="color: red">
+                                                @TempData["Login"]
+                                            </p>
+                                            <br />
+                                            <a href="/ForgotPassword/ForgotPassword" style="color:white;">Forgot Password?</a>
+                                            <input type="submit" value="Login" class="btn float-right login_btn" style="background-color: beige;" name="btnLogin" onclick="return validateform();" />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+    function validateform() {
+
+        $(".errortext").removeClass("errortext");
+
+        if ($('#txtLoginID').val() == '') {
+            $("#txtLoginID").addClass('errortext');
+            $('#txtLoginID').focus();
+
+            return false;
+        }
+        if ($('#txtPassword').val() == '') {
+            $("#txtPassword").addClass('errortext');
+            $('#txtPassword').focus();
+
+            return false;
+        }
+        $("#divload").css({ 'display': '' });
+
+
+    }
+</script>
+
+
+
+@*
+    <script>
+        window.onload = function () {
+            document.addEventListener("contextmenu", function (e) {
+                e.preventDefault();
+            }, false);
+            document.addEventListener("keydown", function (e) {
+                //document.onkeydown = function(e) {
+                // "I" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                    disabledEvent(e);
+                }
+                // "J" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                    disabledEvent(e);
+                }
+                // "S" key + macOS
+                if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                    disabledEvent(e);
+                }
+                // "U" key
+                if (e.ctrlKey && e.keyCode == 85) {
+                    disabledEvent(e);
+                }
+                // "F12" key
+                if (event.keyCode == 123) {
+                    disabledEvent(e);
+                }
+            }, false);
+            function disabledEvent(e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+                e.preventDefault();
+                return false;
+            }
+        }
+    </script>*@
+
+
+
+
+
+
+
+
+
+
+
+

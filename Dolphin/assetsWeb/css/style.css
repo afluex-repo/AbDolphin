@@ -2534,9 +2534,14 @@ select {
 }
 
 .login-bg {
-    background-image: url(http://www.abdolphininfratech.com/assets2/img/offer.gif);
-    height: 660px
+    background-image: url('../img/offer.gif');
+    height: 660px;
 }
+.SignIn-bg {
+    background-image: url('../img/AbDolphineOffer.jpeg');
+    height: 660px;
+}
+
 
 #signIn .modal-content,
 #signUp .modal-content {

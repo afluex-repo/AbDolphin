@@ -1,0 +1,103 @@
+﻿@model Dolphin.Models.AssociateBooking
+
+@{
+    ViewBag.Title = "AssociateDownlineDetail";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("AssociateDownlineDetail", "AssociateDashboard", FormMethod.Post, new { @id = "form1" }))
+{
+
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Affiliate Downline</h5>
+                    <span style="color: red">
+                        @TempData[""]
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body row">
+                @Html.HiddenFor(m => m.LoginId, new { @Value = @Model.LoginId })
+                <div class="table-responsive">
+                    <table id="example2" class="table table-bordered table-striped mb-0">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Affiliate ID, Name</th>
+                                <th>Rank Name</th>
+                                <th>Rank</th>
+                                <th>Branch Name</th>
+                                <th>Mobile Number</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @if (Model != null)
+                          {
+                              if (Model.lstPlot != null)
+                              {
+                                  int i = 1;
+                                  foreach (var Item in Model.lstPlot)
+                                  {
+                                    <tr class="text-left">
+                                        <td>@i</td>
+                                        <td>@Item.AssociateID</td>
+                                        <td>@Item.DesignationName </td>
+                                        <td>@Item.Percentage</td>
+                                        <td>@Item.BranchName</td>
+                                        <td>@Item.Contact</td>
+                                        @if (Item.Status == "Active")
+                                        {
+                                            <td><span class="badge bg-success">@Item.Status</span></td>
+                                        }
+                                        else if (Item.Status == "InActive")
+                                        {
+
+                                            <td><span class="badge bg-danger">@Item.Status</span></td>
+                                        }
+                                        else
+                                        {
+
+                                        }
+
+                                       
+                                    </tr>
+                                      i++;
+                                  }
+                              }
+                          }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Affiliate ID, Name</th>
+                                <th>Rank Name</th>
+                                <th>Rank</th>
+                                <th>Branch Name</th>
+                                <th>Mobile Number</th>
+                                <th>Status</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+
+
+
+    
+
+}
+

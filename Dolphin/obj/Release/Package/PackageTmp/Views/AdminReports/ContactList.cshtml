@@ -1,0 +1,84 @@
+﻿@model Dolphin.Models.Home
+
+@{
+    ViewBag.Title = "ContactList";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("ContactList", "Home", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">Contact List</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- HTML5 Export Buttons table start -->
+                            <div class="card">
+                                <div class="card-header table-card-header">
+                                    @*<a class="btn btn-primary btn-sm" style="margin-left:75%" href="/Customer/CustomerRegistration">Add New</a>*@
+                                </div>
+                                <div class="card-block"> 
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>S No.</th>
+                                                    <th>Name</th>
+                                                    <th>EmailId</th>
+                                                    <th>Mobile Number</th>
+                                                    <th>Message</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.lstMenu != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var Item in Model.lstMenu)
+                                                        {
+                                                            <tr class="text-left">
+
+                                                                <td>@i</td>
+                                                                <td>@Item.Name</td>
+                                                                <td>@Item.Email</td>
+                                                                <td>@Item.Mobile</td>
+                                                                <td>@Item.Message</td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">

@@ -1,0 +1,94 @@
+﻿@model Dolphin.Models.AssociateBooking
+
+@{
+    ViewBag.Title = "AssociateTree";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("AssociateTree", "AssociateDashboard", FormMethod.Post, new { @id = "form1" }))
+{
+
+    
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Affiliate Downline</h5>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-bordered table-striped mb-0">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th></th>
+                                <th>LoginId</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstPlot != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstPlot)
+                                    {
+                                        <tr class="text-left">
+
+                                            <td>@i</td>
+                                            <td>
+                                                @if (Item.Status == "Down")
+                                                {
+
+                                                    <a href="/AssociateDashboard/AssociateTree?AssociateID=@Item.Fk_UserId" id="btnDown" class="btn btn-success btn-sm" onclick="return showbtn();">Down</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#" id="btnDown" class="btn btn-success btn-sm">Self</a>
+                                                }
+
+
+                                            </td>
+                                            <td>@Item.LoginId</td>
+
+                                            <td>
+                                                @if (Item.ActiveStatus == "Inactive")
+                                                {
+                                                    <a href="#" id="btnDown" class="badge bg-danger">@Item.ActiveStatus</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#" id="btnDown" class="badge bg-success">@Item.ActiveStatus</a>
+                                                }
+
+                                            </td>
+
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th></th>
+                                <th>LoginId</th>
+                                <th>Status</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+}

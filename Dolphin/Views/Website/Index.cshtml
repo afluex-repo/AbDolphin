@@ -15,8 +15,8 @@
                         <div class="hero-content">
                             <h1>
                                 Find   <span>
-                                                        Your<img src="~/assetsWeb/img/hero/hero-shape-2.png"
-                                              alt="Image">
+                                    Your<img src="~/assetsWeb/img/hero/hero-shape-2.png"
+                                             alt="Image">
                                 </span> Perfect Home
                             </h1>
                             <p>Discover a range of homes to match your lifestyle. From cozy condos to spacious estates, we have it all.</p>
@@ -32,7 +32,8 @@
                     <div class="col-lg-6 col-md-8 col-sm-10">
                         <div class="hero-content">
                             <h1>
-                                Your   <span>Home,<img src="~/assetsWeb/img/hero/hero-shape-2.png"
+                                Your   <span>
+                                    Home,<img src="~/assetsWeb/img/hero/hero-shape-2.png"
                                               alt="Image">
                                 </span>Our Expertise
                             </h1>
@@ -51,8 +52,10 @@
                     <div class="col-lg-6 col-md-8 col-sm-10">
                         <div class="hero-content">
                             <h1>
-                                Luxury  <span>Living,<img src="~/assetsWeb/img/hero/hero-shape-2.png"
-                                              alt="Image"> </span>  Prime Location
+                                Luxury  <span>
+                                    Living,<img src="~/assetsWeb/img/hero/hero-shape-2.png"
+                                                alt="Image">
+                                </span>  Prime Location
                             </h1>
                             <p>
                                 Discover elegant homes in sought-after neighborhoods. Experience the pinnacle of comfort, style, and convenience in every residence.
@@ -68,31 +71,31 @@
 
 <div class="container">
     <div class="search-property style1">
-        @using (Html.BeginForm("UnitAvailability", "Website", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data", @class="property-search-form justify-content-center"}))
-{
-            
-        <div class="form-group">
-       
-                 @Html.DropDownListFor(m => m.SiteTypeID, new SelectList(ViewBag.ddlSiteType, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteTypeChange();" })
-        </div>
-                        <div class="form-group">
-                            @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
-                        </div>
-                        <div class="form-group">
-                            @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
-                        </div>
-                        <div class="form-group">
-                            @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
-                        </div>
+        @using (Html.BeginForm("UnitAvailability", "Website", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data", @class = "property-search-form justify-content-center" }))
+        {
+
+            <div class="form-group">
+
+                @Html.DropDownListFor(m => m.SiteTypeID, new SelectList(ViewBag.ddlSiteType, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteTypeChange();" })
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
+            </div>
                         <div class="form-group">
                             @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @placeholder = "Plot Number" })
                         </div>
                         <div class="form-group">
                             <button type="buttom" class="btn style2 clearProper" style="background: #2c3240;">
-                            
 
-                                <a class="text-white" href="/Website/UnitAvailability">Clear Property</a>
-                            
+
+                                <a class="text-white" href="/Website/Index">Clear Property Filter</a>
+
                             </button>
                         </div>
                         <div class="form-group">
@@ -243,45 +246,45 @@
 
 
             @*<div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
-                 data-aos-delay="200">
-                <div class="city-card style1">
-                    <img src="~/assetsWeb/img/city/city-5.jpg" alt="Image">
-                    <div class="city-info">
-                        <h3><a href="#!">San Fransisco</a></h3>
-                        <p>+231 properties</p>
+                     data-aos-delay="200">
+                    <div class="city-card style1">
+                        <img src="~/assetsWeb/img/city/city-5.jpg" alt="Image">
+                        <div class="city-info">
+                            <h3><a href="#!">San Fransisco</a></h3>
+                            <p>+231 properties</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
-                 data-aos-delay="300">
-                <div class="city-card style1">
-                    <img src="~/assetsWeb/img/city/city-6.jpg" alt="Image">
-                    <div class="city-info">
-                        <h3><a href="#!">Torento City</a></h3>
-                        <p>+1222 properties</p>
+                <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                     data-aos-delay="300">
+                    <div class="city-card style1">
+                        <img src="~/assetsWeb/img/city/city-6.jpg" alt="Image">
+                        <div class="city-info">
+                            <h3><a href="#!">Torento City</a></h3>
+                            <p>+1222 properties</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
-                 data-aos-delay="400">
-                <div class="city-card style1">
-                    <img src="~/assetsWeb/img/city/city-7.jpg" alt="Image">
-                    <div class="city-info">
-                        <h3><a href="#!">Vancuver City</a></h3>
-                        <p>+151 properties</p>
+                <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                     data-aos-delay="400">
+                    <div class="city-card style1">
+                        <img src="~/assetsWeb/img/city/city-7.jpg" alt="Image">
+                        <div class="city-info">
+                            <h3><a href="#!">Vancuver City</a></h3>
+                            <p>+151 properties</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
-                 data-aos-delay="500">
-                <div class="city-card style1">
-                    <img src="~/assetsWeb/img/city/city-8.jpg" alt="Image">
-                    <div class="city-info">
-                        <h3><a href="#!">Montreal City</a></h3>
-                        <p>+232 properties</p>
+                <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                     data-aos-delay="500">
+                    <div class="city-card style1">
+                        <img src="~/assetsWeb/img/city/city-8.jpg" alt="Image">
+                        <div class="city-info">
+                            <h3><a href="#!">Montreal City</a></h3>
+                            <p>+232 properties</p>
+                        </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
         </div>
     </div>
 </section>
@@ -547,7 +550,7 @@
                     <div class="hw-info">
                         <h3>Confirm Reservation</h3>
                         <p>Reservation Confirmed! Your booking is complete. We look forward to welcoming you. Thank you for choosing us!</p>
-                    
+
                     </div>
                 </div>
             </div>
@@ -698,11 +701,10 @@
 
 <div id="myModal" class="modal fade " role="dialog">
     <div class="modal-dialog">
-        <!-- Modal content-->
         <div class="modal-content secondPopup" style="top:100px">
             <div class="modal-header p-0">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="ri-close-line"></i>
+                    @*<i class="ri-close-line"></i>*@
                 </button>
             </div>
             <div class="modal-body">
@@ -719,29 +721,6 @@
 </div>
 
 
-@*<div id="myOffer" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="top:100px">
-            <div class="modal-header p-0">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body position-relative" id="offerBody">
-                <div class="row">
-                    <div class="col-md-12 offerContentArea">
-                        <div class="text-center">
-                            <h1 id="myElem" style="display:none">@ViewBag.BookingId</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>*@
-
-
-===================================================================================
-
 <style>
     @@media (max-width:767px) {
         #offerBody {
@@ -754,13 +733,11 @@
         bottom: 15%;
     }
 
-  
-
     #myElem {
-            display: block;
-            position: absolute;
-            bottom: 10%;
-            left: 50%;
+        display: block;
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
         color: #fb9f03;
         font-weight: bold;
         font-size: 66px;
@@ -780,7 +757,7 @@
             <div class="modal-body">
                 <div class="row align-items-center gx-5">
                     <div class="col-md-12">
-                        <div class="login-bg bg-f offerContentArea position-relative">
+                        <div class="login-bg bg-f offerContentArea position-relative" style="background-size:100% 100% !important">
                             <div class="text-center">
                                 <h1 id="myElem" style="display:none">@ViewBag.BookingId</h1>
                             </div>
@@ -791,22 +768,16 @@
         </div>
     </div>
 </div>
-===========================================================================
-
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         $("#myModal").modal('show');
-
-        $("#myBtn").click(function () {
-            alert("okkk");
-        })
-
     });
     $(document).ready(function () {
         $("#signUp").modal('show');
+        debugger;
         setTimeout(function () {
             $("#myElem").css("display", "block");
             $("#myElem").fadeIn(1000);
@@ -820,7 +791,7 @@
 
 <script>
     function GetDetails() {
-
+        debugger;
         $(".errortext").removeClass("errortext");
         if ($('#SiteTypeID').val() == '0') {
             $("#SiteTypeID").addClass('errortext');
@@ -927,3 +898,10 @@
 
 
 </script>
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>

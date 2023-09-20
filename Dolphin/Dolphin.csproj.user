@@ -8,6 +8,7 @@
     <WebStackScaffolding_LayoutPageFile>~/Views/Shared/_AdminLayoutTesting.cshtml</WebStackScaffolding_LayoutPageFile>
     <UseIISExpress>true</UseIISExpress>
     <ProjectView>ShowAllFiles</ProjectView>
+    <NameOfLastUsedPublishProfile>AbDolphin6</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
