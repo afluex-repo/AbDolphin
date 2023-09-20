@@ -88,18 +88,18 @@
                             @if (Model.DocumentStatus == "Status : Approved" || Model.DocumentStatus == "Status : Pending")
                             {
                                 <div class="row">
-                                    <div class="col-m-4">
+                                    <div class="col-md-4">
 
                                         <label  class="float-label">Account Number </label>
                                         @Html.TextBoxFor(m => m.DocumentNumber, new { @class = "form-control", @onkeypress = "return isNumberKey(event);", @maxlength = "12", @minlength = "12", @readonly = "readonly" })
                                         @Html.DisplayFor(m => m.DocumentStatus, new { @class = "form-control" })
                                     </div>
-                                    <div class="col-m-4">
+                                    <div class="col-md-4">
                                         <label  class="float-label">IFSC Code</label>
                                         @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @readonly = "readonly" })
 
                                     </div>
-                                    <div class="col-m-4">
+                                    <div class="col-md-4">
                                         <label  class="float-label">Account Holder Name </label>
                                         @Html.TextBoxFor(m => m.AccountHolderName, new { @class = "form-control", @readonly = "readonly" })
 
@@ -107,8 +107,6 @@
                                 </div>
 
                                                     <br />
-                                                    <br />
-
                                                     <br />
                                                     <img src="@Url.Content(Model.DocumentImage)" height="120" width="180" />
                                                     <br />
