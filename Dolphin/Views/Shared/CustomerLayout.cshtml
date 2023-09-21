@@ -275,19 +275,12 @@
                 <div class="user-box dropdown px-3">
                     <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-                        @if (Session["ProfilePic"].ToString() == "../../images/no-profile.png" || Session["ProfilePic"].ToString() == "../files/assets/images/no_avatar.jpg")
-                        {
-                            <div id="profileImage"></div>
-
-                        }
-                        else
-                        {
                             <img src="@Session["ProfilePic"]" class="user-img" alt="user avatar">
-                        }
+                        
                         @*<img src="../../files/assets/images/no_avatar.jpg" class="user-img" alt="user avatar">*@
 
                         <div class="user-info">
-                            <p class="user-name mb-0"><span id="fullName">@Session["FullName"]</span></p>
+                            <p class="user-name mb-0"><span >@Session["FullName"]</span></p>
                             @*<p class="designattion mb-0">Web Designer</p>*@
                         </div>
                     </a>
@@ -344,13 +337,7 @@
     <!--app JS-->
     <script src="../assets33/js/app.js"></script>
 
-    <script>
-        /// For Profile 
-        debugger;
-        const fullName = document.getElementById('fullName').textContent;
-        const intials = fullName.split(' ').map(name => name[0]).join('').toUpperCase();
-        document.getElementById('profileImage').innerHTML = intials;
-    </script>
+   
 </body>
 
 
