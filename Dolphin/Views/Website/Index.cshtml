@@ -831,8 +831,6 @@
 </div>
 @*===========================================================================*@
 
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -847,11 +845,7 @@
         }, 3500);
 
     });
-
-
 </script>
-
-
 <script>
     function GetDetails() {
 
@@ -861,7 +855,6 @@
             $('#SiteTypeID').focus();
             return false;
         }
-
         if ($('#SiteID').val() == '0') {
             $("#SiteID").addClass('errortext');
             $('#SiteID').focus();
@@ -895,9 +888,7 @@
                 });
 
             }
-
         });
-
     }
     function onSiteChange() {
         $("#divload").css({ 'display': '' });
@@ -934,7 +925,6 @@
         });
 
     }
-
     function onSectorChange() {
 
         $("#divload").css({ 'display': '' });
@@ -958,13 +948,7 @@
 
         });
     }
-
-
 </script>
-
-
-
-
 <style>
     .errortext {
         border: 1px solid red !important;
