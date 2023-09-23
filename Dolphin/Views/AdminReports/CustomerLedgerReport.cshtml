@@ -8,6 +8,9 @@
     .errortext {
         border: 1px solid red !important;
     }
+    .bolds{
+        font-weight:600;
+    }
 </style>
 @using (Html.BeginForm("CustomerLedgerReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
@@ -84,19 +87,19 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Plot Rate :</label>
+                                        <label class="bolds">Plot Rate :</label>
                                         <label id="Plotrte"></label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Plot Area :</label>
+                                        <label class="bolds">Plot Area :</label>
                                         <label id="Plotarea"></label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Actual Plot Amount :</label>
+                                        <label class="bolds">Actual Plot Amount :</label>
                                         <label id="ActPlotAmt"></label>
                                     </div>
                                 </div>
@@ -105,19 +108,19 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Discount :</label>
+                                        <label class="bolds">Discount :</label>
                                         <label id="disct"></label>
                                     </div>
                                 </div>
                                 <div class="col-md-4" hidden="hidden">
                                     <div class="form-group">
-                                        <label>Booking Amount :</label>
+                                        <label class="bolds">Booking Amount :</label>
                                         <label id="bookingAmt"></label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Booking Date :</label>
+                                        <label class="bolds">Booking Date :</label>
                                         <label id="Bookigdt"></label>
                                     </div>
                                 </div>
@@ -126,20 +129,20 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Payment Plan :</label>
+                                        <label class="bolds">Payment Plan :</label>
                                         <label id="Payplan"></label>
 
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Total Paid Amount:</label>
+                                        <label class="bolds">Total Paid Amount:</label>
                                         <label id="Payamt"></label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Allotment Date:</label>
+                                        <label class="bolds">Allotment Date:</label>
                                         <label id="Paydt"></label>
                                     </div>
                                 </div>
@@ -148,19 +151,19 @@
                             <div class="row">
                                 <div class="col-md-4" hidden="hidden">
                                     <div class="form-group">
-                                        <label>Total Allotment Amount:</label>
+                                        <label class="bolds">Total Allotment Amount:</label>
                                         <label id="totAlotamt"></label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>No. of Installments:</label>
+                                        <label class="bolds">No. of Installments:</label>
                                         <label id="noOfinst"></label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Installment Amount :</label>
+                                        <label class="bolds">Installment Amount :</label>
                                         <label id="instAmt"></label>
                                     </div>
                                 </div>
@@ -168,8 +171,14 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Balance :</label>
+                                        <label class="bolds">Balance :</label>
                                         <label id="bal"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bolds">Affiliate Details :</label>
+                                        <label id="AffiliateDetails"></label>
                                     </div>
                                 </div>
                             </div>
@@ -313,6 +322,7 @@
                         $("#hdBookingNo").val(data.hdBookingNo);
                         $("#Plotarea").text(data.PlotArea);
                         $("#bal").text(data.Balance);
+                        $("#AffiliateDetails").text(data.AssociateName + ' (' + data.AssociateLoginID + ')');
                         //$("#SiteID").val('');
                         //$("#SectorID").val('');
                         //$("#BlockID").val('');

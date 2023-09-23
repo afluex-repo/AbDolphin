@@ -2852,6 +2852,7 @@
     <Content Include="Views\Shared\_AdminLayoutTesting.cshtml" />
     <Content Include="Views\Admin\Testing.cshtml" />
     <Content Include="Views\Shared\AssociateLayout.cshtml" />
+    <Content Include="Views\Plot\UpdatePaymentPlan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2881,7 +2882,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3120</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3122/</IISUrl>
+          <IISUrl>http://localhost:3121/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
