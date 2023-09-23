@@ -105,6 +105,8 @@ namespace Dolphin.Controllers
                         model.InstallmentAmount = dsblock.Tables[0].Rows[0]["InstallmentAmount"].ToString();
                         model.PlotArea = dsblock.Tables[0].Rows[0]["PlotArea"].ToString();
                         model.Balance = dsblock.Tables[0].Rows[0]["BalanceAmount"].ToString();
+                        model.AssociateLoginID = dsblock.Tables[0].Rows[0]["AssociateLoginID"].ToString();
+                        model.AssociateName = dsblock.Tables[0].Rows[0]["AssociateName"].ToString();
 
                         if (dsblock != null && dsblock.Tables.Count > 0 && dsblock.Tables[1].Rows.Count > 0)
                         {
