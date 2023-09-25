@@ -1,0 +1,78 @@
+﻿@model Dolphin.Models.Master
+@{
+    ViewBag.Title = "BranchList";
+
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("BranchList", "Master", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Branch List</h5>
+                    <button class="btn btn-primary repeater-add-btn px-4"><a href="/Master/BranchMaster" class="text-white">Add New</a></button>
+                </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["Branch"]
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-bordered table-striped mb-0">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Branch Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstBlock1 != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstBlock1)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@Item.BranchName</td>
+
+                                            <td>
+                                                <a href="/Master/BranchMaster?BranchID=@Item.EncryptKey" class="btn btn-info btn-sm">Edit</a>
+                                                <a href="/Master/DeleteBranch?id=@Item.BranchID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you wish to delete this Branch?');">Delete</a>
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+
+
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Branch Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+
+

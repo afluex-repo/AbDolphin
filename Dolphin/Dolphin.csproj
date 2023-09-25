@@ -829,7 +829,6 @@
     <Content Include="assets33\images\county\07.png" />
     <Content Include="assets33\images\county\08.png" />
     <Content Include="assets33\images\errors-images\505-error.png" />
-    <Content Include="assets33\images\favicon-32x32.png" />
     <Content Include="assets33\images\gallery\01.png" />
     <Content Include="assets33\images\gallery\02.png" />
     <Content Include="assets33\images\gallery\03.png" />
@@ -875,8 +874,6 @@
     <Content Include="assets33\images\login-images\login-cover.svg" />
     <Content Include="assets33\images\login-images\register-cover.svg" />
     <Content Include="assets33\images\login-images\reset-password-cover.svg" />
-    <Content Include="assets33\images\logo-icon.png" />
-    <Content Include="assets33\images\logo-img.png" />
     <Content Include="assets33\images\products\01.png" />
     <Content Include="assets33\images\products\02.png" />
     <Content Include="assets33\images\products\03.png" />
@@ -988,6 +985,7 @@
     <Content Include="assetsWeb\css\style.css" />
     <Content Include="assetsWeb\fonts\flaticondddb.svg" />
     <Content Include="assetsWeb\fonts\remixicondf6d.svg" />
+    <Content Include="assetsWeb\img\AbDolphineOffer.jpeg" />
     <Content Include="assetsWeb\img\about.jpg" />
     <Content Include="assetsWeb\img\about\about-img-1.jpg" />
     <Content Include="assetsWeb\img\about\about-img-2.jpg" />
@@ -1033,12 +1031,7 @@
     <Content Include="assetsWeb\img\city\city-7.jpg" />
     <Content Include="assetsWeb\img\city\city-8.jpg" />
     <Content Include="assetsWeb\img\city\city-shape-2.png" />
-    <Content Include="assetsWeb\img\clients\client-1.jpg" />
-    <Content Include="assetsWeb\img\clients\client-2.jpg" />
-    <Content Include="assetsWeb\img\clients\client-3.jpg" />
-    <Content Include="assetsWeb\img\clients\client-4.jpg" />
-    <Content Include="assetsWeb\img\clients\client-5.jpg" />
-    <Content Include="assetsWeb\img\clients\client-6.jpg" />
+    <Content Include="assetsWeb\img\clients\user.jpg" />
     <Content Include="assetsWeb\img\counter-card-shape-1.png" />
     <Content Include="assetsWeb\img\down-arrow-white.png" />
     <Content Include="assetsWeb\img\down-arrow.png" />
@@ -1138,6 +1131,7 @@
     <Content Include="assetsWeb\img\how-it-works\hw-shape-2.png" />
     <Content Include="assetsWeb\img\Logo-2.png" />
     <Content Include="assetsWeb\img\logo.png" />
+    <Content Include="assetsWeb\img\offer.gif" />
     <Content Include="assetsWeb\img\partner\partner-1.png" />
     <Content Include="assetsWeb\img\partner\partner-2.png" />
     <Content Include="assetsWeb\img\partner\partner-3.png" />
@@ -1287,9 +1281,6 @@
     <Content Include="assets\img\others\d.jpg" />
     <Content Include="assets\img\others\vision-nd-mission.jpg" />
     <Content Include="assets\img\team\1.png" />
-    <Content Include="assets\img\team\2.png" />
-    <Content Include="assets\img\team\3.png" />
-    <Content Include="assets\img\team\4.png" />
     <Content Include="assets\img\team\jitender.jpg" />
     <Content Include="assets\img\team\kifayatullah.jpg" />
     <Content Include="assets\img\team\kunj.jpg" />
@@ -1429,25 +1420,6 @@
     <Content Include="files\assets\images\product\p2.jpg" />
     <Content Include="files\assets\images\product\p3.jpg" />
     <Content Include="files\assets\images\product\p4.jpg" />
-    <Content Include="files\assets\images\pupup.jpeg" />
-    <Content Include="files\assets\images\rewardimages\Alto.jpg" />
-    <Content Include="files\assets\images\rewardimages\Audii.jpg" />
-    <Content Include="files\assets\images\rewardimages\Bike%2850000%29.jpg" />
-    <Content Include="files\assets\images\rewardimages\Bullet.jpg" />
-    <Content Include="files\assets\images\rewardimages\Car.jpg" />
-    <Content Include="files\assets\images\rewardimages\Cooler.jpg" />
-    <Content Include="files\assets\images\rewardimages\ForeignTrip.jpg" />
-    <Content Include="files\assets\images\rewardimages\Fridge.jpg" />
-    <Content Include="files\assets\images\rewardimages\i20.jpg" />
-    <Content Include="files\assets\images\rewardimages\Led.jpg" />
-    <Content Include="files\assets\images\rewardimages\Mixer.jpg" />
-    <Content Include="files\assets\images\rewardimages\Pulsar.jpg" />
-    <Content Include="files\assets\images\rewardimages\scorpio.png" />
-    <Content Include="files\assets\images\rewardimages\smartphone.jpg" />
-    <Content Include="files\assets\images\rewardimages\Standfan.jpg" />
-    <Content Include="files\assets\images\rewardimages\WallWatch.jpg" />
-    <Content Include="files\assets\images\rewardimages\Washingmachine.jpg" />
-    <Content Include="files\assets\images\rewardimages\WristWatch.jpg" />
     <Content Include="files\assets\images\search-images\01.jpg" />
     <Content Include="files\assets\images\search-images\02.jpg" />
     <Content Include="files\assets\images\search-images\03.jpg" />
@@ -2569,6 +2541,13 @@
     <Content Include="assetsWeb\img\pdf\deoria.pdf" />
     <Content Include="assetsWeb\img\pdf\diamond-city.pdf" />
     <Content Include="assetsWeb\img\pdf\maniramGorakhpur.pdf" />
+    <None Include="Properties\PublishProfiles\AbDolphin.pubxml" />
+    <None Include="Properties\PublishProfiles\AbDolphin1.pubxml" />
+    <None Include="Properties\PublishProfiles\AbDolphin11.pubxml" />
+    <None Include="Properties\PublishProfiles\AbDolphin111.pubxml" />
+    <None Include="Properties\PublishProfiles\AbDolphin1111.pubxml" />
+    <None Include="Properties\PublishProfiles\AbDolphin33.pubxml" />
+    <None Include="Properties\PublishProfiles\AbDolphin6.pubxml" />
     <None Include="Properties\PublishProfiles\Dolphin.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
@@ -2882,7 +2861,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3120</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3121/</IISUrl>
+          <IISUrl>http://localhost:3120/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

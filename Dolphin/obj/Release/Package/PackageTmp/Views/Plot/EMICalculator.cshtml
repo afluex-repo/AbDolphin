@@ -1,0 +1,587 @@
+﻿@model Dolphin.Models.Plot
+
+@{
+    ViewBag.Title = "EMICalculator";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<style>
+    #divload {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 9999;
+        background: url("../files/assets/images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
+    }
+
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+<div class="loader" id="divload"></div>
+
+
+@using (Html.BeginForm("SavePlotBooking", "Plot", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">EMI Calculator</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>EMI Calculator</h5>
+                                    @*<p style="color: red">
+                                            @TempData["Plot"]
+
+                                        </p>*@
+                                </div>
+                                <div class="card-block">
+                                     
+                                    <div class="row">
+                                         
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Select Site <span style="color: red">*</span>
+                                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Select Sector <span style="color: red">*</span>
+                                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Select Block <span style="color: red">*</span>
+                                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Plot Number <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number", @onchange = "return CheckPlotStatus();", @style = "text-transform:uppercase" })
+                                                @Html.HiddenFor(m => m.PlotID)
+                                                @Html.HiddenFor(m => m.PlotSize)
+                                                @Html.HiddenFor(m => m.BookingPercent)
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Actual Plot Amount <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.PlotAmount, new { @class = "form-control", @Placeholder = "Actual Plot Amount", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Actual Plot Rate <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.ActualPlotRate, new { @class = "form-control", @Placeholder = "Actual Plot Rate", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Plot Rate <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.PlotRate, new { @class = "form-control", @maxlength = "6", @Placeholder = "Plot Rate", @onchange = "return calculatePlotAmount();", onkeypress = "return isNumberOrDecimal(event);" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Total PLC <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.TotalPLC, new { @class = "form-control", @Placeholder = "TotalPLC", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                NetPlotAmount<span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.NetPlotAmount, new { @class = "form-control", @Placeholder = "Net Plot Amount", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Booking Amount <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.BookingAmount, new { @class = "form-control", @maxlength = "8", @Placeholder = "BookingAmount", @onkeypress = "return isNumberOrDecimal(event);", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Discount (In Amount)
+                                                @Html.TextBoxFor(m => m.Discount, new { @class = "form-control", @Placeholder = "Discount", @onchange = "return checkDiscount()", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Pay Amount <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.PayAmount, new { @class = "form-control", @Placeholder = "PayAmount", onkeypress = "return isNumberOrDecimal(event);", @onchange = "return validatePayAmount();" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                  <div class="row">
+                                      <div class="col-md-3">
+                                          <div class="form-group">
+                                              Payment Plan <span style="color: red">*</span>
+                                              @Html.DropDownListFor(m => m.PaymentPlanID, new SelectList(ViewBag.ddlPlan, "Value", "Text"), new { @class = "form-control", @onchange = "return GetMonths();" })
+                                              @Html.HiddenFor(m => m.Months)
+                                          </div>
+                                      </div>
+                                      <div class="col-md-3">
+                                          <div class="form-group">
+                                             EMI Amount  
+                                              @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = " EMI Amount ", onkeypress = "return isNumberOrDecimal(event);", @readonly= "readonly" })
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+
+    function calculatePlotAmount() {
+        var plotSize = $('#PlotSize').val();
+        var plotRate = $('#PlotRate').val();
+        var bookingPercent = $('#BookingPercent').val();
+        var plc = $('#TotalPLC').val();
+        var actplotamt = $('#PlotAmount').val();
+
+        var plotAmount = (Number)(plotSize) * (Number)(plotRate);
+        var bookingAmount = plotAmount * bookingPercent / 100;
+        if ($('#TotalPLC').val() == "0" || $('#TotalPLC').val() == "" || $('#TotalPLC').val() == "0.00") {
+            $("#NetPlotAmount").val(plotAmount);
+
+        }
+        else {
+            var actplotamtplc = (Number)(plotAmount) + (Number)(((Number)(plotAmount) * (Number)(plc)) / 100);
+            $("#NetPlotAmount").val(actplotamtplc);
+        }
+
+
+        $("#PlotAmount").val(plotAmount);
+        $("#BookingAmount").val(bookingAmount);
+    }
+
+    function validatePayAmount() {
+        debugger
+        var payAmount = $('#PayAmount').val();
+        var actualAmount = $('#PlotAmount').val();
+        var disc = $('#Discount').val();
+        if ((Number)(payAmount) > (Number)(actualAmount)) {
+            $("#PayAmount").addClass('errortext');
+            $('#PayAmount').focus();
+            $("#PayAmount").val('');
+            alert("Pay Amount cannot be greater than Actual Plot Amount.");
+            return false;
+        }
+        else if ((Number)(payAmount) > ((Number)(actualAmount) - (Number)(disc))) {
+            $("#PayAmount").addClass('errortext');
+            $('#PayAmount').focus();
+            $("#PayAmount").val('');
+            alert("Pay Amount cannot be greater than Actual Plot Amount after discount");
+            return false;
+        }
+
+        else {
+            $("#PayAmount").removeClass('errortext');
+            return true;
+        }
+    }
+
+    function checkDiscount() {
+        //alert("Called");
+        var discount = $('#Discount').val();
+        var actualAmount = $('#PlotAmount').val();
+        var disc = $('#Discount').val();
+        if ((Number)(discount) > (Number)(actualAmount)) {
+            $("#Discount").addClass('errortext');
+            $('#Discount').focus();
+            $("#Discount").val('');
+            alert("Discount cannot be greater than Actual Plot Amount.");
+            return false;
+        }
+        else {
+            var plotSize = $('#PlotSize').val();
+            var plotRate = $('#PlotRate').val();
+
+            var plotAmount = (Number)(plotSize) * (Number)(plotRate);
+
+            var newPlotAmount = (Number)(plotAmount) - (Number)(discount);
+            //alert(newPlotAmount);
+            $('#NetPlotAmount').val(newPlotAmount);
+        }
+    }
+
+    function validateform() {
+        debugger
+        $("#divload").css({ 'display': '' });
+
+        $(".errortext").removeClass("errortext");
+
+        if ($('#BranchID').val() == '0') {
+            $("#BranchID").addClass('errortext');
+            $('#BranchID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#CustomerID').val() == '') {
+            $("#CustomerID").addClass('errortext');
+            $('#CustomerID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#AssociateID').val() == '') {
+            $("#AssociateID").addClass('errortext');
+            $('#AssociateID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#MLMLoginId').val() == '') {
+            $("#MLMLoginId").addClass('errortext');
+            $('#MLMLoginId').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+
+        if ($('#SiteID').val() == '0') {
+            $("#SiteID").addClass('errortext');
+            $('#SiteID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#SectorID').val() == '0') {
+            $("#SectorID").addClass('errortext');
+            $('#SectorID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+
+        if ($('#BlockID').val() == '0') {
+            $("#BlockID").addClass('errortext');
+            $('#BlockID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+
+        if ($('#PlotNumber').val() == '') {
+            $("#PlotNumber").addClass('errortext');
+            $('#PlotNumber').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+
+        if ($('#PlotRate').val() == '') {
+            $("#PlotRate").addClass('errortext');
+            $('#PlotRate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+
+        if ($('#PaymentPlanID').val() == '0') {
+            $("#PaymentPlanID").addClass('errortext');
+            $('#PaymentPlanID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+
+        if ($('#BookingDate').val() == '') {
+            $("#BookingDate").addClass('errortext');
+            $('#BookingDate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+
+
+        if ($('#PayAmount').val() == '') {
+            $("#PayAmount").addClass('errortext');
+            $('#PayAmount').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+
+        if ($('#PaymentDate').val() == '') {
+            $("#PaymentDate").addClass('errortext');
+            $('#PaymentDate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+
+        if ($('#PaymentMode').val() == '0') {
+            $("#PaymentMode").addClass('errortext');
+            $('#PaymentMode').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+
+        if ($('#PaymentMode').val() != '1') {
+            if ($('#TransactionNumber').val() == '') {
+                $("#TransactionNumber").addClass('errortext');
+                $('#TransactionNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#TransactionDate').val() == '') {
+                $("#TransactionDate").addClass('errortext');
+                $('#TransactionDate').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankBranch').val() == '') {
+                $("#BankBranch").addClass('errortext');
+                $('#BankBranch').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        else {
+            $('#TransactionNumber').val('');
+            $('#TransactionDate').val('');
+            $('#BankName').val('');
+            $('#BankBranch').val('');
+        }
+
+        $("#divload").css({ 'display': '' });
+
+        return true;
+    }
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+    function onSiteChange() {
+        $("#divload").css({ 'display': '' });
+        var value = $('#SiteID').val();
+        var values = $('#SectorID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Master/GetSiteDetailsForPlotBooking",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                var j = 1;
+                if (data.Result == "yes") {
+                    $('#Rate').val(data.Rate);
+                    $("#SectorID").html(""); // clear before appending new list
+                    $("#SectorID").empty();
+                    $("#SectorID").append(
+                          $('<option></option>').val(0).html('Select Sector'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#SectorID").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+
+                    });
+                }
+                else {
+                    $("#SectorID").empty();
+                    $('#Rate').val('');
+                }
+            }
+
+        });
+
+    }
+
+    function onSectorChange() {
+
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#SiteID').val();
+        var sectorID = $('#SectorID').val();
+        $.ajax({
+            url: '/Master/GetBlockList', type: 'post', dataType: 'json',
+            data: { 'SiteID': siteID, 'sectorID': sectorID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                $("#BlockID").html(""); // clear before appending new list
+                $("#BlockID").empty();
+                $("#BlockID").append(
+                      $('<option></option>').val(0).html('Select Block'));
+                $.each(data.lstBlock, function (index, BlockCount) {
+                    $("#BlockID").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+
+            }
+
+        });
+    }
+    function  GetMonths()
+    {
+        $("#divload").css({ 'display': '' });
+        var PaymentPlanID = $('#PaymentPlanID').val();
+        var netplotamt = $('#NetPlotAmount').val();
+        var paid = $('#PayAmount').val();
+
+        $.ajax({
+            url: '/Plot/GetMonths', type: 'get', dataType: 'json',
+            data: { 'PaymentPlanID': PaymentPlanID, },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+          
+                   
+                $("#Months").val(data.Months);
+                var mnth = $("#Months").val(data.Months);
+                var finalamt = (Number)(netplotamt) - (Number)(paid);
+                var emi = (Number)(finalamt) / (Number)(data.Months);
+             //   $('#Amount').val(emi);
+                $('#Amount').val(emi.toFixed(2));
+            }
+
+        });
+    }
+    function CheckPlotStatus() {
+        debugger
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#SiteID').val();
+        var sectorID = $('#SectorID').val();
+        var block = $('#BlockID').val();
+        var plotno = $('#PlotNumber').val();
+
+        $.ajax({
+            url: '/Plot/CheckPlot', type: 'get', dataType: 'json',
+            data: { 'SiteID': siteID, 'SectorID': sectorID, 'BlockID': block, 'PlotNumber': plotno },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "yes") {
+                    $("#PlotNumber").removeClass('errortext');
+                    $("#PlotID").val(data.PlotID);
+                    $("#BookingPercent").val(data.BookingPercent);
+                    $("#PlotSize").val(data.PlotSize);
+                    $("#PlotAmount").val(data.PlotAmount);
+                    $("#ActualPlotRate").val(data.ActualPlotRate);
+                    $("#PlotRate").val(data.ActualPlotRate);
+                    $("#BookingAmount").val(data.BookingAmount);
+                    $("#TotalPLC").val(data.TotalPLC);
+                    $("#NetPlotAmount").val(data.NetPlotAmount);
+                }
+                else if (data.Result == "no") {
+                    alert('Invalid Plot Number !');
+                    $("#PlotNumber").addClass('errortext');
+                    $('#PlotNumber').focus();
+                    $("#PlotNumber").val('');
+                    $("#ActualPlotRate").val('');
+                    $("#BookingAmount").val('');
+                    $("#TotalPLC").val('');
+                    $("#PlotAmount").val('');
+                }
+                else {
+                    alert('Plot not available !');
+                    $("#PlotNumber").addClass('errortext');
+                    $("#PlotNumber").val('');
+                    $("#PlotAmount").val('');
+                    $("#ActualPlotRate").val('');
+                    $("#BookingAmount").val('');
+                    $("#TotalPLC").val('');
+                    $("#PlotAmount").val('');
+                }
+            }
+
+        });
+
+    }
+
+
+
+</script>
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+<script>
+
+    $('#PaymentDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: 0,
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#TransactionDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+        minDate: new Date(new Date().setMonth(new Date().getMonth() - 2))
+    });
+    $('#BookingDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: 0,
+        changeYear: true,
+        changeMonth: true
+    });
+
+</script>
+

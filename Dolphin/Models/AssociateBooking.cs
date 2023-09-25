@@ -644,7 +644,8 @@ namespace Dolphin.Models
             SqlParameter[] para =
             {   new SqlParameter("@PK_UserId",UserID),
                 new SqlParameter("@PK_VisitorId",VisitorId),
-                new SqlParameter("AssociateId",AssociateLoginID),
+                //new SqlParameter("AssociateId",AssociateLoginID),
+                  new SqlParameter("@Associateid",AssociateLoginID),
                 new SqlParameter("@FromDate",FromDate),
                 new SqlParameter("@ToDate",ToDate),
                  new SqlParameter("@IsDownline",Downline),

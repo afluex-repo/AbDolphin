@@ -1,0 +1,189 @@
+﻿@model Dolphin.Models.TraditionalAssociate
+@{
+    ViewBag.Title = "SMS";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("SMS", "AdminReports", FormMethod.Post, new { @id = "form1" }))
+{
+    <p style="color: red">
+        @TempData["Registration"]
+    </p>
+    
+    <div class="row">
+        <p style="color: red">
+            @TempData["BlockUnblock"]
+        </p>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Send SMS @*<small>List Of Sites</small>*@</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            SMS Body
+                            @Html.TextAreaFor(m => m.Body, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            Char
+                            @Html.TextBoxFor(m => m.Char, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            SMS
+                            @Html.TextBoxFor(m => m.Sms, new { @class = "form-control", @readonly = "readonly" })
+                            <p style="color:red">
+                               
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input class="btn btn-success" type="submit" value="Send" id="btnSend" name="Send" onclick="return validateform();" />
+                        </div>
+                    </div>
+                </div>
+                <div class="x_content">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>S No.</th>
+                                <th>Branch</th>
+                                <th>Affiliate ID</th>
+                                <th>Affiliate Name</th>
+                                <th>Sponsor ID </th>
+                                <th>Sponsor Name</th>
+                                <th>Designation</th>
+                                <th>Mobile Number</th>
+                                <th>Email</th>
+                                <th>PAN Number</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstTrad != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstTrad)
+                                    {
+                                <tr class="text-left">
+                                    <td>
+                                        @*<input type="checkbox" name="myTextEditBox" value="checked" />*@
+                                        <input type="checkbox" name="chkSelect_ @i" id="chkSelect_ @i" />
+                                        <input type="hidden" name="hdUserID_ @i" id="hdUserID_ @i" value="@Item.UserID" />
+                                        <input type="hidden" name="hdContact_ @i" id="hdContact_ @i" value="@Item.Contact" />
+                                    </td>
+                                    <td>@i</td>
+                                    <td>@Item.BranchName</td>
+                                    <td>@Item.AssociateID</td>
+                                    <td>@Item.AssociateName</td>
+                                    <td>@Item.SponsorID</td>
+                                    <td>@Item.SponsorName </td>
+                                    <td>@Item.DesignationName</td>
+                                    <td>@Item.Contact</td>
+                                    <td>@Item.Email</td>
+                                    <td>@Item.PanNo</td>
+                                </tr>
+                                        i++;
+                                    }
+                                <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>   
+
+               
+}
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../../vendors/jquery/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+
+    $('#Body').on('keypress', function (e) {
+        var count = $(this).val().length;
+
+        var smsCount = 1;
+        document.getElementById('Sms').value = smsCount;
+        if ((Number)(count) > 160) {
+            smsCount = (Number)(smsCount) + 1;
+            document.getElementById('Sms').value = smsCount;
+        }
+
+        $('#span').text(count);
+        $("#Char").val(count);
+
+    })
+
+
+    //function countChar(val) {
+    //    debugger;
+    //    var len = val.value.length;
+    //    var schoollen = document.getElementById("ContentPlaceHolder1_txtschoolname").value.length;
+    //    var ctext = schoollen + len + " Chars";
+
+    //    var str = document.getElementById("ContentPlaceHolder1_txtschoolname").value + val.value;
+    //    var parts = [];
+    //    var partSize = 160;
+
+    //    while (str) {
+    //        if (str.length < partSize) {
+    //            var rtext = (partSize - str.length) + " Chars Remaining";
+    //            parts.push(str);
+    //            break;
+    //        }
+    //        else {
+    //            parts.push(str.substr(0, partSize));
+    //            str = str.substr(partSize);
+    //        }
+
+    //    }
+    //    var ptext = parts.length + " SMS";
+
+
+    //    document.getElementById("ContentPlaceHolder1_txtcharacter").value = ctext;
+    //    document.getElementById("ContentPlaceHolder1_klo").value = ptext;
+
+    //}
+
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#Body').val() == '') {
+            $("#Body").addClass('errortext');
+            $('#Body').focus();
+            return false;
+        }
+       
+
+        return true;
+    }
+</script>
+
+<style>
+    .errortext
+    {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
