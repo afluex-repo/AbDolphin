@@ -3676,8 +3676,8 @@ namespace Dolphin.Controllers
             ViewBag.ddlPlan = ddlPlan;
             #endregion
 
-            return RedirectToAction("UpdatePaymentPlan", "Plot");
-            //return Json(model, JsonRequestBehavior.AllowGet);
+            //return RedirectToAction("UpdatePaymentPlan", "Plot", new { BookingNumber = BookingNumber });
+            return Json(model, JsonRequestBehavior.AllowGet);
 
 
         }
