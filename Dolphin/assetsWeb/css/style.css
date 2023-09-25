@@ -1185,7 +1185,7 @@ select {
 
 .bg-f {
     background-position: center center;
-    background-size: 100% 100%;
+    background-size: 100%;
     background-repeat: no-repeat;
     background-color: #ddd
 }
@@ -2396,6 +2396,30 @@ select {
 
 .content-wrapper {
     margin-top: 85px
+}
+.companyOverview{
+    background-image: url(../img/breadcrumb/company_overview.jpg)
+}
+.ourTeam{
+    background-image: url(../img/breadcrumb/our_team.jpg)
+}
+.visionMission{
+    background-image: url(../img/breadcrumb/v&m.jpg)!important;
+}
+.qualityPolicy{
+    background-image: url(../img/breadcrumb/q&p.jpg)!important;
+}
+.galleryBrea{
+    background-image: url(../img/breadcrumb/gallery.jpg);
+}
+.unitAvaila{
+    background-image: url(../img/breadcrumb/unitAvaila.jpg);
+}
+.ContactUs{
+    background-image: url(../img/breadcrumb/contact.jpg);
+}
+.policyBg{
+    background-image: url(../img/breadcrumb/policy.jpg);
 }
 
 .br-1 {
@@ -7523,4 +7547,15 @@ article .content-feature-list li i {
     font-size: 21px;
     color: #252525;
     margin-top: 10px;
+}
+
+.tabBtn{
+    background: #2c3240!important;
+    padding: 8px 22px!important;
+    font-size: 20px;
+}
+.tabBtn.active{
+    background: #000!important;
+    padding: 8px 22px!important;
+    font-size: 20px;
 }
