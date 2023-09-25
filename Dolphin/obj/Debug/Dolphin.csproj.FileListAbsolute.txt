@@ -319,7 +319,112 @@ D:\Devendra\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.xml
 D:\Devendra\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
 D:\Devendra\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb
 E:\AbDolphin\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
-D:\Devendra\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\ApplicationInsights.config
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\roslyn\csc.exe
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.CodeAnalysis.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.CSharp.Core.targets
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.VisualBasic.Core.targets
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\roslyn\System.Collections.Immutable.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\roslyn\System.Reflection.Metadata.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\roslyn\vbc.exe
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\roslyn\VBCSCompiler.exe
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\roslyn\VBCSCompiler.exe.config
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Dolphin.dll.config
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Dolphin.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Dolphin.pdb
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.AI.Agent.Intercept.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.AI.DependencyCollector.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.AI.PerfCounterCollector.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.AI.ServerTelemetryChannel.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.AI.Web.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.AI.WindowsServer.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.ApplicationInsights.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.Web.Infrastructure.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Newtonsoft.Json.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Net.Http.Formatting.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Helpers.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Http.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Mvc.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Razor.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Webpages.Deployment.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Webpages.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Webpages.Razor.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.AI.DependencyCollector.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.AI.ServerTelemetryChannel.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.AI.Web.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.AI.WindowsServer.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.ApplicationInsights.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Razor.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Webpages.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Webpages.Deployment.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Webpages.Razor.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Helpers.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Mvc.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\Newtonsoft.Json.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Net.Http.Formatting.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Http.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.xml
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb
+E:\Repository\AbDolphin\Dolphin\bin\ApplicationInsights.config
+E:\Repository\AbDolphin\Dolphin\bin\roslyn\csc.exe
+E:\Repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Repository\AbDolphin\Dolphin\bin\roslyn\System.Collections.Immutable.dll
+E:\Repository\AbDolphin\Dolphin\bin\roslyn\System.Reflection.Metadata.dll
+E:\Repository\AbDolphin\Dolphin\bin\roslyn\vbc.exe
+E:\Repository\AbDolphin\Dolphin\bin\roslyn\VBCSCompiler.exe
+E:\Repository\AbDolphin\Dolphin\bin\roslyn\VBCSCompiler.exe.config
+E:\Repository\AbDolphin\Dolphin\bin\Dolphin.dll.config
+E:\Repository\AbDolphin\Dolphin\bin\Dolphin.dll
+E:\Repository\AbDolphin\Dolphin\bin\Dolphin.pdb
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.AI.Agent.Intercept.dll
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.AI.DependencyCollector.dll
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.AI.Web.dll
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.AI.WindowsServer.dll
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.ApplicationInsights.dll
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.Web.Infrastructure.dll
+E:\Repository\AbDolphin\Dolphin\bin\Newtonsoft.Json.dll
+E:\Repository\AbDolphin\Dolphin\bin\System.Net.Http.Formatting.dll
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Helpers.dll
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Http.dll
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.dll
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Mvc.dll
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Razor.dll
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Webpages.Deployment.dll
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Webpages.dll
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Webpages.Razor.dll
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.AI.DependencyCollector.xml
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.AI.Web.xml
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.AI.WindowsServer.xml
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.ApplicationInsights.xml
+E:\Repository\AbDolphin\Dolphin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Razor.xml
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Webpages.xml
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Webpages.Deployment.xml
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Webpages.Razor.xml
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Helpers.xml
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Mvc.xml
+E:\Repository\AbDolphin\Dolphin\bin\Newtonsoft.Json.xml
+E:\Repository\AbDolphin\Dolphin\bin\System.Net.Http.Formatting.xml
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Http.xml
+E:\Repository\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.xml
+E:\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
+E:\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb
 E:\Tanishq\Repository\AbDolphin\Dolphin\bin\ApplicationInsights.config
 E:\Tanishq\Repository\AbDolphin\Dolphin\bin\roslyn\csc.exe
 E:\Tanishq\Repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -371,6 +476,5 @@ E:\Tanishq\Repository\AbDolphin\Dolphin\bin\Newtonsoft.Json.xml
 E:\Tanishq\Repository\AbDolphin\Dolphin\bin\System.Net.Http.Formatting.xml
 E:\Tanishq\Repository\AbDolphin\Dolphin\bin\System.Web.Http.xml
 E:\Tanishq\Repository\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.xml
-E:\Tanishq\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
 E:\Tanishq\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
 E:\Tanishq\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb

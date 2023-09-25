@@ -1,0 +1,232 @@
+﻿@model Dolphin.Models.Employee
+
+@{
+    ViewBag.Title = "EmployeeRegistration";
+     Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<style>
+
+    .errortext
+    {
+        border: 1px solid red !important;
+    }
+</style>
+<div class="loader" id="divload"></div>
+
+@using (Html.BeginForm("EmployeeRegistration", "Employee", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">New Employee</h5>
+                </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["Employee"]
+                </p>
+            </div>
+        </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-md-12 mb-3">
+                        <h6>Add New Employee</h6>
+                    </div>
+                    <div class="col-sm-3 mb-3">
+                        <label class="float-label">User Type<span style="color:red">*</span></label>
+                        @Html.DropDownListFor(m => m.UserTypeID, new SelectList(ViewBag.ddlUserType, "Value", "Text"), new { @class = "form-control" })
+                        <span class="form-bar"></span>
+                    </div>
+                    <div class="col-sm-3 mb-3">
+                        <label class="float-label">Name<span style="color:red">*</span></label>
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = " Name" })
+                        <span class="form-bar"></span>
+                    </div>
+                    <div class="col-sm-3 mb-3">
+                        <label class="float-label">Mobile No.<span style="color:red">*</span></label>
+                        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Mobile Number", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
+                        <span class="form-bar"></span>
+                    </div>
+                    <div class="col-sm-3 mb-3">
+                        <label class="float-label">Email Id</label>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email" })
+                        <span class="form-bar"></span>
+                    </div>
+                    <div class="col-sm-3 mb-3">
+                        <label class="float-label">Joining  Date<span style="color:red">*</span></label>
+                        @Html.TextBoxFor(m => m.JoiningDate, new { @class = "form-control", @readonly = "readonly" })
+                        <span class="form-bar"></span>
+                    </div>
+                    <div class="col-sm-3 mb-3">
+                        <label class="float-label">Salary</label>
+                        @Html.TextBoxFor(m => m.Salary, new { @class = "form-control", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "15" })
+                        <span class="form-bar"></span>
+                    </div>
+                    <div class="col-sm-3 mb-3" id="PassShow" style="display:none">
+                        <label class="float-label">Password</label>
+                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                        <span class="form-bar"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="float-label d-block">&nbsp;</label>
+                        @if (Model.UserID == null)
+                        {
+                            <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="Registration" />
+                        }
+                        else
+                        {
+                            @Html.HiddenFor(m => m.UserID, new { @Value = @Model.UserID })
+                            <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="Update" />
+                        }
+                        <a class="btn btn-info text-white" href="/Employee/EmployeeList">Back To List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+
+    function validatePan() {
+        var panVal = $('#PanNo').val();
+        var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+
+        if (regpan.test(panVal)) {
+            $("#PanNo").removeClass('errortext');
+        } else {
+            alert("Invalid PAN Number");
+            $("#PanNo").val('');
+            $("#PanNo").addClass('errortext');
+        }
+    }
+
+    function getStateCity() {
+
+        var pincode = $('#Pincode').val();
+        $.ajax({
+            url: '/Master/GetStateCity', type: 'post', dataType: 'json',
+            data: { 'Pincode': pincode },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    $("#State").val(data.State);
+                    $("#City").val(data.City);
+                    $("#State").removeClass('errortext');
+                    $("#City").removeClass('errortext');
+                    $("#Pincode").removeClass('errortext');
+                }
+                else if (data.Result == "no") {
+                    alert("Invalid Pincode");
+                    $("#State").val('');
+                    $("#City").val('');
+                    $("#State").addClass('errortext');
+                    $("#City").addClass('errortext');
+                    $("#Pincode").addClass('errortext');
+                    $('#Pincode').focus();
+                    $('#Pincode').val('');
+
+                }
+            }
+
+        });
+    }
+
+     
+
+    function validateform() {
+        $("#divload").css({ 'display': 'none' });
+        $(".errortext").removeClass("errortext");
+       
+        if ($('#UserTypeID').val() == '0') {
+            $("#UserTypeID").addClass('errortext');
+            $('#UserTypeID').focus();
+            return false;
+        }
+        if ($('#Name').val() == '') {
+            $("#Name").addClass('errortext');
+            $('#Name').focus();
+            return false;
+        }
+        if ($('#Mobile').val() == '') {
+            $("#Mobile").addClass('errortext');
+            $('#Mobile').focus();
+            return false;
+        }
+        if ($('#JoiningDate').val() == '') {
+            $("#JoiningDate").addClass('errortext');
+            $('#JoiningDate').focus();
+            return false;
+        }
+        
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+
+    var UserID = $("#UserID").val();
+    if(UserID !=null)
+    {
+        $("#PassShow").show();
+    }
+</script>
+
+<style>
+    .errortext
+    {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+
+    $('#JoiningDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: 0,
+        changeYear: true,
+        changeMonth: true
+    });
+   
+
+
+</script>

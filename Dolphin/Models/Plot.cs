@@ -10,7 +10,7 @@ namespace Dolphin.Models
 {
     public class Plot : Common
     {
-
+        public string PlanID { get; set; }
         public string PK_BranchID { get; set; }
         public string SiteName { get; set; }
         public string MLMLoginId { get; set; }
@@ -29,6 +29,10 @@ namespace Dolphin.Models
         public string CrAmount { get; set; }
         public string DrAmount { get; set; }
         public string LedgerId { get; set; }
+
+        public string PK_PLanID { get; set; }
+
+        
 
         #region Properties
         public DataTable dtVisitorDetails { get; set; }
@@ -281,6 +285,7 @@ namespace Dolphin.Models
                                       new SqlParameter("@FK_SectorID", SectorID),
                                       new SqlParameter("@FK_BlockID", BlockID),
                                       new SqlParameter("@PlotNumber", PlotNumber),
+                                       new SqlParameter("@PaymentPlanID", PaymentPlanID),
                                   };
 
             DataSet ds = Connection.ExecuteQuery("GetPlotBooking", para);
@@ -1169,6 +1174,34 @@ namespace Dolphin.Models
                                     new SqlParameter("@Fk_UserId",Fk_UserId)
                             };
             DataSet ds = Connection.ExecuteQuery("getCustomerPaymentLedger", para);
+            return ds;
+        }
+       
+        public DataSet GetUpdateNewPaymentPlan()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@SiteID", SiteID),
+                new SqlParameter("@SectorID", SectorID),
+                new SqlParameter("@BlockID", BlockID),
+                new SqlParameter("@PlotNumber", PlotNumber),
+
+            };
+            DataSet ds = Connection.ExecuteQuery("GetUpdatePaymentPlan", para);
+            return ds;
+        }
+
+
+        public DataSet UpdatePaymentPlan()
+        {
+            SqlParameter[] para =
+                            {
+                                        new SqlParameter("@Fk_BookingId",PK_BookingId),
+                                        new SqlParameter("@PaymentPlanID",PaymentPlanID),
+                                        new SqlParameter("@Discount"  ,Discount),
+                                        new SqlParameter("@UpdatedBY",AddedBy)
+
+                            };
+            DataSet ds = Connection.ExecuteQuery("UpdatePaymentPlan", para);
             return ds;
         }
 

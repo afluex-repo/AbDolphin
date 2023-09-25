@@ -65,6 +65,12 @@
                             </div>
                             <div class="col-md-2 mb-3">
                                 <div class="form-group">
+                                    <label>Select Payment Plan</label>
+                                    @Html.DropDownListFor(m => m.PaymentPlanID, new SelectList(ViewBag.ddlPlan, "Value", "Text"), new { @class = "form-control form-select" })
+                                </div>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <div class="form-group">
                                    <label> Select Site</label>
                                     @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
                                 </div>
@@ -114,6 +120,7 @@
                                     <th>Payment Plan</th>
                                     <th>Customer Detail</th>
                                     <th>Affiliate Details</th>
+                                    <th>Customer Mob.No</th>
                                     <th>Plot Amt</th>
                                     <th>PLC</th>
                                     <th>Net Amnt</th>
@@ -138,14 +145,14 @@
                                                 <td>
                                                     @Item.PlotNumber
                                                     <br />
-                                                    <label class="badge bg-primary">@Item.PlotArea</label>
-                                                    <label class="badge bg-info">@Item.BookingStatus</label>
-                                                    <label class="badge bg-warning text-dark">@Item.PlotRate</label>
+                                                    <label class="badge bg-primary text-dark">@Item.PlotArea</label>
+                                                    <label class="badge bg-danger text-dark">@Item.BookingStatus</label>
+                                                    <label style="background-color:#eed594" class="badge text-dark">@Item.PlotRate</label>
                                                 </td>
                                                 <td>@Item.PaymentPlanID</td>
                                                 <td>@Item.CustomerName (@Item.CustomerLoginID)</td>
                                                 <td>@Item.AssociateName (@Item.AssociateLoginID)</td>
-
+                                                <td>@Item.Mobile</td>
                                                 <td>@Item.PlotAmount</td>
                                                 <td>@Item.PK_PLCCharge</td>
                                                 <td>@Item.NetPlotAmount</td>
@@ -172,6 +179,7 @@
                                     <th>Payment Plan</th>
                                     <th>Customer Detail</th>
                                     <th>Affiliate Details</th>
+                                    <th>Customer Mob.No</th>
                                     <th>Plot Amt</th>
                                     <th>PLC</th>
                                     <th>Net Amnt</th>

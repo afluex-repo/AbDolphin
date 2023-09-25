@@ -1,0 +1,222 @@
+﻿@model Dolphin.Models.AssociateBooking
+
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("EditProfile", "AssociateDashboard", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Edit Profile</h5>
+                    <span style="color: red">
+                        @TempData["Registration"]
+                    </span>
+                    <span style="color: red">
+                        @TempData["AssociateDetails"]
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body row">
+                <div class="x_title">
+                    <div class="profile_pic" style="width:10%;">
+                        <img src="@Session["ProfilePic"]" alt="..." class="img-circle profile_img" style="height:50px;width:50px;">
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <label class="float-label">Customer ID</label>
+                    @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Search by Customer ID" })
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <label class="float-label">Branch <span style="color: red">*</span></label>
+                    @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @Placeholder = "Sponsor ID", @readonly = "readonly" })
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <label class="float-label">Sponsor ID</label>
+                    @Html.TextBoxFor(m => m.SponsorID, new { @class = "form-control", @Placeholder = "Sponsor ID", @readonly = "readonly" })
+                    @Html.HiddenFor(m => m.UserID)
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <label class="float-label"> Designation</label>
+                    @Html.TextBoxFor(m => m.DesignationName, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="col-sm-4 mb-3 " style="display:none">
+                    <label class="float-label">Sponsor Name</label>
+                    @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <label class="float-label">First Name</label>
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name", @readonly = "readonly" })
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <label class="float-label">Mobile Number</label>
+                    @Html.TextBoxFor(m => m.Contact, new { @class = "form-control", @Placeholder = "Mobile Number", @readonly = "readonly" })
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <label class="float-label">Email</label>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email" })
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <label class="float-label">PAN Number <span style="color: red">*</span></label>
+                    @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @Placeholder = "PAN Number", @maxlength = "10", @onchange = "return validatePan();" })
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <label class="float-label">Pincode <span style="color: red">*</span></label>
+                    @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6" })
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <label class="float-label">State <span style="color: red">*</span></label>
+                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Placeholder = "State", @readonly = "readonly" })
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <label class="float-label">City <span style="color: red">*</span></label>
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @readonly = "readonly" })
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <label class="float-label">Image <span style="color: red">*</span></label><br />
+                    <input type="file" name="postedFile" id="Image" />
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <label class="float-label">Adhar Number</label>
+                    @Html.TextBoxFor(m => m.AdharNumber, new { @class = "form-control", @Placeholder = "Adhar Number", @readonly = "readonly" })
+                </div>
+                <div class="col-sm-8 mb-3">
+                    <label class="float-label">Address</label>
+                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 mb-3">
+                        <label class="float-label">Bank Account No</label>
+                        @Html.TextBoxFor(m => m.BankAccountNo, new { @class = "form-control", @Placeholder = "Bank Account No", @readonly = "readonly" })
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label class="float-label">Bank Name</label>
+                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @Placeholder = "Bank Name", @readonly = "readonly" })
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label class="float-label">Bank Branch</label>
+                        @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @Placeholder = "Bank Branch", @readonly = "readonly" })
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label class="float-label">IFSCCode <span style="color: red">*</span></label>
+                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @Placeholder = "IFSC Code", @readonly = "readonly" })
+                    </div>
+                </div>
+                <label id="lblMsg" style="color:red;"></label>
+                <div class="col-md-4 mb-3">
+                    @Html.HiddenFor(m => m.UserID, new { @Value = @Model.UserID })
+                    <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="btnUpdate" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+    function getStateCity() {
+        debugger
+        var pincode = $('#Pincode').val();
+        $.ajax({
+            url: '/AssociateDashboard/GetStateCity', type: 'post', dataType: 'json',
+            data: { 'Pincode': pincode },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    $("#State").val(data.State);
+                    $("#City").val(data.City);
+                    $("#State").removeClass('errortext');
+                    $("#City").removeClass('errortext');
+                    $("#Pincode").removeClass('errortext');
+                }
+                else if (data.Result == "no") {
+                    $("#State").val('');
+                    $("#City").val('');
+                    $("#State").addClass('errortext');
+                    $("#City").addClass('errortext');
+                    $("#Pincode").addClass('errortext');
+                    $('#Pincode').focus();
+                    $('#Pincode').val('');
+                    alert("Enter Valid Pin Code")
+                }
+            }
+
+        });
+    }
+     
+    function validateform() {
+
+        $(".errortext").removeClass("errortext");
+
+
+        if ($('#PanNo').val() == '') {
+            $("#PanNo").addClass('errortext');
+            $('#PanNo').focus();
+            alert("Please Fill PAN .")
+            return false;
+        }
+        if ($('#Pincode').val() == '') {
+            $("#Pincode").addClass('errortext');
+            $('#Pincode').focus();
+            alert("Please Enter Pin Code")
+            return false;
+        }
+
+        return true;
+    }
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+    function validatePan() {
+        var panVal = $('#PanNo').val();
+        var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+
+        if (regpan.test(panVal)) {
+            $("#PanNo").removeClass('errortext');
+        } else {
+            alert("Invalid PAN Number");
+            $("#PanNo").val('');
+            $("#PanNo").addClass('errortext');
+        }
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>

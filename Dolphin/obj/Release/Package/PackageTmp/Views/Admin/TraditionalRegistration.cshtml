@@ -1,0 +1,182 @@
+﻿@model Dolphin.Models.Home
+
+@{
+    ViewBag.Title = "TraditionalRegistration";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("TraditionalRegistration", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <h4 class="page-header">TraditionalRegistration</h4>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Change Affiliate Password
+                <br />
+                    <p style="color: red">@TempData["ChangeAsspassword"] </p>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+
+                     <div class="col-md-6 form-group">
+                                Sponsor Id <span style="color: red">*</span>
+                                @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @Placeholder = "Refer By", @onchange = "getsponsordetails(this);" })
+                                @Html.ValidationMessageFor(m => m.LoginId)
+                            </div>
+                            <div class="col-md-6 form-group">
+                                Sponsor Name <span style="color: red">*</span>
+                                @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true" })
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                            <div class="col-md-6 form-group">
+                                First Name <span style="color: red">*</span>
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name" })
+                                @Html.ValidationMessageFor(m => m.FirstName)
+                            </div>
+                            <div class="col-md-6 form-group">
+                                Last Name
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @Placeholder = "Last Name" })
+                                @Html.ValidationMessageFor(m => m.LastName)
+                            </div>
+                            <div class="col-md-6 form-group">
+                                Email Id
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email id" })
+                                @Html.ValidationMessageFor(m => m.Email)
+                            </div>
+                            <div class="col-md-6 form-group">
+                                Mobile No <span style="color: red">*</span>
+                                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No", @Maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                @Html.ValidationMessageFor(m => m.MobileNo)
+                            </div>
+                            <div class="col-md-6 form-group" style="display:none">
+                                Help Amount <span style="color: red">*</span>
+                               @* @Html.DropDownListFor(m => m.Commitment, new SelectList(ViewBag.ddlDolphinamount, "Value", "Text"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Commitment)*@
+                            </div>
+                            <div class="col-md-6 form-group" style="display:none">
+                                Payment <span style="color: red">*</span>
+                               @* @Html.DropDownListFor(m => m.PaymentMethod, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.PaymentMethod)*@
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <!-- Change this to a button or input when using this as a form -->
+                                <input type="button" id="Confirm" onclick="return confirmregistration();" class="btn btn-success" name="Confirm" value="Confirm">
+                                <input type="button" id="Register" onclick="return registration();" class="btn btn-success" style="display: none" name="Register" value="Register">
+                                    </div>
+            </div>
+        </div>
+    </div>
+        </div>
+}
+   <script>
+       function getsponsordetails(obj) {
+
+           $.ajax({
+               url: '/Admin/GetTradSponserDetails',
+               type: 'GET',
+               dataType: 'JSON',
+               data: { 'ReferBy': $(obj).val() },
+               success: function (response) {
+                   if (response.Result == "Yes") {
+
+                       $('#SponsorName').val(response.DisplayName);
+
+                   }
+                   else {
+
+                       $('#SponsorName').val('');
+                       $('#SponsorId').val('');
+                       alert(response.Result);
+                   }
+               }
+           })
+       }
+       function confirmregistration() {
+           $(".errortext").removeClass("errortext");
+           if ($('#SponsorId').val() == '') {
+               $("#SponsorId").addClass('errortext');
+               $('#SponsorId').focus();
+               return false;
+           }
+           if ($('#FirstName').val() == '') {
+               $("#FirstName").addClass('errortext');
+               $('#FirstName').focus();
+               return false;
+           }
+           if ($('#MobileNo').val() == '') {
+               $("#MobileNo").addClass('errortext');
+               $('#MobileNo').focus();
+               return false;
+           }
+           
+           $("#PaymentMethod").attr("disabled", "disabled");
+           $("#Commitment").attr("disabled", "disabled");
+           $("#MobileNo").attr("disabled", "disabled");
+           $("#FirstName").attr("disabled", "disabled");
+           $("#SponsorId").attr("disabled", "disabled");
+           $("#Email").attr("disabled", "disabled");
+           $("#LastName").attr("disabled", "disabled");
+           $('#Confirm').hide();
+           $('#Edit').show();
+           $('#Register').show();
+
+
+
+       }
+       function editregistration() {
+           $("#PaymentMethod").attr("disabled", false);
+           $("#Commitment").attr("disabled", false);
+           $("#MobileNo").attr("disabled", false);
+           $("#FirstName").attr("disabled", false);
+           $("#SponsorId").attr("disabled", false);
+           $("#Email").attr("disabled", false);
+           $("#LastName").attr("disabled", false);
+           $('#Confirm').show();
+           $('#Edit').hide();
+           $('#Register').hide();
+
+       }
+       function registration() {
+           $.ajax({
+               url: "/Home/RegistrationAction",
+               Type: "Get",
+               DataType: "JSON",
+               data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), Email: $("#Email").val(), MobileNo: $("#MobileNo").val(), Commitment: 1, PaymentMethod: "" },
+               success: function (data) {
+                   if (data.Response == "1") {
+                       window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
+                }
+                else {
+                    alert(data.Response);
+                    window.location.href = '@Url.Action("Registration", "Home")';
+                }
+
+
+            }
+
+        });
+    }
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>
+<style>
+    .errortext
+    {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
