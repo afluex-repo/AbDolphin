@@ -1,0 +1,80 @@
+﻿@model Dolphin.Models.Topup
+@{
+    ViewBag.Title = "AdvancePaymentList";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
+}
+
+<style>
+ 
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+@using (Html.BeginForm("AdvancePaymentList", "AssociateDashboard", FormMethod.Post, new { @id = "form1" }))
+{
+
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Advance Payment List</h5>
+                    <span style="color: red">
+                        @TempData[""]
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body row">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-bordered table-striped mb-0">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Login Id</th>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                <th>Payment Date</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.AdvancePaymentList != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.AdvancePaymentList)
+                                    {
+                                        <tr class="text-left">
+
+                                            <td>@i</td>
+                                            <td>@Item.LoginID</td>
+                                            <td>@Item.Name</td>
+                                            <td>@Item.Amount</td>
+                                            <td>@Item.PaymentDate</td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>@ViewBag.Amount</th>
+                                <th></th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+}

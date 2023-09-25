@@ -1,0 +1,358 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--favicon-->
+    <link rel="icon" href="../files/assets/images/Dolphinlogo.png" type="image/png" />
+    <!--plugins-->
+    <link href=".../assets33/plugins/notifications/css/lobibox.min.css" rel="stylesheet" />
+    <link href="../assets33/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <link href="../assets33/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+    <link href="../assets33/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="../assets33/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+    <link href="../assets33/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <!-- loader-->
+    @*<link href="../assets33/css/pace.min.css" rel="stylesheet" />*@
+    <script src="../assets33/js/pace.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="../assets33/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets33/css/bootstrap-extended.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
+    <link href="../assets33/css/app.css" rel="stylesheet">
+    <link href="../assets33/css/icons.css" rel="stylesheet">
+    <!-- Theme Style CSS -->
+    <link rel="stylesheet" href="../assets33/css/dark-theme.css" />
+    <link rel="stylesheet" href="../assets33/css/semi-dark.css" />
+    <link rel="stylesheet" href="../assets33/css/header-colors.css" />
+    <title>Admin Dashboard</title>
+    <style>
+        #profileImage {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: #000000;
+            font-size: 20px;
+            color: #fdea95;
+            text-align: center;
+            line-height: 3rem;
+            margin: 2rem 0;
+        }
+    </style>
+
+</head>
+<!-- Menu horizontal static layout -->
+
+
+
+<body onload="info_noti()">
+
+    <!--wrapper-->
+    <div class="wrapper">
+        <!--sidebar wrapper -->
+        <div class="sidebar-wrapper" data-simplebar="true">
+            <div class="sidebar-header bg-dark">
+                <div>
+                    <img src="/assets/img/logo.png" class="logo-icon" alt="logo icon">
+                </div>
+                <div>
+                    <h4 class="logo-text">Dolphin Infra</h4>
+                </div>
+                <div class="toggle-icon ms-auto">
+                    <i class='bx bx-arrow-back'></i>
+                </div>
+            </div>
+
+            @*@{Html.RenderAction("Menu", "Home", new { area = "" });}*@
+            <!--end navigation-->
+            <!--navigation-->
+            <ul class="metismenu" id="menu">
+
+                @if (Session["Pk_AdminId"] != null)
+                {
+                    <li id="BtnBackToAdmin" class="pcoded-hasmenu">
+                        <a href="/Admin/AdminDashBoard" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext">Back To Admin Login</span>
+                        </a>
+                    </li>
+                }
+
+
+
+
+                @*//////////////////////////////////////////////////////////////
+
+
+                    <li class="pcoded-hasmenu">
+                        <a href="/CustomerDashboard/CustomerDashboard" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext">DashBoard</span>
+                        </a>
+                    </li>
+
+                    <li class="pcoded-hasmenu">
+                        <a href="#" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext">Reports</span>
+                        </a>
+                        <ul class="pcoded-submenu">
+                            <li>
+                                <a href="/CustomerDashboard/CustomerBookingList" class="waves-effect waves-dark">
+                                    <span class="pcoded-mtext" data-i18n="nav.navigate.main">Plot Bookings</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/CustomerDashboard/CustomerLedgerReport" class="waves-effect waves-dark">
+                                    <span class="pcoded-mtext" data-i18n="nav.navigate.main">Ledger</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/CustomerDashboard/DueInstallmentReport" class="waves-effect waves-dark">
+                                    <span class="pcoded-mtext" data-i18n="nav.navigate.main">Due Installment </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="pcoded-hasmenu">
+                        <a href="/CustomerDashboard/ChangePasswordCustomer" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext">Change Password</span>
+                        </a>
+                    </li>
+
+
+
+
+
+
+
+
+
+
+                        <ul class="nav-right">
+
+                                <li class="user-profile header-notification">
+                                    <div class="dropdown-primary dropdown">
+                                        <div class="dropdown-toggle" data-toggle="dropdown">
+                                            @*  <img src="../files/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">*@
+
+                @*<img src="@Session["ProfilePic"]" alt="..." class="img-radius" height="40" width="40">
+                <span>@Session["FullName"]</span>
+                <i class="feather icon-chevron-down"></i>
+        </div>
+        <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+            @if (Session["Pk_AdminId"] == null)
+            {
+                <li>
+                    <a href="/CustomerDashboard/EditProfile">
+                        <i class="feather icon-user"></i> Profile
+                    </a>
+                </li>
+            }
+
+            <li>
+                <a href="/Home/LoginWeb">
+                    <i class="feather icon-log-out"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+    </li>
+    </ul>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*//////////////////////////////////////////////////////////*@
+
+
+
+
+
+    <li>
+        <a href="/CustomerDashboard/CustomerDashboard">
+            <div class="parent-icon">
+                <i class="bx bx-home-alt"></i>
+            </div>
+            <div class="menu-title">DashBoard</div>
+        </a>
+    </li>
+
+    <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon">
+                <i class='bx bx-home-alt'></i>
+            </div>
+            <div class="menu-title">Reports</div>
+        </a>
+        <ul>
+            <li>
+                <a href="/CustomerDashboard/CustomerBookingList"><i class='bx bx-radio-circle'></i>Plot Bookings</a>
+            </li>
+            <li>
+                <a href="/CustomerDashboard/CustomerLedgerReport"><i class='bx bx-radio-circle'></i>Ledger</a>
+            </li>
+            <li>
+                <a href="/CustomerDashboard/DueInstallmentReport"><i class='bx bx-radio-circle'></i>Due Installment</a>
+            </li>
+        </ul>
+    </li>
+
+
+
+    <li>
+        <a href="/CustomerDashboard/ChangePasswordCustomer">
+            <div class="parent-icon">
+                <i class="bx bx-home-alt"></i>
+            </div>
+            <div class="menu-title">Change Password</div>
+        </a>
+    </li>
+
+
+
+    </ul>
+    <!--end navigation-->
+    </div>
+    <!--end sidebar wrapper -->
+    <!--start header -->
+    <header>
+        <div class="topbar d-flex align-items-center">
+            <nav class="navbar navbar-expand gap-3">
+                <div class="mobile-toggle-menu">
+                    <i class='bx bx-menu'></i>
+                </div>
+                <div class="top-menu ms-auto">
+                    <ul class="navbar-nav align-items-center gap-1">
+
+                        <li class="nav-item dropdown dropdown-app">
+
+                            <div class="dropdown-menu dropdown-menu-end p-0">
+                                <div class="app-container p-2 my-2">
+                                    <div class="row gx-0 gy-2 row-cols-3 justify-content-center p-2">
+
+                                    </div><!--end row-->
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown dropdown-large">
+
+                            <div class="dropdown-menu dropdown-menu-end">
+
+                                <div class="header-notifications-list">
+
+                                </div>
+
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown dropdown-large">
+
+                            <div class="dropdown-menu dropdown-menu-end">
+
+                                <div class="header-message-list">
+
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="user-box dropdown px-3">
+                    <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        @if (Session["ProfilePic"].ToString() == "../../images/no-profile.png" || Session["ProfilePic"].ToString() == "../files/assets/images/no_avatar.jpg")
+                        {
+                            <div id="profileImage"></div>
+
+                        }
+                        else
+                        {
+                            <img src="@Session["ProfilePic"]" class="user-img" alt="user avatar">
+                        }
+                        @*<img src="../../files/assets/images/no_avatar.jpg" class="user-img" alt="user avatar">*@
+
+                        <div class="user-info">
+                            <p class="user-name mb-0"><span id="fullName">@Session["FullName"]</span></p>
+                            @*<p class="designattion mb-0">Web Designer</p>*@
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        @if (Session["Pk_AdminId"] == null)
+                        {
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="/CustomerDashboard/EditProfile"><i class="bx bx-user-circle"></i><span>Profile</span></a>
+                            </li>
+                        }
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="/Home/LoginWeb"><i class="bx bx-log-out-circle"></i><span>Logout</span></a>
+                        </li>
+                    </ul>
+
+
+
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--end header -->
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        @RenderBody()
+    </div>
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <footer class="page-footer">
+        <p class="mb-0">© Copyright 2022 Abdolphin All Rights Reserved.</p>
+    </footer>
+    </div>
+
+    <!-- Required Jquery -->
+    <script src="../assets33/js/bootstrap.bundle.min.js"></script>
+    <!--plugins-->
+    <script src="../assets33/js/jquery.min.js"></script>
+    <script src="../assets33/plugins/simplebar/js/simplebar.min.js"></script>
+    <script src="../assets33/plugins/metismenu/js/metisMenu.min.js"></script>
+    <script src="../assets33/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+    <script src="../assets33/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="../assets33/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+    <script src="../assets33/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="../assets33/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../assets33/plugins/chartjs/js/chart.js"></script>
+    <script src="../assets33/plugins/sparkline-charts/jquery.sparkline.min.js"></script>
+    <!--notification js -->
+    <script src="../assets33/plugins/notifications/js/lobibox.min.js"></script>
+    <script src="../assets33/plugins/notifications/js/notifications.min.js"></script>
+    <script src="../assets33/js/index3.js"></script>
+    <!--app JS-->
+    <script src="../assets33/js/app.js"></script>
+
+    <script>
+        /// For Profile 
+        debugger;
+        const fullName = document.getElementById('fullName').textContent;
+        const intials = fullName.split(' ').map(name => name[0]).join('').toUpperCase();
+        document.getElementById('profileImage').innerHTML = intials;
+    </script>
+</body>
+
+
+
+</html>

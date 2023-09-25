@@ -1,0 +1,73 @@
+﻿@model Dolphin.Models.TraditionalAssociate
+
+@{
+    ViewBag.Title = "ClaimRewardReport";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("ClaimRewardReport", "AdminReports", FormMethod.Post, new { @id = "form1" }))
+{
+    
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Claim Reward Report</h5>
+                </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData[""]
+                </p>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Name</th>
+                                <th>Award</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstTrad != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstTrad)
+                                    {
+                                        <tr class="text-left">
+                                            <td>@i</td>
+                                            <td>@Item.AssociateName (@Item.LoginID)</td>
+                                            <td>
+                                                <img src="@Item.PanImage" height="100" width="100" />
+                                                <br />@Item.RewardName
+                                            </td>
+                                            <td>@Item.Status</td>
+                                        </tr>
+
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Name</th>
+                                <th>Award</th>
+                                <th>Status</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

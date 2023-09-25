@@ -1,0 +1,192 @@
+﻿@model Dolphin.Models.TraditionalAssociate
+@{
+    ViewBag.Title = "AssociateList";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("AssociateList", "TraditionalAssociate", FormMethod.Post, new { @id = "form1" }))
+{
+    <p style="color: red">
+        @TempData["Registration"]
+    </p>
+    <div class="page-content">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">Affiliate List</h5>
+                        <button class="btn btn-primary repeater-add-btn px-4"><a href="/TraditionalAssociate/AssociateRegistration" class="text-white">Add New</a></button>
+                    </div>
+                    <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                        @TempData["BlockUnblock"]
+                    </p>
+                </div>
+            </div>
+            <div class="items">
+                <div class="card">
+                    <div class="card-body row">
+                        <form>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label mb-2">Sponsor LoginId</label>
+                                @Html.TextBoxFor(m => m.SponsorID, new { @class = "form-control", @Placeholder = "Sponsor LoginID" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label mb-2">Sponsor Name </label>
+                                @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Placeholder = "Sponsor Name" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label mb-2">Affiliate LoginId</label>
+                                @Html.TextBoxFor(m => m.AssociateID, new { @class = "form-control", @Placeholder = "Search by AffiliateID" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label mb-2">Affiliate Name</label>
+                                @Html.TextBoxFor(m => m.AssociateName, new { @class = "form-control", @Placeholder = "Affiliate Name" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label mb-2">Joining From Date</label>
+                                @Html.TextBoxFor(m => m.JoiningFromDate, new { @class = "form-control", @Placeholder = "From Date" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label mb-2">Joining To Date</label>
+                                @Html.TextBoxFor(m => m.JoiningToDate, new { @class = "form-control", @Placeholder = "To Date" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label mb-2"> Pan Card</label>
+                                @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @Placeholder = "Pan Card" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label mb-2">Adhar No</label>
+                                @Html.TextBoxFor(m => m.AdharNumber, new { @class = "form-control", @Placeholder = "Adhar No." })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="form-group">
+                                    Select Branch
+                                    @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control form-select", @placeholder = "Choose one thing", @id = "single-select-field" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3 mb-3   ">
+                                <label class="float-label d-block">&nbsp;</label>
+                                <input class="btn btn-success" type="submit" value="Search" id="btnSearchCustomer" name="btnSearchCustomer" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+ 
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Branch</th>
+                                <th>Affiliate ID</th>
+                                <th>Affiliate Name</th>
+                                <th>Password</th>
+                                <th>Sponsor ID </th>
+                                <th>Sponsor Name</th>
+                                <th>Designation</th>
+                                @*<th>Name</th>*@
+                                <th>Mobile Number</th>
+                                <th>Email</th>
+                                <th>PAN Number</th>
+                                <th>Adhar Number</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstTrad != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstTrad)
+                                    {
+                                        <tr class="text-left">
+
+                                            <td>@i</td>
+                                            <td>@Item.BranchName</td>
+                                            <td>@Item.AssociateID</td>
+                                            <td>@Item.AssociateName</td>
+                                            <td>@Item.Password</td>
+                                            <td>@Item.SponsorID</td>
+                                            <td>@Item.SponsorName </td>
+                                            <td>@Item.DesignationName</td>
+                                            @*<td>@Item.FirstName</td>*@
+                                            <td>@Item.Contact</td>
+                                            <td>@Item.Email</td>
+                                            <td>@Item.PanNo</td>
+                                            <td>@Item.AdharNumber</td>
+                                            <td>
+                                                <a href="/TraditionalAssociate/AssociateRegistration?UserID=@Item.EncryptKey" class="btn btn-info btn-sm">Edit</a>
+                                                <a href="/TraditionalAssociate/Delete?UserID=@Item.UserID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this row?');">Delete</a>
+
+                                                @if (Item.isBlocked == "False")
+                                                {
+                                                    <a href="/TraditionalAssociate/BlockUser?FK_UserID=@Item.UserID&LoginID=@Item.AssociateID" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to block this User ?')">Block</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="/TraditionalAssociate/UnblockUser?FK_UserID=@Item.UserID&LoginID=@Item.AssociateID" class="btn btn-sm btn-success" onclick="return confirm('Are you sure you want to unblock this User ?')">Unblock</a>
+                                                }
+                                                <a href="/AdminReports/PrintWelcomeLetter?id=@Item.EncryptKey" class="btn btn-success btn-sm" target="_blank">Letter</a>
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Branch</th>
+                                <th>Affiliate ID</th>
+                                <th>Affiliate Name</th>
+                                <th>Password</th>
+                                <th>Sponsor ID </th>
+                                <th>Sponsor Name</th>
+                                <th>Designation</th>
+                                @*<th>Name</th>*@
+                                <th>Mobile Number</th>
+                                <th>Email</th>
+                                <th>PAN Number</th>
+                                <th>Adhar Number</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+
+
+    $('#JoiningFromDate').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+    $('#JoiningToDate').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+
+</script>
+
+

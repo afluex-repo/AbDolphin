@@ -1952,9 +1952,9 @@ namespace Dolphin.Controllers
             List<AssociateBooking> Visitorlist = new List<AssociateBooking>();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-            model.UserID = Session["Pk_userId"].ToString();
+            //model.UserID = Session["Pk_userId"].ToString();
+            model.AssociateLoginID = Session["LoginID"].ToString();
             model.Downline = model.IsDownline == true ? "1" : "0";
-
             DataSet ds = model.VisitorList();
             ViewBag.Total = "0";
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

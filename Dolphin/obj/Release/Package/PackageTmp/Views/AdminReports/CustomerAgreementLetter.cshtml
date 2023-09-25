@@ -1,0 +1,225 @@
+﻿@model Dolphin.Models.Plot
+
+@{
+    ViewBag.Title = "CustomerAgreementLetter";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("CustomerAgreementLetter", "AdminReports", FormMethod.Post, new { @id = "form1" }))
+{
+
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Agreement Letter for Customer</h5>
+                </div>
+            </div>
+        </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <h6>Agreement Letter</h6>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>  Booking Number</label>
+                                @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Search by Booking Number" })
+                                @Html.HiddenFor(m => m.PK_BookingId)
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>  Select Site</label>
+                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>  Select  Sector</label>
+                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Select Block</label>
+                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Plot Number</label>
+                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Search by Plot Number" })
+                            </div>
+                        </div>
+
+                        @*<div class="col-md-3">
+                <div class="form-group">
+                    Joining To Date
+                    @Html.TextBoxFor(m => m.JoiningToDate, new { @class = "form-control", @Placeholder = "To Date" })
+                </div>
+            </div>*@
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label class="d-block"> &nbsp;</label>
+                                <input class="btn btn-success" type="submit" value="Search" id="btnSearchCustomer" name="btnSearchCustomer" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="table-active">
+                                <th hidden>Pk_BookingId</th>
+                                <th>S No.</th>
+                                <th>Branch Name</th>
+                                <th>Customer Name</th>
+                                <th>Affiliate Name</th>
+                                <th>plot Info</th>
+                                <th>Net Plot Amount </th>
+                                <th>Booking Number</th>
+                                <th>Booking Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.ListCust != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.ListCust)
+                                    {
+                                        <tr class="text-left">
+                                            <td hidden>
+                                                @Item.UserID
+                                                @Item.AssociateID
+                                                @Item.PK_BookingId
+                                            </td>
+                                            <td>@i</td>
+                                            <td>@Item.BranchName</td>
+                                            <td>@Item.CustomerName (@Item.CustomerLoginID)</td>
+                                            <td>@Item.AssociateName (@Item.AssociateLoginID)</td>
+                                            <td>@Item.PlotInfo</td>
+                                            <td>@Item.NetPlotAmount </td>
+
+                                            <td>@Item.BookingNumber</td>
+                                            <td>@Item.BookingDate</td>
+
+
+                                            <td>
+                                                <a href="/AdminReports/PrintAgreementLetterForCustomer?PK_BookingId=@Item.PK_BookingId" class="btn btn-success btn-sm" target="_blank">Letter</a>
+                                                @* <a href="/AdminReports/PrintIDCard?id=@Item.EncryptKey" class="btn btn-success btn-sm" target="_blank">Card</a>*@
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <td colspan="5" style="text-align:right">Total</td>
+                                <td>@ViewBag.NetPlotAmount</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+<script>
+    $(document).ready(function () {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+
+        });
+    });
+
+    $('#JoiningFromDate').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+    $('#JoiningToDate').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+
+    function onSiteChange() {
+        $("#divload").css({ 'display': '' });
+        var value = $('#SiteID').val();
+        var values = $('#SectorID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Plot/GetSiteDetails",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                var j = 1;
+                if (data.Result == "yes") {
+                    $('#Rate').val(data.Rate);
+                    $("#SectorID").html(""); // clear before appending new list 
+                    $("#SectorID").empty();
+                    $("#SectorID").append(
+                          $('<option></option>').val(0).html('Select Sector'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#SectorID").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+
+                    });
+
+                }
+                else {
+                    $("#SectorID").empty();
+                    $('#Rate').val('');
+                }
+
+
+            }
+
+        });
+
+    }
+
+    function onSectorChange() {
+
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#SiteID').val();
+        var sectorID = $('#SectorID').val();
+        $.ajax({
+            url: '/Plot/GetBlockList', type: 'post', dataType: 'json',
+            data: { 'SiteID': siteID, 'sectorID': sectorID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                $("#BlockID").html(""); // clear before appending new list 
+                $("#BlockID").empty();
+                $("#BlockID").append(
+                      $('<option></option>').val(0).html('Select Block'));
+                $.each(data.lstBlock, function (index, BlockCount) {
+                    $("#BlockID").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+
+            }
+
+        });
+    }
+</script>
+
+
