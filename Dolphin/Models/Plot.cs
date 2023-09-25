@@ -1180,10 +1180,11 @@ namespace Dolphin.Models
         public DataSet GetUpdateNewPaymentPlan()
         {
             SqlParameter[] para = {
-                new SqlParameter("@SiteID", SiteID),
-                new SqlParameter("@SectorID", SectorID),
-                new SqlParameter("@BlockID", BlockID),
-                new SqlParameter("@PlotNumber", PlotNumber),
+                new SqlParameter("@Fk_PlanId", PlotNumber)
+                //new SqlParameter("@SiteID", SiteID),
+                //new SqlParameter("@SectorID", SectorID),
+                //new SqlParameter("@BlockID", BlockID),
+                //new SqlParameter("@PlotNumber", PlotNumber),
 
             };
             DataSet ds = Connection.ExecuteQuery("GetUpdatePaymentPlan", para);
