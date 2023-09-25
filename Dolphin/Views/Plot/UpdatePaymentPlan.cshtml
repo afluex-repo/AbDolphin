@@ -223,16 +223,16 @@
                                             <label id="remamt"></label>
                                         </div>
                                     </div>
-                                    @Html.HiddenFor(m => m.PlanID)
                                 </div>
                                 <br />
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
                                         <div class="form-group">
                                             <label> Payment Plan <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.PaymentPlanID, new SelectList(ViewBag.ddlPlan, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return CheckPayMode()" })
+                                            @Html.DropDownListFor(m => m.PaymentPlanID, new SelectList(ViewBag.ddlPlan, "Value", "Text"), new { @class = "form-control form-select" })
                                         </div>
                                     </div>
+
                                     <div class="col-md-3 mb-3">
                                         <div class="form-group">
                                             <label>Discount</label>
@@ -243,7 +243,7 @@
                                 <div class="row ">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="submit" name="Save" value="Save" id="btnSave" class="btn btn-success" onclick="return validateform();" />
+                                            <input type="submit" name="Update" value="Update" id="Update" class="btn btn-success" onclick="return validateform();" />
                                         </div>
                                     </div>
                                 </div>
@@ -297,7 +297,7 @@
     function validateform() {
         $(".errortext").removeClass("errortext");
 
-        if ($('#PaymentPlanID').val() == '') {
+        if ($('#PaymentPlanID').val() == '0') {
             $("#PaymentPlanID").addClass('errortext');
             $('#PaymentPlanID').focus();
             return false;
