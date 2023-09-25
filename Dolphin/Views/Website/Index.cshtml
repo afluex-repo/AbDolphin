@@ -110,36 +110,37 @@
 
 <div class="container">
     <div class="search-property style1">
-        @using (Html.BeginForm("UnitAvailability", "Website", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data", @class = "property-search-form justify-content-center" }))
-        {
-
-            <div class="form-group">
-
-                @Html.DropDownListFor(m => m.SiteTypeID, new SelectList(ViewBag.ddlSiteType, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteTypeChange();" })
-            </div>
-            <div class="form-group">
-                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
-            </div>
-            <div class="form-group">
-                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
-            </div>
-            <div class="form-group">
-                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
-            </div>
+        @using (Html.BeginForm("UnitAvailability", "Website", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data", @class="property-search-form justify-content-center"}))
+{
+            
+        <div class="form-group">
+       
+                 @Html.DropDownListFor(m => m.SiteTypeID, new SelectList(ViewBag.ddlSiteType, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteTypeChange();" })
+        </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
+                        </div>
                         <div class="form-group">
                             @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @placeholder = "Plot Number" })
                         </div>
+                       
                         <div class="form-group">
+                            <button type="submit" class="btn style2" name="Search" value="Search" id="btnSearchPlot" onclick="return GetDetails(); ">Search Property</button>
+                            @*<input type="submit" name="Search" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails(); " />*@
+                        </div>
+                         <div class="form-group">
                             <button type="buttom" class="btn style2 clearProper" style="background: #2c3240;">
-
+                            
 
                                 <a class="text-white" href="/Website/Index">Clear Property Filter</a>
                             
                             </button>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn style2" name="Search" value="Search" id="btnSearchPlot" onclick="return GetDetails(); ">Search Property</button>
-                            @*<input type="submit" name="Search" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails(); " />*@
                         </div>
         }
     </div>
@@ -241,7 +242,7 @@
                 <div class="city-card style1">
                     <img src="~/assetsWeb/img/city/city-1.jpg" alt="Image">
                     <div class="city-info">
-                        <h3><a href="#!">Dolphin</a></h3>
+                        <h3><a href="#!">ABDolphin</a></h3>
                         <p>properties</p>
                     </div>
                 </div>
@@ -251,7 +252,7 @@
                 <div class="city-card style1">
                     <img src="~/assetsWeb/img/city/city-2.jpg" alt="Image">
                     <div class="city-info">
-                        <<h3><a href="#!">Dolphin</a></h3>
+                        <<h3><a href="#!">ABDolphin</a></h3>
                         <p>properties</p>
                     </div>
                 </div>
@@ -261,7 +262,7 @@
                 <div class="city-card style1">
                     <img src="~/assetsWeb/img/city/city-3.jpg" alt="Image">
                     <div class="city-info">
-                        <h3><a href="#!">Dolphin</a></h3>
+                        <h3><a href="#!">ABDolphin</a></h3>
                         <p> properties</p>
                     </div>
                 </div>
@@ -271,7 +272,7 @@
                 <div class="city-card style1">
                     <img src="~/assetsWeb/img/city/city-4.jpg" alt="Image">
                     <div class="city-info">
-                        <h3><a href="#!">Dolphin</a></h3>
+                        <h3><a href="#!">ABDolphin</a></h3>
                         <p> properties</p>
                     </div>
                 </div>
@@ -281,45 +282,45 @@
 
 
             @*<div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
-                     data-aos-delay="200">
-                    <div class="city-card style1">
-                        <img src="~/assetsWeb/img/city/city-5.jpg" alt="Image">
-                        <div class="city-info">
-                            <h3><a href="#!">San Fransisco</a></h3>
-                            <p>+231 properties</p>
-                        </div>
+                 data-aos-delay="200">
+                <div class="city-card style1">
+                    <img src="~/assetsWeb/img/city/city-5.jpg" alt="Image">
+                    <div class="city-info">
+                        <h3><a href="#!">San Fransisco</a></h3>
+                        <p>+231 properties</p>
                     </div>
                 </div>
-                <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
-                     data-aos-delay="300">
-                    <div class="city-card style1">
-                        <img src="~/assetsWeb/img/city/city-6.jpg" alt="Image">
-                        <div class="city-info">
-                            <h3><a href="#!">Torento City</a></h3>
-                            <p>+1222 properties</p>
-                        </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="300">
+                <div class="city-card style1">
+                    <img src="~/assetsWeb/img/city/city-6.jpg" alt="Image">
+                    <div class="city-info">
+                        <h3><a href="#!">Torento City</a></h3>
+                        <p>+1222 properties</p>
                     </div>
                 </div>
-                <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
-                     data-aos-delay="400">
-                    <div class="city-card style1">
-                        <img src="~/assetsWeb/img/city/city-7.jpg" alt="Image">
-                        <div class="city-info">
-                            <h3><a href="#!">Vancuver City</a></h3>
-                            <p>+151 properties</p>
-                        </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="400">
+                <div class="city-card style1">
+                    <img src="~/assetsWeb/img/city/city-7.jpg" alt="Image">
+                    <div class="city-info">
+                        <h3><a href="#!">Vancuver City</a></h3>
+                        <p>+151 properties</p>
                     </div>
                 </div>
-                <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
-                     data-aos-delay="500">
-                    <div class="city-card style1">
-                        <img src="~/assetsWeb/img/city/city-8.jpg" alt="Image">
-                        <div class="city-info">
-                            <h3><a href="#!">Montreal City</a></h3>
-                            <p>+232 properties</p>
-                        </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1200"
+                 data-aos-delay="500">
+                <div class="city-card style1">
+                    <img src="~/assetsWeb/img/city/city-8.jpg" alt="Image">
+                    <div class="city-info">
+                        <h3><a href="#!">Montreal City</a></h3>
+                        <p>+232 properties</p>
                     </div>
-                </div>*@
+                </div>
+            </div>*@
         </div>
     </div>
 </section>
@@ -331,26 +332,27 @@
         <div class="counter-card-wrap style1">
             <div class="counter-card">
                 <span class="counter-icon">
-                    <i class="flaticon-customer"></i>
+                    <!-- <i class="flaticon-customer"></i> -->
+                     <i class="flaticon-office-building"></i>
                 </span>
                 <div class="counter-text">
                     <h2 class="counter-num">
-                        <span class="odometer" data-count="967"></span>
+                        <span class="odometer" data-count="5"></span>
                         <span class="target">+</span>
                     </h2>
-                    <p>Listings For Sale</p>
+                    <p>site</p>
                 </div>
             </div>
             <div class="counter-card">
                 <span class="counter-icon">
-                    <i class="flaticon-apartment"></i>
+                    <i class="flaticon-hand-gesture"></i>
                 </span>
                 <div class="counter-text">
                     <h2 class="counter-num">
-                        <span class="odometer" data-count="1276"></span>
+                        <span class="odometer" data-count="2000"></span>
                         <span class="target">+</span>
                     </h2>
-                    <p>Listings For Rent</p>
+                    <p>Our Customer</p>
                 </div>
             </div>
             <div class="counter-card">
@@ -359,10 +361,10 @@
                 </span>
                 <div class="counter-text">
                     <h2 class="counter-num">
-                        <span class="odometer" data-count="396"></span>
+                        <span class="odometer" data-count="500"></span>
                         <span class="target">+</span>
                     </h2>
-                    <p>Our Agents</p>
+                    <p>Our Associate </p>
                 </div>
             </div>
             <div class="counter-card">
@@ -371,10 +373,10 @@
                 </span>
                 <div class="counter-text">
                     <h2 class="counter-num">
-                        <span class="odometer" data-count="177"></span>
+                        <span class="odometer" data-count="2000"></span>
                         <span class="target">+</span>
                     </h2>
-                    <p>Computer Brokers</p>
+                    <p>Happy Customer</p>
                 </div>
             </div>
         </div>
@@ -385,7 +387,6 @@
 <section class="agent-wrap  pb-50 pt-50">
     <div class="container">
         <div class="section-title style1 text-center mb-40">
-            <span>Choose A Popular City</span>
             <h2>Our Team</h2>
         </div>
         <div class="row">
@@ -466,7 +467,7 @@
                     </div>
                     <div class="agent-info-wrap">
                         <div class="agent-info">
-                            <h3><a href="#!">kifayatullah Khan</a></h3>
+                            <h3><a href="#!">Kifayatullah Khan</a></h3>
                             <span>Direactor</span>
                             <ul class="social-profile list-style style1">
                                 <li>
@@ -541,7 +542,7 @@
             <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                 <div class="section-title style2 text-center mb-40">
                     <span>HOW IT WORKS</span>
-                    <h2>3 Steps To Book Your Home</h2>
+                    <h2>3 Steps To Book Your Plot</h2>
                 </div>
             </div>
         </div>
@@ -585,7 +586,7 @@
                     <div class="hw-info">
                         <h3>Confirm Reservation</h3>
                         <p>Reservation Confirmed! Your booking is complete. We look forward to welcoming you. Thank you for choosing us!</p>
-
+                    
                     </div>
                 </div>
             </div>
@@ -736,18 +737,18 @@
 
 <div id="myModal" class="modal fade " role="dialog">
     <div class="modal-dialog">
+        <!-- Modal content-->
         <div class="modal-content secondPopup" style="top:100px">
             <div class="modal-header p-0">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    @*<i class="ri-close-line"></i>*@
+                    <i class="ri-close-line"></i>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="newyear">
-                            <img style="width:100%" src="~/assets2/img/AbDolphineOffer.j
-                                 peg" class="img-responsive" />
+                            <img style="width:100%" src="~/assets2/img/AbDolphineOffer.jpeg" class="img-responsive" />
                         </div>
                     </div>
                 </div>
@@ -757,7 +758,28 @@
 </div>
 
 
+@*<div id="myOffer" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="top:100px">
+            <div class="modal-header p-0">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body position-relative" id="offerBody">
+                <div class="row">
+                    <div class="col-md-12 offerContentArea">
+                        <div class="text-center">
+                            <h1 id="myElem" style="display:none">@ViewBag.BookingId</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
 
+
+@*===================================================================================*@
 
 <style>
     @@media (max-width:767px) {
@@ -771,11 +793,13 @@
         bottom: 15%;
     }
 
+  
+
     #myElem {
             display: block;
             position: absolute;
             bottom: 10%;
-            left: 50%;
+            left: 45%;
         color: #fb9f03;
         font-weight: bold;
         font-size: 66px;
@@ -795,7 +819,7 @@
             <div class="modal-body">
                 <div class="row align-items-center gx-5">
                     <div class="col-md-12">
-                        <div class="login-bg bg-f offerContentArea position-relative">
+                        <div class="login-bg bg-f offerContentArea position-relative" style="background-size:100% 100%!important;">
                             <div class="text-center">
                                 <h1 id="myElem" style="display:none">@ViewBag.BookingId</h1>
                             </div>
@@ -806,6 +830,7 @@
         </div>
     </div>
 </div>
+@*===========================================================================*@
 
 
 
@@ -813,10 +838,10 @@
 <script>
     $(document).ready(function () {
         $("#myModal").modal('show');
+
     });
     $(document).ready(function () {
         $("#signUp").modal('show');
-        debugger;
         setTimeout(function () {
             $("#myElem").css("display", "block");
             $("#myElem").fadeIn(1000);
@@ -830,7 +855,6 @@
 
 <script>
     function GetDetails() {
-        debugger;
         $(".errortext").removeClass("errortext");
         if ($('#SiteTypeID').val() == '0') {
             $("#SiteTypeID").addClass('errortext');
@@ -937,6 +961,10 @@
 
 
 </script>
+
+
+
+
 <style>
     .errortext {
         border: 1px solid red !important;

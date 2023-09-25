@@ -37,10 +37,7 @@
                 }
         }
     </style>
-
-
     <div class="content-wrapper">
-
         <div class="breadcrumb-wrap bg-f unitAvaila">
             <div class="container">
                 <div class="breadcrumb-title">
@@ -52,7 +49,6 @@
                 </div>
             </div>
         </div>
-
         <section class="agent-wrap pt-50 pb-0">
             <div class="container">
                 <div class="section-title style1 text-center mb-40">
@@ -60,8 +56,6 @@
                 </div>
             </div>
         </section>
-
-
         <section class="pb-50">
             <div class="container">
                 <div class="search-property style1 mt-0 mb-50">
@@ -82,24 +76,18 @@
                             @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @placeholder = "Plot Number" })
                         </div>
                         <div class="form-group">
-                            <button type="buttom" class="btn style2 clearProper" style="background: #2c3240;">
-                            
-                            <a class="text-white" href="/Website/UnitAvailability">Clear Property Filter</a>
-                            
-                            </button>
-                           
+                            <button type="submit" class="btn style2" name="Search" value="Search" id="btnSearchPlot" onclick="return GetDetails(); ">Search Property</button>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn style2" name="Search" value="Search" id="btnSearchPlot" onclick="return GetDetails(); ">Search Property</button>
+                            <button type="buttom" class="btn style2 clearProper" style="background: #2c3240;">
+                                <a class="text-white" href="/Website/UnitAvailability">Clear Property Filter</a>
+                            </button>
                             @*<input type="submit" name="Search" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails(); " />*@
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-
-
         <section class="agent-wrap pt-20 pb-0">
             <div class="container">
                 <div class="row g-3 justify-content-center mb-30">
@@ -146,9 +134,6 @@
                 </div>
             </div>
         </section>
-
-
-
         <section>
             <div class="container">
                 <div class="row g-1 mt-4 mb-30">
@@ -178,11 +163,8 @@
                 </div>
             </div>
         </section>
-
     </div>
-
 }
-
 <script>
     function GetDetails() {
 
@@ -204,7 +186,7 @@
         //  $("#divload").css({ 'display': '' });
 
         var value = $('#SiteTypeID').val();
-        var values = $('#SiteID').val();
+        var values = $('#SiteID').val(); 
         var tr = [];
         $.ajax({
             url: "/Website/GetSiteBySiteType",
@@ -224,11 +206,8 @@
                     $("#SiteID").append(
                           $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
                 });
-
             }
-
         });
-
     }
     function onSiteChange() {
         $("#divload").css({ 'display': '' });
@@ -261,11 +240,8 @@
                     $('#Rate').val('');
                 }
             }
-
         });
-
     }
-
     function onSectorChange() {
 
         $("#divload").css({ 'display': '' });
@@ -284,15 +260,10 @@
                     $("#BlockID").append(
                           $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
                 });
-
             }
-
         });
     }
-
-
 </script>
-
 <style>
     .errortext {
         border: 1px solid red !important;

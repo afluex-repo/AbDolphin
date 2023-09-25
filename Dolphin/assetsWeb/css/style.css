@@ -2554,7 +2554,7 @@ select {
 }
 
 .modal-backdrop {
-    opacity: .8 !important
+    opacity: .5 !important
 }
 
 .login-bg {
