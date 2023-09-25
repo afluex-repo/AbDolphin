@@ -30,6 +30,10 @@ namespace Dolphin.Models
         public string DrAmount { get; set; }
         public string LedgerId { get; set; }
 
+        public string PK_PLanID { get; set; }
+
+        
+
         #region Properties
         public DataTable dtVisitorDetails { get; set; }
         public string PK_VisitorId { get; set; }
@@ -1172,19 +1176,29 @@ namespace Dolphin.Models
             DataSet ds = Connection.ExecuteQuery("getCustomerPaymentLedger", para);
             return ds;
         }
-        public DataSet GetUpdatePaymentPlan()
+       
+        public DataSet GetUpdateNewPaymentPlan()
         {
-            SqlParameter[] para = { new SqlParameter("@PK_PLanID", PaymentPlanID) };
+            SqlParameter[] para = {
+                new SqlParameter("@SiteID", SiteID),
+                new SqlParameter("@SectorID", SectorID),
+                new SqlParameter("@BlockID", BlockID),
+                new SqlParameter("@PlotNumber", PlotNumber),
+
+            };
             DataSet ds = Connection.ExecuteQuery("GetUpdatePaymentPlan", para);
             return ds;
         }
+
+
         public DataSet UpdatePaymentPlan()
         {
             SqlParameter[] para =
                             {
-                                        new SqlParameter("@Fk_BookingId ",PK_BookingId),
+                                        new SqlParameter("@Fk_BookingId",PK_BookingId),
+                                        new SqlParameter("@PaymentPlanID",PaymentPlanID),
                                         new SqlParameter("@Discount"  ,Discount),
-                                        new SqlParameter("@AddedBy",AddedBy)
+                                        new SqlParameter("@UpdatedBY",AddedBy)
 
                             };
             DataSet ds = Connection.ExecuteQuery("UpdatePaymentPlan", para);
