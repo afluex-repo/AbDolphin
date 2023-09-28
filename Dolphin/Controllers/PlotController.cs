@@ -3675,9 +3675,8 @@ namespace Dolphin.Controllers
             }
             ViewBag.ddlPlan = ddlPlan;
             #endregion
-
-            return RedirectToAction("UpdatePaymentPlan", "Plot");
-            //return Json(model, JsonRequestBehavior.AllowGet);
+            
+            return Json(model, JsonRequestBehavior.AllowGet);
 
 
         }
