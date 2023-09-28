@@ -1,0 +1,125 @@
+﻿@model Dolphin.Models.AssociateBooking
+
+@{
+    ViewBag.Title = "AssociateUplineDetail";
+  Layout = "~/Views/Shared/AssociateLayout.cshtml";
+}
+
+ 
+
+@using (Html.BeginForm("AssociateUplineDetail", "TraditionalAssociate", FormMethod.Post, new { @id = "form1" }))
+{
+ 
+   
+    
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">Affiliate Upline</h4>
+                        <p style="color: red">
+                            @TempData["Registration"]
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- HTML5 Export Buttons table start -->
+                            <div class="card">
+                                <div class="card-header table-card-header">
+
+                                </div>
+                                <div class="card-block">
+
+                                    @Html.HiddenFor(m => m.LoginId, new { @Value = @Model.LoginId })
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Affiliate ID</th>
+                                                    <th>Affiliate Name</th>
+                                                    <th>Rank Name</th>
+                                                    <th>Rank</th>
+                                                    <th>Branch Name</th>
+                                                    <th>Mobile Number</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.lstPlot != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var Item in Model.lstPlot)
+                                                        {
+                                                            <tr class="text-left">
+                                                                <td>@i</td>
+                                                                <td>@Item.AssociateID</td>
+                                                                <td>@Item.AssociateName  </td>
+                                                                <td>@Item.DesignationName </td>
+                                                                <td>@Item.Percentage</td>
+                                                                <td>@Item.BranchName</td>
+                                                                <td>@Item.Contact</td>
+
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Affiliate ID</th>
+                                                    <th>Affiliate Name</th>
+                                                    <th>Rank Name</th>
+                                                    <th>Rank</th>
+                                                    <th>Branch Name</th>
+                                                    <th>Mobile Number</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+
+        });
+    });
+
+    
+
+         
+      
+
+    
+
+</script>
+
+ 

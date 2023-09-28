@@ -1,0 +1,131 @@
+﻿@model Dolphin.Models.Master
+
+@{
+    ViewBag.Title = "UpdateSponsor";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("UpdateSponsor", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">Change Sponsor</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Change Sponsor</h5>
+                                    <p style="color: red">
+                                        @TempData["ChangeSponsor"]
+                                    </p>
+                                </div>
+                                <div class="card-block">
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            <label class="float-label"><b>Login Id</b><span style="color:red">*</span></label><br />
+                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
+                                        </div>
+                                        <div class="col-sm-4" style="margin-top:27px;">
+                                            <input class="btn btn-success pull-left btn-sm" type="submit" value="Search" id="Search" name="Search" onclick="return validate();" />
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="LoginId" name="LoginId" value="@ViewBag.LoginId" />
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            <label class="float-label"><b>Name</b></label><br />
+                                            <label class="float-label">@ViewBag.Name</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="float-label"><b>Sponsor</b></label><br />
+                                            <label class="float-label">@ViewBag.SponsorName</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            <label class="float-label"><b>Change Sponsor</b><span style="color:red">*</span></label>
+                                            @Html.TextBoxFor(m => m.FK_SponsorId, new { @class = "form-control", @Placeholder = "Sponsor Login Id" })
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="float-label"><b>Remark</b><span style="color:red">*</span></label>
+                                            @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", @Placeholder = "Remarks" })
+                                        </div>
+                                        <div class="col-md-4" style="margin-top:27px;">
+                                            <a href="javascript:void(0)" class="btn btn-success pull-left" onclick="return validateform();" id="btnUpdate" name="btnUpdate">Update</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+
+    function validate() {
+        $(".errortext").removeClass("errortext");
+        if ($('#LoginId').val() == '') {
+            $("#LoginId").addClass('errortext');
+            $('#LoginId').focus();
+            return false;
+        }
+        return true;
+    }
+
+    function validateform() {
+        debugger;
+        var LoginId = $('#LoginId').val();
+        var SponsorId = $('#FK_SponsorId').val();
+        var Remark = $('#Remark').val();
+        if ($('#FK_SponsorId').val() == '') {
+            $("#FK_SponsorId").addClass('errortext');
+            $('#FK_SponsorId').focus();
+            return false;
+        }
+        if ($('#Remark').val() == '') {
+            $("#Remark").addClass('errortext');
+            $('#Remark').focus();
+            return false;
+        }
+        else {
+            $.ajax({
+                url: '/Master/UpdateSponsorName', type: 'get', dataType: 'json',
+                data: { 'LoginId': LoginId, 'SponsorId': SponsorId, 'Remark': Remark },
+                success: function (data) {
+                    if (data.Result == "1") {
+                        alert('Sponsor Updated Successfully');
+                        window.location.href = '/Master/UpdateSponsor';
+                    }
+                    else {
+                        alert(data.Result);
+                    }
+                }
+            });
+        }
+    }
+
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+

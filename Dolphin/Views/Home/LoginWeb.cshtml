@@ -29,11 +29,12 @@
             align-items: center;
             height: 100vh;
         }
-       @@media (min-width:992px){
-             body{
-               background: url(/assets33/images/login-images/body_bg.jpg);
-                 background-repeat: no-repeat;
-                  background-size: cover;
+
+        @@media (min-width:992px) {
+            body {
+                background: url(/assets33/images/login-images/body_bg.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
             }
         }
     </style>
@@ -52,12 +53,12 @@
                         </div>
                     </div>
                     <div class="col-12 col-xl-4 col-lg-4 offset-lg-1">
-                        <div class="card"  style="background: url(/assets33/images/login-images/login_bg.png);
-    background-size: 100% 100%;" >
+                        <div class="card" style="background: url(/assets33/images/login-images/login_bg.png);
+    background-size: 100% 100%;">
                             <div class="card-body p-sm-5">
                                 <div class="">
                                     <div class="mb-3 text-center">
-                                        <img src="~/assets33/images/logo.png" width="100" alt="">
+                                        <a href="/Website/Index"><img src="~/assets33/images/logo.png" width="100" alt=""></a>
                                     </div>
                                     <div class="text-center mb-4">
                                         <h5 class="">Sign into your account</h5>
@@ -80,6 +81,7 @@
                                                 <div class="d-grid gap-2">
                                                     <button type="submit" class="btn text-white" style="background:#ab7d20;" onclick="return validateform()">Login</button>
                                                     <a href="/ForgotPassword/ForgotPassword" style="background:#c6c7c89c;" class="forgot-password btn btn-light">Forgot Password</a>
+                                                    <a href="/Website/Index" style="background:#c6c7c89c;" class="forgot-password btn btn-light"><i class="lni lni-arrow-left"></i> Back To Website</a>
                                                 </div>
                                             </div>
                                         </form>
@@ -151,6 +153,7 @@
         border: 2px solid red !important;
         background-color: #fff0f0 !important;
     }
+
     .successtext {
         border: 2px solid red !important;
         background-color: #808080 !important;

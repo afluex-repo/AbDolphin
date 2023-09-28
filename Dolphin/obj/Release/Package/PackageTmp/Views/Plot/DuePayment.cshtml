@@ -1,0 +1,312 @@
+﻿@model Dolphin.Models.Plot
+
+@{
+    ViewBag.Title = "DuePayment";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<style>
+
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+
+@using (Html.BeginForm("DuePayment", "Plot", FormMethod.Post, new { @id = "form1" }))
+{
+
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Due Payment</h5>
+                </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["Plot"]
+                </p>
+            </div>
+        </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label>  Customer ID</label>
+                                @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Search by Customer ID" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label>   Affiliate ID</label>
+                                @Html.TextBoxFor(m => m.AssociateID, new { @class = "form-control", @Placeholder = "Search by Affiliate ID" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label>   From Date</label>
+                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label>  To Date</label>
+                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label> Booking No</label>
+                                @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Booking No" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label>Select Site</label>
+                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label> Select Sector</label>
+                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label> Select Block</label>
+                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="form-group">
+                                <label>   Plot Number</label>
+                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "PlotNumber" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="d-block">  &nbsp;</label>
+                                <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="Search" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>Branch</th>
+                                <th>Booking No</th>
+                                <th>Booking Date</th>
+                                <th>Plot Details.</th>
+                                <th>Payment Plan</th>
+                                <th>Customer Detail</th>
+                                <th>Affiliate Details</th>
+                                <th>Plot Amt</th>
+                                <th>PLC</th>
+                                <th>Net Amnt</th>
+                                <th hidden="hidden">Booking Amt</th>
+                                <th>Paid Amt</th>
+                                <th>Due Amt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstPlot != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstPlot)
+                                    {
+                                        <tr class="text-left">
+                                            <td>@i</td>
+                                            <td>@Item.BranchName</td>
+                                            <td>@Item.BookingNumber</td>
+                                            <td>@Item.BookingDate</td>
+                                            <td>
+                                                @Item.PlotNumber
+                                                <br />
+                                                <label class="label label-primary">@Item.PlotArea</label>
+                                                <label class="label label-info">@Item.BookingStatus</label>
+                                                <label class="label label-warning">@Item.PlotRate</label>
+                                            </td>
+                                            <td>@Item.PaymentPlanID</td>
+                                            <td>@Item.CustomerName (@Item.CustomerLoginID)</td>
+                                            <td>@Item.AssociateName (@Item.AssociateLoginID)</td>
+
+                                            <td>@Item.PlotAmount</td>
+                                            <td>@Item.PK_PLCCharge</td>
+                                            <td>@Item.NetPlotAmount</td>
+                                            <td hidden="hidden">@Item.BookingAmount</td>
+                                            <td>@Item.PaidAmount</td>
+                                            <td>@Item.DueAmount</td>
+                                            @*<td>
+                            <a href="/Plot/PlotBooking?PK_BookingId=@Item.PK_BookingId" class="btn btn-info btn-sm">Edit</a>
+                             <a href="/Plot/CancelPlotBooking?BookingID=@Item.PK_BookingId" class="btn btn-danger btn-sm" onclick = "return confirm('Are you sure you want to cancel this booking?');">Cancel</a>
+                        </td>*@
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <th colspan="8" style="text-align:end;">Total</th>
+                                <th>@ViewBag.PlotAmount</th>
+                                <th>@ViewBag.PLCCharge</th>
+                                <th>@ViewBag.NetPlotAmount</th>
+                                <th hidden="hidden">Booking Amt</th>
+                                <th>@ViewBag.PaidAmount</th>
+                                <th>@ViewBag.DueAmount</th>
+                            </tr>
+
+                            <tr class="table-active">
+                                <th>S No.</th>
+                                <th>Branch</th>
+                                <th>Booking No</th>
+                                <th>Booking Date</th>
+                                <th>Plot Details.</th>
+                                <th>Payment Plan</th>
+                                <th>Customer Detail</th>
+                                <th>Affiliate Details</th>
+                                <th>Plot Amt</th>
+                                <th>PLC</th>
+                                <th>Net Amnt</th>
+                                <th hidden="hidden">Booking Amt</th>
+                                <th>Paid Amt</th>
+                                <th>Due Amt</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+<script>
+
+
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+
+
+    function EditPlot() {
+        $.ajax({
+            url: "/Plot/UpdatePlotBooking",
+            Type: "Get",
+            DataType: "JSON",
+            data: { PK_BookingId: $("#PK_BookingId").val() },
+            success: function (data) {
+                //   alert(data.Result);
+                window.location.href = '@Url.Action("PlotBooking", "Plot")';
+
+            }
+
+        });
+    }
+    function CancelPlot() {
+        $.ajax({
+            url: "/Plot/CancelPlotBooking",
+            Type: "Get",
+            DataType: "JSON",
+            data: { PK_BookingId: $("#PK_BookingId").val() },
+            success: function (data) {
+                //     alert(data.Result);
+                window.location.href = '@Url.Action("PlotBooking", "Plot")';
+
+            }
+
+        });
+    }
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+
+    function onSiteChange() {
+
+        $("#divload").css({ 'display': '' });
+        var value = $('#SiteID').val();
+        var values = $('#SectorID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Plot/GetSiteDetails",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+
+                $("#divload").css({ 'display': 'none' });
+                var j = 1;
+                if (data.Result == "yes") {
+                    $('#Rate').val(data.Rate);
+                    $("#SectorID").html(""); // clear before appending new list
+                    $("#SectorID").empty();
+                    $("#SectorID").append(
+                          $('<option></option>').val(0).html('Select Sector'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#SectorID").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+
+                    });
+
+                }
+                else {
+                    $("#SectorID").empty();
+                    $('#Rate').val('');
+                }
+
+
+            }
+
+        });
+
+    }
+
+    function onSectorChange() {
+
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#SiteID').val();
+        var sectorID = $('#SectorID').val();
+        $.ajax({
+            url: '/Plot/GetBlockList', type: 'post', dataType: 'json',
+            data: { 'SiteID': siteID, 'sectorID': sectorID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                $("#BlockID").html(""); // clear before appending new list
+                $("#BlockID").empty();
+                $("#BlockID").append(
+                      $('<option></option>').val(0).html('Select Block'));
+                $.each(data.lstBlock, function (index, BlockCount) {
+                    $("#BlockID").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+
+            }
+
+        });
+    }
+
+</script>
+
+
+

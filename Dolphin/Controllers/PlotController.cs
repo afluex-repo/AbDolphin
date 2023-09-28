@@ -425,10 +425,10 @@ namespace Dolphin.Controllers
                         string mob = ds.Tables[0].Rows[0]["Mobile"].ToString();
                         string Plotamout = obj.PlotAmount;
                         string TempId = "1707166013299856267";
-                        string str = BLSMS.Booking(Bookno, Bookamt, AsstName, plot,Plotamout);
+                        string str = BLSMS.Booking(Bookno, Bookamt, AsstName, plot, Plotamout);
                         try
                         {
-                            BLSMS.SendSMS(mob, str,TempId);
+                            BLSMS.SendSMS(mob, str, TempId);
                         }
                         catch { }
 
@@ -1025,7 +1025,7 @@ namespace Dolphin.Controllers
                     obj.CancelRemark = r["CancelRemark"].ToString();
                     obj.CancelDate = r["CancelledDate"].ToString();
                     obj.BookingNumber = r["BookingNo"].ToString();
-                    obj.EncryptKey= Crypto.Encrypt(r["PK_BookingId"].ToString());
+                    obj.EncryptKey = Crypto.Encrypt(r["PK_BookingId"].ToString());
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
@@ -1674,7 +1674,7 @@ namespace Dolphin.Controllers
                         string str = BLSMS.PlotAllotment(name, Plot, amt);
                         try
                         {
-                            BLSMS.SendSMS(mob, str,TempId);
+                            BLSMS.SendSMS(mob, str, TempId);
                         }
                         catch { }
                     }
@@ -1950,7 +1950,7 @@ namespace Dolphin.Controllers
                         string str = BLSMS.EMIPayment(name, Plot, bookno, instno, amt);
                         try
                         {
-                            BLSMS.SendSMS(mob, str,TempId);
+                            BLSMS.SendSMS(mob, str, TempId);
                         }
                         catch { }
                     }
@@ -3132,11 +3132,11 @@ namespace Dolphin.Controllers
                         string AsstName = ds.Tables[0].Rows[0]["AssociateName"].ToString();
                         string plot = ds.Tables[0].Rows[0]["Plot"].ToString();
                         string mob = ds.Tables[0].Rows[0]["Mobile"].ToString();
-                        string TempId = "1707166036770779741"; 
+                        string TempId = "1707166036770779741";
                         string str = BLSMS.HouseBooking(Bookno, Bookamt, AsstName, plot);
                         try
                         {
-                            BLSMS.SendSMS(mob, str,TempId);
+                            BLSMS.SendSMS(mob, str, TempId);
                         }
                         catch { }
                     }
@@ -3444,26 +3444,26 @@ namespace Dolphin.Controllers
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-               
-                    foreach (DataRow r in ds.Tables[0].Rows)
-                    {
-                        Plot obj = new Plot();
-                        
-                        obj.PaidAmount = r["PaidAmount"].ToString();
-                        obj.PaymentDate = r["PaymentDate"].ToString();
-                        obj.PaymentMode = r["PaymentMode"].ToString();
-                        obj.TransactionNumber = r["TransactionNo"].ToString();
-                        obj.TransactionDate = r["TransactionDate"].ToString();
-                        obj.BankName = r["BankName"].ToString();
-                        obj.BankBranch = r["BankBranch"].ToString();
-                        obj.CancelDate = r["CancelledDate"].ToString();
-                        obj.CancelRemark = r["CancelRemark"].ToString();
-                        obj.PaymentRemarks = r["PaymentRemarks"].ToString();
-                        lst.Add(obj);
-                    }
-                    model.lstPlot = lst;
+
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Plot obj = new Plot();
+
+                    obj.PaidAmount = r["PaidAmount"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.TransactionNumber = r["TransactionNo"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.BankName = r["BankName"].ToString();
+                    obj.BankBranch = r["BankBranch"].ToString();
+                    obj.CancelDate = r["CancelledDate"].ToString();
+                    obj.CancelRemark = r["CancelRemark"].ToString();
+                    obj.PaymentRemarks = r["PaymentRemarks"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
             }
-           
+
             return View(model);
         }
 
@@ -3472,7 +3472,7 @@ namespace Dolphin.Controllers
 
 
         #region Update PaymentPlan
-        public ActionResult UpdatePaymentPlan(Plot model,string PK_BookingId,string PaymentPlanID)
+        public ActionResult UpdatePaymentPlan(Plot model, string PK_BookingId, string PaymentPlanID)
         {
 
             //Plot model = new Plot();
@@ -3524,12 +3524,12 @@ namespace Dolphin.Controllers
                     ViewBag.ddlBlock = lstBlock;
                     #endregion
 
-                   
+
                 }
             }
             else
             {
-                
+
 
                 List<SelectListItem> ddlSector = new List<SelectListItem>();
                 ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
@@ -3578,10 +3578,17 @@ namespace Dolphin.Controllers
             }
             ViewBag.ddlSite = ddlSite;
             #endregion
+
             #region ddlPlan
             int count2 = 0;
+=======
+
+            #region ddlPlan
+            int count2 = 0;
+            Plot obj1 = new Plot();
+>>>>>>> 7c7f1accc078f599120ba3f85390c88f1ca40330
             List<SelectListItem> ddlPlan = new List<SelectListItem>();
-            DataSet dsPlan = model.GetUpdatePaymentPlan();
+            DataSet dsPlan = model.GetUpdateNewPaymentPlan();
             if (dsPlan != null && dsPlan.Tables.Count > 0 && dsPlan.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in dsPlan.Tables[0].Rows)
@@ -3653,6 +3660,27 @@ namespace Dolphin.Controllers
             {
                 model.Result = "No record found !";
             }
+
+            #region ddlPlan
+            int count2 = 0;
+            Plot obj1 = new Plot();
+            List<SelectListItem> ddlPlan = new List<SelectListItem>();
+            DataSet dsPlan = model.GetUpdateNewPaymentPlan();
+            if (dsPlan != null && dsPlan.Tables.Count > 0 && dsPlan.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPlan.Tables[0].Rows)
+                {
+                    if (count2 == 0)
+                    {
+                        ddlPlan.Add(new SelectListItem { Text = "Select Payment Plan", Value = "0" });
+                    }
+                    ddlPlan.Add(new SelectListItem { Text = r["PlanName"].ToString(), Value = r["PK_PLanID"].ToString() });
+                    count2 = count2 + 1;
+                }
+            }
+            ViewBag.ddlPlan = ddlPlan;
+            #endregion
+
             return Json(model, JsonRequestBehavior.AllowGet);
 
 
@@ -3662,31 +3690,31 @@ namespace Dolphin.Controllers
         [HttpPost]
         [ActionName("UpdatePaymentPlan")]
         [OnAction(ButtonName = "Update")]
-        public ActionResult UpdatePaymentPlan(Plot obj)
+        public ActionResult UpdatePaymentPlan(Plot obj, string PK_BookingId)
         {
             string FormName = "";
             string Controller = "";
             try
             {
+                obj.PK_BookingId = PK_BookingId;
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
-                obj.PaymentDate = Common.ConvertToSystemDate(string.IsNullOrEmpty(obj.PaymentDate) ? null : obj.PaymentDate, "dd/MM/yyyy");
                 DataSet ds = obj.UpdatePaymentPlan();
                 if (ds != null && ds.Tables.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["Plot"] = " Update Payment Plan successfully !";
-                        string name = ds.Tables[0].Rows[0]["Name"].ToString();
-                        string Plot = ds.Tables[0].Rows[0]["Plot"].ToString();
-                        string mob = ds.Tables[0].Rows[0]["Mobile"].ToString();
-                        string amt = obj.PaidAmount;
-                        string TempId = "1707166036748099409";
-                        string str = BLSMS.PlotAllotment(name, Plot, amt);
-                        try
-                        {
-                            BLSMS.SendSMS(mob, str, TempId);
-                        }
-                        catch { }
+                        TempData["Plot"] = "Payment Plan Updated successfully !";
+                        //string name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        //string Plot = ds.Tables[0].Rows[0]["Plot"].ToString();
+                        //string mob = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        //string amt = obj.PaidAmount;
+                        //string TempId = "1707166036748099409";
+                        //string str = BLSMS.PlotAllotment(name, Plot, amt);
+                        //try
+                        //{
+                        //    BLSMS.SendSMS(mob, str, TempId);
+                        //}
+                        //catch { }
                     }
                     else
                     {
@@ -3704,6 +3732,6 @@ namespace Dolphin.Controllers
             return RedirectToAction(FormName, Controller);
         }
         #endregion
-
+    
     }
 }

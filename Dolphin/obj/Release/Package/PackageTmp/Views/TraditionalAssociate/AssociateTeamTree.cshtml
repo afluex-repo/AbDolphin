@@ -1,0 +1,100 @@
+﻿@model Dolphin.Models.TraditionalAssociate
+
+@{
+    ViewBag.Title = "AssociateTeamTree";
+ 
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("AssociateTeamTree", "TraditionalAssociate", FormMethod.Post, new { @id = "form1" }))
+{
+ 
+    <p style="color: red">
+        @TempData["Registration"]
+    </p>
+    
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Affiliate Team Tree@*<small>List Of Sites</small>*@</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            Affiliate ID <span style="color: red">*</span>
+                            @Html.TextBoxFor(m => m.AssociateID, new { @class = "form-control", @Placeholder = "Search by Affiliate ID" })
+                        </div>
+                    </div>
+                   @* <div class="col-md-4">
+                        <div class="form-group">
+                            With/Without Contact
+                            @Html.DropDownList("With/WithoutCont", new List<SelectListItem>
+{
+    new SelectListItem{ Text="With Contact", Value = "With Contact" },
+    new SelectListItem{ Text="Without Contact", Value = "Without Contact" },
+   
+ }, new { @class = "form-control" })  
+                        </div>
+                    </div>*@
+                    
+               
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <br />
+                            <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="Search" onclick="return validateform();"/>
+                            
+                        </div>
+                    </div>
+                </div>
+                 
+
+
+
+
+
+            </div>
+        </div>
+    </div>   
+
+               
+}
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+
+        });
+    });
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+
+
+        if ($('#AssociateID').val() == '') {
+            $("#AssociateID").addClass('errortext');
+            $('#AssociateID').focus();
+            alert("Please fill Associate ID");
+            return false;
+        }
+
+
+        return true;
+    }
+</script>
+
+
+
+
+
+
+

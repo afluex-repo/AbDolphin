@@ -1,0 +1,73 @@
+﻿@model Dolphin.Models.Master
+@{
+    ViewBag.Title = "UpdateRankLog";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@using (Html.BeginForm("UpdateRankLog", "Master", FormMethod.Post, new { id = "form1" }))
+{
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">Updated Rank Log</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Updated Rank Log</h5>
+                                </div>
+                                <table class="table table-bordered table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr.No</th>
+                                            <th>LoginId</th>
+                                            <th>Old Percentage</th>
+                                            <th>New Percentage</th>
+                                            <th>DoneBy</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstRanklog != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var item in Model.lstRanklog)
+                                                {
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>@item.LoginId</td>
+                                                        <td>@item.OldDesignation (@item.OldPercentage)</td>
+                                                        <td>@item.NewDesignation (@item.NewPercentage)</td>
+                                                        <td>@item.DoneBy</td>
+                                                        <td>@item.EntryDate</td>
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+

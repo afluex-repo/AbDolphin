@@ -1,0 +1,66 @@
+﻿@model Dolphin.Models.Reports
+
+@{
+    ViewBag.Title = "SummryReports";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("SummryReports", "AssociateDashBoard", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Summry Reports</h5>
+                    <span style="color: red">
+                      @TempData["Plot"]
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body row">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-bordered table-striped mb-0">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+                                <th>LoginId</th>
+                                <th>Name</th>
+                                @*<th>Business</th>*@
+                                <th>Income</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstsummry != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstsummry)
+                                    {
+                                        <tr class="text-left">
+                                            <td>@i</td>
+                                            <td>@Item.LoginId</td>
+                                            <td>@Item.Name</td>
+                                            @*<td>@Item.Business</td>*@
+                                            <td>@Item.Income</td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+

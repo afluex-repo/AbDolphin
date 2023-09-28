@@ -17,7 +17,8 @@
 
     @Html.HiddenFor(m => m.PK_BookingId)
     //  @Html.HiddenFor(m => m.PaymentDate)
-    @Html.HiddenFor(m => m.PaymentPlanID)
+
+
     <div class="page-content">
         <div class="card">
             <div class="card-body">
@@ -82,7 +83,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="x_title">
-                        <h5>UpdatePaymentPlan Details @*<small>List Of Sites</small>*@</h5>
+                        <h5>Plot Details @*<small>List Of Sites</small>*@</h5>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                         </ul>
@@ -222,22 +223,16 @@
                                             <label id="remamt"></label>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 " hidden="hidden">
-                                        <div class="form-group">
-                                            <label><b>PyamentPlanID:</b></label>
-                                            <label id="PlanID"></label>
-                                        </div>
-                                    </div>
-                                  
                                 </div>
                                 <br />
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <div class="form-group" >
-                                            <label> Payment Plan <span style="color: red">*</span></label>
+                                        <div class="form-group">
+                                            <label>New Payment Plan <span style="color: red">*</span></label>
                                             @Html.DropDownListFor(m => m.PaymentPlanID, new SelectList(ViewBag.ddlPlan, "Value", "Text"), new { @class = "form-control form-select" })
                                         </div>
                                     </div>
+
                                     <div class="col-md-3 mb-3">
                                         <div class="form-group">
                                             <label>Discount</label>
@@ -248,7 +243,7 @@
                                 <div class="row ">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="submit" name="Save" value="Save" id="btnSave" class="btn btn-success" onclick="return validateform();" />
+                                            <input type="submit" name="Update" value="Update" id="Update" class="btn btn-success" onclick="return validateform();" />
                                         </div>
                                     </div>
                                 </div>
@@ -302,7 +297,7 @@
     function validateform() {
         $(".errortext").removeClass("errortext");
 
-        if ($('#PaymentPlanID').val() == '') {
+        if ($('#PaymentPlanID').val() == '0') {
             $("#PaymentPlanID").addClass('errortext');
             $('#PaymentPlanID').focus();
             return false;
@@ -449,7 +444,7 @@
                         //var paidAmt = $('#Payamt').text();
                         //var checkAmt = (Number)(totalAmt) - (Number)(paidAmt);
                         $("#remamt").text(data.Balance);
-                        $("#PaymentPlanID").val(data.PaymentPlanID);
+                        $("#PlanID").text(data.PaymentPlanID);
                         //$("#SiteID").val('');
                         //$("#SectorID").val('');
                         //$("#BlockID").val('');
@@ -512,7 +507,7 @@
                         $("#Plotarea").text(data.PlotArea);
                         $("#bal").text(data.Balance);
                         $("#netPlotAmt").text(data.NetPlotAmount);
-                        $("#PaymentPlanID").val(data.PaymentPlanID);
+                        $("#PlanID").text(data.PaymentPlanID);
                         //var totalAmt = Number($('#ActPlotAmt').text()) - Number($('#disct').text()) ;
                         //var paidAmt = $('#Payamt').text();
                         //var checkAmt = (Number)(totalAmt) - (Number)(paidAmt);

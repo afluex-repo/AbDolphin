@@ -1,0 +1,2453 @@
+﻿@model Dolphin.Models.Plot
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+<!-- saved from url=(0082)http://arkonlinemarketing.com/CRMAdmin/NewAgreementPrintAjax.aspx?bid=ARKB00601969 -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>
+        Agreement Letter
+    </title>
+    <style type="text/css">
+        .pg-break {
+            /*border: 5px solid #333333;*/
+            padding: 5px 5px 2px 5px;
+            margin: 60px 10px 5px 40px;
+            height: 852px;
+            text-align: justify;
+        }
+
+        .pg-break-last {
+            /*border: 5px solid #333333;*/
+            /*padding: 1px 1px 1px 1px;
+             margin: 60px 10px 5px 5px;*/
+            /*padding: 5px 0px 2px 0px;*/
+            margin: 60px 1px 5px 1px;
+            page-break-before: avoid;
+            min-height: 852px;
+        }
+
+        .head1 {
+            font-family: "times New Roman", Times, serif;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .head-projectname {
+            font-family: "times New Roman", Times, serif;
+            font-size: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .projectname {
+            font-family: "times New Roman", Times, serif;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .content-text {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 14px;
+            line-height: 23px;
+        }
+
+        .content-text_A {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        .content-text-b {
+            font-family: "times New Roman", Times, serif;
+            font-size: 15px;
+            font-weight: bold;
+            color: Black;
+        }
+
+        .block {
+            display: block;
+        }
+
+        .block-dot span {
+            padding: 0px;
+            margin: 0px 0px 2px 0px;
+            display: block;
+            border-bottom-style: dashed;
+            border-width: 1px;
+            border-color: #000000;
+            line-height: 15px;
+            min-height: 15px;
+        }
+
+        .block-solid span {
+            padding: 0px;
+            margin: 0px 0px 15px 0px;
+            display: block;
+            border-bottom-style: solid;
+            border-width: 1px;
+            border-color: #000000;
+        }
+
+        .content-head {
+            font-family: "times New Roman", Times, serif;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .content-head2 {
+            font-family: "times New Roman", Times, serif;
+            font-size: 19px;
+            font-weight: bold;
+            color: Black;
+        }
+
+        .barCodeContaner {
+            page-break-after: always;
+        }
+
+        .barCodeContaner-Last {
+            page-break-before: avoid;
+        }
+
+        .barCodeCss {
+            margin: 1px 0px 0px 0px;
+            padding: 0px 0px 0px 0px;
+            float: right;
+        }
+
+        .style1 {
+            font-family: "times New Roman", Times, serif;
+            font-size: 15px;
+            font-weight: bold;
+            width: 12%;
+        }
+
+        .auto-style1 {
+            height: 38px;
+        }
+
+        .auto-style2 {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 14px;
+            line-height: 23px;
+            height: 38px;
+        }
+
+        .auto-style3 {
+            text-decoration: underline;
+        }
+
+        .auto-style4 {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    </style>
+    <script src="./Agreement Letter_files/jquery-1.8.0.min.js.download"></script>
+
+    <script type="text/javascript">
+        function generateBarcodes(src, target) {
+            var value = src;
+            var btype = "code128";
+
+            var settings = {
+                output: "css",
+                bgColor: "#FFFFFF",
+                color: "#000000",
+                barWidth: "1",
+                barHeight: "30",
+                moduleSize: "1",
+                posX: "1",
+                posY: "2",
+                addQuietZone: "1"
+            };
+            value = { code: value, rect: true };
+            $("." + target).html("").show().barcode(value, btype, settings);
+        }
+
+    </script>
+    <link href="./Agreement Letter_files/default.css" type="text/css" rel="stylesheet">
+    <link href="./Agreement Letter_files/defaultNew.css" type="text/css" rel="stylesheet">
+    <link href="./Agreement Letter_files/DynamicGrid.css" type="text/css" rel="stylesheet">
+    <link href="./Agreement Letter_files/memberdetails.css" type="text/css" rel="stylesheet">
+    <link href="./Agreement Letter_files/UserControll2.css" type="text/css" rel="stylesheet">
+    <link href="./Agreement Letter_files/userpanel.css" type="text/css" rel="stylesheet">
+</head>
+<body style="padding: 5px 0px 2px 0px;">
+    <form name="form1" method="post" action="http://arkonlinemarketing.com/CRMAdmin/NewAgreementPrintAjax.aspx?bid=ARKB00601969" id="form1">
+        <div>
+            <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTExOTE4MjUwMTUPZBYCAgMPZBYqZg8PFgIeBFRleHQFDlBhZ2UtMS0gb2YgMTUgZGQCAQ8PFgIfAAUKMDEvMDcvMjAxOWRkAgIPDxYCHwAFDVBhZ2UtMi0gb2YgMTVkZAIDDw8WAh8ABQ1QYWdlLTMtIG9mIDE1ZGQCBA8PFgIfAAUNUGFnZS00LSBvZiAxNWRkAgUPDxYCHwAFDVBhZ2UtNS0gb2YgMTVkZAIGDw8WAh8ABQ1QYWdlLTYtIG9mIDE1ZGQCBw8PFgIfAAUNUGFnZS03LSBvZiAxNWRkAggPDxYCHwAFDVBhZ2UtOC0gb2YgMTVkZAIJDw8WAh8ABQ1QYWdlLTktIG9mIDE1ZGQCCg8PFgIfAAUOUGFnZS0xMC0gb2YgMTVkZAILDw8WAh8ABQ5QYWdlLTExLSBvZiAxNWRkAgwPDxYCHwAFDlBhZ2UtMTItIG9mIDE1ZGQCDQ8PFgIfAAUOUGFnZS0xMy0gb2YgMTVkZAIODw8WAh8ABQ5QYWdlLTE0LSBvZiAxNWRkAg8PDxYCHwAFDlBhZ2UtMTQtIG9mIDE1ZGQCEA8PFgIfAAUOUGFnZS0xNS0gb2YgMTVkZAISDw8WAh8AZWRkAhMPDxYCHwAFDlBhZ2UtMTQtIG9mIDE1ZGQCFQ8PFgIfAAUJQXJrT25saW5lZGQCFg8PFgIfAAUOUGFnZS0xNS0gb2YgMTVkZGRPuCTZrjzvrTkqS57SJo2ocMaUnsKm2PCjVwgGxlBjxQ==">
+        </div>
+
+        <div>
+
+            <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="0E6665EC">
+            <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAJOTO9fVY7XPz6HneC1WDCOITUz7vQI9NCainVrn6JUsTJH8w8adl3TAGCNmpTzMBOHFNK4W2GSxFy9f6M7OuQN">
+        </div>
+        <div id="dvPage1" class="pg-break">
+            <table style="width: 100%;" cellspacing="0" cellpadding="1">
+
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="head1">
+                            <center>
+                                PLOT BUYERS' AGREEMENT
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <center>
+                                <div style="padding: 5px; border: 1px solid #121212; border-radius: 5px; width: 80%;
+                            height: 100px;" class="content-text">
+                                    For Plots at<br>
+
+                                    <span class="content-head2">
+                                        <span class="head-projectname">
+                                            @ViewBag.SiteName
+                                        </span><br>
+                                        @ViewBag.SiteAddress
+                                    </span>
+
+
+
+                                </div>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <center>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="content-text">
+                            <center>
+                                BETWEEN
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <center>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <center>
+                                <span class="head-projectname">
+
+                                    ABDOLPHIN INFRATECH BUILDERS & DEVELOPERS PVT LTD
+                                </span><br>
+                                <span class="content-text">
+                                    Hall No.-6, First Floor, Brahmkunj Complex, Opposite Pheonix Mall, Alambagh, Lucknow.
+                                </span>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <center>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <center>
+                                AND
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <center>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="26%" class="content-text-b" valign="top">
+                            Mr/Mrs/Miss :
+                        </td>
+                        <td class="content-text block-solid">
+                            <span>
+
+                                @ViewBag.SponsorName
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content-text-b" valign="top">
+                            R/o/ADD :
+                        </td>
+                        <td class="content-text block-solid">
+                            <span>
+                                @ViewBag.Address
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content-text-b" valign="top">
+                            For Plot No :
+                        </td>
+                        <td class="content-text block-solid">
+
+                            <span>
+                                @ViewBag.PlotInfo
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="height:5px;"><br></td>
+                                        <td style="height:5px;" colspan="2"><br></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content-text-b">
+                                            <br>
+                                        </td>
+                                        <td class="content-text-b">
+                                            <br>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="content-text-b" align="left">
+
+                                            <span class="content-text-b">FIRST PARTY</span>
+                                        </td>
+                                        <td class="content-text-b" align="right">
+
+                                            <span class="content-text-b">SECOND PARTY</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label1">Page-1- of 15 </span>
+
+                                        </td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+        <div id="dvPage2" class="pg-break">
+            <table style="width: 100%;" cellspacing="3" cellpadding="3">
+                <tbody>
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td class="head-projectname">
+                            <center>
+                                AGREEMENT
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td class="content-text">
+                            <b>THIS AGREEMENT</b> is made at Lucknow on this <b>
+
+                                <span id="lblAgreementDate">@ViewBag.CurrentDate</span>
+                            </b>by and between <span class="projectname">
+                                                   ABDOLPHIN INFRATECH BUILDERS & DEVELOPERS PVT LTD,
+                            </span>
+                            a company incorporated under the provisions of the Companies Act, 1956, having its registered office at,Hall No.-6, First Floor, Brahmkunj Complex, Opposite Pheonix Mall, Alambagh, Lucknow  and represented by its Authorized Signatory
+                            <span class="auto-style4">@ViewBag.AuthorizedSignatory</span> duly authorized vide Board Resolution dated  15.09.2017
+                            passed in his/her favour (hereinafter referred as <b>“FIRST PARTY”</b> which expression,
+                            unless it be repugnant to its context or meaning there of shall include its successor
+                            in business or assigns), of the First Party),<br>
+                            <center>
+                                <b class="content-head">AND</b>
+                            </center>
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td width="20%" valign="top">
+                                            (I) Mr/Mrs/Miss
+                                        </td>
+                                        <td class="block-dot">
+                                            <span>
+                                                @ViewBag.SponsorName
+                                            </span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td valign="top">
+                                            R/o./Add
+                                        </td>
+                                        <td class="block-dot">
+                                            <span>
+                                                @ViewBag.Address
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height:25px;"><br></td>
+                                        <td style="height:25px;"><br></td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top">
+                                            (II)
+                                            Mr./Mrs.Miss.
+                                        </td>
+                                        <td class="block-dot">
+                                            <span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top">
+                                            S/o,/W/o,D/o
+                                        </td>
+                                        <td class="block-dot">
+                                            <span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top">
+                                            R/o./Add
+                                        </td>
+                                        <td class="block-dot">
+                                            <span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td class="content-text">
+                            (hereinafter referred to as the <b>“SECOND PARTY”</b> which expression, unless it
+                            be repugnant to its context or meaning thereof shall include his legal heirs, assigns,
+                            successors etc), of the <b>Second Party</b>. <br>(<b>First Party</b> and the Second
+                            Party hereinafter, wherever the context so requires, referred to collectively as
+                            the "Parties" and individually as <b>"Party"</b>).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td class="content-text-b">
+                            <center class="content-head">
+                                WHEREAS
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>A.</b>
+                        </td>
+                        <td>
+                            The First Party has acquired agricultural land parcels or is
+                            in the process of acquiring &amp; consolidating agricultural land parcels situated at
+                            <span style="text-transform:uppercase;font-size:14px;"> <b><u> @ViewBag.SiteAddress</u></b></span>
+                            (within the revenue estate of<span style="text-transform:uppercase; font-size:14px;">&nbsp; <b><u></u></b></span>&nbsp;  U.P.) and the First Party contemplates to
+                            develop thereupon a residential colony in the name &amp; style of <span style="text-transform:uppercase;">
+                                &nbsp;<b>
+                                    <u>@ViewBag.SiteName</u>
+                                </b>
+                            </span> (hereinafter
+                            referred to as the “said Residential Colony” as construed as under) which shall
+                            interalia, comprises plots of different sizes &amp; dimensions as per the proposed tentative
+                            lay-out plan prepared by the company.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>B.</b>
+                        </td>
+                        <td class="content-text">
+                            It is also contemplated by the First Party that the entire
+                            proposed tentative lay-out of the said Residential Colony shall be developed by
+                            providing internal Roads,parks, solar street lights and entrance gate with security guard cabin Drainage system
+                            within the periphery of the said Residential Colony as shown in the proposed lay-out
+                            of the said Residential Colony.<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+
+
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="height:5px;"><br></td>
+                                        <td style="height:5px;" colspan="2"><br></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content-text-b">
+                                            <br>
+                                        </td>
+                                        <td class="content-text-b">
+                                            <br>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="content-text-b" align="left">
+
+                                            <span class="content-text-b">FIRST PARTY</span>
+                                        </td>
+                                        <td class="content-text-b" align="right">
+
+                                            <span class="content-text-b">SECOND PARTY</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label2">Page-2- of 15</span>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+        <div id="dvPage3" class="pg-break">
+            <table width="100%" cellspacing="3" cellpadding="5">
+
+                <tbody>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>C.</b>
+                        </td>
+                        <td class="content-text">
+                            The Second Party has approached the First Party and expressed
+                            its desire to purchase the plot bearing <b>Plot No.</b>
+                            <b>
+                                @ViewBag.PlotNumber
+                            </b>, Block No. <b>
+                                @ViewBag.BlockName
+                            </b> marked in the
+                            proposed tentative lay-out of the said Residential Colony and admeasuring <b>
+                                @ViewBag.PlotArea
+                            </b> sq. feet more
+                            fully described in schedule appended to this agreement (Hereinafter referred to
+                            as the “said Plot”) at a basic sale consideration of Rs.
+                            <b>@ViewBag.PlotRate</b>-(
+                            <b>@ViewBag.PlotAmountinrs</b>
+                            ) per sq. feet only totalling Rs  <b>@ViewBag.NetPlotAmount/- </b><b>@ViewBag.Netamountinrs</b>.
+                            Premium with regard to preferential location if any applicable for the said Plot shall be charged over and above the total basic sale consideration.<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>D.</b>
+                        </td>
+                        <td class="content-text">
+                            The Second Party confirms that he/she has inspected the land
+                            parcels over which the said Plot is located in the proposed tentative lay-out of
+                            the said Residential Colony, the entire scheme of the said Residential Colony, present
+                            location plan, land uses and ownership records/title chain of the said Plot and
+                            all other documents relating to the title, competency and all other relevant details
+                            thereto, and the Second Party hereby confirms that he/she is fully satisfied in all
+                            respects including the First Party's right, title and interest on the said Plot.<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>E.</b>
+                        </td>
+                        <td class="content-text">
+                            The First Party has explained to the Second Party about the
+                            overall scheme of the said Residential Colony &amp; nature of development specifications
+                            as may be undertaken by the First Party at its own costs &amp; expenses as to laying
+                            of internal roads, parks, solar street lights and entrance gate with security guard cabin&nbsp;  drainage system within the
+                            proposed tentative lay-out /periphery of the said Residential Colony. The First
+                            Party has explained to the Second Party that the First Party shall not be responsible
+                            to provide any other development specifications, which has not been specifically agreed
+                            between the parties under this agreement. The First Party has also explained to
+                            the Second Party that though the First Party shall develop the lay-out of the said
+                            Residential Colony by providing internal roads  and drainage
+                            system within the lay-out but its continuity and integration with municipal services
+                            (with regard to electricity, drainage connections etc) to said
+                            Plot/said Residential Colony, shall be the responsibility of the Second Party, which
+                            shall be arranged and done by the Second Party at his own costs &amp; expenses.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>F.</b>
+                        </td>
+                        <td class="content-text">
+                            The First Party confirms that the Second Party is signing this
+                            agreement with full knowledge of all the laws, rules, regulations, notifications
+                            applicable for overall scheme for development of the proposed tentative lay-out
+                            plan of the said Residential Colony and the Second Party has clearly understood
+                            its rights, duties, responsibilities, obligations under each and all of the clauses
+                            of this agreement.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td>
+                            <table width="100%">
+
+                                <tbody>
+                                    <tr>
+                                        <td><br></td>
+                                        <td><br></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="content-text-b">
+                                            <br>
+                                        </td>
+                                        <td class="content-text-b">
+                                            <br>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="content-text-b" align="left">
+
+                                            <span class="content-text-b">FIRST PARTY</span>
+                                        </td>
+                                        <td class="content-text-b" align="right">
+
+                                            <span class="content-text-b">SECOND PARTY</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label3">Page-3- of 15</span>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div class="barCodeCss0">
+            </div>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+        <div id="dvPage4" class="pg-break">
+            <table width="100%" cellspacing="1" cellpadding="2">
+
+
+                <tbody>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>G.</b>
+                        </td>
+                        <td class="content-text">
+                            The Second Party confirms that the Second Party has investigated &amp; acquainted himself/themselves with the land uses,
+                            ownership records, location, lay-out &amp; scheme of the said plot/said colony and all other  relevant details and
+                            documents relating to the title, competency and made all enquiries &amp; investigations with regard thereto during the free look period of 15 days from the date of
+                            booking for the said Plot registered with the First Party and the Second Party hereby confirms that he/she is fully satisfied in all respects and it is only after availing
+                            ‘free look period’, the Second Party wished to continue with the booking and to make further payments and to sign agreement with regard to purchase of the said plot from the First Party.
+                            The Second Party is aware that an applicant is entitled to claim refund of entire booking amount for the said Plot from the First Party during the free look period of 15 days
+                            from the date of booking/registration without any forfeiture/deduction excepting that a sum of Rs.<b>1000(One Thousand Rupees Only)</b>
+
+                            which shall be deducted by the First Party on account
+                            of processing and administrative charges and such request of the applicant shall be processed by the First Party within 15 days of the date of submitting request to First Party.
+                            It has been also clarified by the First Party and agreed by the Second Party that any refund claim for booking amount after free-look period of 15 days shall be processed only
+                            as per terms &amp; conditions of this agreement and not otherwise.
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>H.</b>
+                        </td>
+                        <td class="content-text">
+                            In the light of the above representations and warranties, the
+                            parties here to have agreed to enter into this agreement subject to terms &amp; conditions
+                            contained hereafter.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td class="content-head">
+                            NOW THEREFORE, THIS AGREEMENT WITNESSES AS UNDER:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>1.</b>
+                        </td>
+                        <td class="content-text">
+                            &nbsp;That in accordance with and subject to terms &amp; conditions set-out
+                            in this agreement, the First Party  agrees to sell to the Second Party, the said
+                            Plot bearing <b>
+                                Plot No. @ViewBag.PlotNumber
+
+                            </b>, Block No <b>
+
+                                @ViewBag.BlockName
+                            </b>, admeasuring
+                            <b>
+                                @ViewBag.PlotArea
+                            </b> sq.
+                            feet comprised
+                            in the proposed tentative lay-out of the said Residential Colony,  more fully also
+                            described in schedule appended to this agreement and the Second Party agrees to
+                            purchase the said Plot at a basic sale consideration price of Rs.<strong>
+                                @ViewBag.PlotRate/- (
+                                @ViewBag.PlotAmountinrs
+                                ) per sq. feet only
+                            </strong>totalling Rs  <b>@ViewBag.NetPlotAmount /- </b><b>@ViewBag.Netamountinrs</b>.
+                            Premium with regard to preferential location if any applicable for the said Plot shall be charged over and above the total basic sale consideration.
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td class="content-text"></td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td>
+                            <table width="100%">
+
+                                <tbody>
+                                    <tr>
+                                        <td class="content-text-b">
+                                            <br>
+                                        </td>
+                                        <td class="content-text-b">
+                                            <br>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="content-text-b" align="left">
+
+                                            <span class="content-text-b">FIRST PARTY</span>
+                                        </td>
+                                        <td class="content-text-b" align="right">
+
+                                            <span class="content-text-b">SECOND PARTY</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label4">Page-4- of 15</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+        <div id="dvPage5" class="pg-break">
+            <table width="100%" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>2.</b>
+                        </td>
+                        <td class="content-text">
+                            &nbsp;That the Second Party has paid a token sum of Rs. <b>
+                                @ViewBag.PaidAmt/-
+                            </b> (
+                            <b>
+                                @ViewBag.PaidAmtWords
+                            </b>
+                            ) being part payment towards the basic sale consideration of the said Plot vide
+                            
+                              
+                            drawn on Lucknow, the receipt of which the First Party
+                            hereby acknowledged.<br>
+
+                            <b> Total Amount : @ViewBag.ActualPlotAmount</b><br>
+
+                            <b> Discount as per Plan : @ViewBag.Discount</b><br>
+                            <b> Amount Payable : @ViewBag.PaidAmt </b><br>
+                            <strong>
+                                <span class="auto-style3" style="font-size:16px;">
+                                    <b> 10.00 % </b> PLC WILL BE CHARGED AT THE TIME OF REGISTRY
+                                </span>
+                            </strong><br>
+
+
+                            <span class="auto-style3" style="font-size:16px;">(<strong>INCASE OF FOREIGN INVESTOR THE PROVISION OF FEMA 1999/RBI GUIDELINES WILL BE APPLICABLE</strong>)</span><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>3.</b>
+                        </td>
+                        <td class="content-text">
+                            &nbsp;The Second Party shall be responsible to comply with all guidelines, policy, acts,
+                            rules, regulations of Government of India, Reserve Bank of India, Gov. Dept., Development
+                            Authority, Nagar Panchayat etc as applicable with regard to remittance of payment,
+                            acquisition, sale, purchase, transfer of immovable property.
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>4.</b>
+                        </td>
+                        <td class="content-text">
+                            &nbsp;The Second Party agrees that time is the essence with respect to payment of the
+                            sale consideration price or any other sums payable by the Second Party to the First
+                            Party on or before the due date mentioned under this agreement or as and when demanded
+                            by the First Party. Any default in payment of instalments shall attract interest/penalty
+                            10% or as per the management discretion, of the default instalment amount.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>5.</b>
+                        </td>
+                        <td class="content-text">
+                            &nbsp;That the Second Party soon after tendering a token sum of Rs  <b>  @ViewBag.PaidAmt/-</b> (
+                            <b>
+                                @ViewBag.PaidAmtWords
+                            </b> ) to the First Party,
+                            shall make balance sale consideration with regard to said Plot in instalments as per applicable payment plan and in the manner provided
+                            under this agreement.
+                            It is clarified that provisional allotment of the said Plot shall be made by the First Party only after that
+                            the second Party has paid a token sum of the basic sale consideration with regard to the said Plot. The First Party shall
+                            make provisional allotment of the said Plot as marked in the proposed tentative lay-out for the said Residential Colony prepared by
+                            the Architects on behalf of First Party and shown to the Second Party. The basic sale consideration price for the said Plot is calculated
+                            on the basis of its plot area, which is tentative and is subject to change. The final plot area for the said Plot shall be confirmed by the
+                            First Party only after demarcation in the scheme of the said Residential Colony is completed.
+
+                            The Parties agree to make payment or refund excess consideration or to make adjustments in balance sale basic consideration for the said plot if any and as the case may, necessitated on account of increase/decrease in the plot area as per final area alloted in the scheme of the said Residentail Colony.
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td>
+                            <table width="100%">
+
+                                <tbody>
+                                    <tr>
+                                        <td><br><br></td>
+                                        <td><br><br></td>
+                                        <td><br><br></td>
+                                    </tr>
+                                    <tr>
+                                        <td><br><br></td>
+                                        <td><br><br></td>
+                                        <td><br><br></td>
+                                    </tr>
+                                    <tr>
+                                        <td><br><br></td>
+                                        <td><br><br></td>
+                                        <td><br><br></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content-text-b" align="left">
+
+                                            <span class="content-text-b">FIRST PARTY</span>
+                                        </td>
+                                        <td class="content-text-b" align="right">
+
+                                            <span class="content-text-b">SECOND PARTY</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label5">Page-5- of 15</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+        <div id="dvPage6" class="pg-break">
+            <table width="100%" cellspacing="2" cellpadding="4">
+                <tbody>
+                    <tr style="display:none">
+                        <td width="1%" valign="top"></td>
+                        <td class="content-text">
+                            The Parties agree to make payment or refund
+                            excess consideration or to make adjustments in balance sale basic consideration for the said Plot if any and as the case may, necessitated on
+                            account of increase/decrease in the plot area as per final area allotted in the scheme of the said Residential Colony.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>6.</b>
+                        </td>
+                        <td class="content-text">
+                            The Second Party shall make payment of the basic sale consideration
+                            of the said Plot or such other sum as may be payable under this agreement to the
+                            First Party only through Account Payee Cheque(s)/Pay Order(s)/Demand Draft (s) drawn
+                            in favour of <span class="projectname" style="text-decoration: underline; font-size:14px; "> <b>ABDOLPHIN INFRATECH BUILDERS & DEVELOPERS PVT LTD</b></span>
+                            payable at Allahabad Uttar Pradesh.<strong><b> <span class="auto-style3" style="font-size:14px;">Only micr &amp; multi city cheques shall be accepted.</span></b></strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>7.</b>
+                        </td>
+                        <td class="content-text">
+                            That the First Party has explained and it has been also agreed and understood by the Second Party that this agreement
+                            is being executed and signed by the Parties only after that the second Party has paid a token sum of
+
+
+                            the basic sale consideration with
+                            regard to the said Plot to the First Party and prior thereto the Second Party shall not be entitled to claim any agreement confirming
+                            provisional allotment with regard to the said Plot. The Second Party shall be required to sign agreement confirming the provisional allotment
+                            of the said plot soon after that the second Party has paid a token sum of  the basic sale consideration to the First Party and within time and
+                            in manner as
+                            required by the First Party.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>8.</b>
+                        </td>
+                        <td class="content-text">
+
+                            The Second Party agrees and understands that any amount paid by the Second Party to the First Party
+                            with regard to the said Plot either as a token money or any other sum paid thereafter to the extent of second Party
+                            has paid a token sum of
+
+                            the basic sale consideration for the said Plot, shall constitute Earnest Money for ensuring
+                            fulfilment of terms &amp; conditions of this agreement. The First Party shall be entitled to cancel allotment and forfeit
+                            earnest money in the event breach of terms &amp; conditions of this agreement including default in payment of instalments by
+                            the Second  Party. However, the first party at its sole discretion, in exceptional circumstances, condone the delay in payment
+                            of instalments of basic sale consideration or any other sum payable pursuant to this agreement beyond the due date by charging penal
+                            interest/fixed charges
+                            10% default instalment amount.
+                        </td>
+                    </tr>
+                    <tr style="display:none">
+                        <td width="1%" valign="top">
+                            <b>9.</b>
+                        </td>
+                        <td class="content-text">
+                            That "if the second Party wants to cancel his / her booking for the said Plot for any reason whatsoever cancellation of booking of plot will attract 20% cancellation charge as on date paid amount,
+                            <br>
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>10.</b>
+                        </td>
+                        <td class="content-text">
+                            That "if the second Party wants to cancel his / her booking for the said Plot for any reason whatsoever within 15 days from the date of Booking, then the First Party shall be entitled to deduct only a sum of Rs.<b>1000/-(One Thousand Rupees Only)</b> on account of processing and administrative charges and refund the balance amount within 15 Days from the date of receiving request from the Second Party. However if the Second Party wants to cancel his/her booking for the said Plot for any reason whatsoever after 15 days from the date of booking i.e. after expiry of free look period of 15 days, then the First Party shall not deduct any amount except Rs. 1000/- for processing and administrative charges if the amount is refunded in 60 days after receiving the request for the refund from the Second Party. However if the Second Party wants immediate refund against his/her booking for the said Plot, then the First Party shall be entitled to deduct 20% of the entire amount deposited towards sale consideration on account of preferential processing in time and refund the balance amount within 30 days to the Second Party.
+                            However, if the payment on the said plot has been made by Third Party, the payment shall only be refunded in the name of owner of the receipt of the said payment. No refund shall be made in name other than the owner of the said Plot/Receipt of Payment.
+
+                            <br>
+
+
+                        </td>
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td>
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="height:30px;"><br></td>
+                                        <td style="height:30px;"><br></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content-text-b" align="left">
+
+                                            <span class="content-text-b">FIRST PARTY</span>
+                                        </td>
+                                        <td class="content-text-b" align="right">
+
+                                            <span class="content-text-b">SECOND PARTY</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label6">Page-6- of 15</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+        <div id="dvPage7" class="pg-break">
+            <table width="100%" cellspacing="4" cellpadding="3">
+                <tbody>
+                    <tr style="display:none">
+                        <td width="1%" valign="top"></td>
+                        <td class="content-text">
+                            &nbsp;&nbsp;&nbsp;&nbsp;  charges and refund the balance
+                            amount within 15 Days from the date of receiving request from the Second Party. <br>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>11.</b>
+                        </td>
+                        <td class="content-text">
+                            The Second Party understands and agrees that the above stipulations with regard to deduction from the amount deposited by the Second Party towards the sale consideration with regard to the said Plot, would be requisite and it shall be also lawful by the First Party to make deduction in above manner whenever immediate processing of refund is desired by the Second Party. The Second Party undertakes that the Second Party shall not raise any objection or challenge above stipulations on any ground whatsoever whenever &amp; wherever immediate processing of refunds, is desired by the Second Party as the First Party would not be able to get ready buyers for the said Plot soon after cancellation of booking for the said Plot by the Second Party.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>12.</b>
+                        </td>
+                        <td class="content-text">
+                            The First Party shall issue offer of possession with regard to the said Plot to the Second Party within 36 months from the date of signing of this agreement and only after realization of the entire basic sale consideration and any other sums payable by the Second Party to the First Party under this agreement. The First Party shall not be liable to pay penalty or compensation of any nature whatsoever to the Second Party if the First Party is prevented to complete internal developments works within the said Colony and/or the offer of possession could not be issued by the First Party within the period committed under this clause on account of force majeure circumstances or for any reasons beyond the control of the First Party. However, subject to above exceptions, the First Party agrees to pay penalty  Rs. 20 per sq. Mt./month to the Second Party for the delayed period in issuing offer of possession after expiry of 60 months from the date of execution of this
+                            agreement. It is clarified and also agreed by the Second Party that the First Party shall not be liable to pay any penalty or compensation of any nature whatsoever to the Second Party.
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>13.</b>
+                        </td>
+                        <td class="content-text">
+                            If the Second Party is in continuing breach of
+                            any terms &amp; conditions of this agreement including default in payment of instalments under the payment plan opted by him.It is clarified and also
+                            agreed by the Second Party opting for a payment plan having tenure more than 60 months that the Second Party shall not be entitled to claim penalty or compensation of any nature
+                            of whatsoever before the expiry of tenure provided in the payment plan opted by him and the above penalty provisions
+                            shall be applicable to the parties only thereafter as if a longer time period is provided under this agreement instead of the referred 60 months.
+                            The Second Party shall be liable to take possession of said Plot within 90 days from the date of issue of offer of possession by the First Party
+                            and thereafter the said Plot shall remain at the risk &amp; costs of the Second Party. The Second Party shall be liable to pay holding charges
+                            Rs. 10 per sq.
+                            Mt./month to the First Party if the Second Party fails to obtain possession of the said Plot within 90 days of the offer of possession so issued by
+                            the First Party.
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td>
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="height:10px;"><br></td>
+                                        <td style="height:10px;"><br></td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td class="content-text-b" align="left">
+
+                                            <span class="content-text-b">FIRST PARTY</span>
+                                        </td>
+                                        <td class="content-text-b" align="right">
+
+                                            <span class="content-text-b">SECOND PARTY</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label7">Page-7- of 15</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+        <div id="dvPage8" class="pg-break">
+            <table width="100%" cellspacing="4" cellpadding="5">
+
+                <tbody>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>14.</b>
+                        </td>
+                        <td class="content-text">
+                            That the First Party reserves with itself the right to effect suitable alterations in the proposed tentative lay-out of the said Residential
+                            Colony for ensuring optimum land utilization in the Scheme of the said Residential Colony and the Second Party agrees and understands that such alterations
+                            may involve change in location, change in number, change in its boundary, change in area /dimensions or even obliteration of the said Plot. In event of
+                            any of the aforesaid change/alterations effected before demarcation of the said Plot or before the execution &amp; registration of sale deed/conveyance deed
+                            for said Plot or in the case of allotment of the alternative plot as the case may be, the adjustment with regard to excess /short payment of basic sale
+                            consideration shall be made at booking rate except that the Premium with regard to preferential location if any applicable to new Plot shall be
+                            demanded by First Party additionally at prevailing rates of the First Party. None of the above changes/alterations shall be effected after sale
+                            deed/conveyance deed for the said Plot is executed registered by the First Party unto the Second Party.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td class="content-text">
+                            The Second Party shall be considered under a condition of Default, on the occurrence of the following events:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td class="content-text">
+                            In case the Second Party fails to make payments for 3 consecutive demands made by the First Party as per the Payment Plan annexed hereto, despite having been issued notice in that regard the Second Party shall be liable to pay interest to the First Party on the unpaid amount at the rate prescribed in the Rule.
+                        </td>
+                    </tr>
+
+                    <tr style="display:none">
+                        <td width="1%" valign="top">
+                            <b>15.</b>
+                        </td>
+                        <td class="content-text">
+                            That the First Party shall provide following development specifications within the lay-out of the said Residential Colony i.e.
+                            internal roads, electrical lines, drainage system at its own costs &amp; expenses and as per the specifications shown &amp;
+                            explained by the First Party to the Second Party at the time of booking of the said Plot. However, the First Party shall not be responsible
+                            to provide for or arrange the continuity &amp; integrity and energisation of all or any of the internal development works carried-out by the First
+                            Party within the periphery of the said Residential Colony with any Municipal or Government services, which in any case depends
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>15.</b>
+                        </td>
+                        <td class="content-text">
+                            In case of Default by Second Party under the condition listed above continues for a period beyond 6 consecutive months after notice from the First Party in this regard, the First Party may cancel the allotment of the Plot in favor of the Second Party and refund the money paid to him by the Second Party by deducting the booking amount and the interest liabilities and this Agreement shall thereupon stand terminated. Provided that the First Party shall intimate the Second Party about such termination at least thirty days prior to such termination.That the First Party shall provide following development specifications within the lay-out of the said  Residential Colony i.e. internal roads, drainage system, parks, solar street lights and entrance gate with security guard cabin at its own costs &amp; expenses and as per the specifications shown &amp; explained by the First Party to the Second Party at the time of booking of the said Plot. However, the First Party shall not be responsible to provide for or arrange the continuity &amp; integrity and energization of all or any of the internal development works carried-out by the First Party within the periphery of the said Residential Colony with any Municipal or Government services, which in any case depends.
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td>
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="height:15px;"><br></td>
+                                        <td style="height:15px;"><br></td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td class="content-text-b" align="left">
+
+                                            <span class="content-text-b">FIRST PARTY</span>
+                                        </td>
+                                        <td class="content-text-b" align="right">
+
+                                            <span class="content-text-b">SECOND PARTY</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label8">Page-8- of 15</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div class="barCodeCss0">
+            </div>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+        <div id="dvPage9" class="pg-break">
+            <table width="100%" cellspacing="4" cellpadding="6">
+                <tbody>
+                    <tr style="display:none">
+                        <td width="1%" valign="top"></td>
+                        <td class="content-text">
+                            &nbsp;&nbsp;&nbsp;&nbsp; upon the policy guidelines of the concerned Municipal /Competent authorities from time to time. It is clarified by the First Party and also agreed by the Second
+                            Party that the Second Party shall alone be responsible for the continuity,integration and energisation of  all
+                            Municipal/Government services up to
+                            their plot line by paying applicable fees, development charges, levies, security deposits directly to concerned Municipal /Competent authorities.
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>16.</b>
+                        </td>
+                        <td class="content-text">
+                            The First Party shall abide by the time schedule for completing the project as disclosed at the time of registration of the project with the Authority and towards handing over the Plot to the Second Party and the common areas to the association of Second Party or the competent authority, as the case may be.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>17.</b>
+                        </td>
+                        <td class="content-text">
+                            The First Party shall intimate the Second Party about such termination at least thirty days prior to such termination. After refund of money paid by the Second Party, the Second Party agrees that he/she shall not have any rights, claims etc. against the First Party and that the First Party shall be released and discharged from all its obligations and liabilities under this Agreement upon the policy guidelines of the concerned Municipal /Competent authorities from time to time. It is clarified by the First Party and also agreed by the Second Party that the Second Party shall alone be responsible for the continuity, integration and energization of all Municipal/Government services up to their plot line by paying applicable fees, development charges, levies, security deposits directly to concerned Municipal /Competent authorities.
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>18.</b>
+                        </td>
+                        <td class="content-text">
+                            That the First Party shall get the lay-out of the said Residential Colony approved by the concerned Authority. It is explained and also
+                            understood by the Second Party that the land under the entire scheme of the
+                            said residential colony presently falls under the jurisdiction of Panchayat and the First Party has got /shall get the
+                            lay-out approved from the concerned office of Panchayat. However, if any land or part thereof comprised in the said residential
+                            colony is notified now or at any time in future under the master plan and consequently the lay-out is required to be approved from
+                            the concerned development authority, the First shall get the same approved but the entire cost &amp; expenses thereof shall be borne &amp;
+                            recovered from the Second Party. The Second Party also agrees &amp; undertakes to pay External Development Charges, Infrastructure Development
+                            Charges, Infrastructure Augmentation charges, Infrastructure Maintenance Charges, development fees etc., and also taxes, cess, levies, assessment,
+                            outgoings of all or any kind by whatever named called whether levied or liveable in future with regard to the said Plot or which may be imposed
+                            to said Residential Colony or any enhancement thereof on pro-rata basis at any time in pursuance of any policy of the statutory authority,
+                            Government of Uttar Pradesh or Central Govt. It is also made clear and agreed by the Second Party that this undertaking shall survive the
+                            execution of sale deed of the said Plot in favour of the Second Party. It is agreed by the Second Party that any such demand if made by
+                            the First Party or by any competent authority will constitute unpaid sale price and agrees that even if such government charges, levies etc.
+                            are demanded by the First Party after sale deed for the said Plot is executed in favour of the Second Party, the First Party shall have
+                            lien on the said Plot to the extent of such unpaid sale price and the Second Party shall not object or demur such payments as demanded by
+                            the First Party on any ground whatsoever and agrees to co-operate if the First Party resumes possession &amp; ownership of the said Plot
+                            and/or take all legal measures to recover such unpaid sale price upon the Second Party defaulting on such payment.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td>
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="height:10px;"></td>
+                                        <td style="height:10px;"></td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td class="content-text-b" align="left">
+
+                                            <span class="content-text-b">FIRST PARTY</span>
+                                        </td>
+                                        <td class="content-text-b" align="right">
+
+                                            <span class="content-text-b">SECOND PARTY</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label9">Page-9- of 15</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div class="barCodeCss0">
+            </div>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+        <div id="dvPage10" class="pg-break">
+            <table width="100%" cellspacing="3" cellpadding="4">
+
+                <tbody>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>19.</b>
+                        </td>
+                        <td class="content-text">
+                            It is made clear by the First Party and also agreed by the Second Party  that all rights including ownership of any land parcels
+                            ( other than the plots which has been specifically sold against consideration to a particular allottee/buyer) and the
+                            facilities and amenities and the commonly used areas within the said Residential Colony shall soley vest with the First Party
+                            and the First Party shall be entitled to deal with the same in any manner whatsoever including  but not limited to creation of any further rights in favour of any other party by way of sale,
+                            transfer, lease, collaboration, joint venture, operation and management or any other mode
+                            including transfer to any person, institution, trust, local authority, government which the First Party deem fit in its sole discretion.
+                            It is made clear by the First Party to the Second Party that the First Party has not made any commitment or charged any price from the
+                            Second Party for the ownership of any amenities/facilities which are specifically earmarked by the First Party for its ownership,
+                            though the First Party may permit the occupants of the said Residential Colony to use such amenities and facilities upon payment of
+                            applicable charges, fees, subscription, charges, security deposit etc as decided by the First Party from time to time. The Second Party
+                            confirms that these undertakings shall survive throughout occupancy of the said Plot by the Second Party and on its representatives, legal
+                            heirs, executors, assigns, nominees, subsequent transferee(s) and accordingly the First Party agrees to incorporate these conditions
+                            in any sale deed with the subsequent transfree(s).
+                        </td>
+                    </tr>
+
+                    <tr style="display:none">
+                        <td width="1%" valign="top">
+                            <b>14.</b>
+                        </td>
+                        <td class="content-text">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Rs 50 / SqFt will be deducted as Development charge at the time of registry or possession.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>20.</b>
+                        </td>
+                        <td class="content-text">
+                            That the Second Party shall be responsible to obtain all requisite sanctions, approvals, N.O.C, zoning regulations, permits for the construction &amp; development on the said Plot at their own costs &amp; expenses and the First Party shall not be held liable for the same.
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>21.</b>
+                        </td>
+                        <td class="content-text">
+                            That the Second Party shall not make any objection or claim with regard to any development/construction
+                            activities undertaken by the First Party on account of inconvenience or otherwise for many years in future within
+                            the said Residential Colony and in any part thereof and/or to any integration of existing amenities/facilities viz electricity,
+                            , drainage system to any extension of the said Residential colony.
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td class="content-text">
+                            That if any third party payment is remitted with regard to the said Plot
+                            for and on behalf of the Second Party, the Second Party shall ensure that there would
+                            not be any claim by such third party in the said Plot against the payment so made from the
+                            third party in any manner whatsoever. The First Party shall not be liable for any inter-se transaction
+                            between such third party and the Second Party in any manner whatsoever.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>22.</b>
+                        </td>
+                        <td class="content-text">
+                            In cases there are two or more persons signing this agreement on the part of the Second Party,
+                            all communications shall be sent by the First Party to the person, whose name appears first in this agreement
+                            and at the address given by him and which shall for all purposes shall be considered as served on the Second Party
+                            and no separate communications shall be necessary to other named persons in the Second Party.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td>
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="height:15px;"></td>
+                                        <td style="height:15px;"></td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td class="content-text-b" align="left">
+
+                                            <span class="content-text-b">FIRST PARTY</span>
+                                        </td>
+                                        <td class="content-text-b" align="right">
+
+                                            <span class="content-text-b">SECOND PARTY</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label10">Page-10- of 15</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div class="barCodeCss0">
+            </div>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+
+        <div id="dvPage11" class="pg-break">
+            <table width="100%" cellspacing="4" cellpadding="5">
+
+
+                <tbody>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>23.</b>
+                        </td>
+                        <td class="content-text">
+                            That in case of any difference of opinion between the First Party and the Second Party
+                            with regard to size and locations of the said Plot comprised in the said Residential Colony then
+                            though the efforts shall be made by the First Party to accommodate the options of the Second Party
+                            but final allotment of location and size shall be finalized by the First Party at its sole discretion.
+                            The decision of the First Party in this respect shall be final and binding. In the event of the First
+                            Party failing to allot the alternative plot, the Second Party shall be entitled to refund of advances
+                            made under this agreement along with simple interest payable by SBI on its saving deposits. Save as aforesaid,
+                            the Second Party, will not have any claim of compensation, right or action of any nature whatsoever against the First Party.
+                            The Second Party understands and agrees that the allotment shall be tentative and is based on the proposed tentative lay-out of
+                            the said Residential Colony.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>24.</b>
+                        </td>
+                        <td class="content-text">
+                            That the First Party has explained to the Second Party about overall
+                            scheme of the said Residential Colony and the  nature and quality of development
+                            specifications within the periphery of the said Residential Colony at the time of booking
+                            of the said Plot itself and also in the clauses of this agreement and therefore the Second Party
+                            shall not be entitled to raise any objection, claim against First Party on account of deficiency in
+                            services or on any other account whatsoever, noticed and alleged by the Second Party at any time
+                            hereinafter excepting with regard to works  specifically agreed to be undertaken by the First Party under this agreement.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>25.</b>
+                        </td>
+                        <td class="content-text">
+                            That in event the First Party abandons the scheme of the said Residential Colony or
+                            is prevented to execute the said scheme for the circumstances beyond the control of the First
+                            Party or because of any governmental/regulatory actions, inactions or vis major circumstances,
+                            the Second Party shall be entitled to only refund of advances made under this agreement along with
+                            simple interest payable by SBI on its saving deposits. Save as aforesaid, the Second Party, will not
+                            have any claim of compensation, right or action of any nature whatsoever against the First Party.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>26.</b>
+                        </td>
+                        <td class="content-text">
+                            The land on which the said Plot is located is free from all encumbrances including any
+                            notification of acquisition of the government or a local authority and in case any such notification
+                            is passed and the said plot is acquired in the future, the Second Party shall be entitled to receive
+                            compensation directly from the concerned authority and the First Party shall not be liable in any manner
+                            whatsoever on account of the same.  However, in the event of such compensation is paid  by the Authorities
+                            in the name of the First Party, then the Second Party shall be entitled to claim and receive from the First Party
+                            such compensation on a pro rata basis as and when the same is finally determined and received by the First Party.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td>
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="height:25px;"></td>
+                                        <td style="height:25px;"></td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td class="content-text-b" align="left">
+
+                                            <span class="content-text-b">FIRST PARTY</span>
+                                        </td>
+                                        <td class="content-text-b" align="right">
+
+                                            <span class="content-text-b">SECOND PARTY</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label11">Page-11- of 15</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div class="barCodeCss0">
+            </div>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+
+
+        <div id="dvPage12" class="pg-break">
+            <table width="100%" cellspacing="5" cellpadding="6">
+
+                <tbody>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>27.</b>
+                        </td>
+                        <td class="content-text">
+                            The Second Party shall not be entitled to assign the said Plot in favour of its nominees
+                            prior to execution and registration of sale deed/conveyance deed for the said Plot unto the Second Party.
+                            However, the First Party may permit assignment and transfer of the said Plot on payment of   administrative
+                            charges and on compliance of formalities as per policy of the First Party. It is agreed by the Second Party he
+                            shall alone be responsible for the compliance of all laws, rules, and notifications of the concerned authorities as
+                            may be applicable with regard to assignment and transfer of the said Plot and also for execution and registration of sale deed for the said Plot.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>28.</b>
+                        </td>
+                        <td class="content-text">
+                            That the First Party shall execute sale deed/ conveyance deed to convey
+                            title of the said Plot unto the Second Party only after receiving the full sale consideration and other
+                            sums if any payable by the Second Party to the First Party under this agreement. The Second Party shall
+                            take physical possession of the said Plot as is where basis only after Sale Deed/Conveyance Deed for the
+                            said Plot is executed and registered by the First Party unto the Second Party. All expenses with regard to stamp duty,
+                            registration charges and other incidental expenses to cover the cost of registration of the sale deed/conveyance deed will be borne by the Second Party.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>29.</b>
+                        </td>
+                        <td class="content-text">
+                            Notwithstanding any things contained in this agreement,
+                            the Second Party shall indemnify the First Party, its officers, agents and representatives,
+                            estates, effects, indemnified and harmless against any loss/liabilities or damages that
+                            the First Party may suffer as a result on non-payment, non-observance or non-performance
+                            of any of the covenants and conditions stipulated in this agreement.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>30.</b>
+                        </td>
+                        <td class="content-text">
+                            After the First Party executes this Agreement he shall not mortgage or create a charge on the Plot and if any such mortgage or charge is made or created then notwithstanding anything contained in any other law for the time being in force, such mortgage or charge shall not affect the right and interest of the Second Party who has taken or agreed to take such Plot.
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>31.</b>
+                        </td>
+                        <td class="content-text">
+                            That the rights and obligations of the parties under or arising out of this agreement shall be construed and enforced in accordance with the law of India.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>32.</b>
+                        </td>
+                        <td class="content-text">
+                            This agreement may be executed in counterparts each of which shall be deemed to be an original,
+                            but all of whom which shall constitute one and the same instrument and agreement.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td>
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="height:20px;"><br></td>
+                                        <td style="height:20px;"><br></td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td class="content-text-b" align="left">
+
+                                            <span class="content-text-b">FIRST PARTY</span>
+                                        </td>
+                                        <td class="content-text-b" align="right">
+
+                                            <span class="content-text-b">SECOND PARTY</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label12">Page-12- of 15</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div class="barCodeCss0">
+            </div>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+
+
+        <div id="dvPage13" class="pg-break">
+            <table width="100%" cellspacing="5" cellpadding="5">
+
+
+                <tbody>
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>33.</b>
+                        </td>
+                        <td class="content-text">
+                            That the rights and obligations of the parties under or arising out of this Agreement shall be construed and enforced in accordance with the Act and the Rules and Regulations made there under including other applicable laws of India for the time being in force.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td class="content-text">
+                            All or any disputes arising out or touching upon or in relation to the terms and conditions of this Agreement, including the interpretation and validity of the terms thereof and the respective rights and obligations of the Parties, shall be settled amicably by mutual discussion, failing which the same shall be settled through the adjudicating officer appointed under the Act.
+                        </td>
+                    </tr>
+
+                    <tr style="display:none">
+                        <td width="1%" valign="top">
+                            <b>27.</b>
+                        </td>
+                        <td class="content-text">
+                            &nbsp;&nbsp;This Agreement shall be governed by,
+                            and construed in accordance with the laws of India.
+                            In the event any differences or disputes arise between the parties hereto,
+                            such disputes shall be amicably settled / resolved through negotiations in good
+                            faith by the parties hereto. In the event the parties fail to resolve such dispute through
+                            amicable negotiations, the same shall be referred to the Arbitrator appointed as per provisions of The Arbitration and Conciliation Act, 1996.
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td width="1%" valign="top">
+                            <b>34.</b>
+                        </td>
+                        <td class="content-text">
+                            Only courts at Allahabad shall have Jurisdiction in case of any dispute.
+                        </td>
+                    </tr>
+                    <tr style="display:none">
+                        <td width="1%" valign="top">
+                            <b>29.</b>
+                        </td>
+                        <td class="content-text">
+                            &nbsp;&nbsp;&nbsp;&nbsp;That the Second Party shall be responsible to obtain all
+                            requisite sanctions, approvals, N.O.C, zoning regulations, permits for the construction
+                            &amp; development on the said Plot at their own costs &amp; expenses and the First Party shall not be held liable for the same.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content-text">
+                            <br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td class="content-head">
+                            <center>
+                                SCHEDULE
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top" class="auto-style1"></td>
+                        <td class="auto-style2">
+                            Schedule of the said Plot bearing
+                            @ViewBag.PlotNumber
+                            </b> Block No. <b>
+                                @ViewBag.BlockName
+                            </b> marked in the
+                            proposed tentative lay-out of the said Residential Colony, admeasuring <strong>
+                                @ViewBag.PlotArea
+                            </strong> square feet
+                            and bounded as follows:-
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td class="content-text">
+                            <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td width="25%" class="content-text">
+                                            EAST
+                                        </td>
+                                        <td class="content-text">
+                                            NA
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="25%" class="content-text">
+                                            WEST
+                                        </td>
+                                        <td class="content-text">
+                                            NA
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="25%" class="content-text">
+                                            SOUTH
+                                        </td>
+                                        <td class="content-text">
+                                            NA
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="25%" class="content-text">
+                                            NORTH
+                                        </td>
+                                        <td class="content-text">
+                                            NA
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="1%" valign="top"></td>
+                        <td>
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="height:300px;"><br></td>
+                                        <td style="height:300px;"><br></td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td class="content-text-b" align="left">
+
+                                            <span class="content-text-b">FIRST PARTY</span>
+                                        </td>
+                                        <td class="content-text-b" align="right">
+
+                                            <span class="content-text-b">SECOND PARTY</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label13">Page-13- of 15</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div class="barCodeCss0">
+            </div>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+
+
+        <div id="dvPage14" class="pg-break">
+            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#000">
+                <tbody>
+                    <tr>
+                        <td align="center" valign="top">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:solid 1px #000">
+                                <tbody>
+                                    <tr>
+                                        <td width="5%" align="left"></td>
+                                        <td width="6%" align="left"> </td>
+                                        <td width="13%" align="left"></td>
+                                        <td width="14%" align="left"></td>
+                                        <td width="6%" align="left"></td>
+                                        <td width="12%" align="left"></td>
+                                        <td width="13%" align="left"></td>
+                                        <td width="7%" align="left"> </td>
+                                        <td width="24%" align="left"></td>
+                                        <td width="24%" align="left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td height="82" colspan="10" align="center" style="font-size:20px; border-bottom:solid 1px #000"><u><strong><em>PAYMENT DETAILS:</em></strong></u></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" valign="top" colspan="10" style="border-bottom:solid 1px #000">
+                                            <table width="100%" border="0" align="center" cellpadding="4" cellspacing="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="37%" align="left" colspan="5" style="border-right:solid 1px #000; border-bottom:solid 1px #000">Basic Sale Price As on Date :</td>
+                                                        <td width="63%" align="left" colspan="5" style="border-bottom:solid 1px #000"> <b>@ViewBag.NetPlotAmount</b> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="left" colspan="5" style="border-right:solid 1px #000;">Paid at the time of Agreement :</td>
+                                                        <td align="left" colspan="5">&nbsp;<b>@ViewBag.PaidAmt  </b> &nbsp; of the Basic Sales.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <table width="100%" style="border:solid 1px #000;" align="center" cellpadding="2" cellspacing="0">
+
+                <tbody>
+                        <tr>
+                          
+                            <th width="13%" align="left" style="border-right:solid 1px #000; border-bottom:solid 1px #000">Payement Mode</th>
+                            <th width="13%" align="left" style="border-right:solid 1px #000; border-bottom:solid 1px #000">Amount (Rs)</th>
+                           
+                            <th width="6%" align="left" style="border-right:solid 1px #000; border-bottom:solid 1px #000">Dated:</th>
+                           
+                            <th width="13%" align="left" style="border-right:solid 1px #000; border-bottom:solid 1px #000">Receipt No.</th>
+                        
+                            
+
+                        </tr>
+
+
+
+              
+
+        
+                    @if (Model != null)
+                    {
+                        if (Model.lstPlot != null)
+                        {
+                            int i = 1;
+                            foreach (var Item in Model.lstPlot)
+                            {
+                                <tr class="text-left">
+
+                                    
+                                    <td>@Item.PaymentDetails</td>
+                                    <td>@Item.PaidAmount</td>
+                                    <td>@Item.PayDate</td>
+                                    <td>@Item.ReceiptNo</td>
+                                   
+                                  </tr>
+                                i++;
+                            }
+                        }
+                    }
+                </tbody>
+
+            </table>
+
+            <table width="100%" style="border:solid 1px #000;" align="center" cellpadding="2" cellspacing="0">
+                <tbody>
+                    <tr>
+                            <td colspan="3" align="left" style="border-right:solid 1px #000; border-bottom:solid 1px #000">Total Amount Paid (Rs):</td>
+                            <td align="left" colspan="2" style="border-right:solid 1px #000; border-bottom:solid 1px #000"><b>@ViewBag.PaidAmt </b> </td>
+                            <td colspan="4" align="left" style="border-bottom:solid 1px #000">(In Word)&nbsp;<b>@ViewBag.PaidAmtWords </b> </td>
+                        </tr>
+                    <tr>
+                        <td colspan="9" align="left" style="border-bottom:solid 1px #000;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" align="left" style="border-right:solid 1px #000;">PAYMENT PLAN OPTED:</td>
+                        <td colspan="2" align="left"> &nbsp;<b>@ViewBag.PlanName</b></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table width="100%" align="center" cellpadding="0" cellspacing="0" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#000; border:solid 1px #000;">
+                <tbody>
+                    <tr>
+                        <td align="center" style="border-bottom:solid 1px #000">
+                            <table width="100%" border="0" align="center" cellpadding="4" cellspacing="0">
+
+                                <tbody>
+                                    <tr>
+                                        <td width="40%" align="left" style="border-right:solid 1px #000;">In Case of Installment (No of Year ):</td>
+                                        <td width="60%" align="left">
+                                            <b>5</b>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#000; border:solid 1px #000;">
+                <tbody>
+                    <tr>
+                        <td align="center" style="border-bottom:solid 1px #000">
+                            <table width="100%" border="0" align="center" cellpadding="4" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td width="30%" align="left" style="border-right:solid 1px #000; border-bottom:solid 1px #000">Total Amount:</td>
+                                        <td width="70%" align="left" style="border-bottom:solid 1px #000"><b>@ViewBag.ActualPlotAmount</b></td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td align="left" style="border-right:solid 1px #000; border-bottom:solid 1px #000">Amount Paid :</td>
+                                        <td align="left" style="border-bottom:solid 1px #000"><b>@ViewBag.PaidAmt</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="border-right:solid 1px #000; border-bottom:solid 1px #000">Discount as per Plan:</td>
+                                        <td align="left" style="border-bottom:solid 1px #000"><b>@ViewBag.Discount</b></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left" style="border-right:solid 1px #000; ">Amount Payable :</td>
+                                        <td align="left"><b>@ViewBag.PaidAmount</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="border-bottom:solid 1px #000">
+                            <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
+                                <tbody>
+                                    <tr>
+
+                                        <td width="39%" align="left" style="border-right:solid 1px #000;">As Per Monthly Installment Rupees:</td>
+
+
+                                        <td width="21%" align="left" style="border-right:solid 1px #000;"> <b>@ViewBag.InstAmt</b> </td>
+
+                                        <td width="40%" align="left">Balance Amount Will be paid Within &nbsp;<b>5  Year  </b>.</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="40" align="left" style="border-bottom:solid 1px #000"> &nbsp;<b>10.00 %</b>&nbsp;  PLC will be charged at the time of registry</td>
+                    </tr>
+
+                    <tr>
+                        <td align="center">
+                            <table width="100%" border="0" align="center" cellpadding="4" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="height:5px;"><br></td>
+                                        <td style="height:5px;"><br></td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td width="50%" align="center" class="block-dot" style="border-right:solid 1px #000;">
+                                            <p align="center">
+                                                <strong>
+                                                    <span>
+                                                        @ViewBag.FirstName
+                                                    </span>
+                                                </strong>
+                                            </p>
+                                            <p align="center">(Sole/First    Applicant)</p>
+                                        </td>
+                                        <td width="50%" align="center" class="block-dot">
+                                            <p align="center">
+                                                <span>
+                                                </span>
+                                            </p>
+                                            <p align="center">(Second    Applicant)</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td align="center" valign="top">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="center" valign="top">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="height:50px;"><br></td>
+                                        <td style="height:50px;"><br></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td width="54%" align="left" class="content-text-b">FIRST PARTY</td>
+                                        <td width="46%" align="right" class="content-text-b">SECOND PARTY</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label15">Page-14- of 15</span>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <div class="barCodeCss0">
+            </div>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div id="dvPage15" class="pg-break">
+            <table width="100%">
+
+
+                <tbody>
+                    <tr>
+                        <td class="content-text">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<b>IN WITNESS WHEREOF</b>, the First Party represented by
+                            its Authorised Signatory and the Second Party do hereby affix their respective hands
+                            at Allahabad onthe date first mentioned herein above in presence of the following witnesses
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="content-text">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content-text">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content-text">
+                            <div style="width: 50%; text-align: right; float: right;">
+                                <center>
+                                    For and on behalf of<br>
+                                    <span class="projectname">ABDOLPHIN INFRATECH BUILDERS & DEVELOPERS PVT LTD</span>
+                                </center>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content-text">
+                            <b>PLACE ................................</b><br>
+                            <b>DATE ..................................</b><br>
+                            <b style="display:none">PREPARED BY</b>&nbsp;&nbsp;
+                            <b style="display:none">(LEGAL DEPARTMENT)</b>
+                            <br>
+                            <b style="display:none">(____________________________)</b><br>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="content-head">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content-text">
+
+                            <b> CHECKED BY </b>&nbsp;&nbsp;
+
+                            ( <span class="auto-style4">@ViewBag.CheckedBY</span>)<br>
+                            <b>(____________________________)</b><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content-text">
+
+                            <b></b><br>
+                            <b>Facilitator Id</b>&nbsp;&nbsp;
+                            @ViewBag.AssociateLoginID<br>
+                            <b>Facilitator Name</b>&nbsp;&nbsp;
+                            (<span class="auto-style4">@ViewBag.SponsorName </span>)
+                            <br>
+                            <b>(____________________________)</b><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content-head">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content-head">
+                            WITNESSES
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content-text">
+                            <b>1.</b>____________________________________________<br>
+                            &nbsp;&nbsp;____________________________________________<br>
+                            &nbsp;&nbsp;____________________________________________<br>
+                            &nbsp;&nbsp;____________________________________________<br>
+                            &nbsp;&nbsp;____________________________________________
+                            <br>
+                            <div style="width: 30%; text-align: right; float: right;">
+                                <center>
+                                    Auth Signatory<br>
+                                    <span class="content-text-b">(FIRST PARTY)</span>
+                                </center>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content-text">
+                            <b>2.</b>____________________________________________<br>
+                            &nbsp;&nbsp;____________________________________________<br>
+                            &nbsp;&nbsp;____________________________________________<br>
+                            &nbsp;&nbsp;____________________________________________<br>
+                            &nbsp;&nbsp;____________________________________________
+                            <br>
+                            <div style="width: 30%; text-align: right; float: right;">
+                                <center>
+                                    Signed By<br>
+                                    <span class="content-text-b">(SECOND PARTY)</span>
+                                </center>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="height:40px;"><br></td>
+                                        <td style="height:40px;"><br></td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td width="80%"></td>
+                                        <td class="content-text" align="right">
+
+                                            <span id="Label19">Page-15- of 15</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="barCodeContaner">
+            <div class="barCodeCss">
+            </div>
+        </div>
+
+        <div id="dvPage16" class="pg-break-last" style="padding: 5px 0px 2px 0px;">
+            <table width="100%" border="1" align="center" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <th colspan="6" class="content-text_A" style="color: #FFFFFF;border-bottom:solid 1px #000; ">
+                            <center>
+                                <span class="content-head2">INSTALLMENT PAYMENT SCHEDULE</span><br>
+                                <span class="content-text-b">CHEQUE (SUBJECT TO REALISATION)</span>
+                            </center>
+                        </th>
+                    </tr>
+                    <tr class="content-text-b">
+                        <th class="content-text_A" style="width:30%;">
+                            EMI MONTHS
+                        </th>
+                        <th class="content-text_A" style="width:11%; " align="left">
+                            DueDate
+                        </th>
+                        <th class="content-text_A" style="width:11%;" align="left">
+                            Paid on Date
+                        </th>
+                        <th class="content-text_A" style="width:10%;  ">
+                            Installment Amount
+                        </th>
+                        <th class="content-text_A" style="width:auto;">
+                            Payment Mode
+                        </th>
+
+                    </tr>
+
+
+                    @if (Model != null)
+                    {
+                        if (Model.lstPlot != null)
+                        {
+                            int i = 1;
+                            foreach (var Item in Model.lstPlot)
+                            {
+                                <tr class="text-left">
+
+
+                                    <td>@Item.InstallmentNo</td>
+                                    <td>@Item.InstallmentDate</td>
+                                    <td>@Item.PaymentDate</td>
+                                    <td>@Item.InstAmt</td>
+                                    <td>@Item.PaymentDetail</td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                    }
+                </tbody>
+
+            </table>
+            <div style="text-align: right; font-size: 14px;">
+                <br>
+                <br>
+                <br>
+
+                <strong>(@ViewBag.CheckedBY) </strong>
+            </div>
+            <div style="text-align: right;">
+                <label id="lblPlotType" for="v_Country" class="control-label pull-left" style="font-size: 11px;
+                text-align: center;">
+                    CHECKED BY
+                </label>
+            </div>
+        </div>
+
+       
+
+
+
+
+     
+
+
+
+        <div class="barCodeContaner-Last">
+            <div class="barCodeCss">
+            </div>
+        </div>
+        <input type="hidden" name="hdnBookingID" id="hdnBookingID" value="ARKB00601969">
+        <script type="text/javascript">
+            var BookingID = document.getElementById('hdnBookingID').value;
+            generateBarcodes(BookingID, 'barCodeCss');
+        </script>
+    </form>
+
+
+</body>
+</html>

@@ -1,0 +1,307 @@
+﻿@model Dolphin.Models.Website
+
+@{
+    ViewBag.Title = "UnitAvailability";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("UnitAvailability", "Website", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <style>
+        .ploatArea {
+            list-style: none;
+            margin: 0px !important;
+            padding: 0;
+        }
+
+            .ploatArea li {
+                position: relative;
+                padding-left: 69px;
+                color: #000;
+            }
+
+            .ploatArea li b {
+                position: absolute;
+                top: 0px;
+                color: #000;
+                left: -7px;
+            }
+
+            .ploatArea li strong {
+                color: #000;
+            }
+        @@media (max-width:767px){
+           .clearProper{
+                    width:100%!important;
+                     margin-bottom: 15px;
+                }
+        }
+    </style>
+
+
+    <div class="content-wrapper">
+
+        <div class="breadcrumb-wrap bg-f br-2">
+            <div class="container">
+                <div class="breadcrumb-title">
+                    <h2>Unit Availability</h2>
+                    <ul class="breadcrumb-menu list-style">
+                        <li><a href="index.html">Home </a></li>
+                        <li>Unit Availability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section class="agent-wrap pt-50 pb-0">
+            <div class="container">
+                <div class="section-title style1 text-center mb-40">
+                    <h2>For Buy</h2>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="pb-50">
+            <div class="container">
+                <div class="search-property style1 mt-0 mb-50">
+                    <div class="property-search-form justify-content-center">
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.SiteTypeID, new SelectList(ViewBag.ddlSiteType, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteTypeChange();" })
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @placeholder = "Plot Number" })
+                        </div>
+                        <div class="form-group">
+                            <button type="buttom" class="btn style2 clearProper" style="background: #2c3240;">
+                            
+                            <a class="text-white" href="/Website/UnitAvailability">Clear Property</a>
+                            
+                            </button>
+                           
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn style2" name="Search" value="Search" id="btnSearchPlot" onclick="return GetDetails(); ">Search Property</button>
+                            @*<input type="submit" name="Search" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails(); " />*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="agent-wrap pt-20 pb-0">
+            <div class="container">
+                <div class="row g-3 justify-content-center mb-30">
+                    <div class="col-lg-2 col-md-6">
+                        <div class="d-flex justify-content-between align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+                            <div class="ms-2"><b>Availability Status</b></div>
+                            <div class="font-22 text-primary">
+                                <i class="lni lni-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-6">
+                        <div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+                            <div class="font-22 text-primary">
+                                <span class="badge rounded-pill" style="background:#e66b6b">&nbsp;</span>
+                            </div>
+                            <div class="ms-2">Booked</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-6">
+                        <div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+                            <div class="font-22 text-primary">
+                                <span class="badge rounded-pill" style="background:#69ce69">&nbsp;</span>
+                            </div>
+                            <div class="ms-2">Available</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-6">
+                        <div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+                            <div class="font-22 text-primary">
+                                <span class="badge rounded-pill" style="background:#ffff00">&nbsp;</span>
+                            </div>
+                            <div class="ms-2"> On Hold</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-6">
+                        <div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+                            <div class="font-22 text-primary">
+                                <span class="badge rounded-pill" style="background:#e470e4"> &nbsp;</span>
+                            </div>
+                            <div class="ms-2">Allotted</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section>
+            <div class="container">
+                <div class="row g-1 mt-4 mb-30">
+                    @if (Model != null)
+                {
+                    if (Model.lstPlot != null)
+                    {
+                        foreach (var Item in Model.lstPlot)
+                        {
+                                <div class="col-md-3">
+                                    <div class="card bordered rounded-2 text-center shadow-none" style="background: @Item.ColorCSS">
+                                        <div class="card-body">
+                                            <input type="hidden" value="@Item.PlotID" />
+                                            <input type="hidden" value="@Item.SiteID" />
+                                            <input type="hidden" value="@Item.SectorID" />
+                                            <ul class="ploatArea">
+                                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">@Item.PlotNumber</strong></li>
+                                                <li><b>Plot Area :  </b>  <span>@Item.PlotArea  (@Item.SectorName,@Item.BlockName)</span></li>
+                                                @*<li><b>&nbsp; </b> <span>(@Item.SectorName,@Item.BlockName)</span></li>*@
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+<script>
+    function GetDetails() {
+
+        $(".errortext").removeClass("errortext");
+        if ($('#SiteTypeID').val() == '0') {
+            $("#SiteTypeID").addClass('errortext');
+            $('#SiteTypeID').focus();
+            return false;
+        }
+
+        if ($('#SiteID').val() == '0') {
+            $("#SiteID").addClass('errortext');
+            $('#SiteID').focus();
+            return false;
+        }
+        return true;
+    }
+    function onSiteTypeChange() {
+        //  $("#divload").css({ 'display': '' });
+
+        var value = $('#SiteTypeID').val();
+        var values = $('#SiteID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Website/GetSiteBySiteType",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteTypeID: value },
+            success: function (data) {
+                var j = 1;
+
+                //   $("#divload").css({ 'display': 'none' });
+
+                $("#SiteID").html(""); // clear before appending new list
+                $("#SiteID").empty();
+                $("#SiteID").append(
+                      $('<option></option>').val(0).html('Select Site'));
+                $.each(data.ddlSite, function (index, Sectorcount) {
+                    $("#SiteID").append(
+                          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                });
+
+            }
+
+        });
+
+    }
+    function onSiteChange() {
+        $("#divload").css({ 'display': '' });
+
+        var value = $('#SiteID').val();
+        var values = $('#SectorID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Website/GetSitesDetails",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+                var j = 1;
+                if (data.Result == "yes") {
+                    $("#divload").css({ 'display': 'none' });
+                    $('#Rate').val(data.Rate);
+                    $("#SectorID").html(""); // clear before appending new list
+                    $("#SectorID").empty();
+                    $("#SectorID").append(
+                          $('<option></option>').val(0).html('Select Sector'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#SectorID").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                    });
+
+                }
+                else {
+                    $("#SectorID").empty();
+                    $('#Rate').val('');
+                }
+            }
+
+        });
+
+    }
+
+    function onSectorChange() {
+
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#SiteID').val();
+        var sectorID = $('#SectorID').val();
+        $.ajax({
+            url: '/Website/GetBlockList', type: 'post', dataType: 'json',
+            data: { 'SiteID': siteID, 'sectorID': sectorID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                $("#BlockID").html(""); // clear before appending new list
+                $("#BlockID").empty();
+                $("#BlockID").append(
+                      $('<option></option>').val(0).html('Select Block'));
+                $.each(data.lstBlock, function (index, BlockCount) {
+                    $("#BlockID").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+
+            }
+
+        });
+    }
+
+
+</script>
