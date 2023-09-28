@@ -4278,5 +4278,93 @@ namespace Dolphin.Controllers
             return View();
         }
         
+
+        public ActionResult SiteAndAssociateWiseBooking(Reports model)
+        {
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetSiteAndAssociateWiseBookingReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                //foreach (DataRow r in ds.Tables[0].Rows)
+                //{
+                //    Reports obj = new Reports();
+                //    obj.AssociateID = r["AssociateId"].ToString();
+                //    obj.SiteName = r["SiteName"].ToString();
+                //    obj.AssociateName = r["AssociateName"].ToString();
+                //    obj.TotalBooking = r["TotalBooking"].ToString();
+                //    lst.Add(obj);
+                //}
+                //model.lstSiteAndAssociateWiseBooking = lst;
+            }
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("SiteAndAssociateWiseBooking")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetBookingList(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+            model.SiteID = model.SiteID == "0" ? null : model.SiteID;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetSiteAndAssociateWiseBookingReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                    Reports obj = new Reports();
+                    obj.AssociateID = r["AssociateId"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.TotalBooking = r["TotalBooking"].ToString();
+                    lst.Add(obj);
+                }
+                    model.lstSiteAndAssociateWiseBooking = lst;
+                }
+           
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            return View(model);
+        }
     }
 }
