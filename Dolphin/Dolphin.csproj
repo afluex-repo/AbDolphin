@@ -2852,6 +2852,7 @@
     <Content Include="Views\Shared\_AdminLayoutTesting.cshtml" />
     <Content Include="Views\Admin\Testing.cshtml" />
     <Content Include="Views\Shared\AssociateLayout.cshtml" />
+    <Content Include="Views\Plot\UpdatePaymentPlan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

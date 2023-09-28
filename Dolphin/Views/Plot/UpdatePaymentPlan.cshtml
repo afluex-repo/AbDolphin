@@ -83,7 +83,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="x_title">
-                        <h5>UpdatePaymentPlan Details @*<small>List Of Sites</small>*@</h5>
+                        <h5>Plot Details @*<small>List Of Sites</small>*@</h5>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                         </ul>
@@ -228,7 +228,7 @@
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
                                         <div class="form-group">
-                                            <label> Payment Plan <span style="color: red">*</span></label>
+                                            <label>New Payment Plan <span style="color: red">*</span></label>
                                             @Html.DropDownListFor(m => m.PaymentPlanID, new SelectList(ViewBag.ddlPlan, "Value", "Text"), new { @class = "form-control form-select" })
                                         </div>
                                     </div>
@@ -415,7 +415,7 @@
                     if (data.Result == "yes") {
 
 
-
+                        $('#Discount').html('');
                         $("#Details1").show();
 
                         $("#AssoID").text(data.AssociateLoginID);
