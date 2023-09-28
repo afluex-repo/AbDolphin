@@ -92,6 +92,11 @@ namespace Dolphin.Models
         public string TeamBusiness { get; set; }
         public string DirectMemberJoining { get; set; }
         public string TeamMemberJoining { get; set; }
+
+        public List<Reports> lstSiteAndAssociateWiseBooking { get; set; }
+        public string TotalBooking { get; set; }
+
+
         #region 31/01/2022
         public string DesignationName { get; set; }
         public string Percentage { get; set; }
@@ -309,6 +314,19 @@ namespace Dolphin.Models
             DataSet ds = Connection.ExecuteQuery("GetSummryReports",para);
             return ds;
         }
+
+        public DataSet GetSiteAndAssociateWiseBookingReport()
+        {
+            SqlParameter[] para = { new SqlParameter("@AssociateId", AssociateID),
+                                  new SqlParameter("@Fk_SiteId", SiteID),
+                                  new SqlParameter("@FromDate", FromDate),
+                                  new SqlParameter("@ToDate", ToDate)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("AssociateAndSiteWisePlot", para);
+            return ds;
+        }
+
+        
     }
 }
 
