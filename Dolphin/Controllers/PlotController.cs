@@ -3472,10 +3472,10 @@ namespace Dolphin.Controllers
 
 
         #region Update PaymentPlan
-        public ActionResult UpdatePaymentPlan(string PK_BookingId)
+        public ActionResult UpdatePaymentPlan(Plot model,string PK_BookingId,string PaymentPlanID)
         {
 
-            Plot model = new Plot();
+            //Plot model = new Plot();
             if (PK_BookingId != null)
             {
                 model.PK_BookingId = PK_BookingId;
@@ -3529,6 +3529,7 @@ namespace Dolphin.Controllers
             }
             else
             {
+                
 
                 List<SelectListItem> ddlSector = new List<SelectListItem>();
                 ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
@@ -3577,11 +3578,8 @@ namespace Dolphin.Controllers
             }
             ViewBag.ddlSite = ddlSite;
             #endregion
-
-
             #region ddlPlan
             int count2 = 0;
-            model.PaymentPlanID = model.PlanID;
             List<SelectListItem> ddlPlan = new List<SelectListItem>();
             DataSet dsPlan = model.GetUpdatePaymentPlan();
             if (dsPlan != null && dsPlan.Tables.Count > 0 && dsPlan.Tables[0].Rows.Count > 0)
@@ -3598,7 +3596,6 @@ namespace Dolphin.Controllers
             }
             ViewBag.ddlPlan = ddlPlan;
             #endregion
-
             return View(model);
         }
 

@@ -17,8 +17,7 @@
 
     @Html.HiddenFor(m => m.PK_BookingId)
     //  @Html.HiddenFor(m => m.PaymentDate)
-
-
+    @Html.HiddenFor(m => m.PaymentPlanID)
     <div class="page-content">
         <div class="card">
             <div class="card-body">
@@ -223,14 +222,20 @@
                                             <label id="remamt"></label>
                                         </div>
                                     </div>
-                                    @Html.HiddenFor(m => m.PlanID)
+                                    <div class="col-md-3 " hidden="hidden">
+                                        <div class="form-group">
+                                            <label><b>PyamentPlanID:</b></label>
+                                            <label id="PlanID"></label>
+                                        </div>
+                                    </div>
+                                  
                                 </div>
                                 <br />
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <div class="form-group">
+                                        <div class="form-group" >
                                             <label> Payment Plan <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.PaymentPlanID, new SelectList(ViewBag.ddlPlan, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return CheckPayMode()" })
+                                            @Html.DropDownListFor(m => m.PaymentPlanID, new SelectList(ViewBag.ddlPlan, "Value", "Text"), new { @class = "form-control form-select" })
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
@@ -444,7 +449,7 @@
                         //var paidAmt = $('#Payamt').text();
                         //var checkAmt = (Number)(totalAmt) - (Number)(paidAmt);
                         $("#remamt").text(data.Balance);
-                        $("#PlanID").text(data.PaymentPlanID);
+                        $("#PaymentPlanID").val(data.PaymentPlanID);
                         //$("#SiteID").val('');
                         //$("#SectorID").val('');
                         //$("#BlockID").val('');
@@ -507,7 +512,7 @@
                         $("#Plotarea").text(data.PlotArea);
                         $("#bal").text(data.Balance);
                         $("#netPlotAmt").text(data.NetPlotAmount);
-                        $("#PlanID").text(data.PaymentPlanID);
+                        $("#PaymentPlanID").val(data.PaymentPlanID);
                         //var totalAmt = Number($('#ActPlotAmt').text()) - Number($('#disct').text()) ;
                         //var paidAmt = $('#Payamt').text();
                         //var checkAmt = (Number)(totalAmt) - (Number)(paidAmt);
