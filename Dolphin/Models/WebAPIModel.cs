@@ -158,7 +158,9 @@ namespace Dolphin.Models
 	  public string PK_NewsID { get; set; }
       public string NewsHeading { get; set; }
       public string NewsBody { get; set; }
-	}
+      public string UploadFile { get; set; }
+        
+    }
 	public class DueInstallment
 	{
 	  public string CustomerID { get; set; }
