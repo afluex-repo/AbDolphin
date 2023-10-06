@@ -126,6 +126,7 @@
                                     <th>Net Amnt</th>
                                     <th hidden="hidden">Booking Amt</th>
                                     <th>Paid Amt</th>
+                                    <th>Total Paid Amt</th>
                                     @*    <th>Action</th>*@
                                 </tr>
                             </thead>
@@ -158,6 +159,8 @@
                                                 <td>@Item.NetPlotAmount</td>
                                                 <td hidden="hidden">@Item.BookingAmount</td>
                                                 <td>@Item.PaidAmount</td>
+                                                <td>@Item.AllTotalPaidAmount</td>
+
 
                                                 @*<td>
                             <a href="/Plot/PlotBooking?PK_BookingId=@Item.PK_BookingId" class="btn btn-info btn-sm">Edit</a>
@@ -185,6 +188,7 @@
                                     <th>Net Amnt</th>
                                     <th hidden="hidden">Booking Amt</th>
                                     <th>Paid Amt</th>
+                                    <th>Total Paid Amt</th>
                                     @*<th>Action</th>*@
                                 </tr>
                             </tfoot>
