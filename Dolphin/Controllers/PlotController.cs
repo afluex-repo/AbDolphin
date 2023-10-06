@@ -570,6 +570,8 @@ namespace Dolphin.Controllers
                         obj.PK_PLCCharge = r["PLCCharge"].ToString();
                         obj.PlotRate = r["PlotRate"].ToString();
                         obj.Mobile = r["CustomerMobileNo"].ToString();
+                        obj.AllTotalPaidAmount = r["AllTotalPaidAmount"].ToString();
+
                         lst.Add(obj);
                     }
                     model.lstPlot = lst;
