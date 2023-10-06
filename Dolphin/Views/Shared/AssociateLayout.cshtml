@@ -329,7 +329,8 @@
         $(document).ready(function () {
             /// For DataTable
 			var table = $('#example2').DataTable( {
-				lengthChange: false,
+			    lengthChange: false,
+			    "pageLength": 50,
 				buttons: [ 'copy', 'excel', 'pdf', 'print','csv']
 			} );
 

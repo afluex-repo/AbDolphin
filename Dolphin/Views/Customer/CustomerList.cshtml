@@ -163,6 +163,7 @@
     $(document).ready(function () {
         var table = $('#customerData').DataTable({
             lengthChange: false,
+            "pageLength": 50,
             buttons: ['copy', 'excel', 'pdf', 'print', 'csv']
         });
 
