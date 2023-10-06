@@ -425,4 +425,3 @@ E:\Repository\AbDolphin\Dolphin\bin\System.Web.Http.xml
 E:\Repository\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.xml
 E:\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
 E:\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb
-D:\Devendra\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
