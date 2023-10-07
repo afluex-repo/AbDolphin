@@ -378,6 +378,9 @@ namespace Dolphin.Controllers
                 DataSet ds = newdata.GetAssociateForDashboard();
                 if (ds != null && ds.Tables.Count > 0)
                 {
+
+                   
+
                     if (ds.Tables[2].Rows.Count > 0)
                     {
                         obj.Status = "0";
@@ -396,11 +399,14 @@ namespace Dolphin.Controllers
                             obj1.Totalregistry = r["Totalregistry"].ToString();
                             obj1.SelfRegistry = r["SelfRegistry"].ToString();
                             obj1.TeamRegistry = r["TeamRegistry"].ToString();
+                            
                             lst.Add(obj1);
                         }
                         obj.lstassociate = lst;
                         #endregion NewsDetails
                     }
+
+                    obj.Name = ds.Tables[3].Rows[0]["Name"].ToString();
                     return Json(obj, JsonRequestBehavior.AllowGet);
                 }
                 else
