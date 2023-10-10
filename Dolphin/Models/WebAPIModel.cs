@@ -137,7 +137,10 @@ namespace Dolphin.Models
 	   public string Status{get;set;}
 	    public string ErrorMessage {get; set;}
 	    public string AssociateID { get; set; }
-		public List<DueInstallment> lstdueinstallment {get; set;}
+        public string Name { get; set; }
+
+
+        public List<DueInstallment> lstdueinstallment {get; set;}
 		public List<NewsDetails> lstnewsdetail {get; set;}
 		public List<Associate> lstassociate {get; set;}
 		
@@ -158,7 +161,9 @@ namespace Dolphin.Models
 	  public string PK_NewsID { get; set; }
       public string NewsHeading { get; set; }
       public string NewsBody { get; set; }
-	}
+      public string UploadFile { get; set; }
+        
+    }
 	public class DueInstallment
 	{
 	  public string CustomerID { get; set; }
@@ -181,7 +186,8 @@ namespace Dolphin.Models
 	  public string Totalregistry{get;set;}
 	  public string SelfRegistry{get;set;}
 	  public string TeamRegistry{get;set;}
-	}
+     
+    }
 	public class Graph
 	{
 	public string Status {get; set;}
