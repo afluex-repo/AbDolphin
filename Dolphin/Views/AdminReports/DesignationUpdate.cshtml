@@ -27,7 +27,7 @@
                         
                         <div class="col-sm-3 mb-3">
                             <label class="float-label">Branch</label>
-                            @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control form-select", @disabled="true"})
+                            @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control", @disabled="true"})
                             <span class="form-bar"></span>
                         </div>
                         <div class="col-sm-3 mb-3">
@@ -38,13 +38,13 @@
                             <span class="form-bar"></span>
                         </div>
                         <div class="col-sm-3 mb-3">
-                            <label class="float-label">Affiliate Name<span style="color:red">*</span></label>
+                            <label class="float-label">Affiliate Name</label>
                             @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Placeholder = "Sponsor Name", @readonly = "readonly" })
                             <span class="form-bar"></span>
                         </div>
                         <div class="col-sm-3 mb-3">
-                            <label class="float-label">Old Designation<span style="color:red">*</span></label>
-                            @Html.DropDownListFor(m => m.DesignationID, new SelectList(ViewBag.ddlDesignation, "Value", "Text"), new { @class = "form-control form-select", @disabled = "true" })
+                            <label class="float-label">Old Designation</label>
+                            @Html.DropDownListFor(m => m.DesignationID, new SelectList(ViewBag.ddlDesignation, "Value", "Text"), new { @class = "form-control", @disabled = "true" })
                             <span class="form-bar"></span>
                             @Html.HiddenFor(m=> m.OldDesignationID)
                         </div>
@@ -54,8 +54,8 @@
                             <span class="form-bar"></span>
                         </div>
                         <div class="col-sm-3 mb-3">
-                            <label class="float-label">Remark</label>
-                            @Html.TextBoxFor(m => m.Remarks, new { @class = "form-control", @Placeholder = "Remark" })
+                            <label class="float-label">Remark <span style="color:red">*</span></label>
+                            @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control", @Placeholder = "Remark" })
                             <span class="form-bar"></span>
                         </div>
                         <div class="col-md-6 mb-3 align-items-end d-flex">
