@@ -10,6 +10,7 @@ namespace Dolphin.Models
     public class DashBoard : Common
     {
         public string Total { get; set; }
+        public string Site { get; set; }
 
         public string Status { get; set; }
         public string Fk_UserId { get; set; }
@@ -203,6 +204,16 @@ namespace Dolphin.Models
                                       new SqlParameter("@AgentCode", LoginId),
                                   };
             DataSet ds = Connection.ExecuteQuery("BrokerTree", para);
+            return ds;
+        }
+
+       // public List<DashBoard> lstSite { get; set; }
+        public List<DashBoard> ListSite { get; set; }
+
+
+        public DataSet GetBookingDetailsForDashboard()
+        {
+            DataSet ds = Connection.ExecuteQuery("GetPlotBookingDetailsForDashboard");
             return ds;
         }
     }

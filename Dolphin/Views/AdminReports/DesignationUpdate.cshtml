@@ -1,0 +1,190 @@
+﻿@model Dolphin.Models.Reports
+
+@{
+    ViewBag.Title = "DesignationUpdate";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("DesignationUpdate", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Update Designation</h5>
+                        <p style="color: red; margin-bottom:0px; text-align:center">
+                             @TempData["Designation"]
+                        </p>
+                </div>
+            </div>
+        </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                    <form>
+                        @Html.HiddenFor(m=> m.UserID)
+                        
+                        <div class="col-sm-3 mb-3">
+                            <label class="float-label">Branch</label>
+                            @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control form-select", @disabled="true"})
+                            <span class="form-bar"></span>
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <label class="float-label">Affiliate ID<span style="color:red">*</span></label>
+                           
+                                @Html.TextBoxFor(m => m.SponsorID, new { @class = "form-control", @Placeholder = "Sponsor ID", @onchange = "return getSponsorName();" })
+                           
+                            <span class="form-bar"></span>
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <label class="float-label">Affiliate Name<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Placeholder = "Sponsor Name", @readonly = "readonly" })
+                            <span class="form-bar"></span>
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <label class="float-label">Old Designation<span style="color:red">*</span></label>
+                            @Html.DropDownListFor(m => m.DesignationID, new SelectList(ViewBag.ddlDesignation, "Value", "Text"), new { @class = "form-control form-select", @disabled = "true" })
+                            <span class="form-bar"></span>
+                            @Html.HiddenFor(m=> m.OldDesignationID)
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <label class="float-label">New Designation<span style="color:red">*</span></label>
+                            @Html.DropDownListFor(m => m.NewDesignationID, new SelectList(ViewBag.ddlDesignation, "Value", "Text"), new { @class = "form-control form-select"})
+                            <span class="form-bar"></span>
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <label class="float-label">Remark</label>
+                            @Html.TextBoxFor(m => m.Remarks, new { @class = "form-control", @Placeholder = "Remark" })
+                            <span class="form-bar"></span>
+                        </div>
+                        <div class="col-md-6 mb-3 align-items-end d-flex">
+                           
+                                <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave" />
+                          
+                            <label class="float-label">&nbsp;</label>
+                            @*<a class="btn btn-info text-white" href="/TraditionalAssociate/AssociateList">Back To List</a>*@
+                        </div>
+                        @Html.HiddenFor(m => m.DesignationID)
+                        </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+
+    $(document).ready(function () {
+
+        $("#divload").css({ 'display': 'none' });
+    });
+
+    function getSponsorName() {
+        debugger;
+        $("#divload").css({ 'display': '' });
+        var sponsorID = $('#SponsorID').val();
+        $.ajax({
+            url: '/AdminReports/GetSponsorName', type: 'post', dataType: 'json',
+            data: { 'SponsorID': sponsorID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "yes") {
+                    $("#SponsorName").val(data.SponsorName);
+                    $("#UserID").val(data.UserID);
+                    $("#SponsorName").removeClass('errortext');
+                    $("#SponsorID").removeClass('errortext');
+                    $("#BranchID").val(data.BranchID);
+                    $("#DesignationID").val(data.DesignationID);
+                    $("#OldDesignationID").val(data.OldDesignationID);
+                    //$.each(data.ddlDesignation, function (index, Sectorcount) {
+                    //    $("#DesignationID").append(
+                    //          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+
+                    //});
+                }
+                else if (data.Result == "no") {
+                    $("#SponsorName").val('');
+                    $("#SponsorName").addClass('errortext');
+                    $("#SponsorID").addClass('errortext');
+
+                    $('#SponsorID').focus();
+                    $('#SponsorID').val('');
+                    alert("Invalid Sponsor Id");
+                }
+            }
+
+        });
+    }
+
+    function validateform() {
+
+        $(".errortext").removeClass("errortext");
+       
+        if ($('#SponsorID').val() == '') {
+            $("#SponsorID").addClass('errortext');
+            $('#SponsorID').focus();
+            //   alert("Please Select Designation .")
+            return false;
+        }
+        if ($('#NewDesignationID').val() == '0') {
+            $("#NewDesignationID").addClass('errortext');
+            $('#NewDesignationID').focus();
+            //  alert("Please Fill First Name .")
+            return false;
+        }
+        if ($('#Remarks').val() == '') {
+            $("#Remarks").addClass('errortext');
+            $('#Remarks').focus();
+            //  alert("Please Fill Mobile Number .")
+            return false;
+        }
+
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+ 
+</script>
+
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+

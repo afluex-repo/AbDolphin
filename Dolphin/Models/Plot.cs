@@ -1206,6 +1206,25 @@ namespace Dolphin.Models
             return ds;
         }
 
+
+        public DataSet UpdatePlotBookingDetails()
+        {
+            SqlParameter[] para =
+                            {
+                                        new SqlParameter("@PK_BookingId ",PK_BookingId),
+                                        new SqlParameter("@CustomerId ",CustomerID),
+                                        new SqlParameter("@AssociateId" , AssociateID),
+                                        new SqlParameter("@PlotAmount" ,PlotAmount),
+                                        new SqlParameter("@NetPlotAmount" ,NetPlotAmount),
+                                        new SqlParameter("@Discount", Discount),
+                                        new SqlParameter("@PlotRate"  , PlotRate),
+                                        new SqlParameter("@PLCCharge"  , TotalPLC),
+                                        new SqlParameter("@UpdatedBy",AddedBy)
+                            };
+            DataSet ds = Connection.ExecuteQuery("UpdatePlotBookingDetails", para);
+            return ds;
+        }
+
     }
 }
 

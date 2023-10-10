@@ -2853,6 +2853,10 @@
     <Content Include="Views\Admin\Testing.cshtml" />
     <Content Include="Views\Shared\AssociateLayout.cshtml" />
     <Content Include="Views\Plot\UpdatePaymentPlan.cshtml" />
+    <Content Include="Views\AdminReports\SiteAndAssociateWiseBooking.cshtml" />
+    <Content Include="Views\Plot\UpdateBookingDetails.cshtml" />
+    <Content Include="Views\AdminReports\DesignationUpdate.cshtml" />
+    <Content Include="Views\AdminReports\TDSReportDateWise.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

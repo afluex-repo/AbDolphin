@@ -4278,5 +4278,255 @@ namespace Dolphin.Controllers
             return View();
         }
         
+
+        public ActionResult SiteAndAssociateWiseBooking(Reports model)
+        {
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetSiteAndAssociateWiseBookingReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                //foreach (DataRow r in ds.Tables[0].Rows)
+                //{
+                //    Reports obj = new Reports();
+                //    obj.AssociateID = r["AssociateId"].ToString();
+                //    obj.SiteName = r["SiteName"].ToString();
+                //    obj.AssociateName = r["AssociateName"].ToString();
+                //    obj.TotalBooking = r["TotalBooking"].ToString();
+                //    lst.Add(obj);
+                //}
+                //model.lstSiteAndAssociateWiseBooking = lst;
+            }
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("SiteAndAssociateWiseBooking")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetBookingList(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+            model.SiteID = model.SiteID == "0" ? null : model.SiteID;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetSiteAndAssociateWiseBookingReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                    Reports obj = new Reports();
+                    obj.AssociateID = r["AssociateId"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.TotalBooking = r["TotalBooking"].ToString();
+                    lst.Add(obj);
+                }
+                    model.lstSiteAndAssociateWiseBooking = lst;
+                }
+           
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            return View(model);
+        }
+
+
+        public ActionResult DesignationUpdate()
+        {
+            
+            #region ddlBranch
+            Reports obj = new Reports();
+            int count = 0;
+            List<SelectListItem> ddlBranch = new List<SelectListItem>();
+            DataSet dsBranch = obj.GetBranchList();
+            if (dsBranch != null && dsBranch.Tables.Count > 0 && dsBranch.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsBranch.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                    }
+                    ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlBranch = ddlBranch;
+
+            #endregion
+
+            #region ddlDesignation
+
+            int desgnationCount = 0;
+            List<SelectListItem> ddlDesignation = new List<SelectListItem>();
+            DataSet dsdesignation = obj.GetDesignationList();
+            if (dsdesignation != null && dsdesignation.Tables.Count > 0 && dsdesignation.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsdesignation.Tables[0].Rows)
+                {
+                    if (desgnationCount == 0)
+                    {
+                        ddlDesignation.Add(new SelectListItem { Text = "Select Designation", Value = "0" });
+                    }
+                    ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
+                    desgnationCount = desgnationCount + 1;
+                }
+            }
+
+            ViewBag.ddlDesignation = ddlDesignation;
+
+            #endregion
+            return View();
+        }
+
+        public ActionResult GetSponsorName(string SponsorID)
+        {
+            try
+            {
+                Reports model = new Reports();
+                model.LoginId = SponsorID;
+
+                #region GetSiteRate
+                DataSet dsSponsorName = model.GetAssociateList();
+                if (dsSponsorName != null && dsSponsorName.Tables[0].Rows.Count > 0)
+                {
+                    model.SponsorName = dsSponsorName.Tables[0].Rows[0]["Name"].ToString();
+                    model.UserID = dsSponsorName.Tables[0].Rows[0]["PK_UserID"].ToString();
+                    model.DesignationID = dsSponsorName.Tables[0].Rows[0]["FK_DesignationID"].ToString();
+                    model.OldDesignationID = dsSponsorName.Tables[0].Rows[0]["FK_DesignationID"].ToString();
+                    model.Percentage = dsSponsorName.Tables[0].Rows[0]["Percentage"].ToString();
+                    model.BranchID = dsSponsorName.Tables[0].Rows[0]["Fk_BranchID"].ToString();
+
+                    model.Result = "yes";
+                }
+                else
+                {
+                    model.SponsorName = "";
+                    model.Result = "no";
+                }
+                #endregion
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [ActionName("DesignationUpdate")]
+        [OnAction(ButtonName = "btnSave")]
+        public ActionResult UpdateDesignation(Reports model)
+        {
+            string FormName = "";
+            string Controller = "";
+
+            try
+            {
+                model.UpdatedBy = Session["Pk_AdminID"].ToString();
+                DataSet ds = model.UpdateDesignation();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["Designation"] = "Designation Updated Successfully.";
+                        FormName = "DesignationUpdate";
+                        Controller = "AdminReports";
+                    }
+                    else
+                    {
+                        TempData["Designation"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "DesignationUpdate";
+                        Controller = "AdminReports";
+                    }
+                }
+                else
+                {
+                    TempData["Designation"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    FormName = "DesignationUpdate";
+                    Controller = "AdminReports";
+                }
+            }
+            catch(Exception ex)
+            {
+                TempData["Designation"] = ex.Message;
+                FormName = "DesignationUpdate";
+                Controller = "AdminReports";
+            }
+            return RedirectToAction(FormName,Controller);
+        }
+
+
+        public ActionResult TDSReportDateWise()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ActionName("TDSReportDateWise")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult SearchTDSReportDateWise(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetTDSReportDateWise();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.PanNumber = r["PanNumber"].ToString();
+                    obj.TDS = r["TDS"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstTDSReportDateWise = lst;
+            }
+            return View(model);
+        }
+
+
     }
 }

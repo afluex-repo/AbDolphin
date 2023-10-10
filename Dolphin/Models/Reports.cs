@@ -10,6 +10,12 @@ namespace Dolphin.Models
 {
     public class Reports : Common
     {
+        public string Email { get; set; }
+        public string DesignationID { get; set; }
+        public string NewDesignationID { get; set; }
+        public string UserID { get; set; }
+        public string SponsorID { get; set; }
+        public string SponsorName { get; set; }
         public List<Reports> lstTransfer { get; set; }
         public string RegistryName { get; set; }
         public string BlockName { get; set; }
@@ -92,6 +98,11 @@ namespace Dolphin.Models
         public string TeamBusiness { get; set; }
         public string DirectMemberJoining { get; set; }
         public string TeamMemberJoining { get; set; }
+
+        public List<Reports> lstSiteAndAssociateWiseBooking { get; set; }
+        public string TotalBooking { get; set; }
+
+
         #region 31/01/2022
         public string DesignationName { get; set; }
         public string Percentage { get; set; }
@@ -307,6 +318,71 @@ namespace Dolphin.Models
                            new SqlParameter("@LoginId", UserLoginId)
             };
             DataSet ds = Connection.ExecuteQuery("GetSummryReports",para);
+            return ds;
+        }
+
+        public DataSet GetSiteAndAssociateWiseBookingReport()
+        {
+            SqlParameter[] para = { new SqlParameter("@AssociateId", AssociateID),
+                                  new SqlParameter("@Fk_SiteId", SiteID),
+                                  new SqlParameter("@FromDate", FromDate),
+                                  new SqlParameter("@ToDate", ToDate)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("AssociateAndSiteWisePlot", para);
+            return ds;
+        }
+        
+        public List<SelectListItem> ddlDesignation { get; set; }
+
+        public DataSet GetAssociateList()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
+            DataSet ds = Connection.ExecuteQuery("AssociateListTraditional", para);
+            return ds;
+        }
+
+
+        public DataSet GetDesignationList()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Percentage", Percentage)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetDesignationList", para);
+            return ds;
+        }
+
+        public DataSet GetBranchList()
+        {
+            DataSet ds = Connection.ExecuteQuery("GetBranchList");
+            return ds;
+        }
+
+        public string OldDesignationID { get; set; }
+
+        public DataSet UpdateDesignation()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Fk_UserId", UserID),
+                                      new SqlParameter("@Fk_DesignationIdOLD", OldDesignationID),
+                                      new SqlParameter("@Fk_DesignationIdNEW", NewDesignationID),
+                                      new SqlParameter("@Remark", Remarks),
+                                      new SqlParameter("@UpdatedBy",UpdatedBy)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("UpdateDesignation", para);
+            return ds;
+        }
+
+        public string TDS { get; set; }
+        public string PanNumber { get; set; }
+        public List<Reports> lstTDSReportDateWise { get; set; }
+
+        public DataSet GetTDSReportDateWise()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetTDSReportDateWise", para);
             return ds;
         }
     }
