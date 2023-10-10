@@ -36,6 +36,11 @@
                             <span class="form-bar"></span>
                         </div>
                         <div class="col-sm-3 mb-3">
+                            <label class="float-label">Mobile Number</label>
+                            @Html.TextBoxFor(m => m.Contact, new { @class = "form-control", @Placeholder = "Mobile Number" })
+                            <span class="form-bar"></span>
+                        </div>
+                        <div class="col-sm-3 mb-3">
                             <label class="float-label">Affiliate LoginId</label>
                             @Html.TextBoxFor(m => m.AssociateID, new { @class = "form-control", @Placeholder = "Search by AffiliateID" })
                             <span class="form-bar"></span>

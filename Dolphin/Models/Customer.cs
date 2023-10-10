@@ -75,6 +75,7 @@ namespace Dolphin.Models
             SqlParameter[] para = { new SqlParameter("@PK_UserId", UserID),
                                   new SqlParameter("@CustomerLoginID", CustomerLoginID),
                                   new SqlParameter("@CustomerName", CustomerName),
+                                  new SqlParameter("@Mobile", Contact),
                                   new SqlParameter("@AssociateLoginID", AssociateLoginID),
                                   new SqlParameter("@AssociateName", AssociateName),
                                   new SqlParameter("@FromDate", JoiningFromDate),

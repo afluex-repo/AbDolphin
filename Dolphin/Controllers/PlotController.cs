@@ -3730,5 +3730,76 @@ namespace Dolphin.Controllers
         }
         #endregion
 
+        public ActionResult UpdateBookingDetails(string PK_BookingId)
+        {
+            Plot model = new Plot();
+            if (PK_BookingId != null)
+            {
+                model.PK_BookingId = PK_BookingId;
+                DataSet dsBookingDetails = model.GetBookingDetailsList();
+
+                if (dsBookingDetails != null && dsBookingDetails.Tables.Count > 0)
+                {
+                    model.PK_BookingId = PK_BookingId;
+                    model.CustomerID = dsBookingDetails.Tables[0].Rows[0]["CustomerLoginID"].ToString();
+                    model.AssociateID = dsBookingDetails.Tables[0].Rows[0]["AssociateLoginID"].ToString();
+                    ViewBag.CustomerID = dsBookingDetails.Tables[0].Rows[0]["CustomerLoginID"].ToString();
+                    ViewBag.CustomerName = dsBookingDetails.Tables[0].Rows[0]["CustomerName"].ToString();
+                    ViewBag.AssociateID = dsBookingDetails.Tables[0].Rows[0]["AssociateLoginID"].ToString();
+                    ViewBag.AssociateName = dsBookingDetails.Tables[0].Rows[0]["AssociateName"].ToString();
+                    ViewBag.BookingNo = dsBookingDetails.Tables[0].Rows[0]["BookingNo"].ToString();
+                    ViewBag.PlanName = dsBookingDetails.Tables[0].Rows[0]["PlanName"].ToString();
+                    ViewBag.BookingAmount = dsBookingDetails.Tables[0].Rows[0]["BookingAmt"].ToString();
+                    ViewBag.BranchName = dsBookingDetails.Tables[0].Rows[0]["BranchName"].ToString();
+                    ViewBag.BookingDate = dsBookingDetails.Tables[0].Rows[0]["BookingDate"].ToString();
+                    ViewBag.Contact = dsBookingDetails.Tables[0].Rows[0]["CustomerMobileNo"].ToString();
+                    ViewBag.PlotRate = dsBookingDetails.Tables[0].Rows[0]["PlotRate"].ToString();
+                    ViewBag.PlotInfo = dsBookingDetails.Tables[0].Rows[0]["PlotInfo"].ToString();
+                    ViewBag.Discount = dsBookingDetails.Tables[0].Rows[0]["Discount"].ToString();
+                    ViewBag.PaymentMode = dsBookingDetails.Tables[0].Rows[0]["PaymentMode"].ToString();
+                    ViewBag.PlotNumber = dsBookingDetails.Tables[0].Rows[0]["PlotNumber"].ToString();
+                    ViewBag.PlotAmount = dsBookingDetails.Tables[0].Rows[0]["PlotAmount"].ToString();
+                    ViewBag.PlotArea = dsBookingDetails.Tables[0].Rows[0]["PlotArea"].ToString();
+                    model.PlotSize = dsBookingDetails.Tables[0].Rows[0]["TotalArea"].ToString();
+                    ViewBag.NetPlotAmount = dsBookingDetails.Tables[0].Rows[0]["NetPlotAmount"].ToString();
+                    ViewBag.PayAmount = dsBookingDetails.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    model.PayAmount = dsBookingDetails.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    ViewBag.TotalPLC = dsBookingDetails.Tables[0].Rows[0]["PLCCharge"].ToString();
+                    ViewBag.Discount = dsBookingDetails.Tables[0].Rows[0]["Discount"].ToString();
+
+                }
+            }
+            return View(model);
+        }
+        
+        public ActionResult EditBookingDetails(Plot model,string PK_BookingId,string CustomerID,string AssociateID, string PlotAmount,string Discount,string NetPlotAmount,string TotalPLC,string PlotRate)
+        {
+            try
+            {
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.UpdatePlotBookingDetails();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                    }
+                    else
+                    {
+                        model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch
+            {
+                model.Result = "Plot Details Not Updated!!";
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
