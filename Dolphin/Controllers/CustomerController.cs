@@ -180,7 +180,7 @@ namespace Dolphin.Controllers
                         string str = BLSMS.CustomerRegistration(name, id, pass);
                         try
                         {
-                            BLSMS.SendSMS(mob, str,TempId);
+                            BLSMS.SendSMS(mob, str, TempId);
                         }
                         catch { }
 
