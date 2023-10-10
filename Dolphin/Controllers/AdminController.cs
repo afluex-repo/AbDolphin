@@ -100,6 +100,19 @@ namespace Dolphin.Controllers
 
                     newdata.ListInstallment = lstInst;
                 }
+                List<DashBoard> lstSite = new List<DashBoard>();
+                DataSet dsSite = newdata.GetBookingDetailsForDashboard();
+                if (dsSite != null && dsSite.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dsSite.Tables[0].Rows)
+                    {
+                        DashBoard obj = new DashBoard();
+                        obj.Site = r["SiteName"].ToString();
+                        obj.BookingStatus = r["TotalBooked"].ToString();
+                        lstSite.Add(obj);
+                    }
+                    newdata.ListSite = lstSite;
+                }
             }
             catch (Exception ex)
             {

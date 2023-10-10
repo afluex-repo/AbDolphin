@@ -149,6 +149,7 @@ namespace Dolphin.Models
                                   new SqlParameter("@AssociateName", AssociateName),
                                   new SqlParameter("@SponsorLoginID", SponsorID),
                                   new SqlParameter("@SponsorName", SponsorName),
+                                  new SqlParameter("@Mobile", Contact),
                                   new SqlParameter("@FromDate", JoiningFromDate),
                                   new SqlParameter("@ToDate", JoiningToDate),
                                   new SqlParameter("@pan", PanNo),
