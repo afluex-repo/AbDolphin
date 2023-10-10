@@ -347,6 +347,7 @@ namespace Dolphin.Controllers
                             obj1.PK_NewsID = r["PK_NewsID"].ToString();
                             obj1.NewsHeading = r["NewsHeading"].ToString();
                             obj1.NewsBody = r["NewsBody"].ToString();
+                            obj1.UploadFile = r["UploadFile"].ToString();
                             lst.Add(obj1);
                         }
                         obj.lstnewsdetail = lst;

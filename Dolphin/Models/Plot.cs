@@ -447,6 +447,8 @@ namespace Dolphin.Models
 
         #region Plot Allotment
         public string PaidAmount { get; set; }
+        public string AllTotalPaidAmount { get; set; }
+        
         public string PlanName { get; set; }
         public DataSet FillBookedPlotDetails()
         {
