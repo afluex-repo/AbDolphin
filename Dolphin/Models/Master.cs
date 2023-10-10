@@ -85,7 +85,15 @@ namespace Dolphin.Models
         public string Remark { get; set; }
         public string AssociateName { get; set; }
         public string FK_SponsorId { get; set; }
-        
+
+
+        public string HoldTo { get; set; }
+        public string HoldFrom { get; set; }
+        public string HolderName { get; set; }
+        public string TotalPaidAmount { get; set; }
+        public string BookingDate { get; set; }
+        public string CustomerName { get; set; }
+
         #endregion
 
         #region PLCMaster
@@ -880,8 +888,24 @@ namespace Dolphin.Models
             DataSet ds = Connection.ExecuteQuery("UpdateSponsor", para);
             return ds;
         }
-        
+
         #endregion
+
+        public DataSet DetailsPlotAvailabilityReports()
+        {
+            SqlParameter[] para =
+                            {
+
+                                new SqlParameter("@SiteID",SiteID),
+                                new SqlParameter("@SectorID",SectorID),
+                                new SqlParameter("@BlockID",BlockID),
+                                new SqlParameter("@FK_SiteTypeID",SiteTypeID),
+                                new SqlParameter("@PlotNumber",PlotNumber)
+
+                            };
+            DataSet ds = Connection.ExecuteQuery("DetailsPlotAvailabilityReportsStatus", para);
+            return ds;
+        }
 
     }
 }

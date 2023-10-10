@@ -429,14 +429,13 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
                 }
             }
             ViewBag.ddlBranch = ddlBranch;
-            model.BranchID = "1";
             #endregion
 
             return View(model);
@@ -447,6 +446,7 @@ namespace Dolphin.Controllers
         public ActionResult AssociateList(TraditionalAssociate model)
         {
             List<TraditionalAssociate> lst = new List<TraditionalAssociate>();
+            model.BranchID = model.BranchID == "0" ? null : model.BranchID;
             model.JoiningFromDate = string.IsNullOrEmpty(model.JoiningFromDate) ? null : Common.ConvertToSystemDate(model.JoiningFromDate, "dd/MM/yyyy");
             model.JoiningToDate = string.IsNullOrEmpty(model.JoiningToDate) ? null : Common.ConvertToSystemDate(model.JoiningToDate, "dd/MM/yyyy");
             DataSet ds = model.GetList();
@@ -491,7 +491,7 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
