@@ -2833,6 +2833,12 @@
     <Content Include="Views\Shared\AssociateLayout.cshtml" />
     <Content Include="Views\Plot\UpdatePaymentPlan.cshtml" />
     <Content Include="Views\AdminReports\SiteAndAssociateWiseBooking.cshtml" />
+    <Content Include="Views\CustomerDashboard\PlotAvailability.cshtml" />
+    <Content Include="Views\Plot\ReturnCancelledPlotPayment.cshtml" />
+    <Content Include="Views\Plot\ApprovalReturnPaymentCancelledPlot.cshtml" />
+    <Content Include="Views\Plot\ReturnPlotPaymentLedger.cshtml" />
+    <Content Include="Views\AdminReports\DetailsPlotAvailabilityReports.cshtml" />
+    <Content Include="Views\Plot\PendingPaymentReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

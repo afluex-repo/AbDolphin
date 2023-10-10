@@ -56,9 +56,11 @@ namespace Dolphin.Models
         public string ActualPlotRate { get; set; }
         public string DevelopmentCharge { get; set; }
         public List<CustomerDashboard> lstPlot { get; set; }
+        public List<CustomerDashboard> lstPLC { get; set; }
         public string BookingStatus { get; set; }
 
         public string DesignationName { get; set; }
+      
 
         public string Percentage { get; set; }
 
@@ -123,7 +125,28 @@ namespace Dolphin.Models
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string NewsFor { get; set; }
+
+        public string SiteTypeID { get; set; }
+        public string Rate { get; set; }
+
+        public string PLCCharge { get; set; }
+        public string PLCID { get; set; }
+
+        public string PLCName { get; set; }
+        public string SiteName { get; set; }
+
+        public string PlotStatus { get; set; }
+        public string ColorCSS { get; set; }
+
+        public string BlockName { get; set; }
+        public string SectorName { get; set; }
+
+
         
+
+
+
+
         public List<CustomerDashboard> ListNEWS { get; set; }
         #endregion
 
@@ -304,12 +327,51 @@ namespace Dolphin.Models
             DataSet ds = Connection.ExecuteQuery("GetPlotBookingDetailsForCustomersss", para);
             return ds;
         }
+        public DataSet GetPlotDetails()
+        {
+            SqlParameter[] para =
+                            {
 
+                                new SqlParameter("@SiteID",SiteID),
+                                new SqlParameter("@SectorID",SectorID),
+                                new SqlParameter("@BlockID",BlockID),
+                                new SqlParameter("@FK_SiteTypeID",SiteTypeID),
+                                new SqlParameter("@PlotNumber",PlotNumber)
 
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetPlotAvailabilityStatus", para);
+            return ds;
+        }
 
+        public DataSet GetPLCChargeList()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_SiteID", SiteID) };
+            DataSet ds = Connection.ExecuteQuery("GetPlotPLCCharge", para);
+            return ds;
 
+        }
+        public DataSet GetSectorList()
+        {
+            SqlParameter[] para = { new SqlParameter("@SiteID", SiteID) };
+            DataSet ds = Connection.ExecuteQuery("GetSectorList", para);
+            return ds;
+        }
 
+        public DataSet GetBlockList()
+        {
+            SqlParameter[] para ={ new SqlParameter("@SiteID",SiteID),
+                                     new SqlParameter("@SectorID",SectorID),
+                                     new SqlParameter("@BlockID",BlockID),
+                                 };
+            DataSet ds = Connection.ExecuteQuery("GetBlockList", para);
+            return ds;
+        }
 
+        public DataSet GetSiteTypeList()
+        {
 
+            DataSet ds = Connection.ExecuteQuery("SiteTypeList");
+            return ds;
+        }
     }
 }

@@ -1142,7 +1142,7 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
@@ -1505,7 +1505,7 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
@@ -1773,7 +1773,7 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
@@ -2006,14 +2006,13 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
                 }
             }
             ViewBag.ddlBranch = ddlBranch;
-            model.BranchID = "1";
             #endregion
             return View(model);
         }
@@ -2025,6 +2024,7 @@ namespace Dolphin.Controllers
         {
             List<Plot> lst = new List<Plot>();
             model.PaymentMode = model.PaymentMode == "0" ? null : model.PaymentMode;
+            model.BranchID = model.BranchID == "0" ? null : model.BranchID;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.GetPaymentList();
@@ -2089,7 +2089,7 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
@@ -2169,14 +2169,13 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
                 }
             }
             ViewBag.ddlBranch = ddlBranch;
-            model.BranchID = "1";
             #endregion
             return View(model);
         }
@@ -2251,14 +2250,13 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
                 }
             }
             ViewBag.ddlBranch = ddlBranch;
-            model.BranchID = "1";
             #endregion
             return View(model);
         }
@@ -2431,14 +2429,13 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
                 }
             }
             ViewBag.ddlBranch = ddlBranch;
-            model.BranchID = "1";
             #endregion
             return View(model);
         }
@@ -2450,6 +2447,7 @@ namespace Dolphin.Controllers
         {
             List<Plot> lst = new List<Plot>();
             model.PaymentMode = model.PaymentMode == "0" ? null : model.PaymentMode;
+            model.BranchID = model.BranchID == "0" ? null : model.BranchID;
             DataSet ds = model.GetList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -2503,7 +2501,7 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
@@ -3550,7 +3548,7 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
@@ -3578,15 +3576,10 @@ namespace Dolphin.Controllers
             }
             ViewBag.ddlSite = ddlSite;
             #endregion
-
-            #region ddlPlan
-            int count2 = 0;
-=======
-
+            
             #region ddlPlan
             int count2 = 0;
             Plot obj1 = new Plot();
->>>>>>> 7c7f1accc078f599120ba3f85390c88f1ca40330
             List<SelectListItem> ddlPlan = new List<SelectListItem>();
             DataSet dsPlan = model.GetUpdateNewPaymentPlan();
             if (dsPlan != null && dsPlan.Tables.Count > 0 && dsPlan.Tables[0].Rows.Count > 0)
@@ -3731,10 +3724,624 @@ namespace Dolphin.Controllers
 
             return RedirectToAction(FormName, Controller);
         }
-
-
-
         #endregion
-    
+
+        public ActionResult ReturnCancelledPlotPayment(string PK_BookingId)
+        {
+            Plot model = new Plot();
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+
+            #region AccountHead
+            int countAccHead = 0;
+            List<SelectListItem> ddlAccountHead = new List<SelectListItem>();
+            DataSet ds = model.GetAccountHeadDetailsNew();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    if (countAccHead == 0)
+                    {
+                        ddlAccountHead.Add(new SelectListItem { Text = "Select Account Head", Value = "0" });
+                    }
+                    ddlAccountHead.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["PK_AccountHeadId"].ToString() });
+                    countAccHead = countAccHead + 1;
+                }
+                //ddlAccountHead.Add(new SelectListItem { Text = "N/A", Value = "0" });
+            }
+            ViewBag.ddlAccountHead = ddlAccountHead;
+            #endregion
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+            return View(model);
+        }
+       
+        
+        public ActionResult ReturnCancelledPlotPaymentDetails(string SiteID, string SectorID, string BlockID, string PlotNumber, string BookingNumber)
+        {
+            Plot model = new Plot();
+            List<Plot> lst = new List<Plot>();
+            model.SiteID = SiteID;
+            model.SectorID = SectorID;
+            model.BlockID = BlockID;
+            model.PlotNumber = PlotNumber;
+            model.BookingNumber = BookingNumber;
+            DataSet dsblock = model.GetReturnCancelledPlotPaymentDetails();
+            if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
+            {
+                if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                {
+                    model.Result = "yes";
+                    model.PlotAmount = dsblock.Tables[0].Rows[0]["PlotAmount"].ToString();
+                    model.ActualPlotRate = dsblock.Tables[0].Rows[0]["ActualPlotRate"].ToString();
+                    model.PlotRate = dsblock.Tables[0].Rows[0]["PlotRate"].ToString();
+                    model.PayAmount = dsblock.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    model.BookingDate = dsblock.Tables[0].Rows[0]["BookingDate"].ToString();
+                    model.BookingAmount = dsblock.Tables[0].Rows[0]["BookingAmt"].ToString();
+                    model.PaymentDate = dsblock.Tables[0].Rows[0]["PaymentDate"].ToString();
+                    model.PaidAmount = dsblock.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    model.Discount = dsblock.Tables[0].Rows[0]["Discount"].ToString();
+                    model.PaymentPlanID = dsblock.Tables[0].Rows[0]["Fk_PlanId"].ToString();
+                    model.PlanName = dsblock.Tables[0].Rows[0]["PlanName"].ToString();
+                    model.PK_BookingId = dsblock.Tables[0].Rows[0]["PK_BookingId"].ToString();
+                    model.TotalAllotmentAmount = dsblock.Tables[0].Rows[0]["TotalAllotmentAmount"].ToString();
+                    model.PaidAllotmentAmount = dsblock.Tables[0].Rows[0]["PaidAllotmentAmount"].ToString();
+                    model.BalanceAllotmentAmount = dsblock.Tables[0].Rows[0]["BalanceAllotmentAmount"].ToString();
+                    model.TotalInstallment = dsblock.Tables[0].Rows[0]["TotalInstallment"].ToString();
+                    model.InstallmentAmount = dsblock.Tables[0].Rows[0]["InstallmentAmount"].ToString();
+                    model.PlotArea = dsblock.Tables[0].Rows[0]["PlotArea"].ToString();
+                    model.Balance = dsblock.Tables[0].Rows[0]["BalanceAmount"].ToString();
+                    model.AssociateLoginID = dsblock.Tables[0].Rows[0]["AssociateLoginID"].ToString();
+                    model.AssociateName = dsblock.Tables[0].Rows[0]["AssociateName"].ToString();
+                    model.CustomerLoginID = dsblock.Tables[0].Rows[0]["CustomerLoginID"].ToString();
+                    model.CustomerName = dsblock.Tables[0].Rows[0]["CustomerName"].ToString();
+
+
+                }
+                else if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "0")
+                {
+                    model.Result = dsblock.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            else
+            {
+                model.Result = "No record found !";
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+
+
+        }
+
+
+        [HttpPost]
+        [ActionName("ReturnCancelledPlotPayment")]
+        [OnAction(ButtonName = "Save")]
+        public ActionResult SaveReturnCancelledPlotPayment(Plot obj)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+
+                obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/MM/yyyy");
+                obj.AddedBy = Session["Pk_AdminId"].ToString();
+                obj.PaymentDate = string.IsNullOrEmpty(obj.PaymentDate) ? null : Common.ConvertToSystemDate(obj.PaymentDate, "dd/MM/yyyy");
+                DataSet ds = obj.SaveReturnCancelledPlotPayment();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["ReturnCancelledPlot"] = " Return Cancelled Plot Payment Done successfully !";
+                        string name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        string Plot = ds.Tables[0].Rows[0]["Plot"].ToString();
+                        string mob = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string amt = obj.PaidAmount;
+                        if (ds.Tables[0].Rows[0]["PK_ReturnPaymentId"].ToString() != "")
+                        {
+                            TempData["CancelledPartPaymentSucesssMessage"] = "Return Cancelled Plot Payment Done successfully !";
+                            Session["PartPaymentId"] = Crypto.Encrypt(ds.Tables[0].Rows[0]["PK_ReturnPaymentId"].ToString());
+                        }
+                        try
+                        {
+                            // BLSMS.SendSMSNew(mob, str);
+                        }
+                        catch { }
+                    }
+                    else
+                    {
+                        TempData["ReturnCancelledPlot"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ReturnCancelledPlot"] = ex.Message;
+            }
+            FormName = "ReturnCancelledPlotPayment";
+            Controller = "Plot";
+
+            return RedirectToAction(FormName, Controller);
+        }
+
+
+        #region ReturnPaymentCancelledPlot
+
+        public ActionResult ApprovalReturnPaymentCancelledPlot(Plot model)
+        {
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+            
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("ApprovalReturnPaymentCancelledPlot")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetReturnCancelledPlotPaymentList(Plot model)
+        {
+            List<Plot> lst = new List<Plot>();
+            model.PaymentMode = model.PaymentMode == "0" ? null : model.PaymentMode;
+            model.BranchID = model.BranchID == "0" ? null : model.BranchID;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetReturnCancelledPlotPaymentList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Plot obj = new Plot();
+                    obj.UserID = r["PK_ReturnPaymentId"].ToString();
+                    obj.CustomerID = r["CustomerLoginID"].ToString();
+                    obj.CustomerName = r["CustomerName"].ToString();
+                    obj.AssociateID = r["AssociateLoginID"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.TransactionNumber = r["TransactionNo"].ToString();
+                    obj.Remark = r["Details"].ToString();
+                    
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+
+                    obj.PlotNumber = r["PlotNumber"].ToString();
+                    obj.PaidAmount = r["PaidAmount"].ToString();
+                    obj.PaymentStatus = r["PaymentStatus"].ToString();
+                    obj.PaymentRemarks = r["PaymentRemarks"].ToString();
+                    obj.ReceiverBank = r["ReceiverBank"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.AccountHeadName = r["AccountHeadName"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+            
+            return View(model);
+        }
+
+
+
+
+       
+        [HttpPost]
+        [ActionName("ApprovalReturnPaymentCancelledPlot")]
+        [OnAction(ButtonName = "btnapprovereturn")]
+        public ActionResult SaveApprovePaymentForReturnCancelled(Plot model)
+        {
+
+            string ctrRowCount = Request["hdRows"].ToString();
+            string chk = "";
+            string Remarks = "";
+            string PK_ReturnPaymentId = "";
+            int Id = 0;
+            DataTable dtAppreturnpayment = new DataTable();
+            dtAppreturnpayment.Columns.Add("Id");
+            dtAppreturnpayment.Columns.Add("PK_ReturnPaymentId");
+            dtAppreturnpayment.Columns.Add("Remarks");
+            for (int i = 1; i < int.Parse(ctrRowCount); i++)
+            {
+                chk = Request["chkpayment_" + i];
+                if (chk == "on")
+                {
+                    Id = dtAppreturnpayment.Rows.Count + 1;
+                    PK_ReturnPaymentId = Request["PK_ReturnPaymentId_" + i].ToString();
+                    Remarks = Request["txtDesc_" + i].ToString();
+                    dtAppreturnpayment.Rows.Add(Id, PK_ReturnPaymentId, Remarks);
+                }
+            }
+            model.dtTable = dtAppreturnpayment;
+            model.AddedBy = Session["Pk_AdminId"].ToString();
+            model.ApprovedDate = string.IsNullOrEmpty(model.ApprovedDate) ? null : Common.ConvertToSystemDate(model.ApprovedDate, "dd/MM/yyyy");
+            DataSet ds = model.ApprovePaymentForReturnCancelledplot();
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    TempData["Plot"] = "Return Payment Approved successfully !";
+                }
+                else
+                {
+                    TempData["Plot"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("ApprovalReturnPaymentCancelledPlot")]
+        [OnAction(ButtonName = "btnrejectreturn")]
+        public ActionResult RejectPaymentForReturnCancelled(Plot model)
+        {
+
+            string ctrRowCount = Request["hdRows"].ToString();
+            string chk = "";
+            string Remarks = "";
+            string PK_ReturnPaymentId = "";
+            int Id = 0;
+            DataTable dtAppreturnpayment = new DataTable();
+            dtAppreturnpayment.Columns.Add("Id");
+            dtAppreturnpayment.Columns.Add("PK_ReturnPaymentId");
+            dtAppreturnpayment.Columns.Add("Remarks");
+            for (int i = 1; i < int.Parse(ctrRowCount); i++)
+            {
+                chk = Request["chkpayment_" + i];
+                if (chk == "on")
+                {
+                    Id = dtAppreturnpayment.Rows.Count + 1;
+                    PK_ReturnPaymentId = Request["PK_ReturnPaymentId_" + i].ToString();
+                    Remarks = Request["txtDesc_" + i].ToString();
+                    dtAppreturnpayment.Rows.Add(Id, PK_ReturnPaymentId, Remarks);
+                }
+
+            }
+            model.dtTable = dtAppreturnpayment;
+            model.AddedBy = Session["Pk_AdminId"].ToString();
+            model.ApprovedDate = string.IsNullOrEmpty(model.ApprovedDate) ? null : Common.ConvertToSystemDate(model.ApprovedDate, "dd/MM/yyyy");
+            DataSet ds = model.RejectPaymentForReturnCancelled();
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    TempData["Plot"] = "Return Payment Rejected successfully !";
+                }
+                else
+                {
+                    TempData["Plot"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+            #region ddlBranch
+            Plot obj = new Plot();
+            int count = 0;
+            List<SelectListItem> ddlBranch = new List<SelectListItem>();
+            DataSet dsBranch = obj.GetBranchList();
+            if (dsBranch != null && dsBranch.Tables.Count > 0 && dsBranch.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsBranch.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
+                    }
+                    ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
+                    count = count + 1;
+                }
+            }
+            ViewBag.ddlBranch = ddlBranch;
+            #endregion
+            return View(model);
+        }
+
+        
+       
+
+        public ActionResult ReturnPlotPaymentLedger(Plot model)
+        {
+            #region ddlpaymentStatus
+            List<SelectListItem> ddlpaymentStatus = Common.BindPaymentStatus();
+            ViewBag.ddlpaymentStatus = ddlpaymentStatus;
+            #endregion ddlpaymentStatus
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("ReturnPlotPaymentLedger")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult ReturnPlotPaymentLedgerDetails(Plot model)
+        {
+            List<Plot> lst = new List<Plot>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            //model.ApprovedFromDate = string.IsNullOrEmpty(model.ApprovedFromDate) ? null : Common.ConvertToSystemDate(model.ApprovedFromDate, "dd/MM/yyyy");
+            //model.ApprovedToDate = string.IsNullOrEmpty(model.ApprovedToDate) ? null : Common.ConvertToSystemDate(model.ApprovedToDate, "dd/MM/yyyy");
+
+            DataSet ds = model.GetReturnPlotPaymentLedger();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Plot obj = new Plot();
+                    obj.AssociateID = r["AssociateLoginID"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.UserID = r["PK_ReturnPaymentId"].ToString();
+                    obj.CustomerID = r["CustomerLoginID"].ToString();
+                    obj.CustomerName = r["CustomerName"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    //ViewBag.TotalAmount = ds.Tables[0].Rows[0]["Total2"].ToString();
+                    obj.TransactionNumber = r["TransactionNo"].ToString();
+                    obj.Remark = r["Remark"].ToString();
+                    obj.PaidAmount = r["PaidAmount"].ToString();
+                    obj.PaymentStatus = r["PaymentStatus"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.ApprovedDate = r["ApprovedDate"].ToString();
+                    //  obj.RejectedDate = r["RejectedDate"].ToString();
+                    obj.ApproveDescription = r["Description"].ToString();
+                    //  obj.RejectDescription = r["RejectDescription"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+
+
+                ViewBag.TotalAmount = double.Parse(ds.Tables[0].Compute("sum(PaidAmount)", "").ToString()).ToString("n2");
+            }
+            #region ddlpaymentStatus
+            List<SelectListItem> ddlpaymentStatus = Common.BindPaymentStatus();
+            ViewBag.ddlpaymentStatus = ddlpaymentStatus;
+            #endregion ddlpaymentStatus
+            return View(model);
+        }
+        #endregion
+        public ActionResult PendingPaymentReport(Plot model)
+        {
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+            #region ddlpaymentStatus
+            List<SelectListItem> ddlpaymentStatus = Common.BindPaymentStatus();
+            ViewBag.ddlpaymentStatus = ddlpaymentStatus;
+            #endregion ddlpaymentStatus
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("PendingPaymentReport")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetPendingPaymentReport(Plot model)
+        {
+            List<Plot> lst = new List<Plot>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.ApprovedFromDate = string.IsNullOrEmpty(model.ApprovedFromDate) ? null : Common.ConvertToSystemDate(model.ApprovedFromDate, "dd/MM/yyyy");
+            model.ApprovedToDate = string.IsNullOrEmpty(model.ApprovedToDate) ? null : Common.ConvertToSystemDate(model.ApprovedToDate, "dd/MM/yyyy");
+
+            DataSet ds = model.GetPendingPaymentReportList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Plot obj = new Plot();
+                    obj.AssociateID = r["AssociateLoginID"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.PK_BookingDetailsId = r["PK_BookingDetailsId"].ToString();
+                    obj.CustomerID = r["CustomerLoginID"].ToString();
+                    obj.CustomerName = r["CustomerName"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.PK_PaymentID = r["PaymentModeID"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    ViewBag.TotalAmount = ds.Tables[0].Rows[0]["Total2"].ToString();
+                    obj.TransactionNumber = r["TransactionNo"].ToString();
+                    obj.Remark = r["Remark"].ToString();
+                    obj.PaidAmount = r["PaidAmount"].ToString();
+                    obj.PaymentStatus = r["PaymentStatus"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.ApprovedDate = r["ApprovedDate"].ToString();
+                    obj.BankName = r["BankName"].ToString();
+                    obj.BankBranch = r["BankBranch"].ToString();
+                    //  obj.RejectedDate = r["RejectedDate"].ToString();
+                    obj.ApproveDescription = r["Description"].ToString();
+                    //  obj.RejectDescription = r["RejectDescription"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+            #region ddlpaymentStatus
+            List<SelectListItem> ddlpaymentStatus = Common.BindPaymentStatus();
+            ViewBag.ddlpaymentStatus = ddlpaymentStatus;
+            #endregion ddlpaymentStatus
+
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+
+            return View(model);
+        }
+
+        public ActionResult UpdatePaymentMode(string PK_BookingDetailsId,string PaymentMode,string TransactionNumber,string TransactionDate,string BankName,string BankBranch,string Remark)
+        {
+            Plot model = new Plot();
+            try
+            {
+                model.UpdatedBy = Session["PK_AdminID"].ToString();
+                model.PK_BookingDetailsId = PK_BookingDetailsId;
+                model.PaymentMode = PaymentMode;
+                model.TransactionNumber = TransactionNumber;
+                model.TransactionDate = string.IsNullOrEmpty(TransactionDate) ? "" : Common.ConvertToSystemDate(TransactionDate, "dd/MM/yyyy");
+                model.BankName = BankName;
+                model.BankBranch = BankBranch;
+                model.Remark = Remark;
+                DataSet dd = model.UpdatePaymentMode();
+                if (dd != null && dd.Tables[0].Rows.Count > 0)
+                {
+
+                    if (dd.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                    }
+                    else if(dd.Tables[0].Rows[0]["MSG"].ToString() == "0")
+                    {
+                        model.Result = dd.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    model.Result = dd.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch(Exception ex)
+            {
+                model.Result = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+
+
+        }
     }
 }
