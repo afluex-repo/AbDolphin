@@ -127,7 +127,7 @@
                                     <th hidden="hidden">Booking Amt</th>
                                     <th>Paid Amt</th>
                                     <th>Total Paid Amt</th>
-                                    @*    <th>Action</th>*@
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -161,11 +161,11 @@
                                                 <td>@Item.PaidAmount</td>
                                                 <td>@Item.AllTotalPaidAmount</td>
 
-
-                                                @*<td>
-                            <a href="/Plot/PlotBooking?PK_BookingId=@Item.PK_BookingId" class="btn btn-info btn-sm">Edit</a>
-                             <a href="/Plot/CancelPlotBooking?BookingID=@Item.PK_BookingId" class="btn btn-danger btn-sm" onclick = "return confirm('Are you sure you want to cancel this booking?');">Cancel</a>
-                        </td>*@
+                                                <td>
+                                                    <a href="/Plot/UpdateBookingDetails?PK_BookingId=@Item.PK_BookingId" class="btn btn-info btn-sm">Edit</a>
+                             @*<a href="/Plot/PlotBooking?PK_BookingId=@Item.PK_BookingId" class="btn btn-info btn-sm">Edit</a>*@
+                             @*<a href="/Plot/CancelPlotBooking?BookingID=@Item.PK_BookingId" class="btn btn-danger btn-sm" onclick = "return confirm('Are you sure you want to cancel this booking?');">Cancel</a>*@
+                        </td>
                                             </tr>
                                             i++;
                                         }
@@ -189,7 +189,7 @@
                                     <th hidden="hidden">Booking Amt</th>
                                     <th>Paid Amt</th>
                                     <th>Total Paid Amt</th>
-                                    @*<th>Action</th>*@
+                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>

@@ -36,6 +36,11 @@
                                 <span class="form-bar"></span>
                             </div>
                             <div class="col-sm-3 mb-3">
+                                <label class="float-label mb-2">Mobile Number</label>
+                                @Html.TextBoxFor(m => m.Contact, new { @class = "form-control", @Placeholder = "Mobile Number" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
                                 <label class="float-label mb-2">Affiliate LoginId</label>
                                 @Html.TextBoxFor(m => m.AssociateID, new { @class = "form-control", @Placeholder = "Search by AffiliateID" })
                                 <span class="form-bar"></span>
@@ -65,7 +70,7 @@
                                 @Html.TextBoxFor(m => m.AdharNumber, new { @class = "form-control", @Placeholder = "Adhar No." })
                                 <span class="form-bar"></span>
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-3 mb-3 mt-2">
                                 <div class="form-group">
                                     Select Branch
                                     @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control form-select", @placeholder = "Choose one thing", @id = "single-select-field" })

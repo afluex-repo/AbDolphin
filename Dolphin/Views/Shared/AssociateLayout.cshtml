@@ -225,38 +225,11 @@
                     </div>
                     <div class="top-menu ms-auto">
                         <ul class="navbar-nav align-items-center gap-1">
-
-                            <li class="nav-item dropdown dropdown-app">
-
-                                <div class="dropdown-menu dropdown-menu-end p-0">
-                                    <div class="app-container p-2 my-2">
-                                        <div class="row gx-0 gy-2 row-cols-3 justify-content-center p-2">
-
-                                        </div><!--end row-->
-
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown dropdown-large">
-
-                                <div class="dropdown-menu dropdown-menu-end">
-
-                                    <div class="header-notifications-list">
-
-                                    </div>
-
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown dropdown-large">
-
-                                <div class="dropdown-menu dropdown-menu-end">
-
-                                    <div class="header-message-list">
-
-                                    </div>
-
-                                </div>
-                            </li>
+                            @if (Session["Pk_AdminId"] != null)
+                            {
+                                <a href="/Admin/AdminDashBoard" class="btn btn-dark"><i class="bx bx-log-out-circle"></i>Back To Admin</a>
+                            }
+                            
                         </ul>
                     </div>
                     <div class="user-box dropdown px-3">
@@ -286,6 +259,17 @@
                                 <a class="dropdown-item d-flex align-items-center" href="/Home/LoginWeb"><i class="bx bx-log-out-circle"></i><span>Logout</span></a>
                             </li>
                         </ul>
+
+                        @*<ul>
+                            @if (Session["Pk_AdminId"] != null)
+                            {
+                                <li id="BtnBackToAdmin" class="pcoded-hasmenu">
+                                    <a href="/Admin/AdminDashBoard" class="waves-effect waves-dark">
+                                        <span class="pcoded-mtext">Back To Admin Login</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>*@
                     </div>
                 </nav>
             </div>

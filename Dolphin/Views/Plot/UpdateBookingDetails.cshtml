@@ -1,0 +1,262 @@
+﻿@model Dolphin.Models.Plot
+
+@{
+    ViewBag.Title = "UpdateBookingDetails";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("UpdateBookingDetails", "Plot", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m=> m.PK_BookingId)
+    @Html.HiddenFor(m => m.CustomerID)
+    @Html.HiddenFor(m => m.AssociateID)
+    @Html.HiddenFor(m => m.PlotSize)
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Update Booking Details</h5>
+                    @*<p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                        @TempData["UpdateBookingDetails"]
+                    </p>*@
+                </div>
+            </div>
+        </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                    <form>
+                        <div class="row">
+
+                                <div class="col-md-3 mt">
+                                    <div class="form-group">
+                                        <label><b>Branch :</b></label>
+                                        <label>@ViewBag.BranchName</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mt">
+                                    <div class="form-group">
+                                        <label><b>Booking No :</b></label>
+                                        <label>@ViewBag.BookingNo</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mt">
+                                    <div class="form-group">
+                                        <label><b>Booking Date :</b></label>
+                                        <label>@ViewBag.BookingDate</label>
+                                    </div>
+                                </div>
+                            <div class="col-md-3 mt">
+                                <div class="form-group">
+                                    <label><b>Payment Plan :</b></label>
+                                    <label>@ViewBag.PlanName</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt">
+                                <div class="form-group">
+                                    <label><b>Customer Details :</b></label>
+                                    <label>@ViewBag.CustomerName (@ViewBag.CustomerID)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt">
+                                <div class="form-group">
+                                    <label><b>Mobile No :</b></label>
+                                    <label>@ViewBag.Contact</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt">
+                                <div class="form-group">
+                                    <label><b>Affiliate Details :</b></label>
+                                    <label>@ViewBag.AssociateName (@ViewBag.AssociateID)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt">
+                                <div class="form-group">
+                                    <label><b>Plot Amount :</b></label>
+                                    <label>@ViewBag.PlotAmount</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt">
+                                <div class="form-group">
+                                    <label><b>Plot Rate :</b></label>
+                                    <label>@ViewBag.PlotRate</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt">
+                                <div class="form-group">
+                                    <label><b>Net Plot Amount :</b></label>
+                                    <label>@ViewBag.NetPlotAmount</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt">
+                                <div class="form-group">
+                                    <label><b>Paid Amount :</b></label>
+                                    <label>@ViewBag.PayAmount</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt">
+                                <div class="form-group">
+                                    <label><b>PLC :</b></label>
+                                    <label>@ViewBag.TotalPLC</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt">
+                                <div class="form-group">
+                                    <label><b>Discount :</b></label>
+                                    <label>@ViewBag.Discount</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt">
+                                <div class="form-group">
+                                    <label><b>PlotArea :</b></label>
+                                    <label>@ViewBag.PlotArea</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt">
+                                <div class="form-group">
+                                    <label><b>Plot Details :</b></label>
+                                    <label>@ViewBag.PlotInfo</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-3 mb-3">
+                                <div class="form-group">
+                                    <label>New Plot Rate</label>
+                                    @Html.TextBoxFor(m => m.PlotRate, new { @class = "form-control", @maxlength = "6", @Placeholder = "New Plot Rate",@onkeypress = "return isNumberOrDecimal(event);",@onchange = "return CalculatePlotAmount()" })
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="form-group">
+                                    <label>New PLC</label>
+                                    @Html.TextBoxFor(m => m.TotalPLC, new { @class = "form-control", @Placeholder = "TotalPLC", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return CalculatePlotAmount()" })
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="form-group">
+                                    <label>New Discount (In Amount)</label>
+                                    @Html.TextBoxFor(m => m.Discount, new { @class = "form-control", @Placeholder = "Discount",@onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10", @onchange = "return CalculatePlotAmount()" })
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="form-group">
+                                    <label>New Net Plot Amount</label>
+                                    @Html.TextBoxFor(m => m.NetPlotAmount, new { @class = "form-control", @Placeholder = "Net Plot Amount", @readonly = "readonly" })
+                                </div>
+                            </div>
+                           
+                            <div class="col-md-3 mb-3" hidden>
+                                <div class="form-group">
+                                    <label>Plot Amount</label>
+                                    @Html.TextBoxFor(m => m.PlotAmount, new { @class = "form-control", @Placeholder = "PlotAmount" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="submit" value="Update" name="btnUpdate" id="btnUpdate" class="btn btn-success" onclick="return UpdateBookingDetails()" />
+                                <a href="/Plot/PlotBookingList" class="btn btn-info">Back To List</a>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+<script>
+
+    function UpdateBookingDetails() {
+        debugger;
+        var plotRate = $('#PlotRate').val();
+        var Plc = $('#TotalPLC').val();
+        var Dcount = $('#Discount').val();
+        var plotAmount = $('#PlotAmount').val();
+        var NetAmount = $('#NetPlotAmount').val();
+        var bookingid = $('#PK_BookingId').val();
+        var customerid = $('#CustomerID').val();
+        var associateid = $('#AssociateID').val();
+        $.ajax({
+            url: '/Plot/EditBookingDetails', type: 'post', dataType: 'json',
+            data: {
+                    'PlotRate': plotRate,
+                    'TotalPLC': Plc,
+                    'Discount': Dcount,
+                    'PlotAmount': plotAmount,
+                    'NetPlotAmount': NetAmount,
+                    'PK_BookingId': bookingid,
+                    'CustomerID': customerid,
+                    'AssociateID': associateid
+                  },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    alert("Plot Details updated successfully !");
+                }
+                else  {
+                    alert("Plot Details Not updated !!");
+                }
+            }
+
+        });
+    }
+
+
+
+
+
+
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+    }
+
+    function CalculatePlotAmount() {
+        debugger;
+        var plotSize = $('#PlotSize').val();
+        var PlotRate = $('#PlotRate').val();
+        var Plc = $('#TotalPLC').val();
+        var Dcount = $('#Discount').val();
+
+        var PlotAmount = (Number)(plotSize) * (Number)(PlotRate);
+        $('#PlotAmount').val(PlotAmount);
+
+        if ($('#TotalPLC').val() == "0" || $('#TotalPLC').val() == "" || $('#TotalPLC').val() == "0.00")
+        {
+            $("#NetPlotAmount").val(PlotAmount);
+        }
+        else {
+            var Plotplc = (Number)(PlotAmount) + (Number)(Plc);
+                {
+                    if ($('#Discount').val() == "0" || $('#Discount').val() == "" || $('#Discount').val() == "0.00")
+                    {
+                        $("#NetPlotAmount").val(Plotplc);
+                    }
+                    else {
+                        var Amount = (Number)(Plotplc) - (Number)(Dcount);
+                        
+                        $("#NetPlotAmount").val(Amount);
+                         }
+                }
+            }
+    }
+</script>
+
+
+
+
+<style>
+    .mt{
+        margin-top:10px;
+        font-size:14px;
+    }
+</style>
