@@ -70,7 +70,11 @@
                                 <th>Sr No.</th>
                                 <th>LoginID</th>
                                 <th>Name</th>
+                                @*<th>Account Number</th>*@
                                 <th>Account Number</th>
+                                <th>Bank Name</th>
+                                <th>Bank Branch</th>
+                                <th>IFSC Code</th>
                                 <th width="5px">Image</th>
                                 <th>Adhar Number</th>
                                 <th width="5px">Image</th>
@@ -93,7 +97,11 @@
                                             <td>@i</td>
                                             <td>@Item.LoginId</td>
                                             <td>@Item.DisplayName</td>
-                                            <td>@Item.DocumentNumber</td>
+                                            @*<td>@Item.DocumentNumber</td>*@
+                                            <td>@Item.BankAccountNo</td>
+                                            <td>@Item.BankName</td>
+                                            <td>@Item.BankBranch</td>
+                                            <td>@Item.IFSCCode</td>
                                             <td>
                                                 @if (Item.DocumentImage == "")
                                                 {
