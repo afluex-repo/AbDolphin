@@ -30,16 +30,16 @@
 
     <style>
         #profileImage {
-             font-family: Arial, Helvetica, sans-serif;
-             width: 3rem;
-             height: 3rem;
-             border-radius: 50%;
-             background: #000000;
-             font-size: 20px;
-             color:#fdea95;
-             text-align: center;
-             line-height: 3rem;
-             margin: 2rem 0;
+            font-family: Arial, Helvetica, sans-serif;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: #000000;
+            font-size: 20px;
+            color: #fdea95;
+            text-align: center;
+            line-height: 3rem;
+            margin: 2rem 0;
         }
     </style>
 </head>
@@ -47,28 +47,28 @@
 
 
 
-<body >
+<body>
 
     <!--wrapper-->
     <div class="wrapper">
         <!--sidebar wrapper -->
         <div class="sidebar-wrapper" data-simplebar="true">
-         
-                <div class="sidebar-header" style="background-color:#000;">
-                    <div>
-                        @*<img src="/assets/img/dolphin.png" class="logo-icon" alt="logo icon">*@
-                        <img src="~/assets/img/logo.png" class="logo-icon" alt="logo icon"/>
-                        </div>
-                    <div>
-                        <h4 class="logo-text" style="font-size: 18px;">ABdolphin Infra</h4>
-                    </div>
-                    <div class="toggle-icon ms-auto">
-                        <i class='bx bx-arrow-back'></i>
-                    </div>
+
+            <div class="sidebar-header" style="background-color:#000;">
+                <div>
+                    @*<img src="/assets/img/dolphin.png" class="logo-icon" alt="logo icon">*@
+                    <img src="~/assets/img/logo.png" class="logo-icon" alt="logo icon" />
                 </div>
-            
+                <div>
+                    <h4 class="logo-text">Dolphin Infra</h4>
+                </div>
+                <div class="toggle-icon ms-auto">
+                    <i class='bx bx-arrow-back'></i>
+                </div>
+            </div>
+
             <ul class="metismenu" id="menu">
-                <li >
+                <li>
                     <a href="/AssociateDashboard/AssociateDashBoard" class="has-arrow">
                         <div class="parent-icon">
                             <i class='bx bx-home'></i>
@@ -83,15 +83,15 @@
                         </div>
                         <div class="menu-title">Tree</div>
                     </a>
-                        <ul >
-                            <li>
-                                <a href="/AssociateDashboard/Tree"><i class='bx bx-category'></i>Level Tree</a>
-                            </li>
-                            <li>
-                                <a href="/AssociateDashboard/AssociateTree"><i class='bx bx-category'></i>Down Team Tree</a>
-                            </li>
-                              
-                        </ul>
+                    <ul>
+                        <li>
+                            <a href="/AssociateDashboard/Tree"><i class='bx bx-category'></i>Level Tree</a>
+                        </li>
+                        <li>
+                            <a href="/AssociateDashboard/AssociateTree"><i class='bx bx-category'></i>Down Team Tree</a>
+                        </li>
+
+                    </ul>
                 </li>
                 <li>
                     <a href="/AssociateDashboard/ChangePasswordAssociate">
@@ -225,22 +225,55 @@
                     </div>
                     <div class="top-menu ms-auto">
                         <ul class="navbar-nav align-items-center gap-1">
-                            @if (Session["Pk_AdminId"] != null)
-                            {
-                                <a href="/Admin/AdminDashBoard" class="btn btn-dark"><i class="bx bx-log-out-circle"></i>Back To Admin</a>
-                            }
-                            
+
+                            <li class="nav-item dropdown dropdown-app">
+
+                                <div class="dropdown-menu dropdown-menu-end p-0">
+                                    <div class="app-container p-2 my-2">
+                                        <div class="row gx-0 gy-2 row-cols-3 justify-content-center p-2">
+
+                                        </div><!--end row-->
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown dropdown-large">
+
+                                <div class="dropdown-menu dropdown-menu-end">
+
+                                    <div class="header-notifications-list">
+
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown dropdown-large">
+
+                                <div class="dropdown-menu dropdown-menu-end">
+
+                                    <div class="header-message-list">
+
+                                    </div>
+
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <div class="user-box dropdown px-3">
                         <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-                           
-                            
+                            @if (Session["ProfilePic"].ToString() == "../../images/no-profile.png" || Session["ProfilePic"].ToString() == "../files/assets/images/no_avatar.jpg")
+                            {
+                                <div id="profileImage"></div>
+
+                            }
+                            else
+                            {
                                 <img src="@Session["ProfilePic"]" class="user-img" alt="user avatar">
-                           
+                            }
+
                             <div class="user-info">
-                                <p class="user-name mb-0"><span >@Session["FullName"]</span></p>
+                                <p class="user-name mb-0"><span id="fullName">@Session["FullName"]</span></p>
                                 @if (Session["Status"].ToString() == "Active")
                                 {
                                     <p class="designattion mb-0" style="color:#1c8d17">@Session["Status"] </p>
@@ -259,17 +292,6 @@
                                 <a class="dropdown-item d-flex align-items-center" href="/Home/LoginWeb"><i class="bx bx-log-out-circle"></i><span>Logout</span></a>
                             </li>
                         </ul>
-
-                        @*<ul>
-                            @if (Session["Pk_AdminId"] != null)
-                            {
-                                <li id="BtnBackToAdmin" class="pcoded-hasmenu">
-                                    <a href="/Admin/AdminDashBoard" class="waves-effect waves-dark">
-                                        <span class="pcoded-mtext">Back To Admin Login</span>
-                                    </a>
-                                </li>
-                            }
-                        </ul>*@
                     </div>
                 </nav>
             </div>
@@ -321,9 +343,13 @@
 				.appendTo('#example2_wrapper .col-md-6:eq(0)');
 
 
-           
+            /// For Profile
+			debugger;
+			const fullName = document.getElementById('fullName').textContent;
+			const intials = fullName.split(' ').map(name => name[0]).join('').toUpperCase();
+			document.getElementById('profileImage').innerHTML = intials;
 		});
-	
+
     </script>
 </body>
 
