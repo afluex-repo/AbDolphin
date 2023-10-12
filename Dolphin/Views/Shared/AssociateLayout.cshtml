@@ -60,7 +60,7 @@
                     <img src="~/assets/img/logo.png" class="logo-icon" alt="logo icon" />
                 </div>
                 <div>
-                    <h4 class="logo-text">Dolphin Infra</h4>
+                    <h4 class="logo-text" style="font-size:18px;">ABdolphin Infra</h4>
                 </div>
                 <div class="toggle-icon ms-auto">
                     <i class='bx bx-arrow-back'></i>
@@ -257,6 +257,18 @@
 
                                 </div>
                             </li>
+                            @if (Session["Pk_AdminId"] != null)
+                            {
+                            <a href="javascript:;">
+                                <div class="text-center msg-footer">
+                                    <button  id="BtnBackToAdmin" class="btn btn-dark  w-100">
+                                        <a href="/Admin/AdminDashBoard" class="waves-effect waves-dark">
+                                            <span class="pcoded-mtext text-white">Back To Admin</span>
+                                        </a> 
+                                    </button>
+                                </div>
+                            </a>
+                            }
                         </ul>
                     </div>
                     <div class="user-box dropdown px-3">
