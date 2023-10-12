@@ -1243,7 +1243,7 @@ namespace Dolphin.Models
                                         new SqlParameter("@PaymentMode" ,PaymentMode),
                                         new SqlParameter("@TransactionNo"  ,TransactionNumber),
                                         new SqlParameter("@TransactionDate" ,TransactionDate),
-                                         new SqlParameter("@PaymentRemarks" ,PaymentRemarks),
+                                        new SqlParameter("@PaymentRemarks" ,PaymentRemarks),
                                         new SqlParameter("@BankBranch", BankBranch),
                                         new SqlParameter("@BankName"  , BankName),
                                         new SqlParameter("@AddedBy",AddedBy),

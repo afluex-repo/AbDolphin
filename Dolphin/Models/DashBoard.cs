@@ -142,7 +142,7 @@ namespace Dolphin.Models
 
         public DataSet GetAssociateDetails()
         {
-            DataSet ds = Connection.ExecuteQuery("GetAssociateForDashboard");
+            DataSet ds = Connection.ExecuteQuery("GetAssociateForAdminDashboard");
             return ds;
         }
         public List<DashBoard> ListAssociate { get; set; }
