@@ -1,0 +1,695 @@
+﻿@model Dolphin.Models.Plot
+
+@{
+    ViewBag.Title = "PendingPaymentReport";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("PendingPaymentReport", "Plot", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Pending Payment Report</h5>
+                </div>
+            </div>
+        </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> CustomerID</label>
+                                @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Search by CustomerID" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>  Payment Status</label>
+                                @Html.DropDownListFor(m => m.PaymentStatus, new SelectList(ViewBag.ddlpaymentStatus, "Value", "Text"), new { @class = "form-control form-select" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> From Date</label>
+                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "Search From Date", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>  To Date</label>
+                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "Search To Date", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Approved From Date</label>
+                                @Html.TextBoxFor(m => m.ApprovedFromDate, new { @class = "form-control", @Placeholder = "Search Approved From Date", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label> Approved To Date</label>
+                                @Html.TextBoxFor(m => m.ApprovedToDate, new { @class = "form-control", @Placeholder = "Search Approved To Date", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label class="d-block"> &nbsp;</label>
+                                <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="Search" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+
+                                <th>Customer Details</th>
+                                <th>Affiliate Details</th>
+                                <th>Plot Number</th>
+                                <th>Payment Mode</th>
+                                <th>Date</th>
+                                <th>Transaction No.</th>
+
+                                <th>Amount</th>
+                                <th>Payment Date</th>
+                                <th>Status</th>
+                                <th>Approved/Rejected Date</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstPlot != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstPlot)
+                                    {
+                                        <tr class="text-left">
+                                            <td>@i</td>
+                                            <td>@Item.CustomerID (@Item.CustomerName)</td>
+                                            <td>@Item.AssociateID (@Item.AssociateName)</td>
+                                            <td>@Item.PlotNumber</td>
+                                            <td>@Item.PaymentMode</td>
+                                            <td >@Item.TransactionDate</td>
+                                            <td >@Item.TransactionNumber</td>
+
+                                            <td>@Item.PaidAmount</td>
+                                            <td>@Item.PaymentDate</td>
+                                            <td>@Item.PaymentStatus</td>
+                                            <td>@Item.ApprovedDate</td>
+                                            <td>@Item.ApproveDescription</td>
+                                            <td>
+                                            @*<a href="#" data-remarks="@Item.PaymentMode" class="form-bg-info PaymentMode_@Item.PK_BookingDetailsId" onclick="openPopupremarks('@Item.PK_BookingDetailsId);">EDIT</a>*@
+                                            
+                                                @*<button type="button" class="btn btn-primary PaymentMode_@Item.PK_BookingDetailsId" data-toggle="modal"  onclick="openPopupremarks('@Item.PK_BookingDetailsId');"> EDIT
+                                                </button>*@
+                                             <input type="hidden" id="TransactionNumber_@Item.PK_BookingDetailsId"value="@Item.TransactionNumber" />
+                                                <input type="hidden" id="TransactionNumber_@Item.PK_BookingDetailsId" value="@Item.TransactionNumber" />
+                                                <input type="hidden" id="TransactionDate_@Item.PK_BookingDetailsId" value="@Item.TransactionDate" />
+                                                <input type="hidden" id="BankName_@Item.PK_BookingDetailsId" value="@Item.BankName" />
+                                                <input type="hidden" id="BankBranch_@Item.PK_BookingDetailsId" value="@Item.BankBranch" />
+                                                <button type="button" value="@Item.PK_PaymentID" class="btn btn-primary PaymentMode_@Item.PK_BookingDetailsId" data-bs-toggle="modal" onclick="openPopupremarks('@Item.PK_BookingDetailsId');">Edit</button>
+                                            
+                                            </td>
+                                            
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <th></th>
+
+                                <th></th>
+                                <th></th>
+                                <th></th>
+
+                                <th></th>
+                                <th></th>
+                                <th style="text-align:right">Total Amount</th>
+
+                                <th style="color:dodgerblue;font-weight:800">@ViewBag.TotalAmount</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr class="table-active">
+                                <th>Sr No.</th>
+
+                                <th>Customer Details</th>
+                                <th>Affiliate Details</th>
+                                <th>Plot Number</th>
+                                <th>Payment Mode</th>
+                                <th>Date</th>
+                                <th>Transaction No.</th>
+
+                                <th>Amount</th>
+                                <th>Payment Date</th>
+                                <th>Status</th>
+                                <th>Approved/Rejected Date</th>
+                                <th>Description</th>
+                                <th>Action</th>
+
+                            </tr>
+
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="txtdecription" />
+    <!-- Modal -->
+    @Html.HiddenFor(m => m.PK_BookingDetailsId)
+
+    <!-- Button trigger modal -->
+    
+										<!-- Modal -->
+                                        <div class="modal fade" id="exampleVerticallycenteredModal" tabindex="-1" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Update New Payment Mode</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="col-md-12 row">
+                                                            <div class="col-md-4 mb-3">
+                                                                <div class="form-group">
+                                                                    <label> Payment Mode <span style="color: red">*</span></label>
+                                                                    @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return CheckPayMode()" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3" id="divtransactiono" style="display: none">
+                                                                <div class="form-group">
+                                                                    <label>    <span id="txnNo"></span> <span style="color: red">*</span></label>
+                                                                    @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3" id="divPaymentMode" style="display: none">
+                                                                <div class="form-group">
+                                                                    <label>  <span id="txndt"></span><span style="color: red">*</span></label>
+                                                                    @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Date", @Readonly = "readonly" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3" id="divbankname" style="display: none">
+                                                                <div class="form-group">
+                                                                    <label> Bank Name <span style="color: red">*</span></label>
+                                                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Name" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3" id="divbankbranch" style="display: none">
+                                                                <div class="form-group">
+                                                                    <label>  Bank Branch <span style="color: red">*</span></label>
+                                                                    @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3" >
+                                                                <div class="form-group">
+                                                                    <label>  Remark </label>
+                                                                    @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", @Placeholder = "Remark.." })
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" id="updatebtn" name="updatebtn" class="btn btn-primary" onclick="updatePaymentMode();">Update</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+   
+
+
+    
+}
+
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+
+<script>
+
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ApprovedFromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ApprovedToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#TransactionDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+        minDate: new Date(new Date().setMonth(new Date().getMonth() - 2))
+    });
+    debugger;
+
+    function openPopupremarks(PK_BookingDetailsId) {
+        debugger;
+        $("#PK_BookingDetailsId").val(PK_BookingDetailsId);
+        //var PaymentMode = $('.PaymentMode_' + PK_BookingDetailsId).val();
+        //var Transactionno = $('#TransactionNumber_' + PK_BookingDetailsId).val();
+        //var Transactiondate = $('#TransactionDate_' + PK_BookingDetailsId).val();
+        //var Bankname = $('#BankName_' + PK_BookingDetailsId).val();
+        //var Bankbranch = $('#BankBranch_' + PK_BookingDetailsId).val();
+        //$("#PaymentMode").val(PaymentMode);
+        //$("#TransactionNumber").val(Transactionno);
+        //$("#TransactionDate").val(Transactiondate);
+        //$("#BankName").val(Bankname);
+        //$("#BankBranch").val(Bankbranch);
+        CheckPayMode();
+        $("#exampleVerticallycenteredModal").modal('show');
+    }
+
+    function CheckPayMode() {
+        if ($('#PaymentMode').val() == '2') {
+            $('#txnNo').html('Cheque No.');
+            $('#txndt').html('Cheque Date');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divadjustpayment").hide();
+            $("#divreceiver").show();
+            $("#TransactionNumber").attr("placeholder", "Cheque No.");
+            $("#TransactionDate").attr("placeholder", "Cheque Date");
+            
+
+        }
+        else if ($('#PaymentMode').val() == '3') {
+            $('#txndt').html('NEFT Date');
+            $('#txnNo').text('NEFT No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divadjustpayment").hide();
+            $("#divreceiver").show();
+            $("#TransactionNumber").attr("placeholder", "NEFT No.");
+            $("#TransactionDate").attr("placeholder", "NEFT Date");
+        }
+        else if ($('#PaymentMode').val() == '4') {
+            $('#txndt').html('DD Date');
+            $('#txnNo').text('DD No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "DD No.");
+            $("#TransactionDate").attr("placeholder", "DD Date");
+        }
+        else if ($('#PaymentMode').val() == '5') {
+            $('#txndt').html('RTGS Date');
+            $('#txnNo').text('RTGS No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "RTGS No.");
+            $("#TransactionDate").attr("placeholder", "RTGS Date");
+        }
+        else if ($('#PaymentMode').val() == '6') {
+            $('#txndt').html('IMPS Date');
+            $('#txnNo').text('IMPS No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divreceiver").show();
+            $("#divbankbranch").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "IMPS No.");
+            $("#TransactionDate").attr("placeholder", "IMPS Date");
+        }
+        else if ($('#PaymentMode').val() == '7') {
+
+            $('#txnNo').text('Mobile No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divreceiver").show();
+            $("#divPaymentMode").hide();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "Mobile No.");
+        }
+        else if ($('#PaymentMode').val() == '8') {
+
+            $('#txnNo').text('Mobile No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divPaymentMode").hide();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "Mobile No.");
+        }
+        else if ($('#PaymentMode').val() == '9') {
+
+            $('#txnNo').text('Mobile No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divPaymentMode").hide();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "Mobile No.");
+        }
+        else if ($('#PaymentMode').val() == '10') {
+
+            $('#txndt').html('Expiry Date');
+            $('#txnNo').text('Card No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "Card No.");
+            $("#TransactionDate").attr("placeholder", "Expiry Date");
+        }
+        else if ($('#PaymentMode').val() == '11') {
+
+            $('#txtpremarks').html('Payment Remarks');
+            //$('#txnNo').text('Card No.');
+            $("#divPaymentMode").hide();
+            $("#divtransactiono").hide();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divreceiver").show();
+            $("#divadjustpayment").show();
+            $("#PaymentRemarks").attr("placeholder", "Payment Remarks");
+        }
+        else if ($('#PaymentMode').val() == '13') {
+
+            $('#txnNo').text('Mobile No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divreceiver").show();
+            $("#divPaymentMode").hide();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "Mobile No.");
+        }
+        else {
+            $("#divPaymentMode").hide();
+            $("#divtransactiono").hide();
+            $("#divbankname").hide();
+            $("#divreceiver").hide();
+            $("#divadjustpayment").hide();
+            $("#divbankbranch").hide();
+        }
+
+    }
+    function updatePaymentMode() {
+        debugger;
+            $(".errortext").removeClass("errortext");
+            $("#divload").css({ 'display': 'none' });
+
+            if ($('#PaymentMode').val() == '0') {
+                $("#PaymentMode").addClass('errortext');
+                $('#PaymentMode').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#PaymentMode').val() == '2') {
+                if ($('#TransactionNumber').val() == '') {
+                    $("#TransactionNumber").addClass('errortext');
+                    $('#TransactionNumber').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#TransactionDate').val() == '') {
+                    $("#TransactionDate").addClass('errortext');
+                    $('#TransactionDate').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#BankName').val() == '') {
+                    $("#BankName").addClass('errortext');
+                    $('#BankName').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#BankBranch').val() == '') {
+                    $("#BankBranch").addClass('errortext');
+                    $('#BankBranch').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+            }
+            else if ($('#PaymentMode').val() == '3') {
+                if ($('#TransactionNumber').val() == '') {
+                    $("#TransactionNumber").addClass('errortext');
+                    $('#TransactionNumber').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#TransactionDate').val() == '') {
+                    $("#TransactionDate").addClass('errortext');
+                    $('#TransactionDate').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#BankName').val() == '') {
+                    $("#BankName").addClass('errortext');
+                    $('#BankName').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#BankBranch').val() == '') {
+                    $("#BankBranch").addClass('errortext');
+                    $('#BankBranch').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+            }
+            else if ($('#PaymentMode').val() == '4') {
+                if ($('#TransactionNumber').val() == '') {
+                    $("#TransactionNumber").addClass('errortext');
+                    $('#TransactionNumber').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#TransactionDate').val() == '') {
+                    $("#TransactionDate").addClass('errortext');
+                    $('#TransactionDate').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#BankName').val() == '') {
+                    $("#BankName").addClass('errortext');
+                    $('#BankName').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#BankBranch').val() == '') {
+                    $("#BankBranch").addClass('errortext');
+                    $('#BankBranch').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+            }
+            else if ($('#PaymentMode').val() == '5') {
+                if ($('#TransactionNumber').val() == '') {
+                    $("#TransactionNumber").addClass('errortext');
+                    $('#TransactionNumber').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#TransactionDate').val() == '') {
+                    $("#TransactionDate").addClass('errortext');
+                    $('#TransactionDate').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#BankName').val() == '') {
+                    $("#BankName").addClass('errortext');
+                    $('#BankName').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#BankBranch').val() == '') {
+                    $("#BankBranch").addClass('errortext');
+                    $('#BankBranch').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+            }
+            else if ($('#PaymentMode').val() == '6') {
+                if ($('#TransactionNumber').val() == '') {
+                    $("#TransactionNumber").addClass('errortext');
+                    $('#TransactionNumber').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#TransactionDate').val() == '') {
+                    $("#TransactionDate").addClass('errortext');
+                    $('#TransactionDate').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#BankName').val() == '') {
+                    $("#BankName").addClass('errortext');
+                    $('#BankName').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#BankBranch').val() == '') {
+                    $("#BankBranch").addClass('errortext');
+                    $('#BankBranch').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+            }
+            else if ($('#PaymentMode').val() == '7') {
+
+                if ($('#TransactionNumber').val() == '') {
+                    $("#TransactionNumber").addClass('errortext');
+                    $('#TransactionNumber').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+
+            }
+            else if ($('#PaymentMode').val() == '8') {
+
+                if ($('#TransactionNumber').val() == '') {
+                    $("#TransactionNumber").addClass('errortext');
+                    $('#TransactionNumber').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+            }
+            else if ($('#PaymentMode').val() == '9') {
+
+                if ($('#TransactionNumber').val() == '') {
+                    $("#TransactionNumber").addClass('errortext');
+                    $('#TransactionNumber').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+            }
+            else if ($('#PaymentMode').val() == '10') {
+
+                if ($('#TransactionNumber').val() == '') {
+                    $("#TransactionNumber").addClass('errortext');
+                    $('#TransactionNumber').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#TransactionDate').val() == '') {
+                    $("#TransactionDate").addClass('errortext');
+                    $('#TransactionDate').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#BankName').val() == '') {
+                    $("#BankName").addClass('errortext');
+                    $('#BankName').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+                if ($('#BankBranch').val() == '') {
+                    $("#BankBranch").addClass('errortext');
+                    $('#BankBranch').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+            }
+            else if ($('#PaymentMode').val() == '13') {
+
+                if ($('#TransactionNumber').val() == '') {
+                    $("#TransactionNumber").addClass('errortext');
+                    $('#TransactionNumber').focus();
+                    $("#divload").css({ 'display': 'none' });
+                    return false;
+                }
+
+            }
+            
+          
+        debugger;
+        var PK_BookingDetailsId=$("#PK_BookingDetailsId").val();
+        var PaymentMode= $("#PaymentMode").val();
+        var TransactionNumber= $("#TransactionNumber").val();
+        var TransactionDate= $("#TransactionDate").val();
+        var BankName= $("#BankName").val();
+        var BankBranch = $("#BankBranch").val();
+        var Remark = $("#Remark").val();
+        debugger;
+        $.ajax({
+            url: "/Plot/UpdatePaymentMode",
+            Type: "Get",
+            DataType: "JSON",
+            data: { 'PK_BookingDetailsId': PK_BookingDetailsId, 'PaymentMode': PaymentMode, 'TransactionNumber': TransactionNumber, 'TransactionDate': TransactionDate, 'BankName': BankName, 'BankBranch': BankBranch, 'Remark': Remark },
+            success: function (data) {
+                $("#exampleVerticallycenteredModal").modal('hide');
+                if (data.Result == "yes") {
+                    alert("Payment mode Updated");
+                    location.reload();
+                }
+                else {
+                    alert(data.Result);
+                    location.reload();
+                }
+
+            }
+        });
+
+    }
+</script>
+
+

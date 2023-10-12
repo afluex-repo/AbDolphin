@@ -1,0 +1,1023 @@
+﻿@model Dolphin.Models.Plot
+
+@{
+    ViewBag.Title = "ReturnCancelledPlotPayment";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@using (Html.BeginForm("ReturnCancelledPlotPayment", "Plot", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+   
+
+    @Html.HiddenFor(m => m.PK_BookingId)
+    
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Return Cancelled Plot Payment</h5>
+                </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["ReturnCancelledPlot"]
+                </p>
+            </div>
+        </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>Select Site <span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label> Select Sector <span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>Select Block <span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label> Plot Number <span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number", @style = "text-transform:uppercase" })
+                            @Html.HiddenFor(m => m.PlotID)
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>Booking Number</label>
+                            @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Booking Number"  })
+                            @Html.HiddenFor(m => m.PK_BookingId)
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <br />
+                            <input type="button" name="SearchPlot" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails();" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="items" id="Details1" style="display: none;">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h5>Plot Details @*<small>List Of Sites</small>*@</h5>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">Affiliate ID :</label>
+                                        <label id="AssoID"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">Affiliate Name :</label>
+                                        <label id="AssoName"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds"> Customer ID :</label>
+                                        <label id="CustID"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds"> Customer Name :</label>
+                                        <label id="CustName"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">Plot Rate :</label>
+                                        <label id="Plotrte"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">Plot Area :</label>
+                                        <label id="Plotarea"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">Actual Plot Amount :</label>
+                                        <label id="ActPlotAmt"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">Discount :</label>
+                                        <label id="disct"></label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-3" hidden="hidden">
+                                    <div class="form-group">
+                                        <label class="bolds">Booking Amount :</label>
+                                        <label id="bookingAmt"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">Net Plot Amount :</label>
+                                        <label id="netplotamount"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">Booking Date :</label>
+                                        <label id="Bookigdt"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">Payment Plan :</label>
+                                        <label id="Payplan"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">Total Paid Amount:</label>
+                                        <label id="Payamt"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">Payment Date:</label>
+                                        <label id="Paydt"></label>
+                                    </div>
+                                </div>
+                                @*<div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">No. of Installments:</label>
+                                        <label id="noOfinst"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">Installment Amount :</label>
+                                        <label id="instAmt"></label>
+                                    </div>
+                                </div>*@
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bolds">Balance :</label>
+                                        <label id="bal"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-group">
+                                        <label >Pay Amount<span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.PaidAmount, new { @class = "form-control", @Placeholder = "Pay Amount" , @onkeypress = "return  isNumberOrDecimal(event);", @maxlength = "30" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-group">
+                                        <label> Payment Date<span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @Placeholder = "Select Payment Date", @readonly = true })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-group">
+                                        <label> Payment Mode <span style="color: red">*</span></label>
+                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return CheckPayMode()" })
+                                    </div>
+                                </div>
+                                
+                                @*</div>
+                                    <div class="row">*@
+                                <div class="col-md-3 mb-3" id="divtransactiono" style="display: none">
+                                    <div class="form-group">
+                                        <label><span id="txnNo"></span> <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3" id="divPaymentMode" style="display: none">
+                                    <div class="form-group">
+                                        <label><span id="txndt"></span><span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Date", @Readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3" id="divbankname" style="display: none">
+                                    <div class="form-group">
+                                        <label>Bank Name <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Name" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3" id="divbankbranch" style="display: none">
+                                    <div class="form-group">
+                                        <label>Bank Branch <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3" id="divadjustpayment" style="display: none">
+                                    <div class="form-group">
+                                        <label> Payment Remarks <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.PaymentRemarks, new { @class = "form-control", @maxlength = "100", @Placeholder = "Payment Remarks" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3" id="divreceiver" style="display: none">
+                                    <div class="form-group">
+                                        <label><span id="txtreceiver">Receiver Bank</span></label>
+                                        @Html.TextBoxFor(m => m.ReceiverBank, new { @class = "form-control", @maxlength = "100", @Placeholder = "Receiver Bank" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-group">
+                                        <label>Select Account Head<span style="color: red">*</span></label>
+
+
+                                        @Html.DropDownListFor(m => m.FK_AccountHeadId, new SelectList(ViewBag.ddlAccountHead, "Value", "Text"), new { @class = "form-control form-select"})
+                                        @*@Html.TextBoxFor(m => m.AccountHeadName, new { @class = "form-control", @Placeholder = "Account Head Name" })*@
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-group">
+                                        <label>Remark</label>
+                                        @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", @Placeholder = "Remark....." })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="submit" name="Save" value="Save" id="btnSave" class="btn btn-success" onclick="return validateform();" />
+                                    </div>
+                                </div>
+                            </div>
+
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   }
+    <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+    <script>
+
+
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+
+    //function validatePayAmount() {
+    //    debugger
+    //    var balanceAmount = document.getElementById("bal").innerHTML;
+    //    var payAmount = $('#PaidAmount').val();
+
+    //    if ((Number)(payAmount) > (Number)(balanceAmount)) {
+    //        $("#PaidAmount").val('');
+    //        $("#PaidAmount").addClass('errortext');
+    //        alert('Pay Amount cannot be greater than Remaining Amount.\nRemaining Amount is : Rs.' + balanceAmount);
+    //    }
+    //    else {
+    //        $("#PaidAmount").removeClass('errortext');
+    //    }
+    //}
+
+    function getStateCity() {
+
+        var pincode = $('#Pincode').val();
+        $.ajax({
+            url: '/Master/GetStateCity', type: 'post', dataType: 'json',
+            data: { 'Pincode': pincode },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    $("#State").val(data.State);
+                    $("#City").val(data.City);
+                    $("#State").removeClass('errortext');
+                    $("#City").removeClass('errortext');
+                    $("#Pincode").removeClass('errortext');
+                }
+                else if (data.Result == "no") {
+                    $("#State").val('');
+                    $("#City").val('');
+                    $("#State").addClass('errortext');
+                    $("#City").addClass('errortext');
+                    $("#Pincode").addClass('errortext');
+                    $('#Pincode').focus();
+                }
+            }
+
+        });
+    }
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+    function onSiteChange() {
+        $("#divload").css({ 'display': '' });
+        var value = $('#SiteID').val();
+        var values = $('#SectorID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Master/GetSiteDetails",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                var j = 1;
+                if (data.Result == "yes") {
+                    $('#Rate').val(data.Rate);
+                    $("#SectorID").html(""); // clear before appending new list
+                    $("#SectorID").empty();
+                    $("#SectorID").append(
+                          $('<option></option>').val(0).html('Select Sector'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#SectorID").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+
+                    });
+
+                }
+                else {
+                    $("#SectorID").empty();
+                    $('#Rate').val('');
+                }
+
+
+            }
+
+        });
+
+    }
+
+    function onSectorChange() {
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#SiteID').val();
+        var sectorID = $('#SectorID').val();
+        $.ajax({
+            url: '/Master/GetBlockList', type: 'post', dataType: 'json',
+            data: { 'SiteID': siteID, 'sectorID': sectorID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+
+                $("#BlockID").html(""); // clear before appending new list
+                $("#BlockID").empty();
+                $("#BlockID").append(
+                      $('<option></option>').val(0).html('Select Block'));
+                $.each(data.lstBlock, function (index, BlockCount) {
+                    $("#BlockID").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+            }
+
+        });
+    }
+
+    function GetDetails() {
+        $("#divload").css({ 'display': '' });
+        debugger
+        if ($('#PlotNumber').val() == '' && $('#BookingNumber').val() == '') {
+            alert(" Please, either select Site ID, Sector ID, Block ID and fill Plot Number OR fill Booking Number");
+            $("#divload").css({ 'display': 'none' });
+        }
+        else if ($('#BookingNumber').val() != '') {
+
+            var siteID = $('#SiteID').val();
+            var sectorID = $('#SectorID').val();
+            var block = $('#BlockID').val();
+            var plotno = $('#PlotNumber').val();
+            var bookno = $('#BookingNumber').val();
+            $.ajax({
+
+                url: '/Plot/ReturnCancelledPlotPaymentDetails', type: 'get', dataType: 'json',
+                data: { 'SiteID': siteID, 'SectorID': sectorID, 'BlockID': block, 'PlotNumber': plotno, 'BookingNumber': bookno },
+                success: function (data) {
+                    $("#divload").css({ 'display': 'none' });
+                    if (data.Result == "yes") {
+                        $("#Details1").show();
+
+                        $("#AssoID").text(data.AssociateLoginID);
+                        $("#AssoName").text(data.AssociateName);
+                        $("#CustID").text(data.CustomerLoginID);
+                        $("#CustName").text(data.CustomerName);
+
+                        $("#ActPlotAmt").text(data.PlotAmount);
+                        $("#ActPlotRate").text(data.ActualPlotRate);
+                        $("#Plotrte").text(data.PlotRate);
+                        $("#Bookigdt").text(data.BookingDate);
+                        $("#bookingAmt").text(data.BookingAmount);
+                        $("#Payamt").text(data.PaidAmount);
+                        $("#Paydt").text(data.PaymentDate);
+                        $("#disct").text(data.Discount);
+                        $("#Payplan").text(data.PlanName);
+                        $("#PK_BookingId").val(data.PK_BookingId);
+                        //$("#PaymentDate").val(data.PaymentDate);
+                        $("#totAlotamt").text(data.TotalAllotmentAmount);
+                        //$("#noOfinst").text(data.TotalInstallment);
+                        //$("#instAmt").text(data.InstallmentAmount);
+                        $("#Plotarea").text(data.PlotArea);
+
+                         $('#netplotamount').text(data.PlotAmount - data.Discount);
+                        var baln = Number(data.Balance);
+                        $("#bal").text(baln);
+                        //$("#SiteID").val('');
+                        //$("#SectorID").val('');
+                        //$("#BlockID").val('');
+                        //$("#PlotNumber").val('');
+                        
+                    }
+                    else {
+
+                        alert(data.Result);
+                        document.getElementById('spanError').innerHTML = data.Result;
+                        $("#Details1").hide();
+                        $("#BookingNumber").val('');
+                        $("#SiteID").val('0');
+                        $("#SectorID").val('0');
+                        $("#BlockID").val('0');
+                        $("#PlotNumber").val('');
+                       
+                    }
+
+                }
+
+            });
+        }
+
+        else if ($('#SiteID').val() != '0' && $('#SectorID').val() != '0' && $('#BlockID').val() != '0' && $('#PlotNumber').val() != '') {
+            $("#divload").css({ 'display': 'none' });
+            var siteID = $('#SiteID').val();
+            var sectorID = $('#SectorID').val();
+            var block = $('#BlockID').val();
+            var plotno = $('#PlotNumber').val();
+            var bookno = $('#BookingNumber').val();
+
+            $.ajax({
+
+                url: '/Plot/ReturnCancelledPlotPaymentDetails', type: 'get', dataType: 'json',
+                data: { 'SiteID': siteID, 'SectorID': sectorID, 'BlockID': block, 'PlotNumber': plotno, 'BookingNumber': bookno },
+                success: function (data) {
+                    $("#divload").css({ 'display': 'none' });
+                    if (data.Result == "yes") {
+                        $("#Details1").show();
+                        $("#AssoID").text(data.AssociateLoginID);
+                        $("#AssoName").text(data.AssociateName);
+                        $("#CustID").text(data.CustomerLoginID);
+                        $("#CustName").text(data.CustomerName);
+
+                        $("#ActPlotAmt").text(data.PlotAmount);
+                        $("#ActPlotRate").text(data.ActualPlotRate);
+                        $("#Plotrte").text(data.PlotRate);
+                        $("#Bookigdt").text(data.BookingDate);
+                        $("#bookingAmt").text(data.BookingAmount);
+                        $("#Payamt").text(data.PaidAmount);
+                        $("#Paydt").text(data.PaymentDate);
+                        $("#disct").text(data.Discount);
+                        $("#Payplan").text(data.PlanName);
+                        $("#PK_BookingId").val(data.PK_BookingId);
+                        $("#PaymentDate").val(data.PaymentDate);
+                        $("#totAlotamt").text(data.TotalAllotmentAmount);
+                        //$("#noOfinst").text(data.TotalInstallment);
+                        //$("#instAmt").text(data.InstallmentAmount);
+
+                        $("#Plotarea").text(data.PlotArea);
+                        $('#netplotamount').text(data.PlotAmount - data.Discount);
+                        var baln = Number(data.Balance) - Number($('#disct').text());
+                        $("#bal").text(baln);
+                        //$("#SiteID").val('');
+                        //$("#SectorID").val('');
+                        //$("#BlockID").val('');
+                        //$("#PlotNumber").val('');
+                        
+                    }
+                    else {
+                        alert(data.Result);
+                        $("#Details1").hide();
+                        $("#SiteID").val('0');
+                        $("#SectorID").val('0');
+                        $("#BlockID").val('0');
+                        $("#PlotNumber").val('');
+                        $("#BookingNumber").val('');
+                    }
+
+                }
+
+            });
+        }
+
+
+    }
+
+    function CheckPayMode() {
+        if ($('#PaymentMode').val() == '2') {
+            $('#txnNo').html('Cheque No.');
+            $('#txndt').html('Cheque Date');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "Cheque No.");
+            $("#TransactionDate").attr("placeholder", "Cheque Date");
+        }
+        else if ($('#PaymentMode').val() == '3') {
+            $('#txndt').html('NEFT Date');
+            $('#txnNo').text('NEFT No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "NEFT No.");
+            $("#TransactionDate").attr("placeholder", "NEFT Date");
+        }
+        else if ($('#PaymentMode').val() == '4') {
+            $('#txndt').html('DD Date');
+            $('#txnNo').text('DD No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "DD No.");
+            $("#TransactionDate").attr("placeholder", "DD Date");
+        }
+        else if ($('#PaymentMode').val() == '5') {
+            $('#txndt').html('RTGS Date');
+            $('#txnNo').text('RTGS No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "RTGS No.");
+            $("#TransactionDate").attr("placeholder", "RTGS Date");
+        }
+        else if ($('#PaymentMode').val() == '6') {
+            $('#txndt').html('IMPS Date');
+            $('#txnNo').text('IMPS No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "IMPS No.");
+            $("#TransactionDate").attr("placeholder", "IMPS Date");
+        }
+        else if ($('#PaymentMode').val() == '7') {
+
+            $('#txnNo').text('Mobile No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divPaymentMode").hide();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "Mobile No.");
+        }
+        else if ($('#PaymentMode').val() == '8') {
+
+            $('#txnNo').text('Mobile No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divPaymentMode").hide();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "Mobile No.");
+        }
+        else if ($('#PaymentMode').val() == '9') {
+
+            $('#txnNo').text('Mobile No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divPaymentMode").hide();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "Mobile No.");
+        }
+        else if ($('#PaymentMode').val() == '10') {
+
+            $('#txndt').html('Expiry Date');
+            $('#txnNo').text('Card No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divreceiver").show();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "Card No.");
+            $("#TransactionDate").attr("placeholder", "Expiry Date");
+        }
+        else if ($('#PaymentMode').val() == '11') {
+            $('#txtpremarks').html('Payment Remarks');
+            //$('#txnNo').text('Card No.');
+            $("#divPaymentMode").hide();
+            $("#divtransactiono").hide();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divreceiver").show();
+            $("#divadjustpayment").show();
+            $("#PaymentRemarks").attr("placeholder", "Payment Remarks");
+        }
+        else if ($('#PaymentMode').val() == '13') {
+
+            $('#txnNo').text('Mobile No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divreceiver").show();
+            $("#divPaymentMode").hide();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "Mobile No.");
+        }
+        else {
+            $("#divreceiver").hide();
+            $("#divadjustpayment").hide();
+            $("#divPaymentMode").hide();
+            $("#divtransactiono").hide();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+        }
+
+    }
+
+    </script>
+
+
+    <style>
+        .errortext {
+            border: 1px solid red !important;
+            background-color: #fff0f0 !important;
+        }
+
+        .bolds{
+        font-weight:600;
+    }
+    </style>
+
+
+    <script>
+
+
+
+    $('#TransactionDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+        minDate: new Date(new Date().setMonth(new Date().getMonth() - 2))
+    });
+    //$('#PaymentDate').datepicker({
+    //    dateFormat: 'dd/mm/yy',
+    //    changeYear: true,
+    //    changeMonth: true,
+    //});
+
+    $("#PaymentDate").datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: 0,
+        changeYear: true,
+        changeMonth: true
+    });
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+
+        if ($('#PaidAmount').val() == '') {
+            $("#PaidAmount").addClass('errortext');
+            $('#PaidAmount').focus();
+            return false;
+        }
+        if ($('#PaymentDate').val() == '') {
+            $("#PaymentDate").addClass('errortext');
+            $('#PaymentDate').focus();
+            return false;
+        }
+        if ($('#PaymentMode').val() == '0') {
+            $("#PaymentMode").addClass('errortext');
+            $('#PaymentMode').focus();
+            return false;
+        }
+        if ($('#ReceiptNo').val() == '') {
+            $("#ReceiptNo").addClass('errortext');
+            $('#ReceiptNo').focus();
+            return false;
+        }
+        if ($('#FK_AccountHeadId').val() == '0') {
+            $("#FK_AccountHeadId").addClass('errortext');
+            $('#FK_AccountHeadId').focus();
+            return false;
+        }
+
+        if ($('#PaymentMode').val() == '0') {
+            $("#PaymentMode").addClass('errortext');
+            $('#PaymentMode').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#PaymentMode').val() == '2') {
+            if ($('#TransactionNumber').val() == '') {
+                $("#TransactionNumber").addClass('errortext');
+                $('#TransactionNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#TransactionDate').val() == '') {
+                $("#TransactionDate").addClass('errortext');
+                $('#TransactionDate').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankBranch').val() == '') {
+                $("#BankBranch").addClass('errortext');
+                $('#BankBranch').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        else if ($('#PaymentMode').val() == '3') {
+            if ($('#TransactionNumber').val() == '') {
+                $("#TransactionNumber").addClass('errortext');
+                $('#TransactionNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#TransactionDate').val() == '') {
+                $("#TransactionDate").addClass('errortext');
+                $('#TransactionDate').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankBranch').val() == '') {
+                $("#BankBranch").addClass('errortext');
+                $('#BankBranch').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        else if ($('#PaymentMode').val() == '4') {
+            if ($('#TransactionNumber').val() == '') {
+                $("#TransactionNumber").addClass('errortext');
+                $('#TransactionNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#TransactionDate').val() == '') {
+                $("#TransactionDate").addClass('errortext');
+                $('#TransactionDate').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankBranch').val() == '') {
+                $("#BankBranch").addClass('errortext');
+                $('#BankBranch').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        else if ($('#PaymentMode').val() == '5') {
+            if ($('#TransactionNumber').val() == '') {
+                $("#TransactionNumber").addClass('errortext');
+                $('#TransactionNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#TransactionDate').val() == '') {
+                $("#TransactionDate").addClass('errortext');
+                $('#TransactionDate').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankBranch').val() == '') {
+                $("#BankBranch").addClass('errortext');
+                $('#BankBranch').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        else if ($('#PaymentMode').val() == '6') {
+            if ($('#TransactionNumber').val() == '') {
+                $("#TransactionNumber").addClass('errortext');
+                $('#TransactionNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#TransactionDate').val() == '') {
+                $("#TransactionDate").addClass('errortext');
+                $('#TransactionDate').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankBranch').val() == '') {
+                $("#BankBranch").addClass('errortext');
+                $('#BankBranch').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        else if ($('#PaymentMode').val() == '7') {
+
+            if ($('#TransactionNumber').val() == '') {
+                $("#TransactionNumber").addClass('errortext');
+                $('#TransactionNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+
+        }
+        else if ($('#PaymentMode').val() == '8') {
+
+            if ($('#TransactionNumber').val() == '') {
+                $("#TransactionNumber").addClass('errortext');
+                $('#TransactionNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        else if ($('#PaymentMode').val() == '9') {
+
+            if ($('#TransactionNumber').val() == '') {
+                $("#TransactionNumber").addClass('errortext');
+                $('#TransactionNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        else if ($('#PaymentMode').val() == '10') {
+
+            if ($('#TransactionNumber').val() == '') {
+                $("#TransactionNumber").addClass('errortext');
+                $('#TransactionNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#TransactionDate').val() == '') {
+                $("#TransactionDate").addClass('errortext');
+                $('#TransactionDate').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankBranch').val() == '') {
+                $("#BankBranch").addClass('errortext');
+                $('#BankBranch').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        else if ($('#PaymentMode').val() == '13') {
+
+            if ($('#TransactionNumber').val() == '') {
+                $("#TransactionNumber").addClass('errortext');
+                $('#TransactionNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+
+        }
+        return true;
+    }
+
+
+ 
+
+
+
+
+    </script>
+    @*<script>
+
+            $(document).ready(function () {
+                ("#btnSearchPlot").click(function () {
+                    Search();
+                });
+            });
+
+            function Search() {
+                debugger
+                $.ajax({
+                    type: 'Post',
+                    contentType: 'Application/Json',
+                    url: '/Plot/Details',
+                    data: { SiteID: SiteID, SectorID: SectorID, SiteID: SiteID, PlotNumber: PlotNumber },
+                    success: function (result) {
+                        if (result.length > 0) {
+                            for (var i = 0; i < result.length; i++) {
+                                var Data = jQuery.parseJSON(result)
+                                $("#tblData").append('<tr><td id="PK_BookingDetailsId' + i + ' " style="display:none">' + Data[i].PK_BookingDetailsId +
+                                '</td><td id="PK_BookingId' + i + ' " style="display:none">' + Data[i].PK_BookingId +
+                                '</td><td id="InstallmentNo' + i + ' " >' + Data[i].InstallmentNo +
+                                '</td><td id="InstallmentDate' + i + ' " >' + Data[i].InstallmentDate +
+                                '</td><td id="PaymentDate' + i + ' " >' + Data[i].PaymentDate +
+                                '</td><td id="PaidAmount' + i + ' " >' + Data[i].PaidAmount +
+                                '</td><td id="InstallmentAmount' + i + ' " >' + Data[i].InstallmentAmount +
+                                '</td><td id="PaymentMode' + i + ' " >' + Data[i].PaymentMode +
+                                '</td></tr>')
+                            }
+                        }
+                    }
+                })
+            }
+
+        </script>*@

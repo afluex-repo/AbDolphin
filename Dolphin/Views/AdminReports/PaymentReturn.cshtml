@@ -624,6 +624,18 @@
             $("#divadjustpayment").show();
             $("#PaymentRemarks").attr("placeholder", "Payment Remarks");
         }
+        else if ($('#PaymentMode').val() == '13') {
+
+            $('#txnNo').text('Mobile No.');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divreceiver").show();
+            $("#divPaymentMode").hide();
+            $("#divadjustpayment").hide();
+            $("#TransactionNumber").attr("placeholder", "Mobile No.");
+        }
         else {
             $("#divPaymentMode").hide();
             $("#divtransactiono").hide();

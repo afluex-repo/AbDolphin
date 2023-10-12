@@ -763,21 +763,20 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
                 }
             }
             ViewBag.ddlBranch = ddlBranch;
-            model.BranchID = "1";
             #endregion
 
             model.SiteID = model.SiteID == "0" ? null : model.SiteID;
             model.SectorID = model.SectorID == "0" ? null : model.SectorID;
             model.PlotNumber = string.IsNullOrEmpty(model.PlotNumber) ? null : model.PlotNumber;
             model.BlockID = model.BlockID == "0" ? null : model.BlockID;
-
+            model.BranchID = model.BranchID == "0" ? null : model.BranchID;
             #region ddlSite
             int count1 = 0;
             List<SelectListItem> ddlSite = new List<SelectListItem>();
@@ -820,7 +819,7 @@ namespace Dolphin.Controllers
             model.SiteID = model.SiteID == "0" ? null : model.SiteID;
             model.SectorID = model.SectorID == "0" ? null : model.SectorID;
             model.BlockID = model.BlockID == "0" ? null : model.BlockID;
-
+            model.BranchID = model.BranchID == "0" ? null : model.BranchID;
             DataSet ds = model.List();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -930,7 +929,7 @@ namespace Dolphin.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        ddlBranch.Add(new SelectListItem { Text = "All Branch", Value = "0" });
                     }
                     ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
                     count = count + 1;
@@ -1792,7 +1791,6 @@ namespace Dolphin.Controllers
             List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
             ViewBag.ddlKYCStatus = ddlKYCStatus;
             List<Reports> lst = new List<Reports>();
-
             return View();
         }
         [HttpPost]
@@ -1825,6 +1823,10 @@ namespace Dolphin.Controllers
                     obj.PanImage = (r["PanImage"].ToString());
                     obj.DocumentImage = (r["DocumentImage"].ToString());
                     obj.AdharImage = (r["AdharImage"].ToString());
+                    obj.IFSCCode = (r["IFSCCode"].ToString());
+                    obj.BankName = (r["MemberBankName"].ToString());
+                    obj.BankBranch = (r["MemberBranch"].ToString());
+                    obj.BankAccountNo = (r["MemberAccNo"].ToString());
                     obj.Date = (r["DATE"].ToString());
                     obj.Status = (r["Status"].ToString());
 
@@ -4366,6 +4368,193 @@ namespace Dolphin.Controllers
 
             return View(model);
         }
+
+
+        #region PlotAvailability
+
+        public ActionResult DetailsPlotAvailabilityReports(Master model)
+        {
+            #region ddlSiteType
+            Master objSiteType = new Master();
+            int count1 = 0;
+            List<SelectListItem> ddlSiteType = new List<SelectListItem>();
+            DataSet ds2 = objSiteType.GetSiteTypeList();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSiteType.Add(new SelectListItem { Text = "Select Site Type", Value = "0" });
+                    }
+                    ddlSiteType.Add(new SelectListItem { Text = r["SiteTypeName"].ToString(), Value = r["PK_SiteTypeID"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+
+            ViewBag.ddlSiteType = ddlSiteType;
+
+            #endregion
+
+
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+            ViewBag.ddlSite = ddlSite;
+
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+
+            return View();
+        }
+
+       
+        [HttpPost]
+        [ActionName("DetailsPlotAvailabilityReports")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult DetailsPlotAvailabilityReportsAction(Master model)
+        {
+            //Master model = new Master();
+            List<Master> lst = new List<Master>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            //model.SiteID = SiteID;
+            model.SectorID = model.SectorID == "0" ? null : model.SectorID;
+            model.BlockID = model.BlockID == "0" ? null : model.BlockID;
+            model.SiteTypeID = model.SiteTypeID == "0" ? null : model.SiteTypeID;
+
+            DataSet dsblock1 = model.DetailsPlotAvailabilityReports();
+            if (dsblock1 != null && dsblock1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsblock1.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PlotID = r["PK_PlotID"].ToString();
+                    obj.SiteID = r["FK_SiteID"].ToString();
+                    obj.SectorID = r["FK_SectorID"].ToString();
+                    obj.BlockID = r["FK_BlockID"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
+                    obj.PlotStatus = r["Status"].ToString();
+                    obj.ColorCSS = r["ColorCSS"].ToString();
+                    obj.PlotAmount = r["PlotAmount"].ToString();
+                    obj.PlotArea = r["PlotArea"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+
+
+                    obj.CustomerName = r["CustomerName"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.BookingDate = r["BookingDate"].ToString();
+                    obj.TotalPaidAmount = r["TotalPaidAmount"].ToString();
+                    obj.HolderName = r["HolderName"].ToString();
+                    obj.HoldFrom = r["HoldFrom"].ToString();
+                    obj.HoldTo = r["HoldTo"].ToString();
+                    obj.Remark = r["Remark"].ToString();
+                    
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+
+            #region ddlSite
+            int count1 = 0;
+            Master objmaster = new Master();
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            #region GetSectors
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            DataSet dsSector = model.GetSectorList();
+            int sectorcount = 0;
+
+            if (dsSector != null && dsSector.Tables.Count > 0)
+            {
+
+                foreach (DataRow r in dsSector.Tables[0].Rows)
+                {
+                    if (sectorcount == 0)
+                    {
+                        ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+                    }
+                    ddlSector.Add(new SelectListItem { Text = r["SectorName"].ToString(), Value = r["PK_SectorID"].ToString() });
+                    sectorcount = 1;
+                }
+            }
+
+            ViewBag.ddlSector = ddlSector;
+            List<SelectListItem> lstBlock = new List<SelectListItem>();
+
+            int blockcount = 0;
+            //objmodel.SiteID = ds.Tables[0].Rows[0]["PK_SiteID"].ToString();
+            //objmodel.SectorID = ds.Tables[0].Rows[0]["PK_SectorID"].ToString();
+
+            DataSet dsblock = model.GetBlockList();
+
+
+            if (dsblock != null && dsblock.Tables.Count > 0 && dsblock.Tables[0].Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dsblock.Tables[0].Rows)
+                {
+                    if (blockcount == 0)
+                    {
+                        lstBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+                    }
+                    lstBlock.Add(new SelectListItem { Text = dr["BlockName"].ToString(), Value = dr["PK_BlockID"].ToString() });
+                    blockcount = 1;
+                }
+
+            }
+
+
+            ViewBag.ddlBlock = lstBlock;
+            #endregion
+
+            #region ddlSiteType
+            Master objSiteType = new Master();
+            int countType = 0;
+            List<SelectListItem> ddlSiteType = new List<SelectListItem>();
+            DataSet ds2 = model.GetSiteTypeList();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    if (countType == 0)
+                    {
+                        ddlSiteType.Add(new SelectListItem { Text = "Select Site Type", Value = "0" });
+                    }
+                    ddlSiteType.Add(new SelectListItem { Text = r["SiteTypeName"].ToString(), Value = r["PK_SiteTypeID"].ToString() });
+                    countType = countType + 1;
+                }
+            }
+
+            ViewBag.ddlSiteType = ddlSiteType;
+
+            #endregion
+
+            return View(model);
+        }
+        #endregion 
 
 
         public ActionResult DesignationUpdate()
