@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-@using (Html.BeginForm("AssociateList", "TraditionalAssociate", FormMethod.Post, new { @id = "form1" }))
+@using (Html.BeginForm("AssociateList", "TraditionalAssociate", FormMethod.Post, new { @id = "form1" ,@autocomplete="off" }))
 {
     <p style="color: red">
         @TempData["Registration"]
