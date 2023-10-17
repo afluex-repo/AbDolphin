@@ -32,6 +32,8 @@ namespace Dolphin.Models
 
         public string PK_PLanID { get; set; }
         public string PK_PaymentID { get; set; }
+        public string FromAmount { get; set; }
+        public string ToAmount { get; set; }
 
 
         #region Properties
@@ -703,7 +705,9 @@ namespace Dolphin.Models
                                   new SqlParameter("@FromDate",FromDate),
                                    new SqlParameter("@ToDate",ToDate),
                                    new SqlParameter("@ApprovedToDate",ApprovedToDate),
-                                   new SqlParameter("@ApprovedFromDate",ApprovedFromDate)
+                                   new SqlParameter("@ApprovedFromDate",ApprovedFromDate),
+                                   new SqlParameter("@FromAmount",FromAmount),
+                                   new SqlParameter("@ToAmount",ToAmount)
                             };
             DataSet ds = Connection.ExecuteQuery("GetDeatilsForPaymentReport", para);
             return ds;

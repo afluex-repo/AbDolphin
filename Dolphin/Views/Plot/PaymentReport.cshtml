@@ -56,6 +56,18 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
+                                <label> From Amount</label>
+                                @Html.TextBoxFor(m => m.FromAmount, new { @class = "form-control", @Placeholder = "Search From Amount", onkeypress = "return isNumberOrDecimal(event);" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>  To Amount</label>
+                                @Html.TextBoxFor(m => m.ToAmount, new { @class = "form-control", @Placeholder = "Search To Amount", onkeypress = "return isNumberOrDecimal(event);" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
                                 <label class="d-block"> &nbsp;</label>
                                 <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="Search" />
                             </div>
@@ -166,7 +178,14 @@
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
 <script>
-   
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
 
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
