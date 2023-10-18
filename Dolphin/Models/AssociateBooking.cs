@@ -531,7 +531,8 @@ namespace Dolphin.Models
                                        new SqlParameter("@IFSCCode", IFSCCode) ,
                                       new SqlParameter("@DocumentImage", DocumentImage),
                                         new SqlParameter("@Action", ActionStatus),
-
+                                        new SqlParameter("@BankName", BankName),
+                                        new SqlParameter("@BankBranch", BankBranch),
                                   };
             DataSet ds = Connection.ExecuteQuery("UploadKYC", para);
             return ds;
