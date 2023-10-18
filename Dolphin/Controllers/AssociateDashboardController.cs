@@ -1375,6 +1375,9 @@ namespace Dolphin.Controllers
                 obj.DocumentStatus = "Status : " + ds.Tables[0].Rows[0]["DocumentStatus"].ToString();
                 obj.AccountHolderName = ds.Tables[0].Rows[0]["BankHolderName"].ToString();
                 obj.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
+                obj.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
+                obj.BankBranch = ds.Tables[0].Rows[0]["BankBranch"].ToString();
+                
             }
             return View(obj);
         }
