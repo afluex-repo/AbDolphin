@@ -368,7 +368,7 @@ namespace Dolphin.Models
                                       new SqlParameter("@Remark", Remarks),
                                       new SqlParameter("@UpdatedBy",UpdatedBy)
                                   };
-            DataSet ds = Connection.ExecuteQuery("UpdateDesignation", para);
+            DataSet ds = Connection.ExecuteQuery("UpdateDesignationNew", para);
             return ds;
         }
 

@@ -4,7 +4,7 @@
     ViewBag.Title = "ReturnCancelledPlotPayment";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-@using (Html.BeginForm("ReturnCancelledPlotPayment", "Plot", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("ReturnCancelledPlotPayment", "Plot", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" ,@autocomplete="off"}))
 {
    
 
@@ -248,22 +248,20 @@
                                         @Html.TextBoxFor(m => m.PaymentRemarks, new { @class = "form-control", @maxlength = "100", @Placeholder = "Payment Remarks" })
                                     </div>
                                 </div>
-                                <div class="col-md-3 mb-3" id="divreceiver" style="display: none">
+                                @*<div class="col-md-3 mb-3" id="divreceiver" style="display: none">
                                     <div class="form-group">
                                         <label><span id="txtreceiver">Receiver Bank</span></label>
                                         @Html.TextBoxFor(m => m.ReceiverBank, new { @class = "form-control", @maxlength = "100", @Placeholder = "Receiver Bank" })
                                     </div>
-                                </div>
+                                </div>*@
 
-                                <div class="col-md-3 mb-3">
+                                @*<div class="col-md-3 mb-3">
                                     <div class="form-group">
                                         <label>Select Account Head<span style="color: red">*</span></label>
-
-
                                         @Html.DropDownListFor(m => m.FK_AccountHeadId, new SelectList(ViewBag.ddlAccountHead, "Value", "Text"), new { @class = "form-control form-select"})
-                                        @*@Html.TextBoxFor(m => m.AccountHeadName, new { @class = "form-control", @Placeholder = "Account Head Name" })*@
                                     </div>
-                                </div>
+                                </div>*@
+
                                 <div class="col-md-3 mb-3">
                                     <div class="form-group">
                                         <label>Remark</label>
@@ -769,11 +767,11 @@
             $('#ReceiptNo').focus();
             return false;
         }
-        if ($('#FK_AccountHeadId').val() == '0') {
-            $("#FK_AccountHeadId").addClass('errortext');
-            $('#FK_AccountHeadId').focus();
-            return false;
-        }
+        //if ($('#FK_AccountHeadId').val() == '0') {
+        //    $("#FK_AccountHeadId").addClass('errortext');
+        //    $('#FK_AccountHeadId').focus();
+        //    return false;
+        //}
 
         if ($('#PaymentMode').val() == '0') {
             $("#PaymentMode").addClass('errortext');
