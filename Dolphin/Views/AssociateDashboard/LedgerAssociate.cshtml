@@ -1,0 +1,132 @@
+﻿@model Dolphin.Models.AssociateBooking
+
+@{
+    ViewBag.Title = "LedgerAssociate";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
+}
+
+@using (Html.BeginForm("LedgerAssociate", "AssociateDashboard", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Customer Ledger Report</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body row">
+                <div class="col-md-12 mb-3">
+                    <h5>Plot Details</h5>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label class="float-label">Plot Rate :</label>
+                        <label class="float-label" id="Plotrte"></label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label class="float-label">Plot Area :</label>
+                        <label class="float-label" id="Plotarea"></label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label class="float-label">Actual Plot Amount :</label>
+                        <label class="float-label" id="ActPlotAmt"></label>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label class="float-label">Discount :</label>
+                        <label class="float-label" id="disct"></label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label class="float-label">Booking Amount :</label>
+                        <label class="float-label" id="bookingAmt"></label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label class="float-label">Booking Date :</label>
+                        <label class="float-label" id="Bookigdt"></label>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label class="float-label">Payment Plan :</label>
+                        <label class="float-label" id="Payplan"></label>
+
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label class="float-label">Total Paid Amount:</label>
+                        <label class="float-label" id="Payamt"></label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label class="float-label">Allotment Date:</label>
+                        <label class="float-label" id="Paydt"></label>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3" hidden="hidden">
+                    <div class="form-group">
+                        <label class="float-label">Total Allotment Amount:</label>
+                        <label class="float-label" id="totAlotamt"></label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label class="float-label">No. of Installments:</label>
+                        <label class="float-label" id="noOfinst"></label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label class="float-label">Installment Amount :</label>
+                        <label class="float-label" id="instAmt"></label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label class="float-label">Balance :</label>
+                        <label class="float-label" id="bal"></label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h5>Installment Details</h5>
+                </div>
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table id="tblData" class="table table-bordered table-striped mb-0">
+                            <thead>
+                                <tr class="table-active">
+                                    <th hidden>PK_BookingId</th>
+                                    <th hidden>BookingID</th>
+                                    @* <th>S No.</th>*@
+                                    <th>Installment No.</th>
+                                    <th>Installment Date</th>
+                                    <th>Installment Amount</th>
+                                    <th>Paid Amount</th>
+                                    <th>Payment Date</th>
+                                    <th>Due Amount</th>
+                                    <th>Payment Mode</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

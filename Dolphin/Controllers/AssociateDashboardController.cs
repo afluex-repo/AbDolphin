@@ -372,6 +372,7 @@ namespace Dolphin.Controllers
             model.BlockID = model.BlockID == "0" ? null : model.BlockID;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.Downline = model.IsDownline == true ? "1" : "0";
             DataSet ds = model.List();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -463,10 +464,8 @@ namespace Dolphin.Controllers
         #endregion
 
         #region Customer Ledger Report
-        public ActionResult CustomerLedgerReport(string PK_BookingId)
+        public ActionResult CustomerLedgerReport(string PK_BookingId,string BookingNumber)
         {
-
-
             AssociateBooking model = new AssociateBooking();
             model.SiteID = model.SiteID == "0" ? null : model.SiteID;
             model.SectorID = model.SectorID == "0" ? null : model.SectorID;
@@ -502,6 +501,7 @@ namespace Dolphin.Controllers
             List<SelectListItem> ddlBlock = new List<SelectListItem>();
             ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
             ViewBag.ddlBlock = ddlBlock;
+            
             return View(model);
         }
 
@@ -1375,6 +1375,9 @@ namespace Dolphin.Controllers
                 obj.DocumentStatus = "Status : " + ds.Tables[0].Rows[0]["DocumentStatus"].ToString();
                 obj.AccountHolderName = ds.Tables[0].Rows[0]["BankHolderName"].ToString();
                 obj.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
+                obj.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
+                obj.BankBranch = ds.Tables[0].Rows[0]["BankBranch"].ToString();
+                
             }
             return View(obj);
         }
@@ -2317,6 +2320,71 @@ namespace Dolphin.Controllers
             return View(model);
         }
         
-           
+       public ActionResult LedgerAssociate(string BookingNumber)
+        {
+            string FormName = "";
+            string Controller = "";
+            AssociateBooking model = new AssociateBooking();
+            model.LoginId = Session["LoginId"].ToString();
+            List<AssociateBooking> lst = new List<AssociateBooking>();
+            
+            model.BookingNumber = string.IsNullOrEmpty(BookingNumber) ? null : BookingNumber;
+
+            DataSet dsblock = model.FillDetails();
+            if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
+            {
+                if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                {
+                    // model.PlotID = dsblock.Tables[0].Rows[0]["PK_PlotID"].ToString();
+                    model.PlotAmount = dsblock.Tables[0].Rows[0]["PlotAmount"].ToString();
+                    model.ActualPlotRate = dsblock.Tables[0].Rows[0]["ActualPlotRate"].ToString();
+                    model.PlotRate = dsblock.Tables[0].Rows[0]["PlotRate"].ToString();
+                    model.PayAmount = dsblock.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    model.BookingDate = dsblock.Tables[0].Rows[0]["BookingDate"].ToString();
+                    model.BookingAmount = dsblock.Tables[0].Rows[0]["BookingAmt"].ToString();
+                    model.PaymentDate = dsblock.Tables[0].Rows[0]["PaymentDate"].ToString();
+                    model.PaidAmount = dsblock.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    model.Discount = dsblock.Tables[0].Rows[0]["Discount"].ToString();
+                    model.PaymentPlanID = dsblock.Tables[0].Rows[0]["Fk_PlanId"].ToString();
+                    model.PlanName = dsblock.Tables[0].Rows[0]["PlanName"].ToString();
+                    model.PK_BookingId = dsblock.Tables[0].Rows[0]["PK_BookingId"].ToString();
+                    model.TotalAllotmentAmount = dsblock.Tables[0].Rows[0]["TotalAllotmentAmount"].ToString();
+                    model.PaidAllotmentAmount = dsblock.Tables[0].Rows[0]["PaidAllotmentAmount"].ToString();
+                    model.BalanceAllotmentAmount = dsblock.Tables[0].Rows[0]["BalanceAllotmentAmount"].ToString();
+                    model.TotalInstallment = dsblock.Tables[0].Rows[0]["TotalInstallment"].ToString();
+                    model.InstallmentAmount = dsblock.Tables[0].Rows[0]["InstallmentAmount"].ToString();
+                    model.PlotArea = dsblock.Tables[0].Rows[0]["PlotArea"].ToString();
+                    model.Balance = dsblock.Tables[0].Rows[0]["BalanceAmount"].ToString();
+                }
+            }
+            if (dsblock != null && dsblock.Tables.Count > 0 && dsblock.Tables[1].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsblock.Tables[1].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
+
+                    obj.PK_BookingDetailsId = r["PK_BookingDetailsId"].ToString();
+                    obj.PK_BookingId = r["Fk_BookingId"].ToString();
+                    obj.InstallmentNo = r["InstallmentNo"].ToString();
+                    obj.InstallmentDate = r["InstallmentDate"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.PaidAmount = r["PaidAmount"].ToString();
+                    obj.InstallmentAmount = r["InstAmt"].ToString();
+                    obj.PaymentMode = r["PaymentModeName"].ToString();
+                    obj.DueAmount = r["DueAmount"].ToString();
+
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+            else
+            {
+                TempData["MSG"]=dsblock.Tables[0].Rows[0]["ErrorMessage"].ToString();
+
+            }
+            return View(model);
+        }  
+
+
     }
 }
