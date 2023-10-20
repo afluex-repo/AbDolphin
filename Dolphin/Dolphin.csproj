@@ -2923,6 +2923,7 @@
     <Content Include="Views\Plot\ReturnPlotPaymentLedger.cshtml" />
     <Content Include="Views\AdminReports\DetailsPlotAvailabilityReports.cshtml" />
     <Content Include="Views\Plot\PendingPaymentReport.cshtml" />
+    <Content Include="Views\AssociateDashboard\LedgerAssociate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

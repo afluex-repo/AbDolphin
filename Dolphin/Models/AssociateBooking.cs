@@ -100,7 +100,8 @@ namespace Dolphin.Models
                                     new SqlParameter("@PlotNumber", PlotNumber)   ,
                                     new SqlParameter("@BookingNumber", BookingNumber)   ,
                                     new SqlParameter("@FromDate", FromDate)   ,
-                                    new SqlParameter("@ToDate", ToDate)
+                                    new SqlParameter("@ToDate", ToDate),
+                                    new SqlParameter("@IsDownline",Downline)
                                   };
             DataSet ds = Connection.ExecuteQuery("GetPlotBookingForAssociate", para);
             return ds;
