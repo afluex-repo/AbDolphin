@@ -2322,39 +2322,39 @@ namespace Dolphin.Controllers
         
        public ActionResult LedgerAssociate(string BookingNumber)
         {
-            string FormName = "";
-            string Controller = "";
             AssociateBooking model = new AssociateBooking();
             model.LoginId = Session["LoginId"].ToString();
             List<AssociateBooking> lst = new List<AssociateBooking>();
-            
             model.BookingNumber = string.IsNullOrEmpty(BookingNumber) ? null : BookingNumber;
-
             DataSet dsblock = model.FillDetails();
             if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
             {
                 if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "1")
                 {
                     // model.PlotID = dsblock.Tables[0].Rows[0]["PK_PlotID"].ToString();
-                    model.PlotAmount = dsblock.Tables[0].Rows[0]["PlotAmount"].ToString();
-                    model.ActualPlotRate = dsblock.Tables[0].Rows[0]["ActualPlotRate"].ToString();
-                    model.PlotRate = dsblock.Tables[0].Rows[0]["PlotRate"].ToString();
-                    model.PayAmount = dsblock.Tables[0].Rows[0]["PaidAmount"].ToString();
-                    model.BookingDate = dsblock.Tables[0].Rows[0]["BookingDate"].ToString();
-                    model.BookingAmount = dsblock.Tables[0].Rows[0]["BookingAmt"].ToString();
-                    model.PaymentDate = dsblock.Tables[0].Rows[0]["PaymentDate"].ToString();
-                    model.PaidAmount = dsblock.Tables[0].Rows[0]["PaidAmount"].ToString();
-                    model.Discount = dsblock.Tables[0].Rows[0]["Discount"].ToString();
-                    model.PaymentPlanID = dsblock.Tables[0].Rows[0]["Fk_PlanId"].ToString();
-                    model.PlanName = dsblock.Tables[0].Rows[0]["PlanName"].ToString();
-                    model.PK_BookingId = dsblock.Tables[0].Rows[0]["PK_BookingId"].ToString();
-                    model.TotalAllotmentAmount = dsblock.Tables[0].Rows[0]["TotalAllotmentAmount"].ToString();
-                    model.PaidAllotmentAmount = dsblock.Tables[0].Rows[0]["PaidAllotmentAmount"].ToString();
-                    model.BalanceAllotmentAmount = dsblock.Tables[0].Rows[0]["BalanceAllotmentAmount"].ToString();
-                    model.TotalInstallment = dsblock.Tables[0].Rows[0]["TotalInstallment"].ToString();
-                    model.InstallmentAmount = dsblock.Tables[0].Rows[0]["InstallmentAmount"].ToString();
-                    model.PlotArea = dsblock.Tables[0].Rows[0]["PlotArea"].ToString();
-                    model.Balance = dsblock.Tables[0].Rows[0]["BalanceAmount"].ToString();
+                    ViewBag.PlotAmount = dsblock.Tables[0].Rows[0]["PlotAmount"].ToString();
+                    ViewBag.ActualPlotRate = dsblock.Tables[0].Rows[0]["ActualPlotRate"].ToString();
+                    ViewBag.PlotRate = dsblock.Tables[0].Rows[0]["PlotRate"].ToString();
+                    ViewBag.PayAmount = dsblock.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    ViewBag.BookingDate = dsblock.Tables[0].Rows[0]["BookingDate"].ToString();
+                    ViewBag.BookingAmount = dsblock.Tables[0].Rows[0]["BookingAmt"].ToString();
+                    ViewBag.PaymentDate = dsblock.Tables[0].Rows[0]["PaymentDate"].ToString();
+                    ViewBag.PaidAmount = dsblock.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    ViewBag.Discount = dsblock.Tables[0].Rows[0]["Discount"].ToString();
+                    ViewBag.PaymentPlanID = dsblock.Tables[0].Rows[0]["Fk_PlanId"].ToString();
+                    ViewBag.PlanName = dsblock.Tables[0].Rows[0]["PlanName"].ToString();
+                    ViewBag.PK_BookingId = dsblock.Tables[0].Rows[0]["PK_BookingId"].ToString();
+                    ViewBag.TotalAllotmentAmount = dsblock.Tables[0].Rows[0]["TotalAllotmentAmount"].ToString();
+                    ViewBag.PaidAllotmentAmount = dsblock.Tables[0].Rows[0]["PaidAllotmentAmount"].ToString();
+                    ViewBag.BalanceAllotmentAmount = dsblock.Tables[0].Rows[0]["BalanceAllotmentAmount"].ToString();
+                    ViewBag.TotalInstallment = dsblock.Tables[0].Rows[0]["TotalInstallment"].ToString();
+                    ViewBag.InstallmentAmount = dsblock.Tables[0].Rows[0]["InstallmentAmount"].ToString();
+                    ViewBag.PlotArea = dsblock.Tables[0].Rows[0]["PlotArea"].ToString();
+                    ViewBag.Balance = dsblock.Tables[0].Rows[0]["BalanceAmount"].ToString();
+                    ViewBag.AssociateInfo = dsblock.Tables[0].Rows[0]["AssociateInfo"].ToString();
+                    ViewBag.CustomerInfo = dsblock.Tables[0].Rows[0]["CustomerInfo"].ToString();
+                    ViewBag.AssociateID = dsblock.Tables[0].Rows[0]["LoginId"].ToString();
+                    ViewBag.CustomerID = dsblock.Tables[0].Rows[0]["CustomerID"].ToString();
                 }
             }
             if (dsblock != null && dsblock.Tables.Count > 0 && dsblock.Tables[1].Rows.Count > 0)
