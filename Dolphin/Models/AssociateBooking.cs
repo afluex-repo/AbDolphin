@@ -671,7 +671,23 @@ namespace Dolphin.Models
             return ds;
         }
 
+        public DataSet FillDetailsbyAccociates()
+        {
+            SqlParameter[] para =
+                            {
+                                 new SqlParameter("@BookingNo",BookingNumber),
+                                  new SqlParameter("@LoginId",LoginId),
 
+                                   new SqlParameter("@FK_SiteID",SiteID),
+                                    new SqlParameter("@FK_SectorID",SectorID),
+                                     new SqlParameter("@FK_BlockID",BlockID),
+                                      new SqlParameter("@PlotNumber",PlotNumber)
+
+
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetLedgerDetailsByAssociate", para);
+            return ds;
+        }
     }
 
 }
