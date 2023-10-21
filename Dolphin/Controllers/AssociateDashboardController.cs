@@ -2323,10 +2323,10 @@ namespace Dolphin.Controllers
        public ActionResult LedgerAssociate(string BookingNumber)
         {
             AssociateBooking model = new AssociateBooking();
-            model.LoginId = Session["LoginId"].ToString();
+            //model.LoginId = Session["LoginId"].ToString();
             List<AssociateBooking> lst = new List<AssociateBooking>();
             model.BookingNumber = string.IsNullOrEmpty(BookingNumber) ? null : BookingNumber;
-            DataSet dsblock = model.FillDetails();
+            DataSet dsblock = model.FillDetailsbyAccociates();
             if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
             {
                 if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "1")
@@ -2383,8 +2383,8 @@ namespace Dolphin.Controllers
 
             }
             return View(model);
-        }  
-
+        }
+      
 
     }
 }
