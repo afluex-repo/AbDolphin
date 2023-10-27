@@ -100,7 +100,8 @@ namespace Dolphin.Models
                                     new SqlParameter("@PlotNumber", PlotNumber)   ,
                                     new SqlParameter("@BookingNumber", BookingNumber)   ,
                                     new SqlParameter("@FromDate", FromDate)   ,
-                                    new SqlParameter("@ToDate", ToDate)
+                                    new SqlParameter("@ToDate", ToDate),
+                                    new SqlParameter("@IsDownline",Downline)
                                   };
             DataSet ds = Connection.ExecuteQuery("GetPlotBookingForAssociate", para);
             return ds;
@@ -531,7 +532,8 @@ namespace Dolphin.Models
                                        new SqlParameter("@IFSCCode", IFSCCode) ,
                                       new SqlParameter("@DocumentImage", DocumentImage),
                                         new SqlParameter("@Action", ActionStatus),
-
+                                        new SqlParameter("@BankName", BankName),
+                                        new SqlParameter("@BankBranch", BankBranch),
                                   };
             DataSet ds = Connection.ExecuteQuery("UploadKYC", para);
             return ds;
@@ -669,7 +671,23 @@ namespace Dolphin.Models
             return ds;
         }
 
+        public DataSet FillDetailsbyAccociates()
+        {
+            SqlParameter[] para =
+                            {
+                                 new SqlParameter("@BookingNo",BookingNumber),
+                                  new SqlParameter("@LoginId",LoginId),
 
+                                   new SqlParameter("@FK_SiteID",SiteID),
+                                    new SqlParameter("@FK_SectorID",SectorID),
+                                     new SqlParameter("@FK_BlockID",BlockID),
+                                      new SqlParameter("@PlotNumber",PlotNumber)
+
+
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetLedgerDetailsByAssociate", para);
+            return ds;
+        }
     }
 
 }

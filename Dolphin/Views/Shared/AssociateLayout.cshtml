@@ -225,7 +225,7 @@
                     </div>
                     <div class="top-menu ms-auto">
                         <ul class="navbar-nav align-items-center gap-1">
-
+                           
                             <li class="nav-item dropdown dropdown-app">
 
                                 <div class="dropdown-menu dropdown-menu-end p-0">
@@ -274,7 +274,7 @@
                     <div class="user-box dropdown px-3">
                         <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-                            @if (Session["ProfilePic"].ToString() == "../../images/no-profile.png" || Session["ProfilePic"].ToString() == "../files/assets/images/no_avatar.jpg")
+                            @*@if (Session["ProfilePic"].ToString() == "../../images/no-profile.png" || Session["ProfilePic"].ToString() == "../files/assets/images/no_avatar.jpg")
                             {
                                 <div id="profileImage"></div>
 
@@ -294,7 +294,25 @@
                                 {
                                     <p class="designattion mb-0" style="color:red">@Session["Status"] </p>
                                 }
+                            </div>*@
+
+
+                            <img src="@Session["ProfilePic"]" class="user-img" alt="user avatar">
+
+                            <div class="user-info">
+                                <p class="user-name mb-0"><span>@Session["FullName"]</span></p>
+                                @if (Session["Status"].ToString() == "Active")
+                                {
+                                    <p class="designattion mb-0" style="color:#1c8d17">@Session["Status"] </p>
+                                }
+                                else
+                                {
+                                    <p class="designattion mb-0" style="color:red">@Session["Status"] </p>
+                                }
                             </div>
+
+
+
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
@@ -357,10 +375,10 @@
 
 
             /// For Profile
-			debugger;
-			const fullName = document.getElementById('fullName').textContent;
-			const intials = fullName.split(' ').map(name => name[0]).join('').toUpperCase();
-			document.getElementById('profileImage').innerHTML = intials;
+			//debugger;
+			//const fullName = document.getElementById('fullName').textContent;
+			//const intials = fullName.split(' ').map(name => name[0]).join('').toUpperCase();
+			//document.getElementById('profileImage').innerHTML = intials;
 		});
 
     </script>
