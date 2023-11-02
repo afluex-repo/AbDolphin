@@ -9,6 +9,13 @@
     <title>Dolphin</title>
     <link rel="stylesheet" type="text/css" href="../../files/bower_components/bootstrap/css/bootstrap.min.css" />
         <script type="text/javascript" src="../../files/bower_components/bootstrap/js/bootstrap.min.js"></script>
+
+    <style>
+        #trvBroker tr td .trvBroker_1{
+               border: 1px solid #000000!important;
+    padding: 0px 17px!important;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -42,6 +49,7 @@
 
         </div>
     </form>
+
 
 </body>
 </html>
