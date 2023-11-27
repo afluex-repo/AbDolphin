@@ -291,8 +291,11 @@
             //    alert("Please Fill PAN .")
             return false;
         }
+         //$("#btnSave").prop("readonly", true);
+         $("#btnSave").attr('disabled');
          $("#loader-container").show();
-        return true;
+         return true;
+      
     }
 
 
