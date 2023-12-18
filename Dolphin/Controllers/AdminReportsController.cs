@@ -1568,6 +1568,12 @@ namespace Dolphin.Controllers
                     obj.PaidAmount = r["PaidAmount"].ToString();
                     obj.Income = r["Income"].ToString();
                     obj.CommPercentage = r["DifferencePerc"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+
+                    
+
+
+
                     lst.Add(obj);
                 }
                 model.ClosingWisePayoutlist = lst;
