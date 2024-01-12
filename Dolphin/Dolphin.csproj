@@ -1237,6 +1237,7 @@
     <Content Include="assets\fonts\slick-2.html" />
     <Content Include="assets\fonts\slick.html" />
     <Content Include="assets\fonts\slickd41d.html" />
+    <Content Include="assets\img\11111.gif" />
     <Content Include="assets\img\ajax-loader.gif" />
     <Content Include="assets\img\banner\1.jpg" />
     <Content Include="assets\img\banner\3.png" />
@@ -2629,6 +2630,7 @@
     <Content Include="assetsWeb\img\pdf\deoria.pdf" />
     <Content Include="assetsWeb\img\pdf\diamond-city.pdf" />
     <Content Include="assetsWeb\img\pdf\maniramGorakhpur.pdf" />
+    <Content Include="assets\img\Loader.webp" />
     <None Include="Properties\PublishProfiles\Dolphin.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
@@ -2642,7 +2644,9 @@
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="Views\AdminReports\TranferPayment.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
