@@ -216,8 +216,11 @@ namespace Dolphin.Controllers
         public ActionResult CustomerList(Customer model)
         {
             List<Customer> lst = new List<Customer>();
-            DataSet ds = model.GetList();
 
+            model.JoiningFromDate = string.IsNullOrEmpty(model.JoiningFromDate) ? null : Common.ConvertToSystemDate(model.JoiningFromDate, "dd/MM/yyyy");
+            model.JoiningToDate = string.IsNullOrEmpty(model.JoiningToDate) ? null : Common.ConvertToSystemDate(model.JoiningToDate, "dd/MM/yyyy");
+
+            DataSet ds = model.GetList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)

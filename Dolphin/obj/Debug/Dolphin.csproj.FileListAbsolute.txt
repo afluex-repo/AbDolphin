@@ -372,7 +372,6 @@ F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Http.xml
 F:\Ashwani Afluex\repository\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.xml
 F:\Ashwani Afluex\repository\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
 F:\Ashwani Afluex\repository\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb
-F:\Ashwani Afluex\repository\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
 E:\Tanishq\Repository\AbDolphin\Dolphin\bin\ApplicationInsights.config
 E:\Tanishq\Repository\AbDolphin\Dolphin\bin\roslyn\csc.exe
 E:\Tanishq\Repository\AbDolphin\Dolphin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
