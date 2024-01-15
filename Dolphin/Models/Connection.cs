@@ -21,7 +21,7 @@ namespace Dolphin.Models
             }
             catch (Exception)
             {
-                throw;
+                throw; 
             }
         }
         public static int ExecuteNonQuery(string commandText, params SqlParameter[] commandParameters)

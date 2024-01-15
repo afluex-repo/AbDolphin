@@ -479,6 +479,5 @@ E:\Repository\AbDolphin\Dolphin\bin\Newtonsoft.Json.xml
 E:\Repository\AbDolphin\Dolphin\bin\System.Net.Http.Formatting.xml
 E:\Repository\AbDolphin\Dolphin\bin\System.Web.Http.xml
 E:\Repository\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.xml
-E:\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
 E:\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
 E:\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb
