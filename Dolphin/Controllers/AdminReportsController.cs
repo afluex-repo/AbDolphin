@@ -1616,6 +1616,8 @@ namespace Dolphin.Controllers
         public ActionResult PayoutRequestReportBy(AssociateBooking model)
         {
             List<AssociateBooking> lst = new List<AssociateBooking>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.PayoutRequestReport();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1641,12 +1643,17 @@ namespace Dolphin.Controllers
             return View(model);
         }
 
-        public ActionResult ApproveRequest(string id)
+        public ActionResult ApproveRequest(string requestID, string PaymentMode, string TransactionNumber, string TransactionDate, string BankName, string BankBranch)
         {
             AssociateBooking obj = new AssociateBooking();
             try
             {
-                obj.RequestID = id;
+                obj.RequestID = requestID;
+                obj.PaymentMode = PaymentMode;
+                obj.TransactionNumber = TransactionNumber;
+                obj.TransactionDate = string.IsNullOrEmpty(TransactionDate) ? null : Common.ConvertToSystemDate(TransactionDate, "dd/MM/yyyy");
+                obj.BankName = BankName;
+                obj.BankBranch = BankBranch;
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = obj.ApproveRequest();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
