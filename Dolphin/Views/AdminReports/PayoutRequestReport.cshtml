@@ -136,7 +136,7 @@
                                                                 <td>
                                                                     @if (Item.Status == "Pending")
                                                                     {
-                                                                        <a class="btn btn-info btn-sm" href="/AdminReports/ApproveRequest/@Item.RequestID" onclick="return confirm('Are you sure you want to approve this request?');">Approve</a>
+                                                                        <a class="btn btn-info btn-sm" href="#" onclick="Approve('@i','@Item.RequestID');">Approve</a>
                                                                         <a class="btn btn-warning btn-sm" href="/AdminReports/DeclineRequest/@Item.RequestID" onclick="return confirm('Are you sure you want to decline this request?');">Decline</a>
                                                                     }
                                                                 </td>
@@ -201,6 +201,26 @@
         $('#txtbankbranch').val(bankbranch.value);
     }
 
+
+    function Approve(id, RequestID) {
+        debugger
+        var r = confirm('Are you sure you want to approve this Payment ?');
+        if (r == true) {
+            $("#divload").css({ 'display': '' });
+            $.ajax({
+                url: "/AdminReports/ApproveRequest",
+                Type: "Get",
+                DataType: "JSON",
+                data: { requestID: RequestID, PaymentMode: $('#txtpaymentmode').val(), TransactionNumber: $('#txttransactionno').val(), TransactionDate: $('#txttransactiondate').val(), BankName: $('#txtbank').val(), BankBranch: $('#txtbankbranch').val() },
+                success: function (data) {
+                    alert("Payment Approved successfully");
+                    location.reload();
+                    $("#divload").css({ 'display': 'none' });
+                }
+
+            });
+        }
+    }
 
 </script>
 

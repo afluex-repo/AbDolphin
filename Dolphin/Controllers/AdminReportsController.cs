@@ -1643,12 +1643,17 @@ namespace Dolphin.Controllers
             return View(model);
         }
 
-        public ActionResult ApproveRequest(string id)
+        public ActionResult ApproveRequest(string requestID, string PaymentMode, string TransactionNumber, string TransactionDate, string BankName, string BankBranch)
         {
             AssociateBooking obj = new AssociateBooking();
             try
             {
-                obj.RequestID = id;
+                obj.RequestID = requestID;
+                obj.PaymentMode = PaymentMode;
+                obj.TransactionNumber = TransactionNumber;
+                obj.TransactionDate = string.IsNullOrEmpty(TransactionDate) ? null : Common.ConvertToSystemDate(TransactionDate, "dd/MM/yyyy");
+                obj.BankName = BankName;
+                obj.BankBranch = BankBranch;
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = obj.ApproveRequest();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
