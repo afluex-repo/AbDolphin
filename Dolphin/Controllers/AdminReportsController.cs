@@ -1610,6 +1610,8 @@ namespace Dolphin.Controllers
         public ActionResult PayoutRequestReportBy(AssociateBooking model)
         {
             List<AssociateBooking> lst = new List<AssociateBooking>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.PayoutRequestReport();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
