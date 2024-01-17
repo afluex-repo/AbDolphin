@@ -119,24 +119,27 @@
                                                                 <th><a class="@Item.DisplayName">@Item.Status</a></th>
                                                                 
                                                                 <td>
-                                                                    <input type="text" id="txtpaymode @i" name="txtpaymode_@i" onchange="getdata(this)" />
+                                                                    @*<input type="text" class="form-control" id="txtpaymode @i" name="txtpaymode_@i" onchange="getdata(this)" />*@
+                                                                    
+                                                                    @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", onchange = "getdata(this)", id = "txtpaymode @i", @name = "txtpaymode_@i" })
+
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" id="txtTransno @i" name="txtTransno_@i" onchange="getdata2(this)" />
+                                                                    <input type="text" class="form-control" id="txtTransno @i" name="txtTransno_@i" onchange="getdata2(this)" />
                                                                 </td>
                                                                 <td>
-                                                                <input type="date" id="txtTransdate @i" name="txtTransdate_@i" onchange="getdata3(this)" />
+                                                                <input type="date" class="form-control" id="txtTransdate @i" name="txtTransdate_@i" onchange="getdata3(this)" />
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" id="txtBank @i" name="txtBank_@i" onchange="getdata4(this)" />
+                                                                    <input type="text" class="form-control" id="txtBank @i" name="txtBank_@i" onchange="getdata4(this)" />
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" id="txtBankBranch @i" name="txtBankBranch_@i" onchange="getdata5(this)" />
+                                                                    <input type="text" class="form-control" id="txtBankBranch @i" name="txtBankBranch_@i" onchange="getdata5(this)" />
                                                                 </td>
                                                                 <td>
                                                                     @if (Item.Status == "Pending")
                                                                     {
-                                                                        <a class="btn btn-info btn-sm" href="/AdminReports/ApproveRequest/@Item.RequestID" onclick="return confirm('Are you sure you want to approve this request?');">Approve</a>
+                                                                        <a class="btn btn-info btn-sm" href="#" onclick="Approve('@i','@Item.RequestID');">Approve</a>
                                                                         <a class="btn btn-warning btn-sm" href="/AdminReports/DeclineRequest/@Item.RequestID" onclick="return confirm('Are you sure you want to decline this request?');">Decline</a>
                                                                     }
                                                                 </td>
@@ -201,6 +204,26 @@
         $('#txtbankbranch').val(bankbranch.value);
     }
 
+
+    function Approve(id, RequestID) {
+        debugger
+        var r = confirm('Are you sure you want to approve this Payment ?');
+        if (r == true) {
+            $("#divload").css({ 'display': '' });
+            $.ajax({
+                url: "/AdminReports/ApproveRequest",
+                Type: "Get",
+                DataType: "JSON",
+                data: { requestID: RequestID, PaymentMode: $('#txtpaymentmode').val(), TransactionNumber: $('#txttransactionno').val(), TransactionDate: $('#txttransactiondate').val(), BankName: $('#txtbank').val(), BankBranch: $('#txtbankbranch').val() },
+                success: function (data) {
+                    alert("Payment Approved successfully");
+                    location.reload();
+                    $("#divload").css({ 'display': 'none' });
+                }
+
+            });
+        }
+    }
 
 </script>
 
