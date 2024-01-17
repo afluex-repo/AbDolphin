@@ -1584,6 +1584,25 @@ namespace Dolphin.Controllers
 
         public ActionResult PayoutRequestReport(AssociateBooking model)
         {
+            #region ddlPaymentMode
+            int count = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count = count + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+
             List<AssociateBooking> lst = new List<AssociateBooking>();
             model.Status = "Pending";
             DataSet ds = model.PayoutRequestReport();
@@ -1651,7 +1670,7 @@ namespace Dolphin.Controllers
                 obj.RequestID = requestID;
                 obj.PaymentMode = PaymentMode;
                 obj.TransactionNumber = TransactionNumber;
-                obj.TransactionDate = string.IsNullOrEmpty(TransactionDate) ? null : Common.ConvertToSystemDate(TransactionDate, "dd/MM/yyyy");
+                obj.TransactionDate = TransactionDate;
                 obj.BankName = BankName;
                 obj.BankBranch = BankBranch;
                 obj.AddedBy = Session["Pk_AdminId"].ToString();

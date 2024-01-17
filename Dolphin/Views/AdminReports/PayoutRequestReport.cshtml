@@ -119,19 +119,22 @@
                                                                 <th><a class="@Item.DisplayName">@Item.Status</a></th>
                                                                 
                                                                 <td>
-                                                                    <input type="text" id="txtpaymode @i" name="txtpaymode_@i" onchange="getdata(this)" />
+                                                                    @*<input type="text" class="form-control" id="txtpaymode @i" name="txtpaymode_@i" onchange="getdata(this)" />*@
+                                                                    
+                                                                    @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", onchange = "getdata(this)", id = "txtpaymode @i", @name = "txtpaymode_@i" })
+
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" id="txtTransno @i" name="txtTransno_@i" onchange="getdata2(this)" />
+                                                                    <input type="text" class="form-control" id="txtTransno @i" name="txtTransno_@i" onchange="getdata2(this)" />
                                                                 </td>
                                                                 <td>
-                                                                <input type="date" id="txtTransdate @i" name="txtTransdate_@i" onchange="getdata3(this)" />
+                                                                <input type="date" class="form-control" id="txtTransdate @i" name="txtTransdate_@i" onchange="getdata3(this)" />
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" id="txtBank @i" name="txtBank_@i" onchange="getdata4(this)" />
+                                                                    <input type="text" class="form-control" id="txtBank @i" name="txtBank_@i" onchange="getdata4(this)" />
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" id="txtBankBranch @i" name="txtBankBranch_@i" onchange="getdata5(this)" />
+                                                                    <input type="text" class="form-control" id="txtBankBranch @i" name="txtBankBranch_@i" onchange="getdata5(this)" />
                                                                 </td>
                                                                 <td>
                                                                     @if (Item.Status == "Pending")
@@ -177,12 +180,12 @@
         changeMonth: true,
     });
 
-    $('#txtTransdate').datepicker({
-        dateFormat: 'dd/mm/yy',
-        changeYear: true,
-        changeMonth: true
+    //$('#txtTransdate').datepicker({
+    //    dateFormat: 'dd/mm/yy',
+    //    changeYear: true,
+    //    changeMonth: true
 
-    });
+    //});
 
 
     function getdata(paymentmode) {
