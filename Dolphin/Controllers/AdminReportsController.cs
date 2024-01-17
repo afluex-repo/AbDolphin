@@ -1670,7 +1670,7 @@ namespace Dolphin.Controllers
                 obj.RequestID = requestID;
                 obj.PaymentMode = PaymentMode;
                 obj.TransactionNumber = TransactionNumber;
-                obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/MM/yyyy");
+                obj.TransactionDate = TransactionDate;
                 obj.BankName = BankName;
                 obj.BankBranch = BankBranch;
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
