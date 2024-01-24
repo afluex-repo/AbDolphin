@@ -3623,6 +3623,9 @@ namespace Dolphin.Controllers
                         Reports obj = new Reports();
                         obj.LoginId = r["LoginDetails"].ToString();
                         obj.TotalAllotmentAmount = r["TotalBusiness"].ToString();
+                        obj.TeamBusiness = r["TeamBusiness"].ToString();
+                        obj.TeamMemberJoining = r["TeamMemberJoining"].ToString();
+                        obj.DirectMemberJoining = r["DirectMemberJoining"].ToString();
                         lst.Add(obj);
                     }
                 }
