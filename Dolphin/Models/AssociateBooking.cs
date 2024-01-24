@@ -489,10 +489,7 @@ namespace Dolphin.Models
             SqlParameter[] para = { new SqlParameter("@PK_RequestID", RequestID),
                                     new SqlParameter("@ApprovedBy", AddedBy),
                                     new SqlParameter("@PaymentMode", PaymentMode),
-                                    new SqlParameter("@TransactionNumber", TransactionNumber),
-                                    new SqlParameter("@TransactionDate", TransactionDate),
-                                    new SqlParameter("@BankName", BankName),
-                                    new SqlParameter("@BankBranch", BankBranch),
+                                    new SqlParameter("@TransactionDate", TransactionDate)
                                       };
             DataSet ds = Connection.ExecuteQuery("ApprovePayoutRequest", para);
             return ds;
