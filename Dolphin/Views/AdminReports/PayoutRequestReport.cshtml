@@ -84,6 +84,11 @@
                                 <th>Beneficiary Account Name</th>
                                 <th>IFSC Code</th>
                                 <th>Status</th>
+                                <th>Payment Mode</th>
+                                @*<th  style="min-width:150px">Transaction No.</th>*@
+                                <th>Transaction Date</th>
+                                @*<td style="min-width:200px">Bank Name</td>
+                                <td style="min-width:200px">Bank Branch</td>*@
                                 <th></th>
                             </tr>
                         </thead>
@@ -112,14 +117,32 @@
                                                                 <td>@Item.IFSCCode </td>
                                                                
                                                                 <th><a class="@Item.DisplayName">@Item.Status</a></th>
+                                                                
+                                                                <td>
+                                                                    @*<input type="text" class="form-control" id="txtpaymode @i" name="txtpaymode_@i" onchange="getdata(this)" />*@
+                                                                    
+                                                                    @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", onchange = "getdata(this)", id = "txtpaymode @i", @name = "txtpaymode_@i" })
+
+                                                                </td>
+                                                                @*<td>
+                                                                    <input type="text" class="form-control" id="txtTransno @i" name="txtTransno_@i" onchange="getdata2(this)" />
+                                                                </td>*@
+                                                                <td>
+                                                                <input type="date" class="form-control" id="txtTransdate @i" name="txtTransdate_@i" onchange="getdata3(this)" />
+                                                                </td>
+                                                                @*<td>
+                                                                    <input type="text" class="form-control" id="txtBank @i" name="txtBank_@i" onchange="getdata4(this)" />
+                                                                </td>*@
+                                                                @*<td>
+                                                                    <input type="text" class="form-control" id="txtBankBranch @i" name="txtBankBranch_@i" onchange="getdata5(this)" />
+                                                                </td>*@
                                                                 <td>
                                                                     @if (Item.Status == "Pending")
                                                                     {
-                                                                        <a class="btn btn-info btn-sm" href="/AdminReports/ApproveRequest/@Item.RequestID" onclick="return confirm('Are you sure you want to approve this request?');">Approve</a>
+                                                                        <a class="btn btn-info btn-sm" href="#" onclick="Approve('@i','@Item.RequestID');">Approve</a>
                                                                         <a class="btn btn-warning btn-sm" href="/AdminReports/DeclineRequest/@Item.RequestID" onclick="return confirm('Are you sure you want to decline this request?');">Decline</a>
                                                                     }
                                                                 </td>
-
                                                             </tr>
                                                             i++;
                                                         }
@@ -132,7 +155,11 @@
         </div>
     </div>
 
-
+    <input type="hidden" id="txtpaymentmode" />
+    <input type="hidden" id="txttransactiondate" />
+    @*<input type="hidden" id="txttransactionno" />
+    <input type="hidden" id="txtbank" />
+    <input type="hidden" id="txtbankbranch" />*@
 }
 
 
@@ -153,10 +180,49 @@
         changeMonth: true,
     });
 
+    //$('#txtTransdate').datepicker({
+    //    dateFormat: 'dd/mm/yy',
+    //    changeYear: true,
+    //    changeMonth: true
+
+    //});
+
+
+    function getdata(paymentmode) {
+        $('#txtpaymentmode').val(paymentmode.value);
+    }
+    //function getdata2(transactionno) {
+    //    $('#txttransactionno').val(transactionno.value);
+    //}
+    function getdata3(transactiondate) {
+        $('#txttransactiondate').val(transactiondate.value);
+    }
+    //function getdata4(bank) {
+    //    $('#txtbank').val(bank.value);
+    //}
+    //function getdata5(bankbranch) {
+    //    $('#txtbankbranch').val(bankbranch.value);
+    //}
+
+
+    function Approve(id, RequestID) {
+        debugger
+        var r = confirm('Are you sure you want to approve this Payment ?');
+        if (r == true) {
+            $("#divload").css({ 'display': '' });
+            $.ajax({
+                url: "/AdminReports/ApproveRequest",
+                Type: "Get",
+                DataType: "JSON",
+                data: { requestID: RequestID, PaymentMode: $('#txtpaymentmode').val(), TransactionDate: $('#txttransactiondate').val() },
+                success: function (data) {
+                    alert("Payment Approved successfully");
+                    location.reload();
+                    $("#divload").css({ 'display': 'none' });
+                }
+
+            });
+        }
+    }
+
 </script>
-
-
-
-
-
-

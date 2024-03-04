@@ -1584,6 +1584,25 @@ namespace Dolphin.Controllers
 
         public ActionResult PayoutRequestReport(AssociateBooking model)
         {
+            #region ddlPaymentMode
+            int count = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count = count + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+
             List<AssociateBooking> lst = new List<AssociateBooking>();
             model.Status = "Pending";
             DataSet ds = model.PayoutRequestReport();
@@ -1616,6 +1635,8 @@ namespace Dolphin.Controllers
         public ActionResult PayoutRequestReportBy(AssociateBooking model)
         {
             List<AssociateBooking> lst = new List<AssociateBooking>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.PayoutRequestReport();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1641,12 +1662,14 @@ namespace Dolphin.Controllers
             return View(model);
         }
 
-        public ActionResult ApproveRequest(string id)
+        public ActionResult ApproveRequest(string requestID, string PaymentMode, string TransactionDate)
         {
             AssociateBooking obj = new AssociateBooking();
             try
             {
-                obj.RequestID = id;
+                obj.RequestID = requestID;
+                obj.PaymentMode = PaymentMode;
+                obj.TransactionDate = TransactionDate;
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = obj.ApproveRequest();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -3597,6 +3620,9 @@ namespace Dolphin.Controllers
                         Reports obj = new Reports();
                         obj.LoginId = r["LoginDetails"].ToString();
                         obj.TotalAllotmentAmount = r["TotalBusiness"].ToString();
+                        obj.TeamBusiness = r["TeamBusiness"].ToString();
+                        obj.TeamMemberJoining = r["TeamMemberJoining"].ToString();
+                        obj.DirectMemberJoining = r["DirectMemberJoining"].ToString();
                         lst.Add(obj);
                     }
                 }

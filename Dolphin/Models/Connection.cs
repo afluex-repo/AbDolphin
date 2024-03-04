@@ -24,6 +24,8 @@ namespace Dolphin.Models
                 throw; 
             }
         }
+
+
         public static int ExecuteNonQuery(string commandText, params SqlParameter[] commandParameters)
         {
             int k = 0;
@@ -44,6 +46,8 @@ namespace Dolphin.Models
                 return k;
             }
         }
+
+
         public static DataSet ExecuteQuery(string commandText, params SqlParameter[] parameters)
         {
             DataSet ds = new DataSet();

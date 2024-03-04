@@ -474,11 +474,22 @@ namespace Dolphin.Models
             return ds;
         }
 
+        public DataSet GetPaymentModeList()
+        {
+            SqlParameter[] para =
+                            {
+                                new SqlParameter("@PK_paymentID",PlotNumber)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetPaymentModeList", para);
+            return ds;
+        }
+
         public DataSet ApproveRequest()
         {
             SqlParameter[] para = { new SqlParameter("@PK_RequestID", RequestID),
                                     new SqlParameter("@ApprovedBy", AddedBy),
-
+                                    new SqlParameter("@PaymentMode", PaymentMode),
+                                    new SqlParameter("@TransactionDate", TransactionDate)
                                       };
             DataSet ds = Connection.ExecuteQuery("ApprovePayoutRequest", para);
             return ds;
