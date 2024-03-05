@@ -481,3 +481,4 @@ E:\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
 E:\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb
 F:\Sarfraz Ahmad\repository\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
 E:\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
+F:\Ashwani Afluex\repository\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
