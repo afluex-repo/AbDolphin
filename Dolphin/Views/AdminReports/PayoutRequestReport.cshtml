@@ -72,6 +72,7 @@
                         <thead>
                             <tr class="table-active">
                                 <th>Sr No.</th>
+                                <th hidden></th>
                                 <th>  Sender ID</th>
                                 <th> First Name</th>
                                 <th>Requested Date</th>
@@ -85,10 +86,10 @@
                                 <th>IFSC Code</th>
                                 <th>Status</th>
                                 <th>Payment Mode</th>
-                                <th  style="min-width:150px">Transaction No.</th>
+                                @*<th  style="min-width:150px">Transaction No.</th>*@
                                 <th>Transaction Date</th>
-                                <td style="min-width:200px">Bank Name</td>
-                                <td style="min-width:200px">Bank Branch</td>
+                                @*<td style="min-width:200px">Bank Name</td>
+                                <td style="min-width:200px">Bank Branch</td>*@
                                 <th></th>
                             </tr>
                         </thead>
@@ -124,18 +125,18 @@
                                                                     @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", onchange = "getdata(this)", id = "txtpaymode @i", @name = "txtpaymode_@i" })
 
                                                                 </td>
-                                                                <td>
+                                                                @*<td>
                                                                     <input type="text" class="form-control" id="txtTransno @i" name="txtTransno_@i" onchange="getdata2(this)" />
-                                                                </td>
+                                                                </td>*@
                                                                 <td>
                                                                 <input type="date" class="form-control" id="txtTransdate @i" name="txtTransdate_@i" onchange="getdata3(this)" />
                                                                 </td>
-                                                                <td>
+                                                                @*<td>
                                                                     <input type="text" class="form-control" id="txtBank @i" name="txtBank_@i" onchange="getdata4(this)" />
-                                                                </td>
-                                                                <td>
+                                                                </td>*@
+                                                                @*<td>
                                                                     <input type="text" class="form-control" id="txtBankBranch @i" name="txtBankBranch_@i" onchange="getdata5(this)" />
-                                                                </td>
+                                                                </td>*@
                                                                 <td>
                                                                     @if (Item.Status == "Pending")
                                                                     {
@@ -149,6 +150,29 @@
                                                     }
                                                 }
                         </tbody>
+                        <tfoot>
+                                <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>Total</b></td>
+                                <td><b>@ViewBag.TotalGrossAmount</b></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                @*<td></td>*@
+                                <td></td>
+                                @*<td></td>
+                                <td></td>*@
+                                <th></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -156,10 +180,10 @@
     </div>
 
     <input type="hidden" id="txtpaymentmode" />
-    <input type="hidden" id="txttransactionno" />
     <input type="hidden" id="txttransactiondate" />
+    @*<input type="hidden" id="txttransactionno" />
     <input type="hidden" id="txtbank" />
-    <input type="hidden" id="txtbankbranch" />
+    <input type="hidden" id="txtbankbranch" />*@
 }
 
 
@@ -191,18 +215,18 @@
     function getdata(paymentmode) {
         $('#txtpaymentmode').val(paymentmode.value);
     }
-    function getdata2(transactionno) {
-        $('#txttransactionno').val(transactionno.value);
-    }
+    //function getdata2(transactionno) {
+    //    $('#txttransactionno').val(transactionno.value);
+    //}
     function getdata3(transactiondate) {
         $('#txttransactiondate').val(transactiondate.value);
     }
-    function getdata4(bank) {
-        $('#txtbank').val(bank.value);
-    }
-    function getdata5(bankbranch) {
-        $('#txtbankbranch').val(bankbranch.value);
-    }
+    //function getdata4(bank) {
+    //    $('#txtbank').val(bank.value);
+    //}
+    //function getdata5(bankbranch) {
+    //    $('#txtbankbranch').val(bankbranch.value);
+    //}
 
 
     function Approve(id, RequestID) {
@@ -214,7 +238,7 @@
                 url: "/AdminReports/ApproveRequest",
                 Type: "Get",
                 DataType: "JSON",
-                data: { requestID: RequestID, PaymentMode: $('#txtpaymentmode').val(), TransactionNumber: $('#txttransactionno').val(), TransactionDate: $('#txttransactiondate').val(), BankName: $('#txtbank').val(), BankBranch: $('#txtbankbranch').val() },
+                data: { requestID: RequestID, PaymentMode: $('#txtpaymentmode').val(), TransactionDate: $('#txttransactiondate').val() },
                 success: function (data) {
                     alert("Payment Approved successfully");
                     location.reload();
