@@ -95,6 +95,18 @@
                             </div>
                             <div class="col-md-2 mb-3">
                                 <div class="form-group">
+                                    <label>From Plot Number</label>
+                                    @Html.TextBoxFor(m => m.FromPlotNumber, new { @class = "form-control", @Placeholder = "From Plot Number" })
+                                </div>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <div class="form-group">
+                                    <label>To Plot Number</label>
+                                    @Html.TextBoxFor(m => m.ToPlotNumber, new { @class = "form-control", @Placeholder = "To Plot Number" })
+                                </div>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <div class="form-group">
                                     <label> &nbsp;</label>
                                     <br />
                                     <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="Search" />
