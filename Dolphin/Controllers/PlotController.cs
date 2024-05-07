@@ -423,7 +423,8 @@ namespace Dolphin.Controllers
                         string AsstName = ds.Tables[0].Rows[0]["AssociateName"].ToString();
                         string plot = ds.Tables[0].Rows[0]["Plot"].ToString();
                         string mob = ds.Tables[0].Rows[0]["Mobile"].ToString();
-                        string Plotamout = obj.PlotAmount;
+                        //string Plotamout = obj.PlotAmount;
+                        string Plotamout = obj.NetPlotAmount;
                         string TempId = "1707166013299856267";
                         string str = BLSMS.Booking(Bookno, Bookamt, AsstName, plot, Plotamout);
                         try
@@ -534,6 +535,8 @@ namespace Dolphin.Controllers
             model.BranchID = model.BranchID == "0" ? null : model.BranchID;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.FromPlotNumber = model.FromPlotNumber == " " ? null : model.FromPlotNumber;
+            model.ToPlotNumber = model.ToPlotNumber == " " ? null : model.ToPlotNumber;
 
             DataSet ds = model.GetBookingDetailsList();
 

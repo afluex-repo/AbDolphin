@@ -23,86 +23,103 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="form-group">
-                        <label class="float-label">Plot Rate :</label>
-                        <label class="float-label" id="Plotrte"></label>
+                        <label class="float-label"><b>Customer Details :</b></label>
+                        <label class="float-label" id="bal">@ViewBag.CustomerInfo (@ViewBag.CustomerID)</label>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="form-group">
-                        <label class="float-label">Plot Area :</label>
-                        <label class="float-label" id="Plotarea"></label>
+                        <label class="float-label"><b>Affiliate Details :</b></label>
+                        <label class="float-label" id="bal">@ViewBag.AssociateInfo (@ViewBag.AssociateID)</label>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-group">
-                        <label class="float-label">Actual Plot Amount :</label>
-                        <label class="float-label" id="ActPlotAmt"></label>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label class="float-label"><b>Plot Rate :</b></label>
+                            <label class="float-label" id="Plotrte">@ViewBag.PlotRate</label>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label class="float-label"><b>Plot Area :</b></label>
+                            <label class="float-label" id="Plotarea">@ViewBag.PlotArea</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label class="float-label"><b>Actual Plot Amount :</b></label>
+                            <label class="float-label" id="ActPlotAmt">@ViewBag.PlotAmount</label>
+                        </div>
+                    </div>
 
-                <div class="col-md-4 mb-3">
-                    <div class="form-group">
-                        <label class="float-label">Discount :</label>
-                        <label class="float-label" id="disct"></label>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label class="float-label"><b>Discount :</b></label>
+                            <label class="float-label" id="disct">@ViewBag.Discount</label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-group">
-                        <label class="float-label">Booking Amount :</label>
-                        <label class="float-label" id="bookingAmt"></label>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label class="float-label"><b>Booking Amount :</b></label>
+                            <label class="float-label" id="bookingAmt">@ViewBag.BookingAmount</label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-group">
-                        <label class="float-label">Booking Date :</label>
-                        <label class="float-label" id="Bookigdt"></label>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label class="float-label"><b>Booking Date :</b></label>
+                            <label class="float-label" id="Bookigdt">@ViewBag.BookingDate</label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-4 mb-3">
-                    <div class="form-group">
-                        <label class="float-label">Payment Plan :</label>
-                        <label class="float-label" id="Payplan"></label>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label class="float-label"><b>Payment Plan :</b></label>
+                            <label class="float-label" id="Payplan">@ViewBag.PlanName</label>
 
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-group">
-                        <label class="float-label">Total Paid Amount:</label>
-                        <label class="float-label" id="Payamt"></label>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label class="float-label"><b>Total Paid Amount:</b></label>
+                            <label class="float-label" id="Payamt">@ViewBag.PayAmount</label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-group">
-                        <label class="float-label">Allotment Date:</label>
-                        <label class="float-label" id="Paydt"></label>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label class="float-label"><b>Allotment Date:</b></label>
+                            <label class="float-label" id="Paydt">@ViewBag.PaymentDate</label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-4 mb-3" hidden="hidden">
-                    <div class="form-group">
-                        <label class="float-label">Total Allotment Amount:</label>
-                        <label class="float-label" id="totAlotamt"></label>
+                    <div class="col-md-4 mb-3" hidden="hidden">
+                        <div class="form-group">
+                            <label class="float-label"><b>Total Allotment Amount:</b></label>
+                            <label class="float-label" id="totAlotamt">@ViewBag.TotalAllotmentAmount</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label class="float-label"><b>No. of Installments:</b></label>
+                            <label class="float-label" id="noOfinst">@ViewBag.TotalInstallment</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label class="float-label"><b>Installment Amount :</b></label>
+                            <label class="float-label" id="instAmt">@ViewBag.InstallmentAmount</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label class="float-label"><b>Balance :</b></label>
+                            <label class="float-label" id="bal">@ViewBag.Balance</label>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-group">
-                        <label class="float-label">No. of Installments:</label>
-                        <label class="float-label" id="noOfinst"></label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-group">
-                        <label class="float-label">Installment Amount :</label>
-                        <label class="float-label" id="instAmt"></label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-group">
-                        <label class="float-label">Balance :</label>
-                        <label class="float-label" id="bal"></label>
-                    </div>
-                </div>
+              
+               
+               
                 <div class="col-md-12">
                     <h5>Installment Details</h5>
                 </div>
@@ -123,6 +140,28 @@
                                     <th>Payment Mode</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstPlot != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstPlot)
+                                        {
+                                            <tr class="text-left">
+                                                <td>@Item.InstallmentNo</td>
+                                                <td>@Item.InstallmentDate</td>
+                                                <td>@Item.InstallmentAmount</td>
+                                                <td>@Item.PaidAmount</td>
+                                                <td>@Item.PaymentDate</td>
+                                                <td>@Item.DueAmount</td>
+                                                <td>@Item.PaymentMode</td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
                         </table>
                     </div>
                 </div>

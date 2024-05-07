@@ -139,6 +139,9 @@ namespace Dolphin.Models
         public string Remark1 { get; set; }
         public string Fk_EmployeeId { get; set; }
 
+        public string FromPlotNumber { get; set; }
+        public string ToPlotNumber { get; set; }
+
 
         #endregion
 
@@ -289,6 +292,8 @@ namespace Dolphin.Models
                                       new SqlParameter("@FK_BlockID", BlockID),
                                       new SqlParameter("@PlotNumber", PlotNumber),
                                        new SqlParameter("@PaymentPlanID", PaymentPlanID),
+                                        new SqlParameter("@FromPlotNumber", FromPlotNumber),
+                                       new SqlParameter("@ToPlotNumber", ToPlotNumber),
                                   };
 
             DataSet ds = Connection.ExecuteQuery("GetPlotBooking", para);
