@@ -294,7 +294,7 @@
                                 <div class="row ">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="submit" name="Save" value="Save" id="btnSave" class="btn btn-success" onclick="return validateform();" />
+                                            <input type="submit" name="Save" value="Save" id="Save" class="btn btn-success" onclick="return validateform();" />
                                         </div>
                                     </div>
                                 </div>
@@ -579,22 +579,28 @@
                 return false;
             }
         }
-        //For disable button after 5sec
+        //For disable button 
         //document.getElementById("btnSave").addEventListener("click", btnDisabled);
+        btnDisabled();
+     
         return true;
     }
 
-    ////For disable button after 5sec
-    //function btnDisabled() {
-    //    debugger;
-    //    var $button = $('#btnSave');
-    //        $button.prop('disabled', true); // Disable the button
-    //        // Simulate an action (e.g., an AJAX call or a timeout)
-    //        setTimeout(function () {
-    //            $button.prop('disabled', false); // Re-enable the button after 5 seconds
-    //        }, 5000);
-    //    };
-    
+    ///For disable button 
+    function btnDisabled() {
+        debugger;
+        var $button = $('#Save');
+            $button.prop('disabled', true); // Disable the button
+            $button.val('Please wait.');
+            // Simulate an action (e.g., an AJAX call or a timeout)
+            setTimeout(function () {
+                $button.prop('disabled', false);
+                $button.val('Save');// Re-enable the button after 5 seconds
+            }, 5000);
+            //$('#form1').submit();
+        };
+
+
 
     function isNumberOrDecimal(evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;

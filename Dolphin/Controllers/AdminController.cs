@@ -542,7 +542,7 @@ namespace Dolphin.Controllers
             try
             {
                 Plot model = new Plot();
-                model.PK_VisitorId = Id;
+                model.PK_VisitorId = Crypto.Decrypt(Id);
                 model.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = model.DeleteVisitor();
                 if (ds != null && ds.Tables.Count > 0)
