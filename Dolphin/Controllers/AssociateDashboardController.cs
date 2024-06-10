@@ -2273,7 +2273,8 @@ namespace Dolphin.Controllers
             List<Reports> lst = new List<Reports>();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-            model.Fk_UserId = Session["Pk_UserId"].ToString();
+            //model.Fk_UserId = Session["Pk_UserId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
             DataSet ds = model.GetBusiness();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
