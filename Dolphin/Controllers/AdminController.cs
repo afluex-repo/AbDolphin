@@ -542,14 +542,14 @@ namespace Dolphin.Controllers
             try
             {
                 Plot model = new Plot();
-                model.PK_VisitorId = Id;
+                model.PK_VisitorId = Crypto.Decrypt(Id);
                 model.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = model.DeleteVisitor();
                 if (ds != null && ds.Tables.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["VisitMsg"] = "Visitor deleted successfully !";
+                        TempData["VisitMsg"] = "Visitor Deleted successfully !";
                     }
                     else
                     {
