@@ -262,9 +262,9 @@ namespace Dolphin.Controllers
                     else
                     {
                         obj.Status = "0";
-                        string TempId = "1707166036749633527";
-                        string passwordRecoveryMessage = BLSMS.ForgetPassword(dsResult.Tables[0].Rows[0]["FirstName"].ToString(), Crypto.Decrypt(dsResult.Tables[0].Rows[0]["Password"].ToString()));
-                        BLSMS.SendSMS(dsResult.Tables[0].Rows[0]["Mobile"].ToString(), passwordRecoveryMessage, TempId);
+                        //string TempId = "1707166036749633527";
+                        //string passwordRecoveryMessage = BLSMS.ForgetPassword(dsResult.Tables[0].Rows[0]["FirstName"].ToString(), Crypto.Decrypt(dsResult.Tables[0].Rows[0]["Password"].ToString()));
+                        //BLSMS.SendSMS(dsResult.Tables[0].Rows[0]["Mobile"].ToString(), passwordRecoveryMessage, TempId);
                         obj.SuccessMessage = "Password is sent on your registered mobile no.";
                     }
                 }

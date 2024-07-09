@@ -549,7 +549,7 @@ namespace Dolphin.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["VisitMsg"] = "Visitor deleted successfully !";
+                        TempData["VisitMsg"] = "Visitor Deleted successfully !";
                     }
                     else
                     {
