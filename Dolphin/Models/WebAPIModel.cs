@@ -695,38 +695,38 @@ namespace Dolphin.Models
 			public string Status {get;set;}
 			public string DisplayName{get;set;}
 		}
-		public class KYCDocument
-		{
-		public string ErrorMessage{get;set;}
-		public string SuccessMessage{get;set;}
-		public string UserID{get;set;}
-		public string AdharNumber {get;set;}
-		public string AdharImage {get;set;}
-		public string AdharStatus{get;set;}
-		public string ActionStatus { get; set; }
-		public string PanNumber{get;set;}
-		public string PanImage{get;set;}
-		public string PanStatus{get;set;}
-		public string DocumentNumber{get;set;}
-		public string DocumentImage{get;set;}
-		public string DocumentStatus{get;set;}
-		public DataSet UploadKYCDocuments()
-        {
-            SqlParameter[] para = { new SqlParameter("@FK_UserID",UserID ) ,
-                                      new SqlParameter("@AdharNumber", AdharNumber) ,
-                                      new SqlParameter("@AdharImage", AdharImage) ,
-                                      new SqlParameter("@PanNumber", PanNumber),
-                                      new SqlParameter("@PanImage", PanImage) ,
-                                      new SqlParameter("@DocumentNumber", DocumentNumber) ,
-                                      new SqlParameter("@DocumentImage", DocumentImage),
-                                        new SqlParameter("@Action", ActionStatus),
+		//public class KYCDocument
+		//{
+		//public string ErrorMessage{get;set;}
+		//public string SuccessMessage{get;set;}
+		//public string UserID{get;set;}
+		//public string AdharNumber {get;set;}
+		//public string AdharImage {get;set;}
+		//public string AdharStatus{get;set;}
+		//public string ActionStatus { get; set; }
+		//public string PanNumber{get;set;}
+		//public string PanImage{get;set;}
+		//public string PanStatus{get;set;}
+		//public string DocumentNumber{get;set;}
+		//public string DocumentImage{get;set;}
+		//public string DocumentStatus{get;set;}
+		//public DataSet UploadKYCDocuments()
+  //      {
+  //          SqlParameter[] para = { new SqlParameter("@FK_UserID",UserID ) ,
+  //                                    new SqlParameter("@AdharNumber", AdharNumber) ,
+  //                                    new SqlParameter("@AdharImage", AdharImage) ,
+  //                                    new SqlParameter("@PanNumber", PanNumber),
+  //                                    new SqlParameter("@PanImage", PanImage) ,
+  //                                    new SqlParameter("@DocumentNumber", DocumentNumber) ,
+  //                                    new SqlParameter("@DocumentImage", DocumentImage),
+  //                                      new SqlParameter("@Action", ActionStatus),
 
-                                  };
-            DataSet ds = Connection.ExecuteQuery("UploadKYC", para);
-            return ds;
+  //                                };
+  //          DataSet ds = Connection.ExecuteQuery("UploadKYC", para);
+  //          return ds;
 
-        }
-		}
+  //      }
+		//}
 		public class Enquiry
 		{
 		public List<EnquiryList> lstBlock1 { get; set; }
@@ -1040,7 +1040,42 @@ namespace Dolphin.Models
     }
     ///////////////////////////////////////////////////////////////
 
+    public class SaveKYC
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string UserID { get; set; }
+        public string AdharNumber { get; set; }
+        public string AdharImage { get; set; }
+        public string PanNumber { get; set; }
+        public string PanImage { get; set; }
+        public string DocumentNumber { get; set; }
+        public string AccountHolderName { get; set; }
+        public string IFSCCode { get; set; }
+        public string DocumentImage { get; set; }
+        public string ActionStatus { get; set; }
+        public string BankName { get; set; }
+        public string BankBranch { get; set; }
 
+        public DataSet UploadKYCDocuments()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserID",UserID ) ,
+                                    new SqlParameter("@AdharNumber", AdharNumber) ,
+                                    new SqlParameter("@AdharImage", AdharImage) ,
+                                    new SqlParameter("@PanNumber", PanNumber),
+                                    new SqlParameter("@PanImage", PanImage) ,
+                                    new SqlParameter("@DocumentNumber", DocumentNumber) ,
+                                    new SqlParameter("@AccountHolderName", AccountHolderName) ,
+                                    new SqlParameter("@IFSCCode", IFSCCode) ,
+                                    new SqlParameter("@DocumentImage", DocumentImage),
+                                    new SqlParameter("@BankName", BankName),
+                                    new SqlParameter("@BankBranch", BankBranch),
+                                  };
+            DataSet ds = Connection.ExecuteQuery("UploadKYC", para);
+            return ds;
+
+        }
+    }
 
 
 }
