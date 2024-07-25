@@ -1193,145 +1193,145 @@ namespace Dolphin.Controllers
         }
 
         #endregion
-        #region KYC
+        //#region KYC
 
-        public ActionResult KYCDocuments(KYCDocuments model)
-        {
-            KYCDocuments obj = new KYCDocuments();
-            DataSet ds = model.GetKYCDocuments();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                obj.AdharNumber = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
-                obj.AdharImage = ds.Tables[0].Rows[0]["AdharImage"].ToString();
-                obj.AdharStatus = "Status : " + ds.Tables[0].Rows[0]["AdharStatus"].ToString();
-                obj.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
-                obj.PanImage = ds.Tables[0].Rows[0]["PanImage"].ToString();
-                obj.PanStatus = "Status : " + ds.Tables[0].Rows[0]["PanStatus"].ToString();
-                obj.DocumentNumber = ds.Tables[0].Rows[0]["DocumentNumber"].ToString();
-                obj.DocumentImage = ds.Tables[0].Rows[0]["DocumentImage"].ToString();
-                obj.DocumentStatus = "Status : " + ds.Tables[0].Rows[0]["DocumentStatus"].ToString();
-            }
-            return Json(obj, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult KYCDocuments(KYCDocuments model)
+        //{
+        //    KYCDocuments obj = new KYCDocuments();
+        //    DataSet ds = model.GetKYCDocuments();
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        //    {
+        //        obj.AdharNumber = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+        //        obj.AdharImage = ds.Tables[0].Rows[0]["AdharImage"].ToString();
+        //        obj.AdharStatus = "Status : " + ds.Tables[0].Rows[0]["AdharStatus"].ToString();
+        //        obj.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
+        //        obj.PanImage = ds.Tables[0].Rows[0]["PanImage"].ToString();
+        //        obj.PanStatus = "Status : " + ds.Tables[0].Rows[0]["PanStatus"].ToString();
+        //        obj.DocumentNumber = ds.Tables[0].Rows[0]["DocumentNumber"].ToString();
+        //        obj.DocumentImage = ds.Tables[0].Rows[0]["DocumentImage"].ToString();
+        //        obj.DocumentStatus = "Status : " + ds.Tables[0].Rows[0]["DocumentStatus"].ToString();
+        //    }
+        //    return Json(obj, JsonRequestBehavior.AllowGet);
+        //}
 
-        public ActionResult KYCDocuments(KYCDocument obj, IEnumerable<HttpPostedFileBase> postedFile)
-        {
-            try
-            {
-                foreach (var file in postedFile)
-                {
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        file.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage)));
+        //public ActionResult KYCDocuments(KYCDocument obj, IEnumerable<HttpPostedFileBase> postedFile)
+        //{
+        //    try
+        //    {
+        //        foreach (var file in postedFile)
+        //        {
+        //            if (file != null && file.ContentLength > 0)
+        //            {
+        //                obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+        //                file.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage)));
 
-                    }
+        //            }
 
-                }
-                obj.ActionStatus = "Adhar";
-                DataSet ds = obj.UploadKYCDocuments();
-                if (ds != null && ds.Tables.Count > 0)
-                {
-                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                    {
-                        obj.SuccessMessage = "Document uploaded successfully..";
+        //        }
+        //        obj.ActionStatus = "Adhar";
+        //        DataSet ds = obj.UploadKYCDocuments();
+        //        if (ds != null && ds.Tables.Count > 0)
+        //        {
+        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //            {
+        //                obj.SuccessMessage = "Document uploaded successfully..";
 
-                    }
-                    else
-                    {
-                        obj.ErrorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //            }
+        //            else
+        //            {
+        //                obj.ErrorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
 
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                obj.ErrorMessage = ex.Message;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        obj.ErrorMessage = ex.Message;
 
-            }
-            return Json(obj, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult KYCDocuments2(KYCDocument obj, IEnumerable<HttpPostedFileBase> postedFile)
-        {
-            try
-            {
-                foreach (var file in postedFile)
-                {
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        //E:\BitBucket\DolphinZone\Dolphin\files\assets\images\
+        //    }
+        //    return Json(obj, JsonRequestBehavior.AllowGet);
+        //}
+        //public ActionResult KYCDocuments2(KYCDocument obj, IEnumerable<HttpPostedFileBase> postedFile)
+        //{
+        //    try
+        //    {
+        //        foreach (var file in postedFile)
+        //        {
+        //            if (file != null && file.ContentLength > 0)
+        //            {
+        //                //E:\BitBucket\DolphinZone\Dolphin\files\assets\images\
 
-                        obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        file.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
-
-
-                    }
-
-                }
-                obj.ActionStatus = "Pan";
-                DataSet ds = obj.UploadKYCDocuments();
-                if (ds != null && ds.Tables.Count > 0)
-                {
-                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                    {
-                        obj.SuccessMessage = "Document uploaded successfully..";
-
-                    }
-                    else
-                    {
-                        obj.ErrorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                obj.ErrorMessage = ex.Message;
-
-            }
-            return Json(obj, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult KYCDocuments3(KYCDocument obj, IEnumerable<HttpPostedFileBase> postedFile)
-        {
-            try
-            {
-                foreach (var file in postedFile)
-                {
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        //E:\BitBucket\DolphinZone\Dolphin\files\assets\images\
-
-                        obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        file.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
+        //                obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+        //                file.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
 
 
-                    }
+        //            }
 
-                }
-                obj.ActionStatus = "Doc";
-                DataSet ds = obj.UploadKYCDocuments();
-                if (ds != null && ds.Tables.Count > 0)
-                {
-                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                    {
-                        obj.SuccessMessage = "Document uploaded successfully..";
+        //        }
+        //        obj.ActionStatus = "Pan";
+        //        DataSet ds = obj.UploadKYCDocuments();
+        //        if (ds != null && ds.Tables.Count > 0)
+        //        {
+        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //            {
+        //                obj.SuccessMessage = "Document uploaded successfully..";
 
-                    }
-                    else
-                    {
-                        obj.ErrorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //            }
+        //            else
+        //            {
+        //                obj.ErrorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
 
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                obj.ErrorMessage = ex.Message;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        obj.ErrorMessage = ex.Message;
 
-            }
-            return Json(obj, JsonRequestBehavior.AllowGet);
-        }
-        #endregion
+        //    }
+        //    return Json(obj, JsonRequestBehavior.AllowGet);
+        //}
+        //public ActionResult KYCDocuments3(KYCDocument obj, IEnumerable<HttpPostedFileBase> postedFile)
+        //{
+        //    try
+        //    {
+        //        foreach (var file in postedFile)
+        //        {
+        //            if (file != null && file.ContentLength > 0)
+        //            {
+        //                //E:\BitBucket\DolphinZone\Dolphin\files\assets\images\
+
+        //                obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+        //                file.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
+
+
+        //            }
+
+        //        }
+        //        obj.ActionStatus = "Doc";
+        //        DataSet ds = obj.UploadKYCDocuments();
+        //        if (ds != null && ds.Tables.Count > 0)
+        //        {
+        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //            {
+        //                obj.SuccessMessage = "Document uploaded successfully..";
+
+        //            }
+        //            else
+        //            {
+        //                obj.ErrorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        obj.ErrorMessage = ex.Message;
+
+        //    }
+        //    return Json(obj, JsonRequestBehavior.AllowGet);
+        //}
+        //#endregion
 
         public ActionResult EnquiryList(Enquiry model)
         {
@@ -1682,8 +1682,80 @@ namespace Dolphin.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-        
+
         /// ////////////////////////////////////////////////////////////
-        
+
+        public ActionResult KYCDocuments(IEnumerable<HttpPostedFileBase> AdharFile, IEnumerable<HttpPostedFileBase> PanFile, IEnumerable<HttpPostedFileBase> DocumentFile, SaveKYC obj)
+        {
+            try
+            {
+                if (AdharFile != null)
+                {
+                    foreach (var file in AdharFile)
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                            file.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage)));
+                        }
+                    }
+                }
+                if (PanFile != null)
+                {
+                    foreach (var file in PanFile)
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                            file.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
+                        }
+                    }
+                }
+                if (DocumentFile != null)
+                {
+                    foreach (var file in DocumentFile)
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                            file.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
+                        }
+                    }
+                    DataSet ds = obj.UploadKYCDocuments();
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                        {
+                            obj.Status = "0";
+                            obj.Message = "Document uploaded successfully..";
+                            try
+                            {
+                                string KYCUploadedyMessage = "Dear " + ds.Tables[0].Rows[0]["FirstName"].ToString() + ", your kyc uploaded and kyc will be approved in 4-5 working days. AB DOLPHIN";
+                                string TempId = "1707166097826950598";
+                                BLSMS.SendSMS(ds.Tables[0].Rows[0]["Mobile"].ToString(), KYCUploadedyMessage, TempId);
+                            }
+                            catch
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            obj.Status = "1";
+                            obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+
     }
 }
