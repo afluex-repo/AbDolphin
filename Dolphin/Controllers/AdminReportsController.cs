@@ -1657,6 +1657,10 @@ namespace Dolphin.Controllers
             List<AssociateBooking> lst = new List<AssociateBooking>();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.AfromDate = string.IsNullOrEmpty(model.AfromDate) ? null : Common.ConvertToSystemDate(model.AfromDate, "dd/MM/yyyy");
+            model.AtoDate = string.IsNullOrEmpty(model.AtoDate) ? null : Common.ConvertToSystemDate(model.AtoDate, "dd/MM/yyyy");
+
+
             DataSet ds = model.PayoutRequestReport();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1718,23 +1722,28 @@ namespace Dolphin.Controllers
             return RedirectToAction("PayoutRequestReport");
         }
 
-        public ActionResult DeclineRequest(string id)
+        public ActionResult DeclineRequest(string id,string Remarks)
         {
             AssociateBooking obj = new AssociateBooking();
+
+           
             try
             {
                 obj.RequestID = id;
+                obj.DeclineRemarks = Remarks;
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = obj.DeclineRequest();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["Request"] = "Request Declined";
+                        obj.Result = "1";
+                        //TempData["Request"] = "Request Declined";
                     }
                     else
                     {
-                        TempData["Request"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        obj.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        //TempData["Request"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
 
                     }
                 }
@@ -1743,7 +1752,9 @@ namespace Dolphin.Controllers
             {
                 TempData["Request"] = ex.Message;
             }
-            return RedirectToAction("PayoutRequestReport");
+           
+
+            return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
