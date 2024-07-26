@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                                 <br />
-                                <br />
+                               
                                 <input type="file" value="@Model.DocumentImage" id="btnUpdateDoc" name="DocumentFile" />
                                 <br />
                                 <img src="@Url.Content(Model.DocumentImage)" height="120" width="180" />
@@ -173,7 +173,7 @@
                                         @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control" })
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="submit" style="display:none; margin-bottom:10px" id="uploaddoc" class="btn btn-success pull-left mt-4" name="btnUpdateAdhar" value="Update" onclick="return validateform();" />
+                                        <input type="submit" style="display:none;" id="uploaddoc" class="btn btn-success pull-left mt-4" name="btnUpdateAdhar" value="Update" onclick="return validateform();" />
                                     </div>
                                 </div>
                             }
