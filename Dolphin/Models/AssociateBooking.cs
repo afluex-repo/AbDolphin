@@ -81,7 +81,8 @@ namespace Dolphin.Models
         public string VisitorId { get; set; }
         public string Mobile { get; set; }
         public string PK_VisitorId { get; set; }
-        
+     
+
         #endregion
 
 
@@ -151,6 +152,15 @@ namespace Dolphin.Models
         public string InstallmentDate { get; set; }
 
         public string DueAmount { get; set; }
+
+        public string AfromDate { get;set;}
+        public string AtoDate { get; set; }
+        public string DeclineRemarks { get; set; }
+        public string Remarks { get; set; }
+        public string DeclineId { get; set; }
+
+
+
         public DataSet FillDetails()
         {
             SqlParameter[] para =
@@ -468,7 +478,9 @@ namespace Dolphin.Models
             SqlParameter[] para = { new SqlParameter("@LoginId", UserID),
                                     new SqlParameter("@FromDate", FromDate),
                                     new SqlParameter("@ToDate", ToDate),
-                                     new SqlParameter("@Status", Status),
+                                    new SqlParameter("@Status", Status),
+                                    new SqlParameter("@AFromDate",AfromDate),
+                                    new SqlParameter("@AToDate",AtoDate)
                                       };
             DataSet ds = Connection.ExecuteQuery("GetPayoutRequest", para);
             return ds;
@@ -498,6 +510,7 @@ namespace Dolphin.Models
         {
             SqlParameter[] para = { new SqlParameter("@PK_RequestID", RequestID),
                                     new SqlParameter("@ApprovedBy", AddedBy),
+                                    new SqlParameter("@DeclineRemarks",DeclineRemarks)
 
                                       };
             DataSet ds = Connection.ExecuteQuery("DeclinePayoutRequest", para);
