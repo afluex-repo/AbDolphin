@@ -1684,66 +1684,57 @@ namespace Dolphin.Controllers
         }
 
         /// ////////////////////////////////////////////////////////////
-
-        public ActionResult KYCDocuments(IEnumerable<HttpPostedFileBase> AdharFile, IEnumerable<HttpPostedFileBase> PanFile, IEnumerable<HttpPostedFileBase> DocumentFile, SaveKYC obj)
+        #region KYC
+        public ActionResult KYCDocuments(HttpPostedFileBase AdharImage, HttpPostedFileBase AdharBacksideImage, HttpPostedFileBase PanImage, HttpPostedFileBase DocumentImage, SaveKYC obj)
         {
             try
             {
-                if (AdharFile != null)
+                if (AdharImage != null)
                 {
-                    foreach (var file in AdharFile)
-                    {
-                        if (file != null && file.ContentLength > 0)
-                        {
-                            obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
-                            file.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage)));
-                        }
-                    }
+                    obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(AdharImage.FileName);
+                    AdharImage.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage)));
                 }
-                if (PanFile != null)
+                if (AdharBacksideImage != null)
                 {
-                    foreach (var file in PanFile)
-                    {
-                        if (file != null && file.ContentLength > 0)
-                        {
-                            obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
-                            file.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
-                        }
-                    }
+                    obj.AdharBacksideImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(AdharBacksideImage.FileName);
+                    AdharBacksideImage.SaveAs(Path.Combine(Server.MapPath(obj.AdharBacksideImage)));
                 }
-                if (DocumentFile != null)
+                if (PanImage != null)
                 {
-                    foreach (var file in DocumentFile)
+                    obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(PanImage.FileName);
+                    PanImage.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
+                }
+                if (DocumentImage != null)
+                {
+                    obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(DocumentImage.FileName);
+                    DocumentImage.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
+                }
+                obj.AccountHolderName = obj.AccountHolderName == " " ? null : obj.AccountHolderName;
+                obj.BankName = obj.BankName == " " ? null : obj.BankName;
+                obj.BankBranch = obj.BankBranch == " " ? null : obj.BankBranch;
+                obj.IFSCCode = obj.IFSCCode == " " ? null : obj.IFSCCode;
+                DataSet ds = obj.UploadKYCDocuments();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
-                        if (file != null && file.ContentLength > 0)
+                        obj.Status = "0";
+                        obj.Message = "Document uploaded successfully..";
+                        try
                         {
-                            obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
-                            file.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
+                            string KYCUploadedyMessage = "Dear " + ds.Tables[0].Rows[0]["FirstName"].ToString() + ", your kyc uploaded and kyc will be approved in 4-5 working days. AB DOLPHIN";
+                            string TempId = "1707166097826950598";
+                            BLSMS.SendSMS(ds.Tables[0].Rows[0]["Mobile"].ToString(), KYCUploadedyMessage, TempId);
                         }
-                    }
-                    DataSet ds = obj.UploadKYCDocuments();
-                    if (ds != null && ds.Tables.Count > 0)
-                    {
-                        if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                        catch
                         {
-                            obj.Status = "0";
-                            obj.Message = "Document uploaded successfully..";
-                            try
-                            {
-                                string KYCUploadedyMessage = "Dear " + ds.Tables[0].Rows[0]["FirstName"].ToString() + ", your kyc uploaded and kyc will be approved in 4-5 working days. AB DOLPHIN";
-                                string TempId = "1707166097826950598";
-                                BLSMS.SendSMS(ds.Tables[0].Rows[0]["Mobile"].ToString(), KYCUploadedyMessage, TempId);
-                            }
-                            catch
-                            {
 
-                            }
                         }
-                        else
-                        {
-                            obj.Status = "1";
-                            obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        }
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
@@ -1755,6 +1746,7 @@ namespace Dolphin.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
 
 
     }

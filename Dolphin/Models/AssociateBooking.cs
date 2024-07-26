@@ -11,6 +11,7 @@ namespace Dolphin.Models
     public class AssociateBooking : Common
     {
         #region Properties
+        public string AdharBacksideImage { get; set; }
         public List<AssociateBooking> ClosingWisePayoutlist { get; set; }
         public string SMS { get; set; }
         public string SenderID { get; set; }
@@ -533,18 +534,18 @@ namespace Dolphin.Models
 
         public DataSet UploadKYCDocuments()
         {
-            SqlParameter[] para = { new SqlParameter("@FK_UserID",UserID ) ,
+            SqlParameter[] para = {   new SqlParameter("@FK_UserID",UserID ) ,
                                       new SqlParameter("@AdharNumber", AdharNumber) ,
                                       new SqlParameter("@AdharImage", AdharImage) ,
+                                      new SqlParameter("@AdharBacksideImage",AdharBacksideImage),
                                       new SqlParameter("@PanNumber", PanNumber),
                                       new SqlParameter("@PanImage", PanImage) ,
                                       new SqlParameter("@DocumentNumber", DocumentNumber) ,
-                                       new SqlParameter("@AccountHolderName", AccountHolderName) ,
-                                       new SqlParameter("@IFSCCode", IFSCCode) ,
                                       new SqlParameter("@DocumentImage", DocumentImage),
-                                        new SqlParameter("@Action", ActionStatus),
-                                        new SqlParameter("@BankName", BankName),
-                                        new SqlParameter("@BankBranch", BankBranch),
+                                      new SqlParameter("@BankHolderName", AccountHolderName),
+                                      new SqlParameter("@MemberBankName", BankName) ,
+                                      new SqlParameter("@MemberBranch", BankBranch) ,
+                                      new SqlParameter("@IFSCCode", IFSCCode)
                                   };
             DataSet ds = Connection.ExecuteQuery("UploadKYC", para);
             return ds;

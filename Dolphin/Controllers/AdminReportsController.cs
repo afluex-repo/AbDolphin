@@ -1836,17 +1836,37 @@ namespace Dolphin.Controllers
         #endregion
 
         #region Approve KYC
-        public ActionResult AssociateListForKYC()
+        public ActionResult AssociateListForKYC(AssociateBooking model)
         {
+            List<AssociateBooking> lst = new List<AssociateBooking>();
             List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
             ViewBag.ddlKYCStatus = ddlKYCStatus;
-            List<Reports> lst = new List<Reports>();
-            return View();
+            model.Status = "Pending";
+            DataSet ds = model.AssociateListForKYC();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
+                    obj.PK_DocumentID = r["PK_UserDocumentID"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.DisplayName = r["FirstName"].ToString();
+                    obj.DocumentNumber = r["DocumentNumber"].ToString();
+                    obj.DocumentType = r["DocumentType"].ToString();
+                    obj.DocumentImage = (r["DocumentImage"].ToString());
+                    obj.Status = (r["Status"].ToString());
+                    obj.Date = (r["UploadDate"].ToString());
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+            return View(model);
         }
         [HttpPost]
         [ActionName("AssociateListForKYC")]
         [OnAction(ButtonName = "btnSearch")]
-        public ActionResult AssociateListForKYC(AssociateBooking model)
+        public ActionResult GetAssociateListForKYC(AssociateBooking model)
         {
             List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
             ViewBag.ddlKYCStatus = ddlKYCStatus;
@@ -1863,23 +1883,11 @@ namespace Dolphin.Controllers
                     obj.PK_DocumentID = r["PK_UserDocumentID"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.DisplayName = r["FirstName"].ToString();
-
-                    obj.DocumentStatus = (r["DocumentStatus"].ToString());
-                    obj.PanStatus = (r["PanStatus"].ToString());
-                    obj.AdharStatus = (r["AdharStatus"].ToString());
-                    obj.PanNumber = (r["PanNumber"].ToString());
-                    obj.DocumentNumber = (r["DocumentNumber"].ToString());
-                    obj.AdharNumber = (r["AdharNumber"].ToString());
-                    obj.PanImage = (r["PanImage"].ToString());
+                    obj.DocumentNumber = r["DocumentNumber"].ToString();
+                    obj.DocumentType = r["DocumentType"].ToString();
                     obj.DocumentImage = (r["DocumentImage"].ToString());
-                    obj.AdharImage = (r["AdharImage"].ToString());
-                    obj.IFSCCode = (r["IFSCCode"].ToString());
-                    obj.BankName = (r["MemberBankName"].ToString());
-                    obj.BankBranch = (r["MemberBranch"].ToString());
-                    obj.BankAccountNo = (r["MemberAccNo"].ToString());
-                    obj.Date = (r["DATE"].ToString());
                     obj.Status = (r["Status"].ToString());
-
+                    obj.Date = (r["UploadDate"].ToString());
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;

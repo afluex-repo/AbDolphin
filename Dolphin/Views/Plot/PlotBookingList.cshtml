@@ -136,8 +136,8 @@
                                     <th>Plot Amt</th>
                                     <th>PLC</th>
                                     <th>Net Amnt</th>
-                                    <th hidden="hidden">Booking Amt</th>
-                                    <th>Paid Amt</th>
+                                    <th hidden>Booking Amt</th>
+                                    <th>Booking Amt</th>
                                     <th>Total Paid Amt</th>
                                     <th>Action</th>
                                 </tr>
@@ -169,7 +169,7 @@
                                                 <td>@Item.PlotAmount</td>
                                                 <td>@Item.PK_PLCCharge</td>
                                                 <td>@Item.NetPlotAmount</td>
-                                                <td hidden="hidden">@Item.BookingAmount</td>
+                                                <td hidden>@Item.BookingAmount</td>
                                                 <td>@Item.PaidAmount</td>
                                                 <td>@Item.AllTotalPaidAmount</td>
 
@@ -186,22 +186,22 @@
                             </tbody>
                             <tfoot>
                                 <tr class="table-active">
-                                    <th>Sr No.</th>
-                                    <th>Branch</th>
-                                    <th>Booking No</th>
-                                    <th>Booking Date</th>
-                                    <th>Plot Details.</th>
-                                    <th>Payment Plan</th>
-                                    <th>Customer Detail</th>
-                                    <th>Affiliate Details</th>
-                                    <th>Customer Mob.No</th>
-                                    <th>Plot Amt</th>
-                                    <th>PLC</th>
-                                    <th>Net Amnt</th>
-                                    <th hidden="hidden">Booking Amt</th>
-                                    <th>Paid Amt</th>
-                                    <th>Total Paid Amt</th>
-                                    <th>Action</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th hidden></th>
+                                    <th>Total :-</th>
+                                    <th>@ViewBag.TotalPaidAmount</th>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>

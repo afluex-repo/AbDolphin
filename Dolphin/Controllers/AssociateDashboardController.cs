@@ -1365,18 +1365,19 @@ namespace Dolphin.Controllers
             {
                 obj.AdharNumber = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
                 obj.AdharImage = ds.Tables[0].Rows[0]["AdharImage"].ToString();
+                obj.AdharBacksideImage = ds.Tables[0].Rows[0]["AdharBacksideImage"].ToString();
                 obj.AdharStatus = "Status : " + ds.Tables[0].Rows[0]["AdharStatus"].ToString();
                 obj.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                 obj.PanImage = ds.Tables[0].Rows[0]["PanImage"].ToString();
                 obj.PanStatus = "Status : " + ds.Tables[0].Rows[0]["PanStatus"].ToString();
-                obj.Status = "Status : " + ds.Tables[0].Rows[0]["PanStatus"].ToString();
                 obj.DocumentNumber = ds.Tables[0].Rows[0]["DocumentNumber"].ToString();
                 obj.DocumentImage = ds.Tables[0].Rows[0]["DocumentImage"].ToString();
                 obj.DocumentStatus = "Status : " + ds.Tables[0].Rows[0]["DocumentStatus"].ToString();
+                obj.Status = ds.Tables[0].Rows[0]["DocumentStatus"].ToString();
                 obj.AccountHolderName = ds.Tables[0].Rows[0]["BankHolderName"].ToString();
-                obj.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
                 obj.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
                 obj.BankBranch = ds.Tables[0].Rows[0]["BankBranch"].ToString();
+                obj.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
                 
             }
             return View(obj);
@@ -1384,76 +1385,46 @@ namespace Dolphin.Controllers
 
         [HttpPost]
         [ActionName("KYCDocuments")]
-        [OnAction(ButtonName = "btnUpdateAdhar")]
-        public ActionResult KYCDocuments(IEnumerable<HttpPostedFileBase> AdharFile, IEnumerable<HttpPostedFileBase> PanFile, IEnumerable<HttpPostedFileBase> DocumentFile, AssociateBooking obj)
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult KYCDocuments(IEnumerable<HttpPostedFileBase> postedFile, AssociateBooking obj)
         {
             string FormName = "";
             string Controller = "";
-             
+            int count = 0;
             try
             {
-                if (AdharFile != null)
+                foreach (var file in postedFile)
                 {
-                    foreach (var file in AdharFile)
+                    if (file != null && file.ContentLength > 0)
                     {
-                        if (file != null && file.ContentLength > 0)
+                        if (count == 0)
                         {
-                            //E:\BitBucket\DolphinZone\Dolphin\files\assets\images\
-
                             obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
                             file.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage)));
-
                         }
-
-                    }
-                    obj.UserID = Session["Pk_userId"].ToString();
-                    obj.ActionStatus = "Adhar";
-                    DataSet ds = obj.UploadKYCDocuments();
-                    if(ds!= null && ds.Tables[0].Rows[0]["Msg"].ToString()=="0")
-                    {
-                        TempData["DocumentUpload"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        FormName = "KYCDocuments";
-                        Controller = "AssociateDashboard";
-                    }
-                }
-                if(PanFile != null)
-                {
-                    foreach (var file in PanFile)
-                    {
-                        if (file != null && file.ContentLength > 0)
+                        if (count == 1)
                         {
-                            //E:\BitBucket\DolphinZone\Dolphin\files\assets\images\
-
+                            obj.AdharBacksideImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                            file.SaveAs(Path.Combine(Server.MapPath(obj.AdharBacksideImage)));
+                        }
+                        if (count == 2)
+                        {
                             obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
                             file.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
-
-
                         }
-
-                    }
-                    obj.UserID = Session["Pk_userId"].ToString();
-                    obj.ActionStatus = "Pan";
-                    DataSet ds = obj.UploadKYCDocuments();
-
-                }
-
-                if (DocumentFile != null)
-                {
-                    foreach (var file in DocumentFile)
-                    {
-                        if (file != null && file.ContentLength > 0)
+                        if (count == 3)
                         {
-                            //E:\BitBucket\DolphinZone\Dolphin\files\assets\images\
-
                             obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
                             file.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
-
-
                         }
-
                     }
+                    count++;
+                }
                     obj.UserID = Session["Pk_userId"].ToString();
-                    obj.ActionStatus = "Doc";
+                    obj.AccountHolderName = obj.AccountHolderName == " " ? null : obj.AccountHolderName;
+                    obj.BankName = obj.BankName == " " ? null : obj.BankName;
+                    obj.BankBranch = obj.BankBranch == " " ? null : obj.BankBranch;
+                    obj.IFSCCode = obj.IFSCCode == " " ? null : obj.IFSCCode;
                     DataSet ds = obj.UploadKYCDocuments();
                     if (ds != null && ds.Tables.Count > 0)
                     {
@@ -1480,8 +1451,6 @@ namespace Dolphin.Controllers
                             Controller = "AssociateDashboard";
                         }
                     }
-                }
-               
             }
             catch (Exception ex)
             {
@@ -1491,6 +1460,7 @@ namespace Dolphin.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
+
         [HttpPost]
         [ActionName("KYCDocuments")]
         [OnAction(ButtonName = "btnUpdatePan")]
