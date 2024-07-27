@@ -1684,7 +1684,7 @@ namespace Dolphin.Controllers
         }
 
         /// ////////////////////////////////////////////////////////////
-        #region KYC
+        #region Associate KYC
         public ActionResult KYCDocuments(HttpPostedFileBase AdharImage, HttpPostedFileBase AdharBacksideImage, HttpPostedFileBase PanImage, HttpPostedFileBase DocumentImage, SaveKYC obj)
         {
             try
@@ -1746,8 +1746,56 @@ namespace Dolphin.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
+
+        public ActionResult GetKYCList(KYCListAPI model)
+        {
+            KYCListAPI obj = new KYCListAPI();
+            try
+            {
+                List<lstKycDocument> lstKycdocuments = new List<lstKycDocument>();
+                DataSet ds = model.GetKYCDocuments();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        lstKycDocument KYClist = new lstKycDocument();
+                        KYClist.AdharNumber = dr["AdharNumber"].ToString();
+                        KYClist.AdharImage = dr["AdharImage"].ToString();
+                        KYClist.AdharBacksideImage = dr["AdharBacksideImage"].ToString();
+                        KYClist.AdharStatus = dr["AdharStatus"].ToString();
+                        KYClist.PanNumber = dr["PanNumber"].ToString();
+                        KYClist.PanImage = dr["PanImage"].ToString();
+                        KYClist.PanStatus = dr["PanStatus"].ToString();
+                        KYClist.DocumentNumber = dr["DocumentNumber"].ToString();
+                        KYClist.DocumentImage = dr["DocumentImage"].ToString();
+                        KYClist.DocumentStatus = dr["DocumentStatus"].ToString();
+                        KYClist.AccountHolderName = dr["BankHolderName"].ToString();
+                        KYClist.BankName = dr["BankName"].ToString();
+                        KYClist.IFSCCode = dr["IFSCCode"].ToString();
+                        KYClist.BankBranch = dr["BankBranch"].ToString();
+                        lstKycdocuments.Add(KYClist);
+                    }
+                    obj.lstKycdocuments = lstKycdocuments;
+
+                    obj.Status = "0";
+                    obj.Message = "KYC Documents Fetched";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         #endregion
-
-
     }
 }

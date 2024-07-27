@@ -1201,6 +1201,7 @@ namespace Dolphin.Controllers
                     obj.Processing = r["Processing"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
                     obj.PK_PaidPayoutId = r["PK_PaidPayoutId"].ToString();
+                  
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
@@ -1299,6 +1300,8 @@ namespace Dolphin.Controllers
                     obj.GrossAmount = r["AMount"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.DisplayName = r["BackColor"].ToString();
+                    obj.Date = r["ApprovalDate"].ToString();
+                    obj.DeclineRemarks = r["Remarks"].ToString();
 
                     lst.Add(obj);
                 }
@@ -1338,6 +1341,8 @@ namespace Dolphin.Controllers
                     obj.GrossAmount = r["AMount"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.DisplayName = r["BackColor"].ToString();
+                    obj.Date = r["ApprovalDate"].ToString();
+                    obj.DeclineRemarks = r["Remarks"].ToString();
 
                     lst.Add(obj);
                 }

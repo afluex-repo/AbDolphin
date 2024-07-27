@@ -31,13 +31,13 @@
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
                                 <label>  From Date</label>
-                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds" })
+                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds",@placeholder="dd/mm/yyyy"})
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
                                 <label> To Date</label>
-                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds" })
+                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds", @placeholder = "dd/mm/yyyy" })
                             </div>
                         </div>
 

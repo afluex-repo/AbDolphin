@@ -1078,6 +1078,39 @@ namespace Dolphin.Models
         }
     }
 
+    public class KYCListAPI
+    {
+        public string UserID { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<lstKycDocument> lstKycdocuments { get; set; }
+
+        public DataSet GetKYCDocuments()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserID", UserID) };
+            DataSet ds = Connection.ExecuteQuery("GetKYCDocuments", para);
+            return ds;
+        }
+    }
+
+    public class lstKycDocument
+    {
+        public string AdharNumber { get; set; }
+        public string AdharImage { get; set; }
+        public string AdharBacksideImage { get; set; }
+        public string AdharStatus { get; set; }
+        public string PanNumber { get; set; }
+        public string PanImage { get; set; }
+        public string PanStatus { get; set; }
+        public string DocumentNumber { get; set; }
+        public string DocumentImage { get; set; }
+        public string DocumentStatus { get; set; }
+        public string AccountHolderName { get; set; }
+        public string BankName { get; set; }
+        public string IFSCCode { get; set; }
+        public string BankBranch { get; set; }
+    }
+
 
 }
 
