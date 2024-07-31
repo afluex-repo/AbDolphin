@@ -578,6 +578,7 @@ namespace Dolphin.Controllers
                         lst.Add(obj);
                     }
                     model.lstPlot = lst;
+                    ViewBag.TotalPaidAmount = double.Parse(ds.Tables[0].Compute("sum(AllTotalPaidAmount)", "").ToString()).ToString("n2");
                 }
             }
             #region ddlBranch
