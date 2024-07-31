@@ -463,6 +463,9 @@ namespace Dolphin.Controllers
         }
 
         #endregion
+
+        #region GetStateCity
+
         public ActionResult GetStateCity(string Pincode)
         {
             try
@@ -492,6 +495,10 @@ namespace Dolphin.Controllers
             }
         }
 
+        #endregion
+
+        #region GetSite
+
         public ActionResult GetSite(Site model)
         {
             List<SiteList> lst = new List<SiteList>();
@@ -515,6 +522,11 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region GetSiteType
+
         public ActionResult GetSiteType(SiteType model)
         {
             List<SiteTypeList> lst = new List<SiteTypeList>();
@@ -538,6 +550,9 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
         #region ddlSector
         public ActionResult GetSector(Sector model)
         {
@@ -563,6 +578,7 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
         #region ddlBlock
         public ActionResult GetBlock(Block model)
         {
@@ -588,6 +604,9 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        #region BookingList
+
         public ActionResult BookingList(BookingList model)
         {
             List<BookingListDetails> lst = new List<BookingListDetails>();
@@ -648,6 +667,11 @@ namespace Dolphin.Controllers
             ViewBag.ddlBlock = ddlBlock;
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region CustomerLedgerReport
+
         public ActionResult CustomerLedgerReport(string PK_BookingId)
         {
             LedgerReport model = new LedgerReport();
@@ -687,6 +711,10 @@ namespace Dolphin.Controllers
             ViewBag.ddlBlock = ddlBlock;
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region Details
 
         public ActionResult Details(string BookingNumber, string LoginId, string SiteID, string SectorID, string BlockID, string PlotNumber)
         {
@@ -827,6 +855,9 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
 
         }
+
+        #endregion
+
         #region AssociateDownline
 
         public ActionResult AssociateDownlineDetail(Downline model)
@@ -889,6 +920,7 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
         #region Tree
         public ActionResult Tree1(TreeList model)
         {
@@ -913,7 +945,8 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion
-        #region Tree
+
+        #region AssociateTree
         public ActionResult AssociateTree(DownlineTree model, string AssociateID)
         {
             if (AssociateID != null)
@@ -941,6 +974,7 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
         #region UserReward
         public ActionResult UserReward(Reward model)
         {
@@ -1019,6 +1053,7 @@ namespace Dolphin.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
         #region UnpaidIncomeReport
         public ActionResult UnpaidIncome(UnpaidIncome model)
         {
@@ -1154,6 +1189,7 @@ namespace Dolphin.Controllers
         }
 
         #endregion
+
         #region PayoutRequestReport
         public ActionResult PayoutRequestReport(PayoutRequestReports model)
         {
@@ -1193,6 +1229,7 @@ namespace Dolphin.Controllers
         }
 
         #endregion
+
         //#region KYC
 
         //public ActionResult KYCDocuments(KYCDocuments model)
@@ -1333,6 +1370,8 @@ namespace Dolphin.Controllers
         //}
         //#endregion
 
+        #region Enquiry
+
         public ActionResult EnquiryList(Enquiry model)
         {
 
@@ -1387,6 +1426,10 @@ namespace Dolphin.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
+        #region PlotAvailability
+
         public ActionResult PlotAvailability(PlotDetails model)
         {
             List<PlotList> lst = new List<PlotList>();
@@ -1420,6 +1463,10 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region GetSitesDetails
 
         public ActionResult GetSitesDetails(SitePLCCharge model)
         {
@@ -1462,6 +1509,11 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region ViewProfile
+
         public ActionResult ViewProfile(Profile model)
         {
             try
@@ -1501,6 +1553,11 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region UpdateProfile
+
         public ActionResult UpdateProfile(HttpPostedFileBase postedFile, Profile model)
         {
             try
@@ -1529,6 +1586,11 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region GetSummaryReport
+
         public ActionResult GetSummaryReport(SummaryReport model)
         {
             List<SummaryList> lst = new List<SummaryList>();
@@ -1562,6 +1624,11 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region GetBranch
+
         public ActionResult GetBranch(Branch model)
         {
             List<Branch> lst = new List<Branch>();
@@ -1587,6 +1654,11 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region GetDesignation
+
         public ActionResult GetDesignation(Designation model)
         {
             List<DesignationDetails> lst = new List<DesignationDetails>();
@@ -1613,7 +1685,12 @@ namespace Dolphin.Controllers
                 model.ErrorMessage = ex.Message;   
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
-        } 
+        }
+
+        #endregion
+
+        #region TestLogin
+
         public ActionResult TestLogin(TestLoginAPI objParameters)
         {
             LoginAPI obj = new LoginAPI();
@@ -1660,9 +1737,11 @@ namespace Dolphin.Controllers
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
         }
-        
-        /// ////////////////////////////////////////////////////////////
-   
+
+        #endregion
+
+        #region GettownshipbookingDetails
+
         [HttpPost]
         public ActionResult GettownshipbookingDetails(Gettownshipbooking model)
         {
@@ -1683,7 +1762,8 @@ namespace Dolphin.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        /// ////////////////////////////////////////////////////////////
+        #endregion
+        
         #region Associate KYC
         public ActionResult KYCDocuments(HttpPostedFileBase AdharImage, HttpPostedFileBase AdharBacksideImage, HttpPostedFileBase PanImage, HttpPostedFileBase DocumentImage, SaveKYC obj)
         {
@@ -1797,5 +1877,186 @@ namespace Dolphin.Controllers
         }
 
         #endregion
+
+        #region VisitorList
+
+        public ActionResult VisitorList(VisitorListAPI model)
+        {
+            try
+            {
+                List<lstvisitor> lstvisitor = new List<lstvisitor>();
+                DataSet ds = model.VisitorList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        lstvisitor obj = new lstvisitor();
+                        obj.AssociateLoginID = r["LoginId"].ToString();
+                        obj.PK_VisitorID = r["PK_VisitorID"].ToString();
+                        obj.AssociateName = r["AssociateName"].ToString();
+                        obj.SiteName = r["SiteName"].ToString();
+                        obj.VisitDate = r["VisitDate"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        lstvisitor.Add(obj);
+                    }
+                    model.lstvisitor = lstvisitor;
+                    model.TotalAmount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+                    model.Status = "0";
+                    model.Message = "Visitor List Fetched";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch(Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult PrintVisitor(PrintVisitor model)
+        {
+            List<visitorlst> visitorlst = new List<visitorlst>();
+            try
+            {
+                DataSet ds = model.VisitorListById();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.PK_VisitorId = ds.Tables[0].Rows[0]["PK_VisitorID"].ToString();
+                    model.SiteName = ds.Tables[0].Rows[0]["SiteName"].ToString();
+                    model.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                    model.AssociateName = ds.Tables[0].Rows[0]["AssociateName"].ToString();
+                    model.Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
+                    model.VisitDate = ds.Tables[0].Rows[0]["VisitDate"].ToString();
+
+                    if (ds.Tables[1].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in ds.Tables[1].Rows)
+                        {
+                            visitorlst obj = new visitorlst();
+                            obj.CustomerName = r["CustomerName"].ToString();
+                            obj.Mobile = r["Mobile"].ToString();
+                            obj.Address = r["Address"].ToString();
+                            visitorlst.Add(obj);
+                        }
+                    }
+                    model.visitorlst = visitorlst;
+                    model.Status = "0";
+                    model.Message = "Data Fetched..";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region AdvancePaymentList
+
+        public ActionResult AdvancePaymentList(AdvancePayment model)
+        {
+            try
+            {
+                List<lstAdvancePayment> lstAdvancePayment = new List<lstAdvancePayment>();
+                DataSet ds = model.GetAdvancePaymentList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        lstAdvancePayment obj = new lstAdvancePayment();
+                        obj.Amount = r["Amount"].ToString(); ;
+                        obj.LoginID = r["LoginID"].ToString();
+                        obj.PaymentDate = r["PaymentDate"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        lstAdvancePayment.Add(obj);
+                    }
+                    model.lstAdvancePayment = lstAdvancePayment;
+                    model.TotalAmount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+                    model.Status = "0";
+                    model.Message = "Data Fetched..";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region BussinessReport
+
+        public ActionResult BusinessReport(BusinessReport model)
+        {
+           try
+            {
+                List<lstBusinessReport> lstBusinessReport = new List<lstBusinessReport>();
+                DataSet ds = model.GetBusiness();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        model.Status = "1";
+                        model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        return Json(model, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        foreach (DataRow r in ds.Tables[0].Rows)
+                        {
+                            lstBusinessReport obj = new lstBusinessReport();
+                            obj.UserLoginId = r["LoginId"].ToString();
+                            obj.LoginId = r["LoginDetails"].ToString();
+                            obj.TotalAllotmentAmount = r["TotalBusiness"].ToString();
+                            obj.TeamBusiness = r["TeamBusiness"].ToString();
+                            obj.DirectMemberJoining = r["DirectMemberJoining"].ToString();
+                            obj.TeamMemberJoining = r["TeamMemberJoining"].ToString();
+                            lstBusinessReport.Add(obj);
+                        }
+                        model.lstBusinessReport = lstBusinessReport;
+                        model.Status = "0";
+                        model.Message = "Data Fetched..";
+                        return Json(model, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+
     }
 }

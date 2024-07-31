@@ -7,220 +7,217 @@
 
 @using (Html.BeginForm("KYCDocuments", "AssociateDashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <div class="page-content">
+        <section class="section">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6 class="mb-0">Upload KYC</h6>
+                                <span style="color: red">
+                                    @TempData["DocumentUpload"]
+                                </span>
+                                @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
+                            </div>
+                            <p style="color: red;display: block; margin-bottom:0px; text-align:center">
 
-  <div class="page-content">
-      <section class="section">
-          <div class="row">
-              <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                  <div class="card">
-                      <div class="card-body">
-                          <div class="d-flex align-items-center justify-content-between">
-                              <h6 class="mb-0">Upload KYC</h6>
-                              <span style="color: red">
-                                  @TempData["DocumentUpload"]
-                              </span>
-                              @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
-                          </div>
-                          <p style="color: red;display: block; margin-bottom:0px; text-align:center">
-
-                          </p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          @Html.HiddenFor(m => m.Status)
-          @if (Model.Status == "Approved")
-          {
-              <div class="row">
-                  <div class="col-12 col-md-12 col-lg-12">
-                      <div class="card">
-                          <div class="card-body">
-                              <div class="row">
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Adhar Number <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.AdharNumber, new { @class = "form-control", @required = "required", @disabled = "true" })
-                                      @Html.ValidationMessageFor(m => m.AdharNumber)
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Adhar Front Image <span style="color:red">*</span></label>
-                                      <input type="file" name="postedFile" required="required" disabled />
-                                      <br />
-                                      <img src="@Url.Content(Model.AdharImage)" height="120" width="180" /><br />
-                                      <label class="text-success mt-2">@Html.DisplayFor(m => m.AdharStatus)</label>
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Adhar Back Image <span style="color:red">*</span></label>
-                                      <input type="file" name="postedFile" required="required" disabled />
-                                      <br />
-                                      <img src="@Url.Content(Model.AdharBacksideImage)" height="120" width="180" /><br />
-                                      <label class="text-success mt-2">@Html.DisplayFor(m => m.AdharStatus)</label>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-12 col-md-12 col-lg-12">
-                      <div class="card">
-                          <div class="card-body">
-                              <div class="row">
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Pan Number <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.PanNumber, new { @class = "form-control", @required = "required", @disabled = "true" })
-                                      @Html.ValidationMessageFor(m => m.PanNumber)
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label class="d-block mt-3 text-dark">Pan Image <span style="color:red">*</span></label>
-                                      <input type="file" name="postedFile" required="required" disabled />
-                                      <img src="@Url.Content(Model.PanImage)" height="120" width="180" /> <br />
-                                      <label class="text-success mt-2">@Html.DisplayFor(m => m.PanStatus)</label>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-12 col-md-12 col-lg-12">
-                      <div class="card">
-                          <div class="card-body">
-                              <div class="row">
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Account Number <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.DocumentNumber, new { @class = "form-control", @required = "required", @disabled = "true" })
-                                      @Html.ValidationMessageFor(m => m.DocumentNumber)
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Account Holder Name <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.AccountHolderName, new { @class = "form-control", @required = "required", @onkeypress = "return onlyAlphabets();", @disabled = "true" })
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label class="d-block text-dark">Document Image <span style="color:red">*</span></label>
-                                      <input type="file" name="postedFile" required="required" disabled />
-                                      <img src="@Url.Content(Model.DocumentImage)" height="120" width="180" /> <br />
-                                      <label class="text-success mt-2">@Html.DisplayFor(m => m.DocumentStatus)</label>
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Bank Name <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @required = "required", @disabled = "true" })
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>IFSC Code <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @required = "required", @disabled = "true" })
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Bank Branch <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @required = "required", @disabled = "true" })
-                                  </div>
-                                  @*<div class="col-lg-4 col-md-4 mb-3">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.Status)
+            @if (Model.Status == "Approved")
+            {
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Adhar Number <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.AdharNumber, new { @class = "form-control", @required = "required", @disabled = "true" })
+                                        @Html.ValidationMessageFor(m => m.AdharNumber)
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Adhar Front Image <span style="color:red">*</span></label>
+                                        <input type="file" name="postedFile" required="required" disabled />
+                                        <br />
+                                        <img src="@Url.Content(Model.AdharImage)" height="120" width="180" /><br />
+                                        <label class="text-success mt-2">@Html.DisplayFor(m => m.AdharStatus)</label>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Adhar Back Image <span style="color:red">*</span></label>
+                                        <input type="file" name="postedFile" required="required" disabled />
+                                        <br />
+                                        <img src="@Url.Content(Model.AdharBacksideImage)" height="120" width="180" /><br />
+                                        <label class="text-success mt-2">@Html.DisplayFor(m => m.AdharStatus)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Pan Number <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.PanNumber, new { @class = "form-control", @required = "required", @disabled = "true" })
+                                        @Html.ValidationMessageFor(m => m.PanNumber)
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label class="d-block mt-3 text-dark">Pan Image <span style="color:red">*</span></label>
+                                        <input type="file" name="postedFile" required="required" disabled />
+                                        <img src="@Url.Content(Model.PanImage)" height="120" width="180" /> <br />
+                                        <label class="text-success mt-2">@Html.DisplayFor(m => m.PanStatus)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Account Number <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.DocumentNumber, new { @class = "form-control", @required = "required", @disabled = "true" })
+                                        @Html.ValidationMessageFor(m => m.DocumentNumber)
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Account Holder Name <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.AccountHolderName, new { @class = "form-control", @required = "required", @onkeypress = "return onlyAlphabets();", @disabled = "true" })
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label class="d-block text-dark">Document Image <span style="color:red">*</span></label>
+                                        <input type="file" name="postedFile" required="required" disabled />
+                                        <img src="@Url.Content(Model.DocumentImage)" height="120" width="180" /> <br />
+                                        <label class="text-success mt-2">@Html.DisplayFor(m => m.DocumentStatus)</label>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Bank Name <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @required = "required", @disabled = "true" })
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>IFSC Code <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @required = "required", @disabled = "true" })
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Bank Branch <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @required = "required", @disabled = "true" })
+                                    </div>
+                                    @*<div class="col-lg-4 col-md-4 mb-3">
                                         <input type="submit" id="btnUpdate" class="btn btn-success" name="btnUpdate" value="Update" />
                                     </div>*@
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          }
-          else
-          {
-              <div class="row">
-                  <div class="col-12 col-md-12 col-lg-12">
-                      <div class="card">
-                          <div class="card-body">
-                              <div class="row">
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Adhar Number <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.AdharNumber, new { @class = "form-control", @required = "required" })
-                                      @Html.ValidationMessageFor(m => m.AdharNumber)
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Adhar Front Image <span style="color:red">*</span></label>
-                                      <input type="file" name="postedFile" required="required" />
-                                      <br />
-                                      <img src="@Url.Content(Model.AdharImage)" height="120" width="180" /><br />
-                                      <label class="text-success mt-2">@Html.DisplayFor(m => m.AdharStatus)</label>
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Adhar Back Image <span style="color:red">*</span></label>
-                                      <input type="file" name="postedFile" required="required" />
-                                      <br />
-                                      <img src="@Url.Content(Model.AdharBacksideImage)" height="120" width="180" /><br />
-                                      <label class="text-success mt-2">@Html.DisplayFor(m => m.AdharStatus)</label>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-12 col-md-12 col-lg-12">
-                      <div class="card">
-                          <div class="card-body">
-                              <div class="row">
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Pan Number <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.PanNumber, new { @class = "form-control", @required = "required" })
-                                      @Html.ValidationMessageFor(m => m.PanNumber)
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label class="d-block mt-3 text-dark">Pan Image <span style="color:red">*</span></label>
-                                      <input type="file" name="postedFile" required="required" />
-                                      <img src="@Url.Content(Model.PanImage)" height="120" width="180" /> <br />
-                                      <label class="text-success mt-2">@Html.DisplayFor(m => m.PanStatus)</label>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-12 col-md-12 col-lg-12">
-                      <div class="card">
-                          <div class="card-body">
-                              <div class="row">
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Account Number <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.DocumentNumber, new { @class = "form-control", @required = "required" })
-                                      @Html.ValidationMessageFor(m => m.DocumentNumber)
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Account Holder Name <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.AccountHolderName, new { @class = "form-control", @required = "required", @onkeypress = "return onlyAlphabets();" })
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label class="d-block text-dark">Document Image <span style="color:red">*</span></label>
-                                      <input type="file" name="postedFile" required="required" />
-                                      <img src="@Url.Content(Model.DocumentImage)" height="120" width="180" /> <br />
-                                      <label class="text-success mt-2">@Html.DisplayFor(m => m.DocumentStatus)</label>
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Bank Name <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @required = "required" })
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>IFSC Code <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @required = "required" })
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <label>Bank Branch <span style="color:red">*</span></label>
-                                      @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @required = "required" })
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 mb-3">
-                                      <input type="submit" id="btnUpdate" class="btn btn-success" name="btnUpdate" value="Update" />
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          }
-      </section>
-  </div>
-   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Adhar Number <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.AdharNumber, new { @class = "form-control", @required = "required" })
+                                        @Html.ValidationMessageFor(m => m.AdharNumber)
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Adhar Front Image <span style="color:red">*</span></label>
+                                        <input type="file" name="postedFile" required="required" />
+                                        <br />
+                                        <img src="@Url.Content(Model.AdharImage)" height="120" width="180" /><br />
+                                        <label class="text-success mt-2">@Html.DisplayFor(m => m.AdharStatus)</label>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Adhar Back Image <span style="color:red">*</span></label>
+                                        <input type="file" name="postedFile" required="required" />
+                                        <br />
+                                        <img src="@Url.Content(Model.AdharBacksideImage)" height="120" width="180" /><br />
+                                        <label class="text-success mt-2">@Html.DisplayFor(m => m.AdharStatus)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Pan Number <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.PanNumber, new { @class = "form-control", @required = "required" })
+                                        @Html.ValidationMessageFor(m => m.PanNumber)
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label class="d-block mt-3 text-dark">Pan Image <span style="color:red">*</span></label>
+                                        <input type="file" name="postedFile" required="required" />
+                                        <img src="@Url.Content(Model.PanImage)" height="120" width="180" /> <br />
+                                        <label class="text-success mt-2">@Html.DisplayFor(m => m.PanStatus)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Account Number <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.DocumentNumber, new { @class = "form-control", @required = "required" })
+                                        @Html.ValidationMessageFor(m => m.DocumentNumber)
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Account Holder Name <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.AccountHolderName, new { @class = "form-control", @required = "required", @onkeypress = "return onlyAlphabets();" })
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label class="d-block text-dark">Document Image <span style="color:red">*</span></label>
+                                        <input type="file" name="postedFile" required="required" />
+                                        <img src="@Url.Content(Model.DocumentImage)" height="120" width="180" /> <br />
+                                        <label class="text-success mt-2">@Html.DisplayFor(m => m.DocumentStatus)</label>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Bank Name <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @required = "required" })
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>IFSC Code <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @required = "required" })
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <label>Bank Branch <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @required = "required" })
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 mb-3">
+                                        <input type="submit" id="btnUpdate" class="btn btn-success" name="btnUpdate" value="Update" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+    
 }
-
-
 
 <script>
 
@@ -244,3 +241,4 @@
     }
 
 </script>
+
