@@ -57,34 +57,34 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-2 mb-3">
+                        <div class="col-md-3 mb-3">
                             <div class="form-group">
                                 <label>   Login ID</label>
                                 @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Search by Login ID" })
                             </div>
                         </div>
-                        <div class="col-md-2 mb-3">
+                        <div class="col-md-3 mb-3">
                             <div class="form-group">
                                 <label> From Date</label>
                                 @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds", @placeholder = "DD/MM/YYYY" })
                             </div>
                         </div>
-                        <div class="col-md-2 mb-3">
+                        <div class="col-md-3 mb-3">
                             <div class="form-group">
                                 <label>  To Date</label>
                                 @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds", @placeholder = "DD/MM/YYYY" })
                             </div>
                         </div>
-                        <div class="col-md-2 mb-3">
+                        <div class="col-md-3 mb-3">
                             <div class="form-group">
                                 <label>  Status</label>
-                                @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlKYCStatus, "Value", "Text"), new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.KYCStatus, new SelectList(ViewBag.ddlKYCStatus, "Value", "Text"), new { @class = "form-control form-select" })
                             </div>
                         </div>
 
                         <div class="col-md-2 mb-3">
                             <div class="form-group">
-                                <label class="d-block">  &nbsp;</label>
+                                @*<label class="d-block">  &nbsp;</label>*@
                                 <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="btnSearch" />
 
                             </div>
@@ -101,7 +101,7 @@
                         <thead>
                             <tr>
                                 <th>Sr No.</th>
-                                <th> Login Id</th>
+                                <th>Login Id</th>
                                 <th>Name</th>
                                 <th>Document Type</th>
                                 <th>Document Image</th>
@@ -127,9 +127,6 @@
                                             <td class="zoom">
                                                 <img src="@Item.DocumentImage" height="120" width="180" class="zoomable-image" />
                                             </td>
-
-
-
                                             <td>@Item.DocumentNumber</td>
                                             <td>@Item.Status</td>
                                             <td>@Item.Date</td>
