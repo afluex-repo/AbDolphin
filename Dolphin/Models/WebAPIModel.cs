@@ -1111,6 +1111,127 @@ namespace Dolphin.Models
         public string BankBranch { get; set; }
     }
 
+    public class VisitorListAPI
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginID { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Downline { get; set; }
+        public string TotalAmount { get; set; }
+        public List<lstvisitor> lstvisitor { get; set; }
+
+        public DataSet VisitorList()
+        {
+            SqlParameter[] para =
+           {   
+                new SqlParameter("@Associateid",LoginID),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate),
+                new SqlParameter("@IsDownline",Downline),
+            };
+            DataSet ds = Connection.ExecuteQuery("VisitorListForAssociate", para);
+            return ds;
+        }
+      
+    }
+
+    public class lstvisitor
+    {
+        public string AssociateLoginID { get; set; }
+        public string PK_VisitorID { get; set; }
+        public string AssociateName { get; set; }
+        public string SiteName { get; set; }
+        public string VisitDate { get; set; }
+        public string Amount { get; set; }
+    }
+
+    public class PrintVisitor
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string PK_VisitorId { get; set; }
+        public string SiteName { get; set; }
+        public string LoginId { get; set; }
+        public string AssociateName { get; set; }
+        public string Amount { get; set; }
+        public string VisitDate { get; set; }
+        public List<visitorlst> visitorlst { get; set; }
+
+        public DataSet VisitorListById()
+        {
+            SqlParameter[] para =
+            {
+                    new SqlParameter("@PK_VisitorId",PK_VisitorId),
+                };
+            DataSet ds = Connection.ExecuteQuery("VisitorListById", para);
+            return ds;
+        }
+    }
+
+    public class visitorlst
+    {
+        public string CustomerName { get; set; }
+        public string Mobile { get; set; }
+        public string Address { get; set; }
+    }
+
+    public class AdvancePayment
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginID { get; set; }
+        public string TotalAmount { get; set; }
+        public List<lstAdvancePayment> lstAdvancePayment { get; set; }
+
+        public DataSet GetAdvancePaymentList()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginID)
+                                };
+            DataSet ds = Connection.ExecuteQuery("GetAdvancePaymentList", para);
+            return ds;
+        }
+    }
+
+    public class lstAdvancePayment
+    {
+        public string LoginID { get; set; }
+        public string Name { get; set; }
+        public string Amount { get; set; }
+        public string PaymentDate { get; set; }
+    }
+
+    public class BusinessReport
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public List<lstBusinessReport> lstBusinessReport { get; set; }
+        public DataSet GetBusiness()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@LoginId", LoginId),
+                                        new SqlParameter("@FromDate", FromDate),
+                                        new SqlParameter("@ToDate", ToDate),
+            };
+            DataSet ds = Connection.ExecuteQuery("GetBusiness", para);
+            return ds;
+        }
+    }
+
+    public class lstBusinessReport
+    {
+        public string UserLoginId { get; set; }
+        public string LoginId { get; set; }
+        public string TotalAllotmentAmount { get; set; }
+        public string TeamBusiness { get; set; }
+        public string DirectMemberJoining { get; set; }
+        public string TeamMemberJoining { get; set; }
+    }
+
 
 }
 

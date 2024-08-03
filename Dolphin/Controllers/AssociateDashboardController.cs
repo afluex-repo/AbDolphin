@@ -1383,7 +1383,7 @@ namespace Dolphin.Controllers
                 obj.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
                 obj.BankBranch = ds.Tables[0].Rows[0]["BankBranch"].ToString();
                 obj.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
-                
+
             }
             return View(obj);
         }
