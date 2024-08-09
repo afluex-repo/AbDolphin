@@ -1634,6 +1634,7 @@ namespace Dolphin.Controllers
         [ActionName("PayoutRequestReport")]
         [OnAction(ButtonName = "Search")]
         public ActionResult PayoutRequestReportBy(AssociateBooking model)
+
         {
             #region ddlPaymentMode
             int count = 0;
@@ -1686,7 +1687,6 @@ namespace Dolphin.Controllers
             }
             return View(model);
         }
-
         public ActionResult ApproveRequest(string requestID, string PaymentMode, string TransactionDate)
         {
             AssociateBooking obj = new AssociateBooking();
@@ -1852,7 +1852,7 @@ namespace Dolphin.Controllers
             List<AssociateBooking> lst = new List<AssociateBooking>();
             List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
             ViewBag.ddlKYCStatus = ddlKYCStatus;
-            model.Status = "Pending";
+            //model.Status = "Pending";
             DataSet ds = model.AssociateListForKYC();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1879,11 +1879,11 @@ namespace Dolphin.Controllers
         [OnAction(ButtonName = "btnSearch")]
         public ActionResult GetAssociateListForKYC(AssociateBooking model)
         {
-            List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
-            ViewBag.ddlKYCStatus = ddlKYCStatus;
+           
             List<AssociateBooking> lst = new List<AssociateBooking>();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/mm/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/mm/yyyy");
+            model.Status = model.Status;
             DataSet ds = model.AssociateListForKYC();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1903,6 +1903,9 @@ namespace Dolphin.Controllers
                 }
                 model.lstPlot = lst;
             }
+            List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
+            ViewBag.ddlKYCStatus = ddlKYCStatus;
+      
             return View(model);
         }
 

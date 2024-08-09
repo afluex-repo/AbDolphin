@@ -2057,6 +2057,149 @@ namespace Dolphin.Controllers
 
         #endregion
 
+        #region DownBusinessReport
+
+        public ActionResult DownBusinessReport(DownBusiness model)
+        {
+            try
+            {
+                List<lstDownBusiness> lstDownBusiness = new List<lstDownBusiness>();
+                DataSet ds = model.GetBusinessDown();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        lstDownBusiness obj = new lstDownBusiness();
+                        obj.Fk_UserId = r["PK_UserId"].ToString();
+                        obj.LoginId = r["LoginDetails"].ToString();
+                        obj.TotalAllotmentAmount = r["TotalBusiness"].ToString();
+                        lstDownBusiness.Add(obj);
+                    }
+                    model.lstDownBusiness = lstDownBusiness;
+                    model.Status = "0";
+                    model.Message = "Data Fetched..";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region GetDownLineBusinessById
+
+        public ActionResult GetDownLineBusinessById(ViewBussiness model)
+        {
+            try
+            {
+                List<lstViewBussiness> lstViewBussiness = new List<lstViewBussiness>();
+                DataSet dspayout = model.GetDownLineBusinesById();
+                if (dspayout != null && dspayout.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dspayout.Tables[0].Rows)
+                    {
+                        lstViewBussiness obj = new lstViewBussiness();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.Business = r["Business"].ToString();
+                        lstViewBussiness.Add(obj);
+                    }
+                    model.lstViewBussiness = lstViewBussiness;
+                    model.Status = "0";
+                    model.Message = "Data Fetched..";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = dspayout.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region GetSelfDownlineBusinessReport
+
+        public ActionResult GetSelfDownlineBusinessReport(GetSelfDownlineBusines model)
+        {
+           try
+            {
+                List<lstSelfDownlineBusiness> lstSelfDownlineBusiness = new List<lstSelfDownlineBusiness>();
+                model.SiteID = model.SiteID == "0" ? null : model.SiteID;
+                model.SectorID = model.SectorID == "0" ? null : model.SectorID;
+                model.BlockID = model.BlockID == "0" ? null : model.BlockID;
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+                DataSet ds = model.GetSelfDownlineBusiness();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        lstSelfDownlineBusiness obj = new lstSelfDownlineBusiness();
+                        obj.BranchName = r["BranchName"].ToString();
+                        obj.PK_BookingId = r["PK_BookingID"].ToString();
+                        obj.CustomerName = r["CustomerInfo"].ToString();
+                        obj.CustomerID = r["LoginId"].ToString();
+                        obj.AssociateID = r["AssoLoginId"].ToString();
+                        obj.AssociateName = r["AssociateInfo"].ToString();
+                        obj.PaidAmount = r["NewPaidAmount"].ToString();
+                        obj.PaymentDate = r["LastPaymentDate"].ToString();
+                        obj.PlotNumber = r["PlotInfo"].ToString();
+                        obj.PlotAmount = r["NetPlotAmount"].ToString();
+                        obj.Balance = r["Balance"].ToString();
+                        obj.Amount = r["PlotAmount"].ToString();
+                        obj.BookingNumber = r["BookingNo"].ToString();
+                        obj.Discount = r["Discount"].ToString();
+                        lstSelfDownlineBusiness.Add(obj);   
+                    }
+                    model.lstSelfDownlineBusiness = lstSelfDownlineBusiness;
+                    model.TotalPaidAmount = double.Parse(ds.Tables[0].Compute("sum(NewPaidAmount)", "").ToString()).ToString("n2");
+                    model.TotalPlotAmount = double.Parse(ds.Tables[0].Compute("sum(NetPlotAmount)", "").ToString()).ToString("n2");
+                    model.TotalBalance = double.Parse(ds.Tables[0].Compute("sum(Balance)", "").ToString()).ToString("n2");
+                    model.TotalAmount = double.Parse(ds.Tables[0].Compute("sum(PlotAmount)", "").ToString()).ToString("n2");
+                    model.TotalDiscount = double.Parse(ds.Tables[0].Compute("sum(Discount)", "").ToString()).ToString("n2");
+                    model.Status = "0";
+                    model.Message = "Data Fetched..";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+
 
     }
 }

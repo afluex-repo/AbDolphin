@@ -11,6 +11,7 @@ namespace Dolphin.Models
     public class AssociateBooking : Common
     {
         #region Properties
+        public string KYCStatus { get; set; }
         public string AdharBacksideImage { get; set; }
         public List<AssociateBooking> ClosingWisePayoutlist { get; set; }
         public string SMS { get; set; }
@@ -569,7 +570,7 @@ namespace Dolphin.Models
         public DataSet AssociateListForKYC()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                  new SqlParameter("@Status", Status),
+                                  new SqlParameter("@Status", KYCStatus),
                                 new SqlParameter("@FromDate",FromDate),
                                   new SqlParameter("@ToDate", ToDate)
                                   };

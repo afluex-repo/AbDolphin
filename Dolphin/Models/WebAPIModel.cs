@@ -328,14 +328,13 @@ namespace Dolphin.Models
 	   public string LoginId {get; set;}
        public string CustomerLoginID {get; set;}
        public string CustomerName {get; set;}
-	    public List<BookingListDetails> lstbooking{get; set;}
+	   public List<BookingListDetails> lstbooking{get; set;}
 		public DataSet List()
         {
             SqlParameter[] para = {
-                                      new SqlParameter("@PK_BookingId", PK_BookingId),
-                                     new SqlParameter("@AssociateID", LoginId)   ,
-
-                                     new SqlParameter("@CustomerLoginID", CustomerLoginID)   ,
+                                    new SqlParameter("@PK_BookingId", PK_BookingId),
+                                    new SqlParameter("@AssociateID", LoginId)   ,
+                                    new SqlParameter("@CustomerLoginID", CustomerLoginID)   ,
                                     new SqlParameter("@CustomerName", CustomerName)   ,
                                     new SqlParameter("@PK_SiteID", SiteID)   ,
                                     new SqlParameter("@PK_SectorID", SectorID)   ,
@@ -1232,6 +1231,125 @@ namespace Dolphin.Models
         public string TeamMemberJoining { get; set; }
     }
 
+    public class DownBusiness
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public List<lstDownBusiness> lstDownBusiness { get; set; }
+
+        public DataSet GetBusinessDown()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@LoginId", LoginId),
+                                        new SqlParameter("@FromDate", FromDate),
+                                        new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetBusinessDownline", para);
+            return ds;
+        }
+    }
+
+    public class lstDownBusiness
+    {
+        public string Fk_UserId { get; set; }
+        public string LoginId { get; set; }
+        public string TotalAllotmentAmount { get; set; }
+    }
+
+    public class ViewBussiness
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string Fk_UserId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public List<lstViewBussiness> lstViewBussiness { get; set; }
+        public DataSet GetDownLineBusinesById()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@Fk_UserId", Fk_UserId),
+                                        new SqlParameter("@FromDate", FromDate),
+                                        new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDownBusiness", para);
+            return ds;
+        }
+    }
+
+    public class lstViewBussiness
+    {
+        public string Name { get; set; }
+        public string LoginId { get; set; }
+        public string Business { get; set; }
+    }
+
+    public class GetSelfDownlineBusines
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginID { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string PK_BookingId { get; set; }
+        public string CustomerLoginID { get; set; }
+        public string CustomerName { get; set; }
+        public string PlotNumber { get; set; }
+        public string BookingNumber { get; set; }
+        public string SiteID { get; set; }
+        public string SectorID { get; set; }
+        public string BlockID { get; set; }
+        public string Mobile { get; set; }
+        public string Downline { get; set; }
+        public string TotalPaidAmount { get; set; }
+        public string TotalBalance { get; set; }
+        public string TotalPlotAmount { get; set; }
+        public string TotalDiscount { get; set; }
+        public string TotalAmount { get; set; }
+        public List<lstSelfDownlineBusiness> lstSelfDownlineBusiness { get; set; }
+        public DataSet GetSelfDownlineBusiness()
+        {
+            SqlParameter[] para =
+                             {
+                                 new SqlParameter("@PK_BookingId",PK_BookingId),
+                                 new SqlParameter("@CustomerID",CustomerLoginID ),
+                                 new SqlParameter("@AssociateID",LoginID ),
+                                 new SqlParameter("@FromDate",FromDate),
+                                 new SqlParameter("@ToDate",ToDate),
+                                 new SqlParameter("@CustomerName",CustomerName),
+                                 new SqlParameter("@PlotNumber",PlotNumber),
+                                 new SqlParameter("@BookingNo",BookingNumber),
+                                 new SqlParameter("@PK_SiteID",SiteID),
+                                 new SqlParameter("@PK_SectorID",SectorID),
+                                 new SqlParameter("@PK_BlockID",BlockID),
+                                 new SqlParameter("@Mobile",Mobile),
+                                 new SqlParameter("@IsDownline",Downline)
+                            };
+
+            DataSet ds = Connection.ExecuteQuery("GetSelfDownlineBusiness", para);
+            return ds;
+        }
+    }
+
+    public class lstSelfDownlineBusiness
+    {
+        public string PK_BookingId { get; set; }
+        public string CustomerID { get; set; }
+        public string CustomerName { get; set; }
+        public string AssociateID { get; set; }
+        public string AssociateName { get; set; }
+        public string BranchName { get; set; }
+        public string PaidAmount { get; set; }
+        public string PaymentDate { get; set; }
+        public string PlotAmount { get; set; }
+        public string Amount { get; set; }
+        public string PlotNumber { get; set; }
+        public string Balance { get; set; }
+        public string Discount { get; set; }
+        public string BookingNumber { get; set; }
+    }
 
 }
 
