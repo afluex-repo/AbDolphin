@@ -328,14 +328,13 @@ namespace Dolphin.Models
 	   public string LoginId {get; set;}
        public string CustomerLoginID {get; set;}
        public string CustomerName {get; set;}
-	    public List<BookingListDetails> lstbooking{get; set;}
+	   public List<BookingListDetails> lstbooking{get; set;}
 		public DataSet List()
         {
             SqlParameter[] para = {
-                                      new SqlParameter("@PK_BookingId", PK_BookingId),
-                                     new SqlParameter("@AssociateID", LoginId)   ,
-
-                                     new SqlParameter("@CustomerLoginID", CustomerLoginID)   ,
+                                    new SqlParameter("@PK_BookingId", PK_BookingId),
+                                    new SqlParameter("@AssociateID", LoginId)   ,
+                                    new SqlParameter("@CustomerLoginID", CustomerLoginID)   ,
                                     new SqlParameter("@CustomerName", CustomerName)   ,
                                     new SqlParameter("@PK_SiteID", SiteID)   ,
                                     new SqlParameter("@PK_SectorID", SectorID)   ,

@@ -1634,6 +1634,7 @@ namespace Dolphin.Controllers
         [ActionName("PayoutRequestReport")]
         [OnAction(ButtonName = "Search")]
         public ActionResult PayoutRequestReportBy(AssociateBooking model)
+
         {
             #region ddlPaymentMode
             int count = 0;
@@ -1686,7 +1687,6 @@ namespace Dolphin.Controllers
             }
             return View(model);
         }
-
         public ActionResult ApproveRequest(string requestID, string PaymentMode, string TransactionDate)
         {
             AssociateBooking obj = new AssociateBooking();

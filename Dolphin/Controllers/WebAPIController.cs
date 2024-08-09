@@ -2170,7 +2170,7 @@ namespace Dolphin.Controllers
                         obj.Amount = r["PlotAmount"].ToString();
                         obj.BookingNumber = r["BookingNo"].ToString();
                         obj.Discount = r["Discount"].ToString();
-                        lstSelfDownlineBusiness.Add(obj);
+                        lstSelfDownlineBusiness.Add(obj);   
                     }
                     model.lstSelfDownlineBusiness = lstSelfDownlineBusiness;
                     model.TotalPaidAmount = double.Parse(ds.Tables[0].Compute("sum(NewPaidAmount)", "").ToString()).ToString("n2");

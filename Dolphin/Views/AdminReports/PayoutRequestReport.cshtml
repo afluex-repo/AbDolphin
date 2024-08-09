@@ -126,9 +126,7 @@
                                             <td>@Item.Details</td>
                                             <td>@Item.BankAccountNo </td>
                                             <td>@Item.FirstName</td>
-
                                             <td>@Item.IFSCCode </td>
-
                                             <th><a class="@Item.DisplayName">@Item.Status</a></th>
 
                                             <td>
@@ -324,8 +322,9 @@
 
     function closeModal() {
         debugger;
-        $("#myModal").hide();
-        location.reload();
+        $("#myModal").modal('hide');
+       //$("#myModal").hide();
+        //location.reload();
         //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
     }
 
