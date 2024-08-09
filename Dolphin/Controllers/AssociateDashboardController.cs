@@ -771,7 +771,6 @@ namespace Dolphin.Controllers
 
         #region EditProfile
 
-
         public ActionResult EditProfile(AssociateBooking model)
         {
             model.UserID = Session["Pk_userId"].ToString();
