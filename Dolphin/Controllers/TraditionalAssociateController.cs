@@ -603,7 +603,7 @@ namespace Dolphin.Controllers
             {
                 TempData["Registration"] = ex.Message;
             }
-            FormName = "AssociateRegistration";
+            FormName = "AssociateList";
             Controller = "TraditionalAssociate";
 
             return RedirectToAction(FormName, Controller);

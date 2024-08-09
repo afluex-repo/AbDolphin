@@ -159,7 +159,7 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 mb-3">
                                         <label>Pan Number <span style="color:red">*</span></label>
-                                        @Html.TextBoxFor(m => m.PanNumber, new { @class = "form-control", @required = "required" })
+                                        @Html.TextBoxFor(m => m.PanNumber, new { @class = "form-control", @required = "required",@onchange = "return validatePan();" })
                                         @Html.ValidationMessageFor(m => m.PanNumber)
                                     </div>
                                     <div class="col-lg-4 col-md-4 mb-3">
@@ -240,5 +240,18 @@
         }
     }
 
+
+    function validatePan() {
+        var panVal = $('#PanNumber').val();
+        var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+
+        if (regpan.test(panVal)) {
+            $("#PanNo").removeClass('errortext');
+        } else {
+            alert("Invalid PAN Number");
+            $("#PanNo").val('');
+            $("#PanNo").addClass('errortext');
+        }
+    }
 </script>
 

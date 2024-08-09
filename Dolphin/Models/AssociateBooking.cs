@@ -298,13 +298,13 @@ namespace Dolphin.Models
                                         new SqlParameter("@State", State) ,
                                          new SqlParameter("@City", City) ,
                                           new SqlParameter("@Address", Address) ,
-                                           new SqlParameter("@PanNumber", PanNo) ,
+                                           //new SqlParameter("@PanNumber", PanNo) ,
                                             new SqlParameter("@UpdatedBy", UpdatedBy) ,
                                             new SqlParameter("@ProfilePic", ProfilePic),
-                                              new SqlParameter("@MemberAccNo", BankAccountNo),
-                                                 new SqlParameter("@MemberBankName", BankName),
-                                                  new SqlParameter("@MemberBranch", BankBranch),
-                                                     new SqlParameter("@IFSCCode", IFSCCode)
+                                              //new SqlParameter("@MemberAccNo", BankAccountNo),
+                                              //   new SqlParameter("@MemberBankName", BankName),
+                                              //    new SqlParameter("@MemberBranch", BankBranch),
+                                              //       new SqlParameter("@IFSCCode", IFSCCode)
                                   };
             DataSet ds = Connection.ExecuteQuery("EditAssociateDetailsForProfile", para);
             return ds;
