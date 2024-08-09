@@ -1849,29 +1849,29 @@ namespace Dolphin.Controllers
         #region Approve KYC
         public ActionResult AssociateListForKYC(AssociateBooking model)
         {
-            List<AssociateBooking> lst = new List<AssociateBooking>();
+            //List<AssociateBooking> lst = new List<AssociateBooking>();
             List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
             ViewBag.ddlKYCStatus = ddlKYCStatus;
             //model.Status = "Pending";
-            DataSet ds = model.AssociateListForKYC();
+            //DataSet ds = model.AssociateListForKYC();
 
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    AssociateBooking obj = new AssociateBooking();
-                    obj.PK_DocumentID = r["PK_UserDocumentID"].ToString();
-                    obj.LoginId = r["LoginId"].ToString();
-                    obj.DisplayName = r["FirstName"].ToString();
-                    obj.DocumentNumber = r["DocumentNumber"].ToString();
-                    obj.DocumentType = r["DocumentType"].ToString();
-                    obj.DocumentImage = (r["DocumentImage"].ToString());
-                    obj.Status = (r["Status"].ToString());
-                    obj.Date = (r["UploadDate"].ToString());
-                    lst.Add(obj);
-                }
-                model.lstPlot = lst;
-            }
+            //if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            //{
+            //    foreach (DataRow r in ds.Tables[0].Rows)
+            //    {
+            //        AssociateBooking obj = new AssociateBooking();
+            //        obj.PK_DocumentID = r["PK_UserDocumentID"].ToString();
+            //        obj.LoginId = r["LoginId"].ToString();
+            //        obj.DisplayName = r["FirstName"].ToString();
+            //        obj.DocumentNumber = r["DocumentNumber"].ToString();
+            //        obj.DocumentType = r["DocumentType"].ToString();
+            //        obj.DocumentImage = (r["DocumentImage"].ToString());
+            //        obj.Status = (r["Status"].ToString());
+            //        obj.Date = (r["UploadDate"].ToString());
+            //        lst.Add(obj);
+            //    }
+            //    model.lstPlot = lst;
+            //}
             return View(model);
         }
         [HttpPost]
