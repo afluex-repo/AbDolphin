@@ -1622,6 +1622,7 @@ namespace Dolphin.Controllers
                     obj.BankAccountNo = r["MemberAccNo"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.DisplayName = r["BackColor"].ToString();
+                    obj.ApprovalDate = r["ApprovalDate"].ToString();
 
                     lst.Add(obj);
                 }
@@ -1679,6 +1680,7 @@ namespace Dolphin.Controllers
                     obj.GrossAmount = r["AMount"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.DisplayName = r["BackColor"].ToString();
+                    obj.ApprovalDate = r["ApprovalDate"].ToString();
 
                     lst.Add(obj);
                 }

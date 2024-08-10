@@ -88,6 +88,7 @@
                                 <th>  Sender ID</th>
                                 <th> First Name</th>
                                 <th>Requested Date</th>
+                                <th>Approval/Rejected Date</th>
                                 <th>Amount</th>
                                 <th>Sender Account No</th>
                                 <th>Sender Name</th>
@@ -102,7 +103,7 @@
                                 <th>Transaction Date</th>
                                 @*<td style="min-width:200px">Bank Name</td>
                                     <td style="min-width:200px">Bank Branch</td>*@
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -119,6 +120,7 @@
                                             <td>@Item.AssociateLoginID</td>
                                             <td>@Item.FirstName</td>
                                             <td>@Item.ClosingDate  </td>
+                                            <td>@Item.ApprovalDate</td>
                                             <td>@Item.GrossAmount </td>
                                             <td>@Item.SenderAccountNo</td>
                                             <td>@Item.SenderName</td>
@@ -165,6 +167,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -323,7 +326,7 @@
     function closeModal() {
         debugger;
         $("#myModal").modal('hide');
-       //$("#myModal").hide();
+       // $("#myModal").hide();
         //location.reload();
         //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
     }
