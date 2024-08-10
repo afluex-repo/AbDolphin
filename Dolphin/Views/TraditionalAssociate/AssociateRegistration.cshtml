@@ -112,26 +112,53 @@
                             @Html.TextBoxFor(m => m.AdharNumber, new { @class = "form-control", @Placeholder = "AdharNumber", @maxlength = "12", @onchange = "return validateAdhar();" })
                             <span class="form-bar"></span>
                         </div>
-                        <div class="col-sm-3 mb-3">
-                            <label class="float-label">Bank Account No </label>
-                            @Html.TextBoxFor(m => m.BankAccountNo, new { @class = "form-control", @Placeholder = "Bank Account No", @onchange = "return validateAccount();" })
-                            <span class="form-bar"></span>
-                        </div>
-                        <div class="col-sm-3 mb-3">
-                            <label class="float-label">Bank Name </label>
-                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @Placeholder = "Bank Name" })
-                            <span class="form-bar"></span>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="float-label">Bank Branch</label>
-                            @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @Placeholder = "Bank Branch" })
-                            <span class="form-bar"></span>
-                        </div>
-                        <div class="col-sm-3 mb-3">
-                            <label class="float-label">IFSC Code</label>
-                            @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @Placeholder = "IFSC Code" })
-                            <span class="form-bar"></span>
-                        </div>
+                        @if (Model.UserID == null)
+                        {
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label">Bank Account No </label>
+                                @Html.TextBoxFor(m => m.BankAccountNo, new { @class = "form-control", @Placeholder = "Bank Account No", @onchange = "return validateAccount();" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label">Bank Name </label>
+                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @Placeholder = "Bank Name" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="float-label">Bank Branch</label>
+                                @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @Placeholder = "Bank Branch" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label">IFSC Code</label>
+                                @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @Placeholder = "IFSC Code" })
+                                <span class="form-bar"></span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label">Bank Account No </label>
+                                @Html.TextBoxFor(m => m.BankAccountNo, new { @class = "form-control", @Placeholder = "Bank Account No", @readonly = "readonly" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label">Bank Name </label>
+                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @Placeholder = "Bank Name", @readonly = "readonly" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="float-label">Bank Branch</label>
+                                @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @Placeholder = "Bank Branch", @readonly = "readonly" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label">IFSC Code</label>
+                                @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @Placeholder = "IFSC Code", @readonly = "readonly" })
+                                <span class="form-bar"></span>
+                            </div>
+                        }
+                       
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
                                 @*<img src="@Model.ProfilePicture" height="190" width="250" />*@

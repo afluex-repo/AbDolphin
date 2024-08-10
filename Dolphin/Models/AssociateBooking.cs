@@ -417,6 +417,8 @@ namespace Dolphin.Models
 
         public string PlotStatus { get; set; }
 
+        public string ApprovalDate { get; set; }
+
         public DataSet UnpaidIncomes()
         {
             SqlParameter[] para = { new SqlParameter("@FK_UserId", UserID),
