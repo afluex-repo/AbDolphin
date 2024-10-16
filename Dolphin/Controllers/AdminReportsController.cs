@@ -1617,6 +1617,8 @@ namespace Dolphin.Controllers
                     obj.ClosingDate = r["RequestedDate"].ToString();
                     obj.AssociateLoginID = r["LoginId"].ToString();
                     obj.FirstName = r["Name"].ToString();
+                    obj.NetAmount = r["NetAmount"].ToString();
+                    obj.TDS = r["TDS"].ToString();
                     obj.GrossAmount = r["AMount"].ToString();
                     obj.IFSCCode = r["IFSCCode"].ToString();
                     obj.BankAccountNo = r["MemberAccNo"].ToString();
@@ -1677,6 +1679,8 @@ namespace Dolphin.Controllers
                     obj.FirstName = r["Name"].ToString();
                     obj.IFSCCode = r["IFSCCode"].ToString();
                     obj.BankAccountNo = r["MemberAccNo"].ToString();
+                    obj.NetAmount = r["NetAmount"].ToString();
+                    obj.TDS = r["TDS"].ToString();
                     obj.GrossAmount = r["AMount"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.DisplayName = r["BackColor"].ToString();
