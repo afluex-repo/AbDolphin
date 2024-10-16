@@ -85,7 +85,9 @@
                                 <th> First Name</th>
                                 <th>Requested Date</th>
                                 <th>Approval/Rejected Date</th>
-                                <th>Amount</th>
+                                <th>Net Amount</th>
+                                <th>TDS</th>
+                                <th>Gross Amount</th>
                                 <th>Sender Account No</th>
                                 <th>Sender Name</th>
                                 <th>SMS</th>
@@ -117,6 +119,8 @@
                                             <td>@Item.FirstName</td>
                                             <td>@Item.ClosingDate  </td>
                                             <td>@Item.ApprovalDate</td>
+                                            <td>@Item.NetAmount </td>
+                                            <td>@Item.TDS </td>
                                             <td>@Item.GrossAmount </td>
                                             <td>@Item.SenderAccountNo</td>
                                             <td>@Item.SenderName</td>
@@ -163,6 +167,8 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
