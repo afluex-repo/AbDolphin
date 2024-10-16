@@ -1902,9 +1902,9 @@ namespace Dolphin.Controllers
                     obj.DisplayName = r["FirstName"].ToString();
                     obj.DocumentNumber = r["DocumentNumber"].ToString();
                     obj.DocumentType = r["DocumentType"].ToString();
-                    obj.DocumentImage = (r["DocumentImage"].ToString());
-                    obj.Status = (r["Status"].ToString());
-                    obj.Date = (r["UploadDate"].ToString());
+                    obj.DocumentImage = r["DocumentImage"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.Date = r["UploadDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
