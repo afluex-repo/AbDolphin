@@ -209,9 +209,9 @@ namespace Dolphin.Controllers
             }
             return Json(dataList3, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult VisitorForm()
+        public ActionResult VisitorForm(Plot model)
         {
-            Plot model = new Plot();
+           
             #region ddlSite
             int count1 = 0;
             List<SelectListItem> ddlSite = new List<SelectListItem>();
@@ -231,7 +231,30 @@ namespace Dolphin.Controllers
             }
             ViewBag.ddlSite = ddlSite;
             #endregion
-            return View();
+            #region ddlBranch
+            TraditionalAssociate obj = new TraditionalAssociate();
+            int count = 0;
+            List<SelectListItem> ddlBranch = new List<SelectListItem>();
+            DataSet dsBranch = obj.GetBranchList();
+            if (dsBranch != null && dsBranch.Tables.Count > 0 && dsBranch.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsBranch.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                    }
+                    ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlBranch = ddlBranch;
+
+            #endregion
+            model.BranchID = "1";
+
+            return View(model);
         }
         //[HttpPost]
         //[ActionName("VisitorForm")]
@@ -270,7 +293,7 @@ namespace Dolphin.Controllers
 
 
         [HttpPost]
-        public JsonResult save(Plot obj, string dataValue, string SiteID, string AssociateID, string AssociateName, string Amount, string VisiteDate)
+        public JsonResult save(Plot obj, string dataValue,string BranchID, string SiteID, string AssociateID, string AssociateName, string Amount, string VisiteDate)
         {
 
             obj.VisitDate = string.IsNullOrEmpty(VisiteDate) ? null : Common.ConvertToSystemDate(VisiteDate, "dd/MM/yyyy");
@@ -311,6 +334,27 @@ namespace Dolphin.Controllers
 
         public ActionResult VisitorList()
         {
+            #region ddlBranch
+            TraditionalAssociate obj = new TraditionalAssociate();
+            int count = 0;
+            List<SelectListItem> ddlBranch = new List<SelectListItem>();
+            DataSet dsBranch = obj.GetBranchList();
+            if (dsBranch != null && dsBranch.Tables.Count > 0 && dsBranch.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsBranch.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                    }
+                    ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlBranch = ddlBranch;
+
+            #endregion
             return View();
         }
         [HttpPost]
@@ -335,6 +379,7 @@ namespace Dolphin.Controllers
                     obj.AssociateName = r["AssociateName"].ToString();
                     //obj.Mobile = r["Mobile"].ToString();
                     //obj.CustomerName = r["CustomerName"].ToString();
+                    obj.BranchName = r["BranchName"].ToString();
                     obj.SiteName = r["SiteName"].ToString();
                     //obj.Address = r["Address"].ToString();
                     obj.VisitDate = r["VisitDate"].ToString();
@@ -344,6 +389,27 @@ namespace Dolphin.Controllers
                 }
                 model.lstVistor = Visitorlist;
             }
+            #region ddlBranch
+            TraditionalAssociate obj1 = new TraditionalAssociate();
+            int count = 0;
+            List<SelectListItem> ddlBranch = new List<SelectListItem>();
+            DataSet dsBranch = obj1.GetBranchList();
+            if (dsBranch != null && dsBranch.Tables.Count > 0 && dsBranch.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsBranch.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                    }
+                    ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlBranch = ddlBranch;
+
+            #endregion
             return View(model);
         }
 
