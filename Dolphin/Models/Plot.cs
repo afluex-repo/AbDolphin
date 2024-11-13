@@ -987,11 +987,12 @@ namespace Dolphin.Models
         public DataSet SaveVisitorDetails()
         {
             SqlParameter[] para = {
+                                      new SqlParameter("@Fk_BranchId",BranchID),
                                       new SqlParameter("@FK_SiteID", SiteID),
-                                       new SqlParameter("@AssociateID", AssociateID),
-                                       new SqlParameter("@Amount", Amount),
-                                        new SqlParameter("@AddedBy", AddedBy),
-                                       new SqlParameter("@VisiteDate", VisitDate),
+                                      new SqlParameter("@AssociateID", AssociateID),
+                                      new SqlParameter("@Amount", Amount),
+                                      new SqlParameter("@AddedBy", AddedBy),
+                                      new SqlParameter("@VisiteDate", VisitDate),
                                       new SqlParameter("@DtVisitorDetail",dtVisitorDetails)
                                   };
             DataSet ds = Connection.ExecuteQuery("SaveVisitor", para);
@@ -1001,6 +1002,7 @@ namespace Dolphin.Models
         {
             SqlParameter[] para =
             {
+                new SqlParameter("@Fk_BranchId",BranchID),
                 new SqlParameter("AssociateId",AssociateLoginID),
                 new SqlParameter("@IsDownline",Downline),
                 new SqlParameter("@FromDate",FromDate),

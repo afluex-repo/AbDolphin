@@ -1296,6 +1296,8 @@ namespace Dolphin.Controllers
                     obj.ClosingDate = r["RequestedDate"].ToString();
                     obj.AssociateLoginID = r["LoginId"].ToString();
                     obj.FirstName = r["Name"].ToString();
+                    obj.NetAmount = r["NetAmount"].ToString();
+                    obj.TDS = r["TDS"].ToString();
                     obj.GrossAmount = r["AMount"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.DisplayName = r["BackColor"].ToString();
@@ -1337,6 +1339,8 @@ namespace Dolphin.Controllers
                     obj.ClosingDate = r["RequestedDate"].ToString();
                     obj.AssociateLoginID = r["LoginId"].ToString();
                     obj.FirstName = r["Name"].ToString();
+                    obj.NetAmount = r["NetAmount"].ToString();
+                    obj.TDS = r["TDS"].ToString();
                     obj.GrossAmount = r["AMount"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.DisplayName = r["BackColor"].ToString();

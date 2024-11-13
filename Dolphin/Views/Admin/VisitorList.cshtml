@@ -25,6 +25,11 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-3 mb-3">
+                            <label class="float-label">Branch</label>
+                            @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control" })
+                            <span class="form-bar"></span>
+                        </div>
+                        <div class="col-sm-3 mb-3">
                             <label class="float-label">Associate Id</label>
                             @Html.TextBoxFor(m => m.AssociateLoginID, new { @class = "form-control", @Placeholder = "Associate Id" })
                             <span class="form-bar"></span>
@@ -42,7 +47,7 @@
                         <div class="col-sm-3 mb-3">
                             <div class="form-group mt-2">
                                 <label class="d-block">  &nbsp;</label>
-                              <label>  Is DownLine</label>
+                                <label>  Is DownLine</label>
                                 @Html.CheckBoxFor(m => m.IsDownline)
                             </div>
                         </div>
@@ -60,9 +65,10 @@
 						<thead>
 							<tr class="table-active">
                                 <th>Sr No.</th>
+                                <th>Branch</th>
                                 <th>Site </th>
                                 <th>Associate</th>
-                                <td>Associate Name</td>
+                                <th>Associate Name</th>
                                 @*<th>Customer</th>*@
                                 <th>Amount</th>
                                 @*<th>Mobile</th>*@
@@ -80,6 +86,7 @@
                                     {
                                         <tr>
                                             <td>@i</td>
+                                            <td>@Item.BranchName</td>
                                             <td>@Item.SiteName</td>
                                             <td>@Item.AssociateLoginID</td>
                                             <td>@Item.AssociateName</td>
@@ -100,15 +107,17 @@
                             }
 						</tbody>
 						<tfoot>
-							<tr class="table-active">
-                                <th> </th>
+                            <tr class="table-active">
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <td></td>
                                 <th style="text-align:right">Total</th>
                                 <th>@ViewBag.Total</th>
                                 <th></th>
                                 <th></th>
-							</tr>
+
+                            </tr>
 						</tfoot>
 					</table>
 				</div>
