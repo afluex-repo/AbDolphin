@@ -253,7 +253,7 @@
         function EditPlot() {
             $.ajax({
                 url: "/Plot/UpdatePlotBooking",
-                Type: "Get",
+                Type: "Get",    
                 DataType: "JSON",
                 data: { PK_BookingId: $("#PK_BookingId").val() },
                 success: function (data) {

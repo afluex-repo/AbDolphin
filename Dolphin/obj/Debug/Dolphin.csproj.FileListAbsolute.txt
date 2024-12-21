@@ -589,4 +589,7 @@ E:\RISHI\REPOSITORY\AbDolphin\Dolphin\bin\System.Web.Http.xml
 E:\RISHI\REPOSITORY\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.xml
 E:\RISHI\REPOSITORY\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
 E:\RISHI\REPOSITORY\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb
+E:\Tanishq\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.csproj.AssemblyReference.cache
+E:\Tanishq\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.csproj.CoreCompileInputs.cache
+E:\Tanishq\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.csproj.Up2Date
 E:\RISHI\REPOSITORY\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
