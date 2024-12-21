@@ -258,6 +258,7 @@ namespace Dolphin.Models
         public static string ContactNo = "6389002500";
         public static string LandLine = "";
         public static string Website = "abdolphininfratech.com";
-        public static string EmailID = "dolphininfratech125@gmail.com";
+        public static string EmailID = "Abdolphin2020@gmail.com";
+        //public static string EmailID = "dolphininfratech125@gmail.com";
     }
 }
