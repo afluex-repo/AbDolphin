@@ -219,6 +219,8 @@
 
     function closeModal() {
         $("#myModal").hide();
+        location.reload();
+       
         //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
     }
 
@@ -236,6 +238,26 @@
             //$("#divload").css({ 'display': '' });
             $.ajax({
                 url: "/Plot/CancelPlotBooking",
+                type: "GET",
+                dataType: "JSON",
+                data: { BookingID: $("#PK_BookingId").val(), Remark: $("#CancelRemark").val() },
+                success: function (data) {
+                    if (data.Success) {
+                        alert(data.Message);
+                        window.location.href = '/Plot/PlotBookingListForCancel';
+                    }
+                    else {
+                        alert(data.Message);
+                        closeModal();
+                    }
+                },
+                error: function () {
+                    alert("An unexpected error occurred.");
+                  
+                }
+            });
+            @*$.ajax({
+                url: "/Plot/CancelPlotBooking",
                 Type: "Get",
                 DataType: "JSON",
                 data: { BookingID: $("#PK_BookingId").val(), Remark: $("#CancelRemark").val() },
@@ -245,7 +267,7 @@
 
                 }
 
-            });
+            });*@
             }
         }
 
@@ -253,7 +275,7 @@
         function EditPlot() {
             $.ajax({
                 url: "/Plot/UpdatePlotBooking",
-                Type: "Get",
+                Type: "Get",    
                 DataType: "JSON",
                 data: { PK_BookingId: $("#PK_BookingId").val() },
                 success: function (data) {
