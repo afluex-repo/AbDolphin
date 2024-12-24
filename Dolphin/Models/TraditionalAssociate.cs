@@ -174,15 +174,15 @@ namespace Dolphin.Models
                                   new SqlParameter("@State", State) ,
                                   new SqlParameter("@City", City) ,
                                   new SqlParameter("@Address", Address) ,
-                                  new SqlParameter("@PanNumber", PanNo) ,
+                                  //new SqlParameter("@PanNumber", PanNo) ,
                                   new SqlParameter("@UpdatedBy", AddedBy) ,
-                                   new SqlParameter("@AdharNumber", AdharNumber) ,
-                                  new SqlParameter("@BankAccountNo", BankAccountNo) ,
-                                  new SqlParameter("@BankName", BankName) ,
-                                  new SqlParameter("@BankBranch", BankBranch) ,
-                                  new SqlParameter("@IFSCCode", IFSCCode) ,
-                                   new SqlParameter("@ProfilePic", ProfilePic) ,
-                                      new SqlParameter("@Signature", Signature) ,
+                                  // new SqlParameter("@AdharNumber", AdharNumber) ,
+                                  //new SqlParameter("@BankAccountNo", BankAccountNo) ,
+                                  //new SqlParameter("@BankName", BankName) ,
+                                  //new SqlParameter("@BankBranch", BankBranch) ,
+                                  //new SqlParameter("@IFSCCode", IFSCCode) ,
+                                  new SqlParameter("@ProfilePic", ProfilePic) ,
+                                  new SqlParameter("@Signature", Signature) ,
 
                                   };
             DataSet ds = Connection.ExecuteQuery("UpdateAssociateRegistrationDetails", para);

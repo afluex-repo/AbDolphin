@@ -262,9 +262,9 @@ namespace Dolphin.Controllers
                     else
                     {
                         obj.Status = "0";
-                        string TempId = "1707166036749633527";
-                        string passwordRecoveryMessage = BLSMS.ForgetPassword(dsResult.Tables[0].Rows[0]["FirstName"].ToString(), Crypto.Decrypt(dsResult.Tables[0].Rows[0]["Password"].ToString()));
-                        BLSMS.SendSMS(dsResult.Tables[0].Rows[0]["Mobile"].ToString(), passwordRecoveryMessage, TempId);
+                        //string TempId = "1707166036749633527";
+                        //string passwordRecoveryMessage = BLSMS.ForgetPassword(dsResult.Tables[0].Rows[0]["FirstName"].ToString(), Crypto.Decrypt(dsResult.Tables[0].Rows[0]["Password"].ToString()));
+                        //BLSMS.SendSMS(dsResult.Tables[0].Rows[0]["Mobile"].ToString(), passwordRecoveryMessage, TempId);
                         obj.SuccessMessage = "Password is sent on your registered mobile no.";
                     }
                 }
@@ -463,6 +463,9 @@ namespace Dolphin.Controllers
         }
 
         #endregion
+
+        #region GetStateCity
+
         public ActionResult GetStateCity(string Pincode)
         {
             try
@@ -492,6 +495,10 @@ namespace Dolphin.Controllers
             }
         }
 
+        #endregion
+
+        #region GetSite
+
         public ActionResult GetSite(Site model)
         {
             List<SiteList> lst = new List<SiteList>();
@@ -515,6 +522,11 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region GetSiteType
+
         public ActionResult GetSiteType(SiteType model)
         {
             List<SiteTypeList> lst = new List<SiteTypeList>();
@@ -538,6 +550,9 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
         #region ddlSector
         public ActionResult GetSector(Sector model)
         {
@@ -563,6 +578,7 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
         #region ddlBlock
         public ActionResult GetBlock(Block model)
         {
@@ -588,6 +604,9 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        #region BookingList
+
         public ActionResult BookingList(BookingList model)
         {
             List<BookingListDetails> lst = new List<BookingListDetails>();
@@ -648,6 +667,11 @@ namespace Dolphin.Controllers
             ViewBag.ddlBlock = ddlBlock;
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region CustomerLedgerReport
+
         public ActionResult CustomerLedgerReport(string PK_BookingId)
         {
             LedgerReport model = new LedgerReport();
@@ -687,6 +711,10 @@ namespace Dolphin.Controllers
             ViewBag.ddlBlock = ddlBlock;
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region Details
 
         public ActionResult Details(string BookingNumber, string LoginId, string SiteID, string SectorID, string BlockID, string PlotNumber)
         {
@@ -827,6 +855,9 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
 
         }
+
+        #endregion
+
         #region AssociateDownline
 
         public ActionResult AssociateDownlineDetail(Downline model)
@@ -889,6 +920,7 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
         #region Tree
         public ActionResult Tree1(TreeList model)
         {
@@ -913,7 +945,8 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion
-        #region Tree
+
+        #region AssociateTree
         public ActionResult AssociateTree(DownlineTree model, string AssociateID)
         {
             if (AssociateID != null)
@@ -941,6 +974,7 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
         #region UserReward
         public ActionResult UserReward(Reward model)
         {
@@ -1019,6 +1053,7 @@ namespace Dolphin.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
         #region UnpaidIncomeReport
         public ActionResult UnpaidIncome(UnpaidIncome model)
         {
@@ -1154,6 +1189,7 @@ namespace Dolphin.Controllers
         }
 
         #endregion
+
         #region PayoutRequestReport
         public ActionResult PayoutRequestReport(PayoutRequestReports model)
         {
@@ -1193,145 +1229,148 @@ namespace Dolphin.Controllers
         }
 
         #endregion
-        #region KYC
 
-        public ActionResult KYCDocuments(KYCDocuments model)
-        {
-            KYCDocuments obj = new KYCDocuments();
-            DataSet ds = model.GetKYCDocuments();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                obj.AdharNumber = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
-                obj.AdharImage = ds.Tables[0].Rows[0]["AdharImage"].ToString();
-                obj.AdharStatus = "Status : " + ds.Tables[0].Rows[0]["AdharStatus"].ToString();
-                obj.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
-                obj.PanImage = ds.Tables[0].Rows[0]["PanImage"].ToString();
-                obj.PanStatus = "Status : " + ds.Tables[0].Rows[0]["PanStatus"].ToString();
-                obj.DocumentNumber = ds.Tables[0].Rows[0]["DocumentNumber"].ToString();
-                obj.DocumentImage = ds.Tables[0].Rows[0]["DocumentImage"].ToString();
-                obj.DocumentStatus = "Status : " + ds.Tables[0].Rows[0]["DocumentStatus"].ToString();
-            }
-            return Json(obj, JsonRequestBehavior.AllowGet);
-        }
+        //#region KYC
 
-        public ActionResult KYCDocuments(KYCDocument obj, IEnumerable<HttpPostedFileBase> postedFile)
-        {
-            try
-            {
-                foreach (var file in postedFile)
-                {
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        file.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage)));
+        //public ActionResult KYCDocuments(KYCDocuments model)
+        //{
+        //    KYCDocuments obj = new KYCDocuments();
+        //    DataSet ds = model.GetKYCDocuments();
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        //    {
+        //        obj.AdharNumber = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+        //        obj.AdharImage = ds.Tables[0].Rows[0]["AdharImage"].ToString();
+        //        obj.AdharStatus = "Status : " + ds.Tables[0].Rows[0]["AdharStatus"].ToString();
+        //        obj.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
+        //        obj.PanImage = ds.Tables[0].Rows[0]["PanImage"].ToString();
+        //        obj.PanStatus = "Status : " + ds.Tables[0].Rows[0]["PanStatus"].ToString();
+        //        obj.DocumentNumber = ds.Tables[0].Rows[0]["DocumentNumber"].ToString();
+        //        obj.DocumentImage = ds.Tables[0].Rows[0]["DocumentImage"].ToString();
+        //        obj.DocumentStatus = "Status : " + ds.Tables[0].Rows[0]["DocumentStatus"].ToString();
+        //    }
+        //    return Json(obj, JsonRequestBehavior.AllowGet);
+        //}
 
-                    }
+        //public ActionResult KYCDocuments(KYCDocument obj, IEnumerable<HttpPostedFileBase> postedFile)
+        //{
+        //    try
+        //    {
+        //        foreach (var file in postedFile)
+        //        {
+        //            if (file != null && file.ContentLength > 0)
+        //            {
+        //                obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+        //                file.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage)));
 
-                }
-                obj.ActionStatus = "Adhar";
-                DataSet ds = obj.UploadKYCDocuments();
-                if (ds != null && ds.Tables.Count > 0)
-                {
-                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                    {
-                        obj.SuccessMessage = "Document uploaded successfully..";
+        //            }
 
-                    }
-                    else
-                    {
-                        obj.ErrorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //        }
+        //        obj.ActionStatus = "Adhar";
+        //        DataSet ds = obj.UploadKYCDocuments();
+        //        if (ds != null && ds.Tables.Count > 0)
+        //        {
+        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //            {
+        //                obj.SuccessMessage = "Document uploaded successfully..";
 
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                obj.ErrorMessage = ex.Message;
+        //            }
+        //            else
+        //            {
+        //                obj.ErrorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
 
-            }
-            return Json(obj, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult KYCDocuments2(KYCDocument obj, IEnumerable<HttpPostedFileBase> postedFile)
-        {
-            try
-            {
-                foreach (var file in postedFile)
-                {
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        //E:\BitBucket\DolphinZone\Dolphin\files\assets\images\
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        obj.ErrorMessage = ex.Message;
 
-                        obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        file.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
+        //    }
+        //    return Json(obj, JsonRequestBehavior.AllowGet);
+        //}
+        //public ActionResult KYCDocuments2(KYCDocument obj, IEnumerable<HttpPostedFileBase> postedFile)
+        //{
+        //    try
+        //    {
+        //        foreach (var file in postedFile)
+        //        {
+        //            if (file != null && file.ContentLength > 0)
+        //            {
+        //                //E:\BitBucket\DolphinZone\Dolphin\files\assets\images\
 
-
-                    }
-
-                }
-                obj.ActionStatus = "Pan";
-                DataSet ds = obj.UploadKYCDocuments();
-                if (ds != null && ds.Tables.Count > 0)
-                {
-                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                    {
-                        obj.SuccessMessage = "Document uploaded successfully..";
-
-                    }
-                    else
-                    {
-                        obj.ErrorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                obj.ErrorMessage = ex.Message;
-
-            }
-            return Json(obj, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult KYCDocuments3(KYCDocument obj, IEnumerable<HttpPostedFileBase> postedFile)
-        {
-            try
-            {
-                foreach (var file in postedFile)
-                {
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        //E:\BitBucket\DolphinZone\Dolphin\files\assets\images\
-
-                        obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        file.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
+        //                obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+        //                file.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
 
 
-                    }
+        //            }
 
-                }
-                obj.ActionStatus = "Doc";
-                DataSet ds = obj.UploadKYCDocuments();
-                if (ds != null && ds.Tables.Count > 0)
-                {
-                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                    {
-                        obj.SuccessMessage = "Document uploaded successfully..";
+        //        }
+        //        obj.ActionStatus = "Pan";
+        //        DataSet ds = obj.UploadKYCDocuments();
+        //        if (ds != null && ds.Tables.Count > 0)
+        //        {
+        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //            {
+        //                obj.SuccessMessage = "Document uploaded successfully..";
 
-                    }
-                    else
-                    {
-                        obj.ErrorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //            }
+        //            else
+        //            {
+        //                obj.ErrorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
 
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                obj.ErrorMessage = ex.Message;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        obj.ErrorMessage = ex.Message;
 
-            }
-            return Json(obj, JsonRequestBehavior.AllowGet);
-        }
-        #endregion
+        //    }
+        //    return Json(obj, JsonRequestBehavior.AllowGet);
+        //}
+        //public ActionResult KYCDocuments3(KYCDocument obj, IEnumerable<HttpPostedFileBase> postedFile)
+        //{
+        //    try
+        //    {
+        //        foreach (var file in postedFile)
+        //        {
+        //            if (file != null && file.ContentLength > 0)
+        //            {
+        //                //E:\BitBucket\DolphinZone\Dolphin\files\assets\images\
+
+        //                obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+        //                file.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
+
+
+        //            }
+
+        //        }
+        //        obj.ActionStatus = "Doc";
+        //        DataSet ds = obj.UploadKYCDocuments();
+        //        if (ds != null && ds.Tables.Count > 0)
+        //        {
+        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //            {
+        //                obj.SuccessMessage = "Document uploaded successfully..";
+
+        //            }
+        //            else
+        //            {
+        //                obj.ErrorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        obj.ErrorMessage = ex.Message;
+
+        //    }
+        //    return Json(obj, JsonRequestBehavior.AllowGet);
+        //}
+        //#endregion
+
+        #region Enquiry
 
         public ActionResult EnquiryList(Enquiry model)
         {
@@ -1387,6 +1426,10 @@ namespace Dolphin.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
+        #region PlotAvailability
+
         public ActionResult PlotAvailability(PlotDetails model)
         {
             List<PlotList> lst = new List<PlotList>();
@@ -1420,6 +1463,10 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region GetSitesDetails
 
         public ActionResult GetSitesDetails(SitePLCCharge model)
         {
@@ -1462,6 +1509,11 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region ViewProfile
+
         public ActionResult ViewProfile(Profile model)
         {
             try
@@ -1501,6 +1553,11 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region UpdateProfile
+
         public ActionResult UpdateProfile(HttpPostedFileBase postedFile, Profile model)
         {
             try
@@ -1529,6 +1586,11 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region GetSummaryReport
+
         public ActionResult GetSummaryReport(SummaryReport model)
         {
             List<SummaryList> lst = new List<SummaryList>();
@@ -1562,6 +1624,11 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region GetBranch
+
         public ActionResult GetBranch(Branch model)
         {
             List<Branch> lst = new List<Branch>();
@@ -1587,6 +1654,11 @@ namespace Dolphin.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region GetDesignation
+
         public ActionResult GetDesignation(Designation model)
         {
             List<DesignationDetails> lst = new List<DesignationDetails>();
@@ -1613,7 +1685,12 @@ namespace Dolphin.Controllers
                 model.ErrorMessage = ex.Message;   
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
-        } 
+        }
+
+        #endregion
+
+        #region TestLogin
+
         public ActionResult TestLogin(TestLoginAPI objParameters)
         {
             LoginAPI obj = new LoginAPI();
@@ -1660,9 +1737,11 @@ namespace Dolphin.Controllers
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
         }
-        
-        /// ////////////////////////////////////////////////////////////
-   
+
+        #endregion
+
+        #region GettownshipbookingDetails
+
         [HttpPost]
         public ActionResult GettownshipbookingDetails(Gettownshipbooking model)
         {
@@ -1682,8 +1761,445 @@ namespace Dolphin.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
         
-        /// ////////////////////////////////////////////////////////////
-        
+        #region Associate KYC
+        public ActionResult KYCDocuments(HttpPostedFileBase AdharImage, HttpPostedFileBase AdharBacksideImage, HttpPostedFileBase PanImage, HttpPostedFileBase DocumentImage, SaveKYC obj)
+        {
+            try
+            {
+                if (AdharImage != null)
+                {
+                    obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(AdharImage.FileName);
+                    AdharImage.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage)));
+                }
+                if (AdharBacksideImage != null)
+                {
+                    obj.AdharBacksideImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(AdharBacksideImage.FileName);
+                    AdharBacksideImage.SaveAs(Path.Combine(Server.MapPath(obj.AdharBacksideImage)));
+                }
+                if (PanImage != null)
+                {
+                    obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(PanImage.FileName);
+                    PanImage.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
+                }
+                if (DocumentImage != null)
+                {
+                    obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(DocumentImage.FileName);
+                    DocumentImage.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
+                }
+                obj.AccountHolderName = obj.AccountHolderName == " " ? null : obj.AccountHolderName;
+                obj.BankName = obj.BankName == " " ? null : obj.BankName;
+                obj.BankBranch = obj.BankBranch == " " ? null : obj.BankBranch;
+                obj.IFSCCode = obj.IFSCCode == " " ? null : obj.IFSCCode;
+                DataSet ds = obj.UploadKYCDocuments();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "Document uploaded successfully..";
+                        try
+                        {
+                            string KYCUploadedyMessage = "Dear " + ds.Tables[0].Rows[0]["FirstName"].ToString() + ", your kyc uploaded and kyc will be approved in 4-5 working days. AB DOLPHIN";
+                            string TempId = "1707166097826950598";
+                            BLSMS.SendSMS(ds.Tables[0].Rows[0]["Mobile"].ToString(), KYCUploadedyMessage, TempId);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult GetKYCList(KYCListAPI model)
+        {
+            KYCListAPI obj = new KYCListAPI();
+            try
+            {
+                List<lstKycDocument> lstKycdocuments = new List<lstKycDocument>();
+                DataSet ds = model.GetKYCDocuments();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        lstKycDocument KYClist = new lstKycDocument();
+                        KYClist.AdharNumber = dr["AdharNumber"].ToString();
+                        KYClist.AdharImage = dr["AdharImage"].ToString();
+                        KYClist.AdharBacksideImage = dr["AdharBacksideImage"].ToString();
+                        KYClist.AdharStatus = dr["AdharStatus"].ToString();
+                        KYClist.PanNumber = dr["PanNumber"].ToString();
+                        KYClist.PanImage = dr["PanImage"].ToString();
+                        KYClist.PanStatus = dr["PanStatus"].ToString();
+                        KYClist.DocumentNumber = dr["DocumentNumber"].ToString();
+                        KYClist.DocumentImage = dr["DocumentImage"].ToString();
+                        KYClist.DocumentStatus = dr["DocumentStatus"].ToString();
+                        KYClist.AccountHolderName = dr["BankHolderName"].ToString();
+                        KYClist.BankName = dr["BankName"].ToString();
+                        KYClist.IFSCCode = dr["IFSCCode"].ToString();
+                        KYClist.BankBranch = dr["BankBranch"].ToString();
+                        lstKycdocuments.Add(KYClist);
+                    }
+                    obj.lstKycdocuments = lstKycdocuments;
+
+                    obj.Status = "0";
+                    obj.Message = "KYC Documents Fetched";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region VisitorList
+
+        public ActionResult VisitorList(VisitorListAPI model)
+        {
+            try
+            {
+                List<lstvisitor> lstvisitor = new List<lstvisitor>();
+                DataSet ds = model.VisitorList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        lstvisitor obj = new lstvisitor();
+                        obj.AssociateLoginID = r["LoginId"].ToString();
+                        obj.PK_VisitorID = r["PK_VisitorID"].ToString();
+                        obj.AssociateName = r["AssociateName"].ToString();
+                        obj.SiteName = r["SiteName"].ToString();
+                        obj.VisitDate = r["VisitDate"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        lstvisitor.Add(obj);
+                    }
+                    model.lstvisitor = lstvisitor;
+                    model.TotalAmount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+                    model.Status = "0";
+                    model.Message = "Visitor List Fetched";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch(Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult PrintVisitor(PrintVisitor model)
+        {
+            List<visitorlst> visitorlst = new List<visitorlst>();
+            try
+            {
+                DataSet ds = model.VisitorListById();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.PK_VisitorId = ds.Tables[0].Rows[0]["PK_VisitorID"].ToString();
+                    model.SiteName = ds.Tables[0].Rows[0]["SiteName"].ToString();
+                    model.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                    model.AssociateName = ds.Tables[0].Rows[0]["AssociateName"].ToString();
+                    model.Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
+                    model.VisitDate = ds.Tables[0].Rows[0]["VisitDate"].ToString();
+
+                    if (ds.Tables[1].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in ds.Tables[1].Rows)
+                        {
+                            visitorlst obj = new visitorlst();
+                            obj.CustomerName = r["CustomerName"].ToString();
+                            obj.Mobile = r["Mobile"].ToString();
+                            obj.Address = r["Address"].ToString();
+                            visitorlst.Add(obj);
+                        }
+                    }
+                    model.visitorlst = visitorlst;
+                    model.Status = "0";
+                    model.Message = "Data Fetched..";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region AdvancePaymentList
+
+        public ActionResult AdvancePaymentList(AdvancePayment model)
+        {
+            try
+            {
+                List<lstAdvancePayment> lstAdvancePayment = new List<lstAdvancePayment>();
+                DataSet ds = model.GetAdvancePaymentList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        lstAdvancePayment obj = new lstAdvancePayment();
+                        obj.Amount = r["Amount"].ToString(); ;
+                        obj.LoginID = r["LoginID"].ToString();
+                        obj.PaymentDate = r["PaymentDate"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        lstAdvancePayment.Add(obj);
+                    }
+                    model.lstAdvancePayment = lstAdvancePayment;
+                    model.TotalAmount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+                    model.Status = "0";
+                    model.Message = "Data Fetched..";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region BussinessReport
+
+        public ActionResult BusinessReport(BusinessReport model)
+        {
+           try
+            {
+                List<lstBusinessReport> lstBusinessReport = new List<lstBusinessReport>();
+                DataSet ds = model.GetBusiness();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        model.Status = "1";
+                        model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        return Json(model, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        foreach (DataRow r in ds.Tables[0].Rows)
+                        {
+                            lstBusinessReport obj = new lstBusinessReport();
+                            obj.UserLoginId = r["LoginId"].ToString();
+                            obj.LoginId = r["LoginDetails"].ToString();
+                            obj.TotalAllotmentAmount = r["TotalBusiness"].ToString();
+                            obj.TeamBusiness = r["TeamBusiness"].ToString();
+                            obj.DirectMemberJoining = r["DirectMemberJoining"].ToString();
+                            obj.TeamMemberJoining = r["TeamMemberJoining"].ToString();
+                            lstBusinessReport.Add(obj);
+                        }
+                        model.lstBusinessReport = lstBusinessReport;
+                        model.Status = "0";
+                        model.Message = "Data Fetched..";
+                        return Json(model, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region DownBusinessReport
+
+        public ActionResult DownBusinessReport(DownBusiness model)
+        {
+            try
+            {
+                List<lstDownBusiness> lstDownBusiness = new List<lstDownBusiness>();
+                DataSet ds = model.GetBusinessDown();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        lstDownBusiness obj = new lstDownBusiness();
+                        obj.Fk_UserId = r["PK_UserId"].ToString();
+                        obj.LoginId = r["LoginDetails"].ToString();
+                        obj.TotalAllotmentAmount = r["TotalBusiness"].ToString();
+                        lstDownBusiness.Add(obj);
+                    }
+                    model.lstDownBusiness = lstDownBusiness;
+                    model.Status = "0";
+                    model.Message = "Data Fetched..";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region GetDownLineBusinessById
+
+        public ActionResult GetDownLineBusinessById(ViewBussiness model)
+        {
+            try
+            {
+                List<lstViewBussiness> lstViewBussiness = new List<lstViewBussiness>();
+                DataSet dspayout = model.GetDownLineBusinesById();
+                if (dspayout != null && dspayout.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dspayout.Tables[0].Rows)
+                    {
+                        lstViewBussiness obj = new lstViewBussiness();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.Business = r["Business"].ToString();
+                        lstViewBussiness.Add(obj);
+                    }
+                    model.lstViewBussiness = lstViewBussiness;
+                    model.Status = "0";
+                    model.Message = "Data Fetched..";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = dspayout.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region GetSelfDownlineBusinessReport
+
+        public ActionResult GetSelfDownlineBusinessReport(GetSelfDownlineBusines model)
+        {
+           try
+            {
+                List<lstSelfDownlineBusiness> lstSelfDownlineBusiness = new List<lstSelfDownlineBusiness>();
+                model.SiteID = model.SiteID == "0" ? null : model.SiteID;
+                model.SectorID = model.SectorID == "0" ? null : model.SectorID;
+                model.BlockID = model.BlockID == "0" ? null : model.BlockID;
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+                DataSet ds = model.GetSelfDownlineBusiness();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        lstSelfDownlineBusiness obj = new lstSelfDownlineBusiness();
+                        obj.BranchName = r["BranchName"].ToString();
+                        obj.PK_BookingId = r["PK_BookingID"].ToString();
+                        obj.CustomerName = r["CustomerInfo"].ToString();
+                        obj.CustomerID = r["LoginId"].ToString();
+                        obj.AssociateID = r["AssoLoginId"].ToString();
+                        obj.AssociateName = r["AssociateInfo"].ToString();
+                        obj.PaidAmount = r["NewPaidAmount"].ToString();
+                        obj.PaymentDate = r["LastPaymentDate"].ToString();
+                        obj.PlotNumber = r["PlotInfo"].ToString();
+                        obj.PlotAmount = r["NetPlotAmount"].ToString();
+                        obj.Balance = r["Balance"].ToString();
+                        obj.Amount = r["PlotAmount"].ToString();
+                        obj.BookingNumber = r["BookingNo"].ToString();
+                        obj.Discount = r["Discount"].ToString();
+                        lstSelfDownlineBusiness.Add(obj);   
+                    }
+                    model.lstSelfDownlineBusiness = lstSelfDownlineBusiness;
+                    model.TotalPaidAmount = double.Parse(ds.Tables[0].Compute("sum(NewPaidAmount)", "").ToString()).ToString("n2");
+                    model.TotalPlotAmount = double.Parse(ds.Tables[0].Compute("sum(NetPlotAmount)", "").ToString()).ToString("n2");
+                    model.TotalBalance = double.Parse(ds.Tables[0].Compute("sum(Balance)", "").ToString()).ToString("n2");
+                    model.TotalAmount = double.Parse(ds.Tables[0].Compute("sum(PlotAmount)", "").ToString()).ToString("n2");
+                    model.TotalDiscount = double.Parse(ds.Tables[0].Compute("sum(Discount)", "").ToString()).ToString("n2");
+                    model.Status = "0";
+                    model.Message = "Data Fetched..";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+
+
     }
 }

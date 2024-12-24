@@ -1568,6 +1568,12 @@ namespace Dolphin.Controllers
                     obj.PaidAmount = r["PaidAmount"].ToString();
                     obj.Income = r["Income"].ToString();
                     obj.CommPercentage = r["DifferencePerc"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+
+                    
+
+
+
                     lst.Add(obj);
                 }
                 model.ClosingWisePayoutlist = lst;
@@ -1578,6 +1584,25 @@ namespace Dolphin.Controllers
 
         public ActionResult PayoutRequestReport(AssociateBooking model)
         {
+            #region ddlPaymentMode
+            int count = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count = count + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+
             List<AssociateBooking> lst = new List<AssociateBooking>();
             model.Status = "Pending";
             DataSet ds = model.PayoutRequestReport();
@@ -1592,15 +1617,19 @@ namespace Dolphin.Controllers
                     obj.ClosingDate = r["RequestedDate"].ToString();
                     obj.AssociateLoginID = r["LoginId"].ToString();
                     obj.FirstName = r["Name"].ToString();
+                    obj.NetAmount = r["NetAmount"].ToString();
+                    obj.TDS = r["TDS"].ToString();
                     obj.GrossAmount = r["AMount"].ToString();
                     obj.IFSCCode = r["IFSCCode"].ToString();
                     obj.BankAccountNo = r["MemberAccNo"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.DisplayName = r["BackColor"].ToString();
+                    obj.ApprovalDate = r["ApprovalDate"].ToString();
 
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
+                ViewBag.TotalGrossAmount = double.Parse(ds.Tables[0].Compute("sum(AMount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
@@ -1608,8 +1637,34 @@ namespace Dolphin.Controllers
         [ActionName("PayoutRequestReport")]
         [OnAction(ButtonName = "Search")]
         public ActionResult PayoutRequestReportBy(AssociateBooking model)
+
         {
+            #region ddlPaymentMode
+            int count = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count = count + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+
             List<AssociateBooking> lst = new List<AssociateBooking>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.AfromDate = string.IsNullOrEmpty(model.AfromDate) ? null : Common.ConvertToSystemDate(model.AfromDate, "dd/MM/yyyy");
+            model.AtoDate = string.IsNullOrEmpty(model.AtoDate) ? null : Common.ConvertToSystemDate(model.AtoDate, "dd/MM/yyyy");
+
+
             DataSet ds = model.PayoutRequestReport();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1624,23 +1679,28 @@ namespace Dolphin.Controllers
                     obj.FirstName = r["Name"].ToString();
                     obj.IFSCCode = r["IFSCCode"].ToString();
                     obj.BankAccountNo = r["MemberAccNo"].ToString();
+                    obj.NetAmount = r["NetAmount"].ToString();
+                    obj.TDS = r["TDS"].ToString();
                     obj.GrossAmount = r["AMount"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.DisplayName = r["BackColor"].ToString();
+                    obj.ApprovalDate = r["ApprovalDate"].ToString();
 
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
+                ViewBag.TotalGrossAmount = double.Parse(ds.Tables[0].Compute("sum(AMount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
-
-        public ActionResult ApproveRequest(string id)
+        public ActionResult ApproveRequest(string requestID, string PaymentMode, string TransactionDate)
         {
             AssociateBooking obj = new AssociateBooking();
             try
             {
-                obj.RequestID = id;
+                obj.RequestID = requestID;
+                obj.PaymentMode = PaymentMode;
+                obj.TransactionDate = TransactionDate;
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = obj.ApproveRequest();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -1668,23 +1728,28 @@ namespace Dolphin.Controllers
             return RedirectToAction("PayoutRequestReport");
         }
 
-        public ActionResult DeclineRequest(string id)
+        public ActionResult DeclineRequest(string id,string Remarks)
         {
             AssociateBooking obj = new AssociateBooking();
+
+           
             try
             {
                 obj.RequestID = id;
+                obj.DeclineRemarks = Remarks;
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = obj.DeclineRequest();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["Request"] = "Request Declined";
+                        obj.Result = "1";
+                        //TempData["Request"] = "Request Declined";
                     }
                     else
                     {
-                        TempData["Request"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        obj.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        //TempData["Request"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
 
                     }
                 }
@@ -1693,7 +1758,9 @@ namespace Dolphin.Controllers
             {
                 TempData["Request"] = ex.Message;
             }
-            return RedirectToAction("PayoutRequestReport");
+           
+
+            return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
@@ -1786,23 +1853,43 @@ namespace Dolphin.Controllers
         #endregion
 
         #region Approve KYC
-        public ActionResult AssociateListForKYC()
+        public ActionResult AssociateListForKYC(AssociateBooking model)
         {
+            //List<AssociateBooking> lst = new List<AssociateBooking>();
             List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
             ViewBag.ddlKYCStatus = ddlKYCStatus;
-            List<Reports> lst = new List<Reports>();
-            return View();
+            //model.Status = "Pending";
+            //DataSet ds = model.AssociateListForKYC();
+
+            //if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            //{
+            //    foreach (DataRow r in ds.Tables[0].Rows)
+            //    {
+            //        AssociateBooking obj = new AssociateBooking();
+            //        obj.PK_DocumentID = r["PK_UserDocumentID"].ToString();
+            //        obj.LoginId = r["LoginId"].ToString();
+            //        obj.DisplayName = r["FirstName"].ToString();
+            //        obj.DocumentNumber = r["DocumentNumber"].ToString();
+            //        obj.DocumentType = r["DocumentType"].ToString();
+            //        obj.DocumentImage = (r["DocumentImage"].ToString());
+            //        obj.Status = (r["Status"].ToString());
+            //        obj.Date = (r["UploadDate"].ToString());
+            //        lst.Add(obj);
+            //    }
+            //    model.lstPlot = lst;
+            //}
+            return View(model);
         }
         [HttpPost]
         [ActionName("AssociateListForKYC")]
         [OnAction(ButtonName = "btnSearch")]
-        public ActionResult AssociateListForKYC(AssociateBooking model)
+        public ActionResult GetAssociateListForKYC(AssociateBooking model)
         {
-            List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
-            ViewBag.ddlKYCStatus = ddlKYCStatus;
+           
             List<AssociateBooking> lst = new List<AssociateBooking>();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/mm/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/mm/yyyy");
+            model.Status = model.Status;
             DataSet ds = model.AssociateListForKYC();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1813,27 +1900,18 @@ namespace Dolphin.Controllers
                     obj.PK_DocumentID = r["PK_UserDocumentID"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.DisplayName = r["FirstName"].ToString();
-
-                    obj.DocumentStatus = (r["DocumentStatus"].ToString());
-                    obj.PanStatus = (r["PanStatus"].ToString());
-                    obj.AdharStatus = (r["AdharStatus"].ToString());
-                    obj.PanNumber = (r["PanNumber"].ToString());
-                    obj.DocumentNumber = (r["DocumentNumber"].ToString());
-                    obj.AdharNumber = (r["AdharNumber"].ToString());
-                    obj.PanImage = (r["PanImage"].ToString());
-                    obj.DocumentImage = (r["DocumentImage"].ToString());
-                    obj.AdharImage = (r["AdharImage"].ToString());
-                    obj.IFSCCode = (r["IFSCCode"].ToString());
-                    obj.BankName = (r["MemberBankName"].ToString());
-                    obj.BankBranch = (r["MemberBranch"].ToString());
-                    obj.BankAccountNo = (r["MemberAccNo"].ToString());
-                    obj.Date = (r["DATE"].ToString());
-                    obj.Status = (r["Status"].ToString());
-
+                    obj.DocumentNumber = r["DocumentNumber"].ToString();
+                    obj.DocumentType = r["DocumentType"].ToString();
+                    obj.DocumentImage = r["DocumentImage"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.Date = r["UploadDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
             }
+            List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
+            ViewBag.ddlKYCStatus = ddlKYCStatus;
+      
             return View(model);
         }
 
@@ -3591,6 +3669,9 @@ namespace Dolphin.Controllers
                         Reports obj = new Reports();
                         obj.LoginId = r["LoginDetails"].ToString();
                         obj.TotalAllotmentAmount = r["TotalBusiness"].ToString();
+                        obj.TeamBusiness = r["TeamBusiness"].ToString();
+                        obj.TeamMemberJoining = r["TeamMemberJoining"].ToString();
+                        obj.DirectMemberJoining = r["DirectMemberJoining"].ToString();
                         lst.Add(obj);
                     }
                 }

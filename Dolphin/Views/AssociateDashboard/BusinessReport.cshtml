@@ -25,10 +25,10 @@
         <div class="card">
             <div class="card-body row">
 
-                <div class="col-sm-3 mb-3">
+                @*<div class="col-sm-3 mb-3">
                     <label class="float-label">LoginID</label>
                     @Html.TextBoxFor(m => m.UserLoginId, new { @class = "form-control", @Placeholder = "Search by LoginId" })
-                </div>
+                </div>*@
                 <div class="col-sm-3 mb-3">
                     <label class="float-label">From Date</label>
                     @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds", @placeholder = "From Date" })
@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="float-label d-block">&nbsp;</label>
-                    <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="btnSearch"   onclick="return validate();"/>
+                    <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="btnSearch"   @*onclick="return validate();"*@/>
                 </div>
 
                 <div class="table-responsive">
@@ -52,7 +52,7 @@
                                 <th>Team Business</th>
                                 <th>Direct Member Joining</th>
                                 <th>Team Member Joining</th>
-                                <th>Team Income Summary Details</th>
+                                @*<th>Team Income Summary Details</th>*@
                             </tr>
                         </thead>
                         <tbody>
@@ -71,7 +71,7 @@
                                             <td>@Item.TeamBusiness</td>
                                             <td>@Item.DirectMemberJoining</td>
                                             <td>@Item.TeamMemberJoining</td>
-                                            <td><a href="/AssociateDashBoard/SummryReports?LoginId=@Item.UserLoginId" class="btn btn-info">Summry Reports</a></td>
+                                            @*<td><a href="/AssociateDashBoard/SummryReports?LoginId=@Item.UserLoginId" class="btn btn-info">Summry Reports</a></td>*@
                                         </tr>
                                         i++;
                                     }
@@ -95,11 +95,11 @@
 <script>
     function validate()
     {
-        if ($("#UserLoginId").val() == "") {
-            $("#UserLoginId").addClass('errortext');
-            $('#UserLoginId').focus();
-            return false;
-        }
+        //if ($("#UserLoginId").val() == "") {
+        //    $("#UserLoginId").addClass('errortext');
+        //    $('#UserLoginId').focus();
+        //    return false;
+        //}
     }
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });

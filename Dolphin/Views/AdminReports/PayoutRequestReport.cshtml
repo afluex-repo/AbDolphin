@@ -5,13 +5,9 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
- 
 
 @using (Html.BeginForm("PayoutRequestReport", "AdminReports", FormMethod.Post, new { @id = "form1" }))
 {
-    
-    
-
     <div class="page-content">
         <div class="card">
             <div class="card-body">
@@ -34,14 +30,26 @@
                     </div>
                     <div class="col-md-2 mb-3">
                         <div class="form-group">
-                            <label>From Date</label>
-                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds" })
+                            <label>Request From Date</label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds", @placeholder = "dd/mm/yyyy" })
                         </div>
                     </div>
                     <div class="col-md-2 mb-3">
                         <div class="form-group">
-                            <label>To Date</label>
-                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds" })
+                            <label>Request To Date</label>
+                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds", @placeholder = "dd/mm/yyyy" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>Approval From Date</label>
+                            @Html.TextBoxFor(m => m.AfromDate, new { @class = "form-control", @readonly = "ds", @placeholder = "dd/mm/yyyy" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>Approval To Date</label>
+                            @Html.TextBoxFor(m => m.AtoDate, new { @class = "form-control", @readonly = "ds", @placeholder = "dd/mm/yyyy" })
                         </div>
                     </div>
                     <div class="col-md-2 mb-3">
@@ -72,10 +80,14 @@
                         <thead>
                             <tr class="table-active">
                                 <th>Sr No.</th>
+                                <th hidden></th>
                                 <th>  Sender ID</th>
                                 <th> First Name</th>
                                 <th>Requested Date</th>
-                                <th>Amount</th>
+                                <th>Approval/Rejected Date</th>
+                                <th>Net Amount</th>
+                                <th>TDS</th>
+                                <th>Gross Amount</th>
                                 <th>Sender Account No</th>
                                 <th>Sender Name</th>
                                 <th>SMS</th>
@@ -84,62 +96,157 @@
                                 <th>Beneficiary Account Name</th>
                                 <th>IFSC Code</th>
                                 <th>Status</th>
-                                <th></th>
+                                <th>Payment Mode</th>
+                                @*<th  style="min-width:150px">Transaction No.</th>*@
+                                <th>Transaction Date</th>
+                                @*<td style="min-width:200px">Bank Name</td>
+                                    <td style="min-width:200px">Bank Branch</td>*@
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (Model != null)
+                            {
+                                if (Model.lstPlot != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstPlot)
+                                    {
+                                        <tr class="text-left">
+                                            <td>@i</td>
+                                            <td hidden>@Item.RequestID</td>
+                                            <td>@Item.AssociateLoginID</td>
+                                            <td>@Item.FirstName</td>
+                                            <td>@Item.ClosingDate  </td>
+                                            <td>@Item.ApprovalDate</td>
+                                            <td>@Item.NetAmount </td>
+                                            <td>@Item.TDS </td>
+                                            <td>@Item.GrossAmount </td>
+                                            <td>@Item.SenderAccountNo</td>
+                                            <td>@Item.SenderName</td>
+                                            <td>@Item.SMS</td>
+                                            <td>@Item.Details</td>
+                                            <td>@Item.BankAccountNo </td>
+                                            <td>@Item.FirstName</td>
+                                            <td>@Item.IFSCCode </td>
+                                            <th><a class="@Item.DisplayName">@Item.Status</a></th>
+
+                                            <td>
+                                                @*<input type="text" class="form-control" id="txtpaymode @i" name="txtpaymode_@i" onchange="getdata(this)" />*@
+
+                                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", onchange = "getdata(this)", id = "txtpaymode @i", @name = "txtpaymode_@i" })
+
+                                            </td>
+                                            @*<td>
+                                                    <input type="text" class="form-control" id="txtTransno @i" name="txtTransno_@i" onchange="getdata2(this)" />
+                                                </td>*@
+                                            <td>
+                                                <input type="date" class="form-control" id="txtTransdate @i" name="txtTransdate_@i" onchange="getdata3(this)" />
+                                            </td>
+                                            @*<td>
+                                                    <input type="text" class="form-control" id="txtBank @i" name="txtBank_@i" onchange="getdata4(this)" />
+                                                </td>*@
+                                            @*<td>
+                                                    <input type="text" class="form-control" id="txtBankBranch @i" name="txtBankBranch_@i" onchange="getdata5(this)" />
+                                                </td>*@
+                                            <td>
+                                                @if (Item.Status == "Pending")
                                                 {
-                                                    if (Model.lstPlot != null)
-                                                    {
-                                                        int i = 1;
-                                                        foreach (var Item in Model.lstPlot)
-                                                        {
-                                                            <tr class="text-left">
-                                                                <td>@i</td>
-                                                                <td hidden>@Item.RequestID</td>
-                                                                <td>@Item.AssociateLoginID</td>
-                                                                <td>@Item.FirstName</td>
-                                                                <td>@Item.ClosingDate  </td>
-                                                                <td>@Item.GrossAmount </td>
-                                                                <td>@Item.SenderAccountNo</td>
-                                                                <td>@Item.SenderName</td>
-                                                                <td>@Item.SMS</td>
-                                                                <td>@Item.Details</td>
-                                                                <td>@Item.BankAccountNo </td>
-                                                                <td>@Item.FirstName</td>
+                                                    <a class="btn btn-info btn-sm" href="#" onclick="Approve('@i','@Item.RequestID');">Approve</a>
+                                                    <a href="#" class="btn btn-warning btn-sm" onclick="openCancelPopup('@Item.RequestID');">Decline</a>
 
-                                                                <td>@Item.IFSCCode </td>
-                                                               
-                                                                <th><a class="@Item.DisplayName">@Item.Status</a></th>
-                                                                <td>
-                                                                    @if (Item.Status == "Pending")
-                                                                    {
-                                                                        <a class="btn btn-info btn-sm" href="/AdminReports/ApproveRequest/@Item.RequestID" onclick="return confirm('Are you sure you want to approve this request?');">Approve</a>
-                                                                        <a class="btn btn-warning btn-sm" href="/AdminReports/DeclineRequest/@Item.RequestID" onclick="return confirm('Are you sure you want to decline this request?');">Decline</a>
-                                                                    }
-                                                                </td>
 
-                                                            </tr>
-                                                            i++;
-                                                        }
-                                                    }
+                                                                @*<a class="btn btn-warning btn-sm" href="/AdminReports/DeclineRequest/@Item.RequestID" onclick="return confirm('Are you sure you want to decline this request?');">Decline</a>*@
                                                 }
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>Total</b></td>
+                                <td><b>@ViewBag.TotalGrossAmount</b></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                @*<td></td>*@
+                                <td></td>
+                                @*<td></td>
+                                    <td></td>*@
+                                <th></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 
+    <input type="hidden" id="txtpaymentmode" />
+    <input type="hidden" id="txttransactiondate" />
+    @*<input type="hidden" id="txttransactionno" />
+        <input type="hidden" id="txtbank" />
+        <input type="hidden" id="txtbankbranch" />*@
+
+        <!-- Popup for Decline  -->
+    <div class="modal fade" id="myModal" role="dialog" style="display: none;padding-top:55px;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" style="color: red">REASON FOR DECLINE</h6>
+                    <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
+
+                </div>
+                <div class="modal-body" style="color: black">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" id="Pk_Id" name="Pk_Id" hidden />
+                                @*<label>Decline Remark</label>*@
+                           @Html.TextAreaFor(m => m.DeclineRemarks, new { @class = "form-control", @placeholder = "Remarks for Decline", @rows = "5", @cols = "15" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-sm btn-danger pull-right delete" onclick="return DeclineRequest()" value="Submit" />
+                </div>
+            </div>
+         </div>
+    </div>
+    <!-- Popup for Decline -->
+
 
 }
 
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
 
 
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
 <script>
 
     $('#FromDate').datepicker({
@@ -153,10 +260,114 @@
         changeMonth: true,
     });
 
+    $('#AfromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+    });
+    $('#AtoDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+    });
+
+
+    //$('#txtTransdate').datepicker({
+    //    dateFormat: 'dd/mm/yy',
+    //    changeYear: true,
+    //    changeMonth: true
+
+    //});
+
+
+    function getdata(paymentmode) {
+        $('#txtpaymentmode').val(paymentmode.value);
+    }
+    //function getdata2(transactionno) {
+    //    $('#txttransactionno').val(transactionno.value);
+    //}
+    function getdata3(transactiondate) {
+        $('#txttransactiondate').val(transactiondate.value);
+    }
+    //function getdata4(bank) {
+    //    $('#txtbank').val(bank.value);
+    //}
+    //function getdata5(bankbranch) {
+    //    $('#txtbankbranch').val(bankbranch.value);
+    //}
+
+
+    function Approve(id, RequestID) {
+        debugger
+        var r = confirm('Are you sure you want to approve this Payment ?');
+        if (r == true) {
+            $("#divload").css({ 'display': '' });
+            $.ajax({
+                url: "/AdminReports/ApproveRequest",
+                Type: "Get",
+                DataType: "JSON",
+                data: { requestID: RequestID, PaymentMode: $('#txtpaymentmode').val(), TransactionDate: $('#txttransactiondate').val() },
+                success: function (data) {
+                    alert("Payment Approved successfully");
+                    location.reload();
+                    $("#divload").css({ 'display': 'none' });
+                }
+
+            });
+        }
+    }
+
+
+    function openCancelPopup(DeclineId) {
+        debugger;
+        var Pk_Id = $("#Pk_Id").val(DeclineId);
+        //$("#RequestID").val(DeclineId);
+        $("#myModal").modal('show');
+    }
+
+    function closeModal() {
+        debugger;
+        $("#myModal").modal('hide');
+       // $("#myModal").hide();
+        //location.reload();
+        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
+    }
+
+
+
+
+    function DeclineRequest() {
+        debugger
+        $(".errortext").removeClass("errortext");
+        if ($('#DeclineRemarks').val() == '') {
+            $("#DeclineRemarks").addClass('errortext');
+            $('#DeclineRemarks').focus();
+            return false;
+        }
+
+        var r = confirm('Are you sure you want to decline this request ?');
+        if (r == true) {
+            debugger
+            //$("#divload").css({ 'display': '' });
+            $.ajax({
+                url: "/AdminReports/DeclineRequest",
+                Type: "Get",
+                DataType: "JSON",
+                data: { id: $("#Pk_Id").val(), Remarks: $("#DeclineRemarks").val() },
+                success: function (data) {
+                    if (data.Result == "1") {
+                        alert("Request has been Declined.");
+                        window.location.href = '@Url.Action("PayoutRequestReport", "AdminReports")';
+                    }
+                    else {
+                        alert(data.Result);
+                    }
+                }
+
+            });
+        }
+    }
+
+
+
 </script>
-
-
-
-
-
-

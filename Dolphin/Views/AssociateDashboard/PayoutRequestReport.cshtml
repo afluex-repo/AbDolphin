@@ -42,11 +42,16 @@
                         <thead>
                             <tr class="table-active">
                                 <th>Sr No.</th>
+                                <th hidden></th>
                                 <th>Login ID</th>
                                 <th>First Name</th>
                                 <th>Requested Date</th>
-                                <th>Amount</th>
+                                <th>Net Amount</th>
+                                <th>TDS</th>
+                                <th>Gross Amount</th>
                                 <th>Status</th>
+                                <th>Approve/Reject Date</th>
+                                <th>Remarks</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,9 +68,12 @@
                                             <td>@Item.AssociateLoginID</td>
                                             <td>@Item.FirstName</td>
                                             <td>@Item.ClosingDate  </td>
+                                            <td>@Item.NetAmount</td>
+                                            <td>@Item.TDS</td>
                                             <td>@Item.GrossAmount </td>
-
                                             <td><a class="@Item.DisplayName">@Item.Status</a></td>
+                                            <td>@Item.Date</td>
+                                            <td>@Item.DeclineRemarks</td>
 
                                         </tr>
                                         i++;
@@ -77,19 +85,29 @@
                         <tfoot>
                             <tr class="table-active">
                                 <th></th>
+                                <th hidden></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
+                                <th>Total</th>
                                 <th>@ViewBag.GrossAmount</th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                             </tr>
                             <tr class="table-active">
                                 <th>Sr No.</th>
+                                <th hidden></th>
                                 <th>Login ID</th>
                                 <th>First Name</th>
                                 <th>Requested Date</th>
-                                <th>Amount</th>
+                                <th>Net Amount</th>
+                                <th>TDS</th>
+                                <th>Gross Amount</th>
                                 <th>Status</th>
+                                <th>Approve/Reject Date</th>
+                                <th>Remarks</th>
                             </tr>
                         </tfoot>
                     </table>

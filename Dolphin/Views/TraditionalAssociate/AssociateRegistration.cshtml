@@ -14,10 +14,10 @@
 {
 
     @*<p style="color: red">
-        @TempData["Registration"]
-        <br />
-        @TempData["AssociateDetails"]
-    </p>*@
+            @TempData["Registration"]
+            <br />
+            @TempData["AssociateDetails"]
+        </p>*@
 
     <div class="page-content">
         <div class="card">
@@ -25,8 +25,8 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <h5 class="mb-0">Add New Affiliate</h5>
                     @*<p style="color: red;display: block; margin-bottom:0px; text-align:center">
-                         @TempData["Registration"]
-                    </p>*@
+                             @TempData["Registration"]
+                        </p>*@
                 </div>
             </div>
         </div>
@@ -112,30 +112,57 @@
                             @Html.TextBoxFor(m => m.AdharNumber, new { @class = "form-control", @Placeholder = "AdharNumber", @maxlength = "12", @onchange = "return validateAdhar();" })
                             <span class="form-bar"></span>
                         </div>
-                        <div class="col-sm-3 mb-3">
-                            <label class="float-label">Bank Account No </label>
-                            @Html.TextBoxFor(m => m.BankAccountNo, new { @class = "form-control", @Placeholder = "Bank Account No", @onchange = "return validateAccount();" })
-                            <span class="form-bar"></span>
-                        </div>
-                        <div class="col-sm-3 mb-3">
-                            <label class="float-label">Bank Name </label>
-                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @Placeholder = "Bank Name" })
-                            <span class="form-bar"></span>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="float-label">Bank Branch</label>
-                            @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @Placeholder = "Bank Branch" })
-                            <span class="form-bar"></span>
-                        </div>
-                        <div class="col-sm-3 mb-3">
-                            <label class="float-label">IFSC Code</label>
-                            @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @Placeholder = "IFSC Code" })
-                            <span class="form-bar"></span>
-                        </div>
+                        @if (Model.UserID == null)
+                        {
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label">Bank Account No </label>
+                                @Html.TextBoxFor(m => m.BankAccountNo, new { @class = "form-control", @Placeholder = "Bank Account No", @onchange = "return validateAccount();" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label">Bank Name </label>
+                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @Placeholder = "Bank Name" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="float-label">Bank Branch</label>
+                                @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @Placeholder = "Bank Branch" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label">IFSC Code</label>
+                                @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @Placeholder = "IFSC Code" })
+                                <span class="form-bar"></span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label">Bank Account No </label>
+                                @Html.TextBoxFor(m => m.BankAccountNo, new { @class = "form-control", @Placeholder = "Bank Account No", @readonly = "readonly" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label">Bank Name </label>
+                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @Placeholder = "Bank Name", @readonly = "readonly" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="float-label">Bank Branch</label>
+                                @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @Placeholder = "Bank Branch", @readonly = "readonly" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-3 mb-3">
+                                <label class="float-label">IFSC Code</label>
+                                @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @Placeholder = "IFSC Code", @readonly = "readonly" })
+                                <span class="form-bar"></span>
+                            </div>
+                        }
+                       
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
                                 @*<img src="@Model.ProfilePicture" height="190" width="250" />*@
-                                
+
                                 <label class="float-label">Image</label>
                                 <input type="file" name="postedFile" class="form-control" id="Image" />
                             </div>
@@ -147,19 +174,19 @@
                                 <input type="file" name="postedFile1" class="form-control" id="Image1" />
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3 align-items-end d-flex">   
-                               <label class="float-label">&nbsp;</label>
-                               @if (Model.UserID == null)
-                               {
-                                   <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnRegistration" />
-                               }
-                               else
-                               {
-                                   @Html.HiddenFor(m => m.UserID, new { @Value = @Model.UserID })
-                                   <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="btnUpdate" />
-                               }
-                               <label class="float-label">&nbsp;</label>
-                               <a class="btn btn-info text-white" href="/TraditionalAssociate/AssociateList">Back To List</a>
+                        <div class="col-md-6 mb-3 align-items-end d-flex">
+                            <label class="float-label">&nbsp;</label>
+                            @if (Model.UserID == null)
+                            {
+                                <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnRegistration" />
+                            }
+                            else
+                            {
+                                @Html.HiddenFor(m => m.UserID, new { @Value = @Model.UserID })
+                                <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="btnUpdate" />
+                            }
+                            <label class="float-label">&nbsp;</label>
+                            <a class="btn btn-info text-white" href="/TraditionalAssociate/AssociateList">Back To List</a>
                         </div>
                 </div>
             </div>
@@ -167,8 +194,14 @@
 
     </div>
 
-}
 
+
+    <div id="loader-container" style="display:none;">
+        <div class="loader">
+            <img src="~/assets/img/11111.gif" />
+        </div>
+    </div>
+}
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
@@ -246,7 +279,7 @@
     }
 
     function validateform() {
-
+        debugger;
         $(".errortext").removeClass("errortext");
         if ($('#BranchID').val() == '0') {
             $("#BranchID").addClass('errortext');
@@ -254,41 +287,58 @@
             //   alert("Please Select Branch .")
             return false;
         }
-        if ($('#SponsorID').val() == '') {
+         if ($('#SponsorID').val() == '') {
             $("#SponsorID").addClass('errortext');
             $('#SponsorID').focus();
             $('#SponsorID').val('');
             //   alert("Please Fill Sponsor ID .")
             return false;
         }
-        if ($('#DesignationID').val() == '0') {
+        else if ($('#DesignationID').val() == '0') {
             $("#DesignationID").addClass('errortext');
             $('#DesignationID').focus();
             //   alert("Please Select Designation .")
             return false;
         }
-        if ($('#FirstName').val() == '') {
+        else if ($('#FirstName').val() == '') {
             $("#FirstName").addClass('errortext');
             $('#FirstName').focus();
             //  alert("Please Fill First Name .")
             return false;
         }
-        if ($('#Contact').val() == '') {
+        else if ($('#Contact').val() == '') {
             $("#Contact").addClass('errortext');
             $('#Contact').focus();
             //  alert("Please Fill Mobile Number .")
             return false;
         }
-        if ($('#PanNo').val() == '') {
+        else if ($('#PanNo').val() == '') {
             $("#PanNo").addClass('errortext');
             $('#PanNo').focus();
             //    alert("Please Fill PAN .")
             return false;
         }
-
-        $("#divload").css({ 'display': '' });
-        return true;
+         //$("#btnSave").prop("readonly", true);
+         $("#btnSave").attr('disabled');
+         $("#loader-container").show();
+         return true;
+      
     }
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Hide the loader with a delay
+        setTimeout(function () {
+            var loaderContainer = document.getElementById("loader-container");
+            loaderContainer.classList.add("loader-hidden");
+        }, 1000); // Adjust the delay time (in milliseconds) as needed
+    });
+
+
+
+
+
 
     function isNumberOrDecimal(evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -348,20 +398,20 @@
     }
     function validateAdhar() {
         var AdharNumber = $('#AdharNumber').val();
-            $.ajax({
-                url: '/TraditionalAssociate/GetAdharDetails', type: 'post', dataType: 'json',
-                data: { 'AdharNumber': AdharNumber },
-                success: function (data) {
-                    if (data.Result == "yes") {
-                        $('#AdharNumber').val(AdharNumber);
-                    }
-                    else if (data.Result == "no") {
-                        alert("Adhar No already registred another ID try another no.!!");
-                        $("#AdharNumber").val('');
-                        $("#AdharNumber").addClass('errortext');
-                    }
+        $.ajax({
+            url: '/TraditionalAssociate/GetAdharDetails', type: 'post', dataType: 'json',
+            data: { 'AdharNumber': AdharNumber },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    $('#AdharNumber').val(AdharNumber);
                 }
-            });
+                else if (data.Result == "no") {
+                    alert("Adhar No already registred another ID try another no.!!");
+                    $("#AdharNumber").val('');
+                    $("#AdharNumber").addClass('errortext');
+                }
+            }
+        });
     }
     function validateAccount() {
         var BankAccountNo = $('#BankAccountNo').val();
@@ -397,8 +447,6 @@
         }
     </script>
 }
-
-
 
 
 <style>

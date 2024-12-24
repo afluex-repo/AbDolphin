@@ -328,14 +328,13 @@ namespace Dolphin.Models
 	   public string LoginId {get; set;}
        public string CustomerLoginID {get; set;}
        public string CustomerName {get; set;}
-	    public List<BookingListDetails> lstbooking{get; set;}
+	   public List<BookingListDetails> lstbooking{get; set;}
 		public DataSet List()
         {
             SqlParameter[] para = {
-                                      new SqlParameter("@PK_BookingId", PK_BookingId),
-                                     new SqlParameter("@AssociateID", LoginId)   ,
-
-                                     new SqlParameter("@CustomerLoginID", CustomerLoginID)   ,
+                                    new SqlParameter("@PK_BookingId", PK_BookingId),
+                                    new SqlParameter("@AssociateID", LoginId)   ,
+                                    new SqlParameter("@CustomerLoginID", CustomerLoginID)   ,
                                     new SqlParameter("@CustomerName", CustomerName)   ,
                                     new SqlParameter("@PK_SiteID", SiteID)   ,
                                     new SqlParameter("@PK_SectorID", SectorID)   ,
@@ -695,38 +694,38 @@ namespace Dolphin.Models
 			public string Status {get;set;}
 			public string DisplayName{get;set;}
 		}
-		public class KYCDocument
-		{
-		public string ErrorMessage{get;set;}
-		public string SuccessMessage{get;set;}
-		public string UserID{get;set;}
-		public string AdharNumber {get;set;}
-		public string AdharImage {get;set;}
-		public string AdharStatus{get;set;}
-		public string ActionStatus { get; set; }
-		public string PanNumber{get;set;}
-		public string PanImage{get;set;}
-		public string PanStatus{get;set;}
-		public string DocumentNumber{get;set;}
-		public string DocumentImage{get;set;}
-		public string DocumentStatus{get;set;}
-		public DataSet UploadKYCDocuments()
-        {
-            SqlParameter[] para = { new SqlParameter("@FK_UserID",UserID ) ,
-                                      new SqlParameter("@AdharNumber", AdharNumber) ,
-                                      new SqlParameter("@AdharImage", AdharImage) ,
-                                      new SqlParameter("@PanNumber", PanNumber),
-                                      new SqlParameter("@PanImage", PanImage) ,
-                                      new SqlParameter("@DocumentNumber", DocumentNumber) ,
-                                      new SqlParameter("@DocumentImage", DocumentImage),
-                                        new SqlParameter("@Action", ActionStatus),
+		//public class KYCDocument
+		//{
+		//public string ErrorMessage{get;set;}
+		//public string SuccessMessage{get;set;}
+		//public string UserID{get;set;}
+		//public string AdharNumber {get;set;}
+		//public string AdharImage {get;set;}
+		//public string AdharStatus{get;set;}
+		//public string ActionStatus { get; set; }
+		//public string PanNumber{get;set;}
+		//public string PanImage{get;set;}
+		//public string PanStatus{get;set;}
+		//public string DocumentNumber{get;set;}
+		//public string DocumentImage{get;set;}
+		//public string DocumentStatus{get;set;}
+		//public DataSet UploadKYCDocuments()
+  //      {
+  //          SqlParameter[] para = { new SqlParameter("@FK_UserID",UserID ) ,
+  //                                    new SqlParameter("@AdharNumber", AdharNumber) ,
+  //                                    new SqlParameter("@AdharImage", AdharImage) ,
+  //                                    new SqlParameter("@PanNumber", PanNumber),
+  //                                    new SqlParameter("@PanImage", PanImage) ,
+  //                                    new SqlParameter("@DocumentNumber", DocumentNumber) ,
+  //                                    new SqlParameter("@DocumentImage", DocumentImage),
+  //                                      new SqlParameter("@Action", ActionStatus),
 
-                                  };
-            DataSet ds = Connection.ExecuteQuery("UploadKYC", para);
-            return ds;
+  //                                };
+  //          DataSet ds = Connection.ExecuteQuery("UploadKYC", para);
+  //          return ds;
 
-        }
-		}
+  //      }
+		//}
 		public class Enquiry
 		{
 		public List<EnquiryList> lstBlock1 { get; set; }
@@ -1040,8 +1039,317 @@ namespace Dolphin.Models
     }
     ///////////////////////////////////////////////////////////////
 
+    public class SaveKYC
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string UserID { get; set; }
+        public string AdharNumber { get; set; }
+        public string AdharImage { get; set; }
+        public string AdharBacksideImage { get; set; }
+        public string PanNumber { get; set; }
+        public string PanImage { get; set; }
+        public string DocumentNumber { get; set; }
+        public string AccountHolderName { get; set; }
+        public string IFSCCode { get; set; }
+        public string DocumentImage { get; set; }
+        public string BankName { get; set; }
+        public string BankBranch { get; set; }
 
+        public DataSet UploadKYCDocuments()
+        {
+            SqlParameter[] para = {   new SqlParameter("@FK_UserID",UserID ) ,
+                                      new SqlParameter("@AdharNumber", AdharNumber) ,
+                                      new SqlParameter("@AdharImage", AdharImage) ,
+                                      new SqlParameter("@AdharBacksideImage",AdharBacksideImage),
+                                      new SqlParameter("@PanNumber", PanNumber),
+                                      new SqlParameter("@PanImage", PanImage) ,
+                                      new SqlParameter("@DocumentNumber", DocumentNumber) ,
+                                      new SqlParameter("@DocumentImage", DocumentImage),
+                                      new SqlParameter("@BankHolderName", AccountHolderName),
+                                      new SqlParameter("@MemberBankName", BankName) ,
+                                      new SqlParameter("@MemberBranch", BankBranch) ,
+                                      new SqlParameter("@IFSCCode", IFSCCode)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("UploadKYC", para);
+            return ds;
 
+        }
+    }
+
+    public class KYCListAPI
+    {
+        public string UserID { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<lstKycDocument> lstKycdocuments { get; set; }
+
+        public DataSet GetKYCDocuments()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserID", UserID) };
+            DataSet ds = Connection.ExecuteQuery("GetKYCDocuments", para);
+            return ds;
+        }
+    }
+
+    public class lstKycDocument
+    {
+        public string AdharNumber { get; set; }
+        public string AdharImage { get; set; }
+        public string AdharBacksideImage { get; set; }
+        public string AdharStatus { get; set; }
+        public string PanNumber { get; set; }
+        public string PanImage { get; set; }
+        public string PanStatus { get; set; }
+        public string DocumentNumber { get; set; }
+        public string DocumentImage { get; set; }
+        public string DocumentStatus { get; set; }
+        public string AccountHolderName { get; set; }
+        public string BankName { get; set; }
+        public string IFSCCode { get; set; }
+        public string BankBranch { get; set; }
+    }
+
+    public class VisitorListAPI
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginID { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Downline { get; set; }
+        public string TotalAmount { get; set; }
+        public List<lstvisitor> lstvisitor { get; set; }
+
+        public DataSet VisitorList()
+        {
+            SqlParameter[] para =
+           {   
+                new SqlParameter("@Associateid",LoginID),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate),
+                new SqlParameter("@IsDownline",Downline),
+            };
+            DataSet ds = Connection.ExecuteQuery("VisitorListForAssociate", para);
+            return ds;
+        }
+      
+    }
+
+    public class lstvisitor
+    {
+        public string AssociateLoginID { get; set; }
+        public string PK_VisitorID { get; set; }
+        public string AssociateName { get; set; }
+        public string SiteName { get; set; }
+        public string VisitDate { get; set; }
+        public string Amount { get; set; }
+    }
+
+    public class PrintVisitor
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string PK_VisitorId { get; set; }
+        public string SiteName { get; set; }
+        public string LoginId { get; set; }
+        public string AssociateName { get; set; }
+        public string Amount { get; set; }
+        public string VisitDate { get; set; }
+        public List<visitorlst> visitorlst { get; set; }
+
+        public DataSet VisitorListById()
+        {
+            SqlParameter[] para =
+            {
+                    new SqlParameter("@PK_VisitorId",PK_VisitorId),
+                };
+            DataSet ds = Connection.ExecuteQuery("VisitorListById", para);
+            return ds;
+        }
+    }
+
+    public class visitorlst
+    {
+        public string CustomerName { get; set; }
+        public string Mobile { get; set; }
+        public string Address { get; set; }
+    }
+
+    public class AdvancePayment
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginID { get; set; }
+        public string TotalAmount { get; set; }
+        public List<lstAdvancePayment> lstAdvancePayment { get; set; }
+
+        public DataSet GetAdvancePaymentList()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginID)
+                                };
+            DataSet ds = Connection.ExecuteQuery("GetAdvancePaymentList", para);
+            return ds;
+        }
+    }
+
+    public class lstAdvancePayment
+    {
+        public string LoginID { get; set; }
+        public string Name { get; set; }
+        public string Amount { get; set; }
+        public string PaymentDate { get; set; }
+    }
+
+    public class BusinessReport
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public List<lstBusinessReport> lstBusinessReport { get; set; }
+        public DataSet GetBusiness()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@LoginId", LoginId),
+                                        new SqlParameter("@FromDate", FromDate),
+                                        new SqlParameter("@ToDate", ToDate),
+            };
+            DataSet ds = Connection.ExecuteQuery("GetBusiness", para);
+            return ds;
+        }
+    }
+
+    public class lstBusinessReport
+    {
+        public string UserLoginId { get; set; }
+        public string LoginId { get; set; }
+        public string TotalAllotmentAmount { get; set; }
+        public string TeamBusiness { get; set; }
+        public string DirectMemberJoining { get; set; }
+        public string TeamMemberJoining { get; set; }
+    }
+
+    public class DownBusiness
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public List<lstDownBusiness> lstDownBusiness { get; set; }
+
+        public DataSet GetBusinessDown()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@LoginId", LoginId),
+                                        new SqlParameter("@FromDate", FromDate),
+                                        new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetBusinessDownline", para);
+            return ds;
+        }
+    }
+
+    public class lstDownBusiness
+    {
+        public string Fk_UserId { get; set; }
+        public string LoginId { get; set; }
+        public string TotalAllotmentAmount { get; set; }
+    }
+
+    public class ViewBussiness
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string Fk_UserId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public List<lstViewBussiness> lstViewBussiness { get; set; }
+        public DataSet GetDownLineBusinesById()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@Fk_UserId", Fk_UserId),
+                                        new SqlParameter("@FromDate", FromDate),
+                                        new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDownBusiness", para);
+            return ds;
+        }
+    }
+
+    public class lstViewBussiness
+    {
+        public string Name { get; set; }
+        public string LoginId { get; set; }
+        public string Business { get; set; }
+    }
+
+    public class GetSelfDownlineBusines
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginID { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string PK_BookingId { get; set; }
+        public string CustomerLoginID { get; set; }
+        public string CustomerName { get; set; }
+        public string PlotNumber { get; set; }
+        public string BookingNumber { get; set; }
+        public string SiteID { get; set; }
+        public string SectorID { get; set; }
+        public string BlockID { get; set; }
+        public string Mobile { get; set; }
+        public string Downline { get; set; }
+        public string TotalPaidAmount { get; set; }
+        public string TotalBalance { get; set; }
+        public string TotalPlotAmount { get; set; }
+        public string TotalDiscount { get; set; }
+        public string TotalAmount { get; set; }
+        public List<lstSelfDownlineBusiness> lstSelfDownlineBusiness { get; set; }
+        public DataSet GetSelfDownlineBusiness()
+        {
+            SqlParameter[] para =
+                             {
+                                 new SqlParameter("@PK_BookingId",PK_BookingId),
+                                 new SqlParameter("@CustomerID",CustomerLoginID ),
+                                 new SqlParameter("@AssociateID",LoginID ),
+                                 new SqlParameter("@FromDate",FromDate),
+                                 new SqlParameter("@ToDate",ToDate),
+                                 new SqlParameter("@CustomerName",CustomerName),
+                                 new SqlParameter("@PlotNumber",PlotNumber),
+                                 new SqlParameter("@BookingNo",BookingNumber),
+                                 new SqlParameter("@PK_SiteID",SiteID),
+                                 new SqlParameter("@PK_SectorID",SectorID),
+                                 new SqlParameter("@PK_BlockID",BlockID),
+                                 new SqlParameter("@Mobile",Mobile),
+                                 new SqlParameter("@IsDownline",Downline)
+                            };
+
+            DataSet ds = Connection.ExecuteQuery("GetSelfDownlineBusiness", para);
+            return ds;
+        }
+    }
+
+    public class lstSelfDownlineBusiness
+    {
+        public string PK_BookingId { get; set; }
+        public string CustomerID { get; set; }
+        public string CustomerName { get; set; }
+        public string AssociateID { get; set; }
+        public string AssociateName { get; set; }
+        public string BranchName { get; set; }
+        public string PaidAmount { get; set; }
+        public string PaymentDate { get; set; }
+        public string PlotAmount { get; set; }
+        public string Amount { get; set; }
+        public string PlotNumber { get; set; }
+        public string Balance { get; set; }
+        public string Discount { get; set; }
+        public string BookingNumber { get; set; }
+    }
 
 }
 

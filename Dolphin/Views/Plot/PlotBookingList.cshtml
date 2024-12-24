@@ -95,6 +95,18 @@
                             </div>
                             <div class="col-md-2 mb-3">
                                 <div class="form-group">
+                                    <label>From Plot Number</label>
+                                    @Html.TextBoxFor(m => m.FromPlotNumber, new { @class = "form-control", @Placeholder = "From Plot Number" })
+                                </div>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <div class="form-group">
+                                    <label>To Plot Number</label>
+                                    @Html.TextBoxFor(m => m.ToPlotNumber, new { @class = "form-control", @Placeholder = "To Plot Number" })
+                                </div>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <div class="form-group">
                                     <label> &nbsp;</label>
                                     <br />
                                     <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="Search" />
@@ -124,8 +136,8 @@
                                     <th>Plot Amt</th>
                                     <th>PLC</th>
                                     <th>Net Amnt</th>
-                                    <th hidden="hidden">Booking Amt</th>
-                                    <th>Paid Amt</th>
+                                    <th hidden>Booking Amt</th>
+                                    <th>Booking Amt</th>
                                     <th>Total Paid Amt</th>
                                     <th>Action</th>
                                 </tr>
@@ -157,7 +169,7 @@
                                                 <td>@Item.PlotAmount</td>
                                                 <td>@Item.PK_PLCCharge</td>
                                                 <td>@Item.NetPlotAmount</td>
-                                                <td hidden="hidden">@Item.BookingAmount</td>
+                                                <td hidden>@Item.BookingAmount</td>
                                                 <td>@Item.PaidAmount</td>
                                                 <td>@Item.AllTotalPaidAmount</td>
 
@@ -174,22 +186,22 @@
                             </tbody>
                             <tfoot>
                                 <tr class="table-active">
-                                    <th>Sr No.</th>
-                                    <th>Branch</th>
-                                    <th>Booking No</th>
-                                    <th>Booking Date</th>
-                                    <th>Plot Details.</th>
-                                    <th>Payment Plan</th>
-                                    <th>Customer Detail</th>
-                                    <th>Affiliate Details</th>
-                                    <th>Customer Mob.No</th>
-                                    <th>Plot Amt</th>
-                                    <th>PLC</th>
-                                    <th>Net Amnt</th>
-                                    <th hidden="hidden">Booking Amt</th>
-                                    <th>Paid Amt</th>
-                                    <th>Total Paid Amt</th>
-                                    <th>Action</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th hidden></th>
+                                    <th>Total :-</th>
+                                    <th>@ViewBag.TotalPaidAmount</th>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -242,11 +254,16 @@
         });
     }
 
+
     $('#FromDate').datepicker({
-        dateFormat: 'dd/mm/yy'
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
     });
     $('#ToDate').datepicker({
-        dateFormat: 'dd/mm/yy'
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
     });
 
     function onSiteChange() {

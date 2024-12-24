@@ -11,6 +11,8 @@ namespace Dolphin.Models
     public class AssociateBooking : Common
     {
         #region Properties
+        public string KYCStatus { get; set; }
+        public string AdharBacksideImage { get; set; }
         public List<AssociateBooking> ClosingWisePayoutlist { get; set; }
         public string SMS { get; set; }
         public string SenderID { get; set; }
@@ -81,7 +83,8 @@ namespace Dolphin.Models
         public string VisitorId { get; set; }
         public string Mobile { get; set; }
         public string PK_VisitorId { get; set; }
-        
+     
+
         #endregion
 
 
@@ -151,6 +154,15 @@ namespace Dolphin.Models
         public string InstallmentDate { get; set; }
 
         public string DueAmount { get; set; }
+
+        public string AfromDate { get;set;}
+        public string AtoDate { get; set; }
+        public string DeclineRemarks { get; set; }
+        public string Remarks { get; set; }
+        public string DeclineId { get; set; }
+
+
+
         public DataSet FillDetails()
         {
             SqlParameter[] para =
@@ -286,13 +298,13 @@ namespace Dolphin.Models
                                         new SqlParameter("@State", State) ,
                                          new SqlParameter("@City", City) ,
                                           new SqlParameter("@Address", Address) ,
-                                           new SqlParameter("@PanNumber", PanNo) ,
+                                           //new SqlParameter("@PanNumber", PanNo) ,
                                             new SqlParameter("@UpdatedBy", UpdatedBy) ,
                                             new SqlParameter("@ProfilePic", ProfilePic),
-                                              new SqlParameter("@MemberAccNo", BankAccountNo),
-                                                 new SqlParameter("@MemberBankName", BankName),
-                                                  new SqlParameter("@MemberBranch", BankBranch),
-                                                     new SqlParameter("@IFSCCode", IFSCCode)
+                                              //new SqlParameter("@MemberAccNo", BankAccountNo),
+                                              //   new SqlParameter("@MemberBankName", BankName),
+                                              //    new SqlParameter("@MemberBranch", BankBranch),
+                                              //       new SqlParameter("@IFSCCode", IFSCCode)
                                   };
             DataSet ds = Connection.ExecuteQuery("EditAssociateDetailsForProfile", para);
             return ds;
@@ -405,6 +417,8 @@ namespace Dolphin.Models
 
         public string PlotStatus { get; set; }
 
+        public string ApprovalDate { get; set; }
+
         public DataSet UnpaidIncomes()
         {
             SqlParameter[] para = { new SqlParameter("@FK_UserId", UserID),
@@ -468,9 +482,21 @@ namespace Dolphin.Models
             SqlParameter[] para = { new SqlParameter("@LoginId", UserID),
                                     new SqlParameter("@FromDate", FromDate),
                                     new SqlParameter("@ToDate", ToDate),
-                                     new SqlParameter("@Status", Status),
+                                    new SqlParameter("@Status", Status),
+                                    new SqlParameter("@AFromDate",AfromDate),
+                                    new SqlParameter("@AToDate",AtoDate)
                                       };
             DataSet ds = Connection.ExecuteQuery("GetPayoutRequest", para);
+            return ds;
+        }
+
+        public DataSet GetPaymentModeList()
+        {
+            SqlParameter[] para =
+                            {
+                                new SqlParameter("@PK_paymentID",PlotNumber)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetPaymentModeList", para);
             return ds;
         }
 
@@ -478,7 +504,8 @@ namespace Dolphin.Models
         {
             SqlParameter[] para = { new SqlParameter("@PK_RequestID", RequestID),
                                     new SqlParameter("@ApprovedBy", AddedBy),
-
+                                    new SqlParameter("@PaymentMode", PaymentMode),
+                                    new SqlParameter("@TransactionDate", TransactionDate)
                                       };
             DataSet ds = Connection.ExecuteQuery("ApprovePayoutRequest", para);
             return ds;
@@ -487,6 +514,7 @@ namespace Dolphin.Models
         {
             SqlParameter[] para = { new SqlParameter("@PK_RequestID", RequestID),
                                     new SqlParameter("@ApprovedBy", AddedBy),
+                                    new SqlParameter("@DeclineRemarks",DeclineRemarks)
 
                                       };
             DataSet ds = Connection.ExecuteQuery("DeclinePayoutRequest", para);
@@ -522,18 +550,18 @@ namespace Dolphin.Models
 
         public DataSet UploadKYCDocuments()
         {
-            SqlParameter[] para = { new SqlParameter("@FK_UserID",UserID ) ,
+            SqlParameter[] para = {   new SqlParameter("@FK_UserID",UserID ) ,
                                       new SqlParameter("@AdharNumber", AdharNumber) ,
                                       new SqlParameter("@AdharImage", AdharImage) ,
+                                      new SqlParameter("@AdharBacksideImage",AdharBacksideImage),
                                       new SqlParameter("@PanNumber", PanNumber),
                                       new SqlParameter("@PanImage", PanImage) ,
                                       new SqlParameter("@DocumentNumber", DocumentNumber) ,
-                                       new SqlParameter("@AccountHolderName", AccountHolderName) ,
-                                       new SqlParameter("@IFSCCode", IFSCCode) ,
                                       new SqlParameter("@DocumentImage", DocumentImage),
-                                        new SqlParameter("@Action", ActionStatus),
-                                        new SqlParameter("@BankName", BankName),
-                                        new SqlParameter("@BankBranch", BankBranch),
+                                      new SqlParameter("@BankHolderName", AccountHolderName),
+                                      new SqlParameter("@MemberBankName", BankName) ,
+                                      new SqlParameter("@MemberBranch", BankBranch) ,
+                                      new SqlParameter("@IFSCCode", IFSCCode)
                                   };
             DataSet ds = Connection.ExecuteQuery("UploadKYC", para);
             return ds;
@@ -544,7 +572,7 @@ namespace Dolphin.Models
         public DataSet AssociateListForKYC()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                  new SqlParameter("@Status", Status),
+                                  new SqlParameter("@Status", KYCStatus),
                                 new SqlParameter("@FromDate",FromDate),
                                   new SqlParameter("@ToDate", ToDate)
                                   };

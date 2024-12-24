@@ -137,12 +137,12 @@ namespace Dolphin.Models
         }
         public static List<SelectListItem> BindKYCStatus()
         {
-            List<SelectListItem> PasswordType = new List<SelectListItem>();
-            PasswordType.Add(new SelectListItem { Text = "All", Value = null });
-            PasswordType.Add(new SelectListItem { Text = "Pending", Value = "Pending" });
-            PasswordType.Add(new SelectListItem { Text = "Approved", Value = "Approved" });
-            PasswordType.Add(new SelectListItem { Text = "Rejected", Value = "Rejected" });
-            return PasswordType;
+            List<SelectListItem> KYCStatus = new List<SelectListItem>();
+            KYCStatus.Add(new SelectListItem { Text = "All", Value = null });
+            KYCStatus.Add(new SelectListItem { Text = "Pending", Value = "Pending" });
+            KYCStatus.Add(new SelectListItem { Text = "Approved", Value = "Approved" });
+            KYCStatus.Add(new SelectListItem { Text = "Rejected", Value = "Rejected" });
+            return KYCStatus;
         }
 
         public static List<SelectListItem> AttendanceStatus()

@@ -1237,6 +1237,7 @@
     <Content Include="assets\fonts\slick-2.html" />
     <Content Include="assets\fonts\slick.html" />
     <Content Include="assets\fonts\slickd41d.html" />
+    <Content Include="assets\img\11111.gif" />
     <Content Include="assets\img\ajax-loader.gif" />
     <Content Include="assets\img\banner\1.jpg" />
     <Content Include="assets\img\banner\3.png" />
@@ -2527,11 +2528,11 @@
     <Content Include="Global.asax" />
     <Content Include="AdminLevelTree.aspx" />
     <Content Include="images\noimage.jpg" />
-    <Content Include="KYCDocuments\0933247f-09e1-4ba8-bf94-54b5fd7bcac7.png" />
-    <Content Include="KYCDocuments\57094f0b-159d-45e1-b923-d149bef13963.png" />
-    <Content Include="KYCDocuments\a6f6c4ca-3914-44ed-8452-da5636078056.jpg" />
-    <Content Include="KYCDocuments\b0af1138-da09-4e5d-8dcb-ca6dc2256cdc.png" />
-    <Content Include="KYCDocuments\d992cd70-1bbc-4243-8c03-2ad9e23f9fb1.jpg" />
+    <Content Include="images\KYCDocuments\0933247f-09e1-4ba8-bf94-54b5fd7bcac7.png" />
+    <Content Include="images\KYCDocuments\57094f0b-159d-45e1-b923-d149bef13963.png" />
+    <Content Include="images\KYCDocuments\a6f6c4ca-3914-44ed-8452-da5636078056.jpg" />
+    <Content Include="images\KYCDocuments\b0af1138-da09-4e5d-8dcb-ca6dc2256cdc.png" />
+    <Content Include="images\KYCDocuments\d992cd70-1bbc-4243-8c03-2ad9e23f9fb1.jpg" />
     <Content Include="LevelTree.aspx" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
@@ -2629,6 +2630,7 @@
     <Content Include="assetsWeb\img\pdf\deoria.pdf" />
     <Content Include="assetsWeb\img\pdf\diamond-city.pdf" />
     <Content Include="assetsWeb\img\pdf\maniramGorakhpur.pdf" />
+    <Content Include="assets\img\Loader.webp" />
     <None Include="Properties\PublishProfiles\Dolphin.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
@@ -2642,7 +2644,9 @@
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="Views\AdminReports\TranferPayment.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
