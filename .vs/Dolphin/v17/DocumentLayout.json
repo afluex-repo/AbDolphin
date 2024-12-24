@@ -1,0 +1,119 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Tanishq\\Repository\\AbDolphin\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|e:\\tanishq\\repository\\abdolphin\\dolphin\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|solutionrelative:dolphin\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|e:\\tanishq\\repository\\abdolphin\\dolphin\\views\\admin\\visitorlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|solutionrelative:dolphin\\views\\admin\\visitorlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|e:\\tanishq\\repository\\abdolphin\\dolphin\\models\\plot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|solutionrelative:dolphin\\models\\plot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|e:\\tanishq\\repository\\abdolphin\\dolphin\\models\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|solutionrelative:dolphin\\models\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|e:\\tanishq\\repository\\abdolphin\\dolphin\\views\\admin\\visitorform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|solutionrelative:dolphin\\views\\admin\\visitorform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "VisitorList.cshtml",
+              "DocumentMoniker": "E:\\Tanishq\\Repository\\AbDolphin\\Dolphin\\Views\\Admin\\VisitorList.cshtml",
+              "RelativeDocumentMoniker": "Dolphin\\Views\\Admin\\VisitorList.cshtml",
+              "ToolTip": "E:\\Tanishq\\Repository\\AbDolphin\\Dolphin\\Views\\Admin\\VisitorList.cshtml",
+              "RelativeToolTip": "Dolphin\\Views\\Admin\\VisitorList.cshtml",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAswG4AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-13T08:13:26.714Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Plot.cs",
+              "DocumentMoniker": "E:\\Tanishq\\Repository\\AbDolphin\\Dolphin\\Models\\Plot.cs",
+              "RelativeDocumentMoniker": "Dolphin\\Models\\Plot.cs",
+              "ToolTip": "E:\\Tanishq\\Repository\\AbDolphin\\Dolphin\\Models\\Plot.cs",
+              "RelativeToolTip": "Dolphin\\Models\\Plot.cs",
+              "ViewState": "AgIAAGsDAAAAAAAAAAAqwOwDAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-13T07:47:15.267Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "VisitorForm.cshtml",
+              "DocumentMoniker": "E:\\Tanishq\\Repository\\AbDolphin\\Dolphin\\Views\\Admin\\VisitorForm.cshtml",
+              "RelativeDocumentMoniker": "Dolphin\\Views\\Admin\\VisitorForm.cshtml",
+              "ToolTip": "E:\\Tanishq\\Repository\\AbDolphin\\Dolphin\\Views\\Admin\\VisitorForm.cshtml",
+              "RelativeToolTip": "Dolphin\\Views\\Admin\\VisitorForm.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACEAAACQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-13T06:14:11.296Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "E:\\Tanishq\\Repository\\AbDolphin\\Dolphin\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Dolphin\\Controllers\\AdminController.cs",
+              "ToolTip": "E:\\Tanishq\\Repository\\AbDolphin\\Dolphin\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Dolphin\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAGgBAAAAAAAAAAAQwHEBAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-13T06:14:01.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Connection.cs",
+              "DocumentMoniker": "E:\\Tanishq\\Repository\\AbDolphin\\Dolphin\\Models\\Connection.cs",
+              "RelativeDocumentMoniker": "Dolphin\\Models\\Connection.cs",
+              "ToolTip": "E:\\Tanishq\\Repository\\AbDolphin\\Dolphin\\Models\\Connection.cs",
+              "RelativeToolTip": "Dolphin\\Models\\Connection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-13T06:13:41.476Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 64,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

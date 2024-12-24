@@ -30,11 +30,16 @@
             <div class="card">
                 <div class="card-body row">
                     <div class="col-md-2 mb-3">
+                        <label class="float-label">Branch<span style="color:red">*</span></label>
+                        @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control" })
+                        <span class="form-bar"></span>
+                    </div>
+                    <div class="col-md-2 mb-3">
                         <div class="form-group">
-                            <label>Select Site <span style="color: red">*</span></label> 
+                            <label>Select Site <span style="color: red">*</span></label>
                             @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new
                                            {
-                                               @class = "form-control form-select", @*@onchange = "return onSiteChange();"*@ })
+                                               @class = "form-control form-select",@*@onchange = "return onSiteChange();"*@})
                         </div>
                     </div>
                     <div class="col-md-2 mb-3">
@@ -46,19 +51,22 @@
                     </div>
                     <div class="col-md-2 mb-3">
                         <div class="form-group">
-                            <label>  Affiliate Name</label> 
-                                @Html.TextBoxFor(m => m.AssociateName, new { @class = "form-control", @Placeholder = "Affiliate Name", @readonly = "readonly" })</div>
+                            <label>  Affiliate Name</label>
+                            @Html.TextBoxFor(m => m.AssociateName, new { @class = "form-control", @Placeholder = "Affiliate Name", @readonly = "readonly" })
+                        </div>
                     </div>
                     <div class="col-md-2 mb-3">
                         <div class="form-group">
-                            <label>Amount<span style="color: red">*</span></label> 
-                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "Amount", @onkeypress = "return isNumberOrDecimal(event)" })</div>
+                            <label>Amount<span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "Amount", @onkeypress = "return isNumberOrDecimal(event)" })
+                        </div>
                     </div>
 
                     <div class="col-md-2 mb-3">
                         <div class="form-group">
                             <label> Visit Date<span style="color: red">*</span>  </label>
-                                @Html.TextBoxFor(m => m.VisitDate, new { @class = "form-control", @Placeholder = "DD/MM/YYYY", @readonly = true })</div>
+                            @Html.TextBoxFor(m => m.VisitDate, new { @class = "form-control", @Placeholder = "DD/MM/YYYY", @readonly = true })
+                        </div>
                     </div>
 
                 </div>
@@ -181,7 +189,12 @@
         $('#btnsssubmit').click(function () {
             var isAllValid = true;
 
-
+            if ($('#BranchID').val() == '0') {
+                $("#BranchID").addClass('errortext');
+                $('#BranchID').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
             if ($('#SiteID').val() == '0') {
                 $("#SiteID").addClass('errortext');
                 $('#SiteID').focus();
@@ -250,7 +263,7 @@
                 $.ajax({
                     type: 'POST',
                     url: 'Save',
-                    data: JSON.stringify({ dataValue: JSON.stringify(data), SiteID: $("#SiteID").val(), AssociateID: $("#UserID").val(), AssociateName: $("#AssociateName").val(), Amount: $("#Amount").val(), VisiteDate: $("#VisitDate").val() }),
+                    data: JSON.stringify({ dataValue: JSON.stringify(data), BranchID: $("#BranchID").val(), SiteID: $("#SiteID").val(), AssociateID: $("#UserID").val(), AssociateName: $("#AssociateName").val(), Amount: $("#Amount").val(), VisiteDate: $("#VisitDate").val() }),
                     contentType: 'application/json',
                     success: function (data) {
                         if (data.status) {
