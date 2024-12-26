@@ -814,10 +814,15 @@
           top:28%;
     }
     #offerTable .table-responsive{
-        height: 358px;
-        background: #fff;
-        border: 13px solid #eacf73;
+           height: 358px; 
+            border: 6px solid #ffffff52;
+            color: #fff;
+            border-radius: 23px;
+            overflow:auto;
     }
+     #offerTable .table-responsive tr td, #offerTable .table-responsive tr{
+         color:#fff!important;
+     }  
 </style>
 
 <div class="modal fade show" id="signUp" tabindex="-1" role="dialog" aria-modal="true">
@@ -911,10 +916,6 @@
                                                     <td>Lucas Pink</td>
                                                     <td>$155</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Isabella Lime</td>
-                                                    <td>$200</td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -927,7 +928,6 @@
         </div>
     </div>
 </div>
-
 
 
 @*<div class="modal fade show" id="signUp" tabindex="-1" role="dialog" aria-modal="true">
@@ -954,8 +954,6 @@
 </div*@>
 @*===========================================================================*@
 
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -970,10 +968,7 @@
         }, 3500);
 
     });
-
-
 </script>
-
 
 <script>
     function GetDetails() {
@@ -1008,7 +1003,7 @@
 
                 //   $("#divload").css({ 'display': 'none' });
 
-                $("#SiteID").html(""); // clear before appending new list
+                $("#SiteID").html("");
                 $("#SiteID").empty();
                 $("#SiteID").append(
                       $('<option></option>').val(0).html('Select Site'));
@@ -1016,11 +1011,8 @@
                     $("#SiteID").append(
                           $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
                 });
-
             }
-
         });
-
     }
     function onSiteChange() {
         $("#divload").css({ 'display': '' });
@@ -1046,7 +1038,6 @@
                         $("#SectorID").append(
                               $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
                     });
-
                 }
                 else {
                     $("#SectorID").empty();
