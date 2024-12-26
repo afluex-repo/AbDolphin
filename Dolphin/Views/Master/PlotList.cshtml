@@ -97,12 +97,25 @@
                                             <td>@Item.PLCCharge</td>
                                             <td>@Item.BookingPercent</td>
                                             <td>@Item.AllottmentPercent</td>
-                                            <td><a class="@Item.ColorCSS">@Item.PlotStatus</a></td>
+                                            <td>
+                                                @if (Item.PlotStatus == "Available")
+                                                {
+                                                  <a class="@Item.ColorCSS">@Item.PlotStatus</a>
+                                                }
+                                                else if (Item.PlotStatus == "Hold")
+                                                {
+                                                    <a href="#" class="@Item.ColorCSS plot-status-link" data-plotid="@Item.PlotID" data-status="@Item.PlotStatus"> @Item.PlotStatus</a>
+                                                }
+                                                else
+                                                {
+                                                  <a href="#" class="@Item.ColorCSS plot-status-link" data-plotid="@Item.PlotID"> @Item.PlotStatus</a>
+                                                }
+                                             </td>
                                             <td>
                                                 @if (Item.PlotStatus == "Available")
                                                 {
                                                     <a href="/Master/UpdatePlot?PlotID=@Item.EncryptKey" class="btn btn-info btn-sm">Edit</a>
-                                                                        <a href="/Master/DeletePlot?id=@Item.PlotID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you wish to delete this Plot?');">Delete</a>
+                                                    <a href="/Master/DeletePlot?id=@Item.PlotID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you wish to delete this Plot?');">Delete</a>
                                                 }
                                             </td>
                                         </tr>
@@ -136,6 +149,24 @@
 
     </div>
 
+    <!-- Modal for Plot Details -->
+    <div id="statusModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Plot Booking Status</h5>
+                    <button type="button" class="close" onclick="closeModal()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalContent">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
@@ -143,19 +174,75 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
-
     $(document).ready(function () {
-        $("#divload").css({ 'display': 'none' });
+        $('.plot-status-link').click(function (e) {
+            e.preventDefault();
+
+            var plotId = $(this).data('plotid');
+            var Status = $(this).data('status');
+
+            if (!Status) {
+                $.ajax({
+                    url: '/Master/GetPlotDetails',
+                    type: 'GET',
+                    data: { Fk_PlotId: plotId },
+                    success: function (response) {
+                        if (response.Result === "yes") {
+                            var content = `
+                        <p><strong>Customer Details : </strong> ${response.CustomerDetails}</p>
+                        <p><strong>Associate Details : </strong> ${response.AssociateDetails}</p>
+                        <p><strong>Booking Number : </strong> ${response.BookingNumber}</p>
+                        <p><strong>Booking Date : </strong> ${response.BookingDate}</p>
+                        <p><strong>Net Plot Amount  :</strong> ${response.NetPlotAmount}</p>
+                    `;
+                            $('#modalContent').html(content);
+                        } else {
+                            $('#modalContent').html('<p class="text-danger">Plot is Available.</p>');
+                        }
+
+                        $('#statusModal').modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        $('#modalContent').html('<p class="text-danger">An error occurred while fetching plot details. Please try again later.</p>');
+                        $('#statusModal').modal('show');
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: '/Master/GetPlotDetails',
+                    type: 'GET',
+                    data: { Fk_PlotId: plotId,
+                            status: Status},
+                    success: function (response) {
+                        if (response.Result === "yes") {
+                            var content = `
+                        <p><strong>Name : </strong> ${response.Name}</p>
+                        <p><strong>Mobile : </strong> ${response.Mobile}</p>
+                        <p><strong>Hold Date : </strong> ${response.HoldDate}</p>
+                        <p><strong>Booking Date : </strong> ${response.BookingDate}</p>
+                        <p><strong>Hold Amount: </strong> ${response.HoldAmount}</p>
+                        <p><strong>Reciept No : </strong> ${response.RecieptNo}</p>
+                    `;
+                            $('#modalContent').html(content);
+                        } else {
+                            $('#modalContent').html('<p class="text-danger">Plot is Available.</p>');
+                        }
+
+                        $('#statusModal').modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        $('#modalContent').html('<p class="text-danger">An error occurred while fetching plot details. Please try again later.</p>');
+                        $('#statusModal').modal('show');
+                    }
+                });
+            }
+        });
     });
 
-    //function load()
-    //{
-    //    $("#divload").css({ 'display': '' });
-    //    return true;
-    //}
-
-
-
+    function closeModal() {
+        $('#statusModal').modal('hide');
+    }
 
     function onSiteChange() {
         var value = $('#SiteID').val();

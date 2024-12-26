@@ -11,6 +11,14 @@ namespace Dolphin.Models
     public class Master : Common
     {
         #region Properties
+
+        public string HoldDate { get; set; }
+        public string HoldAmount { get; set; }
+        public string RecieptNo { get; set; }
+        public string CustomerDetails { get; set; }
+        public string AssociateDetails { get; set; }
+        public string BookingNumber { get; set; }
+        public string NetPlotAmount { get; set; }
         public string Subject { get; set; }
         public string LoginId { get; set; }
         public string Body { get; set; }
@@ -319,6 +327,24 @@ namespace Dolphin.Models
                                   new SqlParameter("@PlotNumber", PlotNumber),
                                   };
             DataSet ds = Connection.ExecuteQuery("PlotList", para);
+            return ds;
+        }
+
+        public DataSet BookingDetails()
+        {
+            SqlParameter[] para = { 
+                                  new SqlParameter("@PlotID", PlotID),
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetBookingDetails", para);
+            return ds;
+        }
+
+        public DataSet BookingHoldDetails()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@PlotID", PlotID),
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetBookingHoldDetails", para);
             return ds;
         }
 

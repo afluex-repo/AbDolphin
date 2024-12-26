@@ -936,10 +936,11 @@ namespace Dolphin.Controllers
             return RedirectToAction(FormName, Controller);
         }
 
-        public ActionResult CancelPlotBooking(string BookingID, string Remark)
+        public JsonResult CancelPlotBooking(string BookingID, string Remark)
         {
-            string FormName = "";
-            string Controller = "";
+            var response = new { Success = false, Message = "An error occurred while cancelling the booking." };
+            //string FormName = "";
+            //string Controller = "";
             try
             {
                 Plot model = new Plot();
@@ -953,22 +954,22 @@ namespace Dolphin.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["Plot"] = "Plot Booking Cancelled successfully !";
+                        response = new { Success = true, Message = "Plot Booking Cancelled successfully!" };
                     }
                     else
                     {
-                        TempData["Plot"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        response = new { Success = false, Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString() };
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["Plot"] = ex.Message;
+                response = new { Success = false, Message = ex.Message };
             }
-            FormName = "PlotBookingListForCancel";
-            Controller = "Plot";
 
-            return RedirectToAction(FormName, Controller);
+            //FormName = "PlotBookingListForCancel";
+            //Controller = "Plot";
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult CancelledPlotBookingList(Plot model)

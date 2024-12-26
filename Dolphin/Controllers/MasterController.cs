@@ -1029,6 +1029,56 @@ namespace Dolphin.Controllers
             return View(model);
         }
 
+        public ActionResult GetPlotDetails(string Fk_PlotId,string status)
+        {
+            Master model = new Master();
+            try
+            {
+                model.PlotID = Fk_PlotId;
+                model.PlotStatus = status;
+                if (model.PlotStatus == null)
+                {
+                    DataSet ds = model.BookingDetails();
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        model.Result = "yes";
+                        model.CustomerDetails = ds.Tables[0].Rows[0]["CustomerDetails"].ToString();
+                        model.AssociateDetails = ds.Tables[0].Rows[0]["AssociateDetails"].ToString();
+                        model.BookingNumber = ds.Tables[0].Rows[0]["BookingNo"].ToString();
+                        model.NetPlotAmount = ds.Tables[0].Rows[0]["NetPlotAmount"].ToString();
+                        model.BookingDate = ds.Tables[0].Rows[0]["BookingDate"].ToString();
+                    }
+                    else
+                    {
+                        model.Result = "no";
+                    }
+                }
+                else
+                {
+                    DataSet ds = model.BookingHoldDetails();
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        model.Result = "yes";
+                        model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        model.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        model.HoldDate = ds.Tables[0].Rows[0]["HoldDate"].ToString();
+                        model.HoldAmount = ds.Tables[0].Rows[0]["HoldAmount"].ToString();
+                        model.RecieptNo = ds.Tables[0].Rows[0]["RecieptNo"].ToString();
+                        model.BookingDate = ds.Tables[0].Rows[0]["Date"].ToString();
+                    }
+                    else
+                    {
+                        model.Result = "no";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        
         public ActionResult UpdatePlot(string PlotID)
         {
             Master model = new Master();
