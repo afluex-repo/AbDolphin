@@ -1128,99 +1128,50 @@
         }
 </style>
 
-@*<div class="modal fade show" id="signUp" tabindex="-1" role="dialog" aria-modal="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="ri-close-line text-white"></i>
-                    </button>
-                </div>
-                <div class="modal-body bg-white" id="offerTable">
-                    <div class="row align-items-center gx-5">
-                        <div class="col-md-12">
-                            <div class="login-bg bg-f offerContentArea position-relative" style="background-size:100% 100%!important;">
-                                <div class="row align-items-center justify-content-center gx-5">
-                                    <div class="col-md-8">
-                                        <div class="table-responsive mt-4">
-                                            <table class="table table-bordered table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>User Name</th>
-                                                        <th>Gift Amount</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>John Doe</td>
-                                                        <td>$50</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Jane Smith</td>
-                                                        <td>$100</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Michael Brown</td>
-                                                        <td>$75</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Lisa Johnson</td>
-                                                        <td>$120</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Chris Green</td>
-                                                        <td>$30</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Anna White</td>
-                                                        <td>$200</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Paul Black</td>
-                                                        <td>$90</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Sarah Grey</td>
-                                                        <td>$110</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Emily Blue</td>
-                                                        <td>$60</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Ryan Yellow</td>
-                                                        <td>$40</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>David Red</td>
-                                                        <td>$250</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Olivia Gold</td>
-                                                        <td>$180</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Ethan Silver</td>
-                                                        <td>$130</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Chloe Bronze</td>
-                                                        <td>$70</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Matthew Aqua</td>
-                                                        <td>$95</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Grace Purple</td>
-                                                        <td>$80</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Lucas Pink</td>
-                                                        <td>$155</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+
+    @if (Model.lstoffer != null)
+    {
+        <div class="modal fade show" id="signUp" tabindex="-1" role="dialog" aria-modal="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="ri-close-line text-white"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body bg-white" id="offerTable">
+                        <div class="row align-items-center gx-5">
+                            <div class="col-md-12">
+                                <div class="login-bg bg-f offerContentArea position-relative" style="background-size:100% 100%!important;">
+                                    <div class="row align-items-center justify-content-center gx-5">
+                                        <div class="col-md-8">
+                                            <div class="table-responsive mt-4">
+                                                <table class="table table-bordered table-striped">
+                                                    <thead class="text-center">
+                                                        <tr>
+                                                            <th>Sr.No.</th>
+                                                            <th>Name</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="text-center">
+                                                        @if (Model != null)
+                                                        {
+                                                            if (Model.lstoffer != null)
+                                                            {
+                                                                int i = 1;
+                                                                foreach (var Item in Model.lstoffer)
+                                                                {
+                                                                    <tr class="text-left">
+                                                                        <td>@i</td>
+                                                                        <td>@Item.Name</td>
+                                                                    </tr>
+                                                                    i++;
+                                                                }
+                                                            }
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1230,7 +1181,8 @@
                 </div>
             </div>
         </div>
-    </div>*@
+    }
+
 
 
 @*===========================================================================*@

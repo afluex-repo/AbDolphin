@@ -10,6 +10,7 @@ namespace Dolphin.Models
 {
     public class Website:Common
     {
+        public List<Website> lstoffer { get; set; }
         public List<Website> lstPlot { get; set; }
         public string SectorName { get; set; }
         public string BlockName { get; set; }
@@ -99,6 +100,12 @@ namespace Dolphin.Models
         public DataSet GetTopBusiness()
         {
             DataSet ds = Connection.ExecuteQuery("GetTopBusinessAssociateList");
+            return ds;
+        }
+
+        public DataSet GetBusiness()
+        {
+            DataSet ds = Connection.ExecuteQuery("GetBusinessforIndex");
             return ds;
         }
 
