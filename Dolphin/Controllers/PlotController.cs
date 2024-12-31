@@ -2021,6 +2021,41 @@ namespace Dolphin.Controllers
             }
             ViewBag.ddlBranch = ddlBranch;
             #endregion
+
+            #region ddlSiteType
+            Master objSiteType = new Master();
+            int count1 = 0;
+            List<SelectListItem> ddlSiteType = new List<SelectListItem>();
+            DataSet ds2 = objSiteType.GetSiteTypeList();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSiteType.Add(new SelectListItem { Text = "Select Site Type", Value = "0" });
+                    }
+                    ddlSiteType.Add(new SelectListItem { Text = r["SiteTypeName"].ToString(), Value = r["PK_SiteTypeID"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+
+            ViewBag.ddlSiteType = ddlSiteType;
+
+            #endregion
+
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+            ViewBag.ddlSite = ddlSite;
+
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+
             return View(model);
         }
 
@@ -2029,11 +2064,19 @@ namespace Dolphin.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult GetList(Plot model)
         {
+
             List<Plot> lst = new List<Plot>();
+            model.SiteTypeID = model.SiteTypeID == "0" ? null : model.SiteTypeID;
+            model.SiteID = model.SiteID == "0" ? null : model.SiteID;
+            model.SectorID = model.SectorID == "0" ? null : model.SectorID;
+            model.BlockID = model.BlockID == "0" ? null : model.BlockID;
             model.PaymentMode = model.PaymentMode == "0" ? null : model.PaymentMode;
             model.BranchID = model.BranchID == "0" ? null : model.BranchID;
+            model.PlotNumber = model.PlotNumber == " " ? null : model.PlotNumber;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+
             DataSet ds = model.GetPaymentList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -2050,12 +2093,10 @@ namespace Dolphin.Controllers
                     obj.TransactionDate = r["TransactionDate"].ToString();
                     obj.TransactionNumber = r["TransactionNo"].ToString();
                     obj.Remark = r["Details"].ToString();
-
                     obj.BranchName = r["BranchName"].ToString();
                     obj.SiteName = r["SiteName"].ToString();
                     obj.SectorName = r["SectorName"].ToString();
                     obj.BlockName = r["BlockName"].ToString();
-
                     obj.PlotNumber = r["PlotNumber"].ToString();
                     obj.PaidAmount = r["PaidAmount"].ToString();
                     obj.PaymentStatus = r["PaymentStatus"].ToString();
@@ -2105,8 +2146,45 @@ namespace Dolphin.Controllers
             }
             ViewBag.ddlBranch = ddlBranch;
             #endregion
+
+            #region ddlSiteType
+            Master objSiteType = new Master();
+            int count1 = 0;
+            List<SelectListItem> ddlSiteType = new List<SelectListItem>();
+            DataSet ds2 = objSiteType.GetSiteTypeList();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSiteType.Add(new SelectListItem { Text = "Select Site Type", Value = "0" });
+                    }
+                    ddlSiteType.Add(new SelectListItem { Text = r["SiteTypeName"].ToString(), Value = r["PK_SiteTypeID"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+
+            ViewBag.ddlSiteType = ddlSiteType;
+
+            #endregion
+
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+            ViewBag.ddlSite = ddlSite;
+
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+
             return View(model);
         }
+
+
         [HttpPost]
         [ActionName("Payment")]
         [OnAction(ButtonName = "btnapprove")]
@@ -4424,5 +4502,10 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
+
+        public ActionResult ReverseApprovePayment()
+        {
+            return View();
+        }
     }
 }

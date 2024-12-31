@@ -229,7 +229,9 @@ namespace Dolphin.Models
         {
             SqlParameter[] para =
                             {
-                                new SqlParameter("@PK_paymentID",PlotNumber)
+                            //new SqlParameter("@PK_paymentID", (object)PlotNumber ?? DBNull.Value)
+                                //new SqlParameter("@PK_paymentID",PlotNumber)
+                                new SqlParameter("@PK_paymentID",PaymentMode)
                             };
             DataSet ds = Connection.ExecuteQuery("GetPaymentModeList", para);
             return ds;
@@ -639,12 +641,17 @@ namespace Dolphin.Models
                             {
                                  new SqlParameter("@PaymentMode",PaymentMode),
                                  new SqlParameter("@PK_BranchID",BranchID),
-                                  new SqlParameter("@FromDate",FromDate),
-                                   new SqlParameter("@ToDate",ToDate)
+                                 new SqlParameter("@SiteID",SiteID),
+                                 new SqlParameter("@SectorID",SectorID),
+                                 new SqlParameter("@BlockID",BlockID),
+                                 new SqlParameter("@PlotNumber",PlotNumber),
+                                 new SqlParameter("@FromDate",FromDate),
+                                 new SqlParameter("@ToDate",ToDate)
                             };
             DataSet ds = Connection.ExecuteQuery("GetDeatilsForChequeCashPayment", para);
             return ds;
         }
+        public string SiteTypeID { get; set; }
 
         public string PaymentStatus { get; set; }
 
