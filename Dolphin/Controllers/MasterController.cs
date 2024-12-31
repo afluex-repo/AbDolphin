@@ -1029,6 +1029,56 @@ namespace Dolphin.Controllers
             return View(model);
         }
 
+        public ActionResult GetPlotDetails(string Fk_PlotId,string status)
+        {
+            Master model = new Master();
+            try
+            {
+                model.PlotID = Fk_PlotId;
+                model.PlotStatus = status;
+                if (model.PlotStatus == null)
+                {
+                    DataSet ds = model.BookingDetails();
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        model.Result = "yes";
+                        model.CustomerDetails = ds.Tables[0].Rows[0]["CustomerDetails"].ToString();
+                        model.AssociateDetails = ds.Tables[0].Rows[0]["AssociateDetails"].ToString();
+                        model.BookingNumber = ds.Tables[0].Rows[0]["BookingNo"].ToString();
+                        model.NetPlotAmount = ds.Tables[0].Rows[0]["NetPlotAmount"].ToString();
+                        model.BookingDate = ds.Tables[0].Rows[0]["BookingDate"].ToString();
+                    }
+                    else
+                    {
+                        model.Result = "no";
+                    }
+                }
+                else
+                {
+                    DataSet ds = model.BookingHoldDetails();
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        model.Result = "yes";
+                        model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        model.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        model.HoldDate = ds.Tables[0].Rows[0]["HoldDate"].ToString();
+                        model.HoldAmount = ds.Tables[0].Rows[0]["HoldAmount"].ToString();
+                        model.RecieptNo = ds.Tables[0].Rows[0]["RecieptNo"].ToString();
+                        model.BookingDate = ds.Tables[0].Rows[0]["Date"].ToString();
+                    }
+                    else
+                    {
+                        model.Result = "no";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        
         public ActionResult UpdatePlot(string PlotID)
         {
             Master model = new Master();
@@ -2883,9 +2933,74 @@ namespace Dolphin.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        
+        public ActionResult Promoter()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult SavePromoter(List<string> loginIds,string LoginId)
+        {
+            Master model = new Master();
+            try
+            {
+                var dtst = new DataTable();
+                string LoginIdss = "";
+
+                dtst.Columns.Add("LoginIdss", typeof(string));
+                
+                for (int i = 0; i <= (loginIds.Count) - 1; i++)
+                {
+
+                    LoginIdss = loginIds[i].ToString();
+                    dtst.Rows.Add(LoginIdss);
+                }
+                
+                model.LoginId = LoginId;
+                model.AssociatedownLoginId = dtst;
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.promotersave();
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                {
+                    model.Result = "1";
+                }
+                else
+                {
+                    model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+               model.Result = "Error occurred: " + ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
 
 
+        //[HttpPost]
+        //[ActionName("Promoter")]
+        //[OnAction(ButtonName = "btnSerach")]
+        //public ActionResult GetDownlineAssoci(Master model)
+        //{
+        //    List<Master> lst = new List<Master>();
+        //    DataSet ds = model.GetDownlineDetails();
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        //    {
+        //        foreach (DataRow r in ds.Tables[0].Rows)
+        //        {
+        //            Master obj = new Master();
+        //            obj.Status = r["Status"].ToString();
+        //            obj.LoginId = r["AssociateDetails"].ToString();
+        //            obj.AssociateName = r["AssociateName"].ToString();
+        //            obj.DesignationName = r["DesignationName"].ToString();
+        //            obj.Percentage = r["Percentage"].ToString();
+        //            obj.BranchName = r["BranchName"].ToString();
+        //            lst.Add(obj);
+        //        }
+        //        model.lstTrad = lst;
+        //    }
+        //    return View(model);
+        //}
 
     }
 }
