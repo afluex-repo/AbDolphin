@@ -13,21 +13,22 @@
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between">
                     <h5 class="mb-0">User Rewards</h5>
+                   
                     <span style="color:red">@TempData["Rewardmsg"]</span>
                 </div>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
+                <h6 style="color:red"> Note:Fresh rewards counting from buisness 01-Jan-2025</h6>
                 <div class="table-responsive">
                     <table id="example2" class="table table-bordered table-striped mb-0">
                         <thead>
                             <tr class="table-active">
                                 <th>Sr No.</th>
+                                <th>Target</th>
                                 <th>Reward</th>
                                 <th>Status</th>
-                                <th>Qualify Date</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,12 +41,16 @@
                                     {
                                         <tr class="text-left">
                                             <td>@i</td>
+                                            <td>@Item.Target</td>
+                                           &nbsp;
                                             <td>
-                                                <img src="@Item.RewardImage" height="100" width="100" />
-                                                <br />@Item.RewardName
+                                        <img src="@Item.RewardImage" height="100" width="100" />(@Item.RewardName)
+                                             </td>
+                                        <td class="@((Item.Status == "Achieved") ? "text-success" : (Item.Status == "Pending" ? "text-danger" : ""))" style="font-weight:bold">
+                                                @Item.Status
                                             </td>
-                                            <td><label class="@Item.Contact">@Item.Status</label></td>
-                                            <td>@Item.QualifyDate</td>
+
+                                       
                                             <td>
                                                 @if (Item.Status == "Achieved")
                                                 {

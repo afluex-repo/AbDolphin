@@ -1247,7 +1247,7 @@ namespace Dolphin.Controllers
                         contact = Request["hdContact_ " + i].ToString();
 
                         dtst.Rows.Add(id, contact);
-                        string TempId="";
+                        string TempId = "";
                         string contact1 = dtst.Rows[i - 1]["Contact"].ToString();
                         BLSMS.SendSMS(contact1, model.Body, TempId);
 
@@ -1570,7 +1570,7 @@ namespace Dolphin.Controllers
                     obj.CommPercentage = r["DifferencePerc"].ToString();
                     obj.SiteName = r["SiteName"].ToString();
 
-                    
+
 
 
 
@@ -1625,6 +1625,7 @@ namespace Dolphin.Controllers
                     obj.Status = r["Status"].ToString();
                     obj.DisplayName = r["BackColor"].ToString();
                     obj.ApprovalDate = r["ApprovalDate"].ToString();
+                    obj.BankName = r["MemberBankName"].ToString();
 
                     lst.Add(obj);
                 }
@@ -1685,6 +1686,7 @@ namespace Dolphin.Controllers
                     obj.Status = r["Status"].ToString();
                     obj.DisplayName = r["BackColor"].ToString();
                     obj.ApprovalDate = r["ApprovalDate"].ToString();
+                    obj.BankName = r["MemberBankName"].ToString();
 
                     lst.Add(obj);
                 }
@@ -1728,11 +1730,11 @@ namespace Dolphin.Controllers
             return RedirectToAction("PayoutRequestReport");
         }
 
-        public ActionResult DeclineRequest(string id,string Remarks)
+        public ActionResult DeclineRequest(string id, string Remarks)
         {
             AssociateBooking obj = new AssociateBooking();
 
-           
+
             try
             {
                 obj.RequestID = id;
@@ -1758,7 +1760,7 @@ namespace Dolphin.Controllers
             {
                 TempData["Request"] = ex.Message;
             }
-           
+
 
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
@@ -1885,7 +1887,7 @@ namespace Dolphin.Controllers
         [OnAction(ButtonName = "btnSearch")]
         public ActionResult GetAssociateListForKYC(AssociateBooking model)
         {
-           
+
             List<AssociateBooking> lst = new List<AssociateBooking>();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/mm/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/mm/yyyy");
@@ -1911,7 +1913,7 @@ namespace Dolphin.Controllers
             }
             List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
             ViewBag.ddlKYCStatus = ddlKYCStatus;
-      
+
             return View(model);
         }
 
@@ -3512,14 +3514,14 @@ namespace Dolphin.Controllers
         }
         [HttpPost]
         [ActionName("CommissionPaidReport")]
-        [OnAction(ButtonName ="btnSearch")]
+        [OnAction(ButtonName = "btnSearch")]
         public ActionResult CommisionReport(Plot model)
         {
             List<Plot> lstpaid = new List<Plot>();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.getCommissionPaidReport();
-            if(ds!=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
@@ -3581,7 +3583,7 @@ namespace Dolphin.Controllers
         public ActionResult GetDirectUserReward(Reports model)
         {
 
-          
+
             model.RewardID = "1";
 
             List<Reports> lst = new List<Reports>();
@@ -3600,7 +3602,7 @@ namespace Dolphin.Controllers
                     obj.RewardImage = r["RewardImage"].ToString();
                     obj.RewardName = r["RewardName"].ToString();
                     obj.BookingAmount = r["TotalBusiness"].ToString();
-                    obj.Target = r["Target"].ToString();   
+                    obj.Target = r["Target"].ToString();
                     lst.Add(obj);
                 }
                 model.lstP = lst;
@@ -3709,7 +3711,7 @@ namespace Dolphin.Controllers
 
             return View(model);
         }
-        public ActionResult GetDownLineBusinessById(string Fk_UserId, string FromDate,string ToDate)
+        public ActionResult GetDownLineBusinessById(string Fk_UserId, string FromDate, string ToDate)
         {
             Reports model = new Reports();
             List<Reports> lst = new List<Reports>();
@@ -3719,20 +3721,20 @@ namespace Dolphin.Controllers
             DataSet dspayout = model.GetDownLineBusinesById();
             if (dspayout != null && dspayout.Tables[0].Rows.Count > 0)
             {
-         
-                    model.Result = "yes";
-                    if (dspayout != null && dspayout.Tables.Count > 0 && dspayout.Tables[0].Rows.Count > 0)
+
+                model.Result = "yes";
+                if (dspayout != null && dspayout.Tables.Count > 0 && dspayout.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dspayout.Tables[0].Rows)
                     {
-                        foreach (DataRow r in dspayout.Tables[0].Rows)
-                        {
-                            Reports obj = new Reports();
-                            obj.LoginId = r["LoginId"].ToString();
-                            obj.Name = r["Name"].ToString();
-                            obj.Business = r["Business"].ToString();
-                            lst.Add(obj);
-                        }
-                        model.lstDownLineBusiness = lst;
-                  
+                        Reports obj = new Reports();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.Business = r["Business"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstDownLineBusiness = lst;
+
                 }
             }
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -3744,7 +3746,7 @@ namespace Dolphin.Controllers
             model.SectorID = model.SectorID == "0" ? null : model.SectorID;
             model.PlotNumber = string.IsNullOrEmpty(model.PlotNumber) ? null : model.PlotNumber;
             model.BlockID = model.BlockID == "0" ? null : model.BlockID;
-       
+
             #region ddlSite
             int count1 = 0;
             List<SelectListItem> ddlSite = new List<SelectListItem>();
@@ -4194,7 +4196,7 @@ namespace Dolphin.Controllers
             return View(model);
         }
 
-     
+
         [HttpPost]
         [ActionName("CustomerPaymentLedgerList")]
         [OnAction(ButtonName = "search")]
@@ -4209,25 +4211,25 @@ namespace Dolphin.Controllers
             {
                 if (ds.Tables[0].Rows[0][0].ToString() == "0")
                 {
-                    TempData["Plot"]= ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    TempData["Plot"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
                 else
                 {
                     foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    Plot obj = new Plot();
-                    obj.Fk_UserId= r["Fk_userId"].ToString();
-                    obj.UserDetails = r["UserDetails"].ToString();
-                    //obj.PlotInfo = r["PlotInfo"].ToString();
-                    obj.TotalAmount= r["TotalPaidAmount"].ToString();
-                    obj.CrAmount = r["TotalCrAmount"].ToString();
-                    obj.DrAmount = r["TotalDrAmount"].ToString();
-                    //obj.PaymentDate = r["PaymentDate"].ToString();
-                    //obj.BookingNumber = r["BookingNo"].ToString();
-                    lst.Add(obj);
+                    {
+                        Plot obj = new Plot();
+                        obj.Fk_UserId = r["Fk_userId"].ToString();
+                        obj.UserDetails = r["UserDetails"].ToString();
+                        //obj.PlotInfo = r["PlotInfo"].ToString();
+                        obj.TotalAmount = r["TotalPaidAmount"].ToString();
+                        obj.CrAmount = r["TotalCrAmount"].ToString();
+                        obj.DrAmount = r["TotalDrAmount"].ToString();
+                        //obj.PaymentDate = r["PaymentDate"].ToString();
+                        //obj.BookingNumber = r["BookingNo"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstPlot = lst;
                 }
-                model.lstPlot = lst;
-            }
             }
             #region ddlSite
             int count1 = 0;
@@ -4259,7 +4261,7 @@ namespace Dolphin.Controllers
             return View(model);
         }
 
-        public ActionResult Ledger(string userid, string Am ,string PAm)
+        public ActionResult Ledger(string userid, string Am, string PAm)
         {
             Plot model = new Plot();
 
@@ -4330,6 +4332,7 @@ namespace Dolphin.Controllers
                 ViewBag.ddlBlock = ddlBlock;
                 return View(model);
             }
+
             return View();
         }
         public ActionResult TransferPaymentList()
@@ -4357,10 +4360,10 @@ namespace Dolphin.Controllers
 
         public ActionResult TransferPlotList()
         {
-            
+
             return View();
         }
-        
+
 
         public ActionResult SiteAndAssociateWiseBooking(Reports model)
         {
@@ -4415,8 +4418,8 @@ namespace Dolphin.Controllers
             DataSet ds = model.GetSiteAndAssociateWiseBookingReport();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                    foreach (DataRow r in ds.Tables[0].Rows)
-                    {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
                     Reports obj = new Reports();
                     obj.AssociateID = r["AssociateId"].ToString();
                     obj.SiteName = r["SiteName"].ToString();
@@ -4424,9 +4427,9 @@ namespace Dolphin.Controllers
                     obj.TotalBooking = r["TotalBooking"].ToString();
                     lst.Add(obj);
                 }
-                    model.lstSiteAndAssociateWiseBooking = lst;
-                }
-           
+                model.lstSiteAndAssociateWiseBooking = lst;
+            }
+
             #region ddlSite
             int count1 = 0;
             List<SelectListItem> ddlSite = new List<SelectListItem>();
@@ -4493,7 +4496,7 @@ namespace Dolphin.Controllers
             return View();
         }
 
-       
+
         [HttpPost]
         [ActionName("DetailsPlotAvailabilityReports")]
         [OnAction(ButtonName = "Search")]
@@ -4536,7 +4539,7 @@ namespace Dolphin.Controllers
                     obj.HoldFrom = r["HoldFrom"].ToString();
                     obj.HoldTo = r["HoldTo"].ToString();
                     obj.Remark = r["Remark"].ToString();
-                    
+
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
@@ -4640,7 +4643,7 @@ namespace Dolphin.Controllers
 
         public ActionResult DesignationUpdate()
         {
-            
+
             #region ddlBranch
             Reports obj = new Reports();
             int count = 0;
@@ -4756,13 +4759,13 @@ namespace Dolphin.Controllers
                     Controller = "AdminReports";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 TempData["Designation"] = ex.Message;
                 FormName = "DesignationUpdate";
                 Controller = "AdminReports";
             }
-            return RedirectToAction(FormName,Controller);
+            return RedirectToAction(FormName, Controller);
         }
 
 
@@ -4796,7 +4799,6 @@ namespace Dolphin.Controllers
             }
             return View(model);
         }
-
-
+        
     }
 }
