@@ -18,10 +18,8 @@ namespace Dolphin.Models
             {
                 //connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=dolphindb; User Id=sa; Password=Fx1479LVAPbF; Integrated Security=false;";
 
-                 connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=dolphindbTest_8Apr2024; User Id=sa; Password=Fx1479LVAPbF; Integrated Security=false;";
+                connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=dolphindbTest_8Apr2024; User Id=sa; Password=Fx1479LVAPbF; Integrated Security=false;";
 
-                //connectionString = "Data Source=103.48.51.111,1232;Initial Catalog= dolphindb; User Id= dolphin; Password=Cn0my9~7; Integrated Security=false;";
-                //connectionString = "Data Source=103.48.51.111,1232;Initial Catalog= dolphindbnewBak; User Id= dolphin; Password=Cn0my9~7; Integrated Security=false;";
             }
             catch (Exception)
             {

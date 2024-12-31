@@ -94,13 +94,16 @@ namespace Dolphin.Models
         public string AssociateName { get; set; }
         public string FK_SponsorId { get; set; }
 
-
+        public List<Master> lstTrad { get; set; }
+        public string Status { get; set; }
+        public string AssociateLoginId { get; set; }
         public string HoldTo { get; set; }
         public string HoldFrom { get; set; }
         public string HolderName { get; set; }
         public string TotalPaidAmount { get; set; }
         public string BookingDate { get; set; }
         public string CustomerName { get; set; }
+        public DataTable AssociatedownLoginId { get; set; }
 
         #endregion
 
@@ -327,6 +330,16 @@ namespace Dolphin.Models
                                   new SqlParameter("@PlotNumber", PlotNumber),
                                   };
             DataSet ds = Connection.ExecuteQuery("PlotList", para);
+            return ds;
+        }
+
+
+        public DataSet GetDownlineDetails()
+        {
+            SqlParameter[] para = {
+
+                                      new SqlParameter("@LoginId", LoginId) };
+            DataSet ds = Connection.ExecuteQuery("GetDownAssociateDet", para);
             return ds;
         }
 
@@ -930,6 +943,19 @@ namespace Dolphin.Models
 
                             };
             DataSet ds = Connection.ExecuteQuery("DetailsPlotAvailabilityReportsStatus", para);
+            return ds;
+        }
+        
+        public DataSet promotersave()
+        {
+            SqlParameter[] para =
+                            {
+
+                                new SqlParameter("@LoginId",LoginId),
+                                new SqlParameter("@AssociatedownLoginId",AssociatedownLoginId),
+                                new SqlParameter("@AddedBy",AddedBy),
+                            };
+            DataSet ds = Connection.ExecuteQuery("Savepromoter", para);
             return ds;
         }
 
