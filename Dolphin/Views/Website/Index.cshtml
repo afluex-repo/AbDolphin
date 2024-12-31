@@ -861,12 +861,29 @@
                                             <table class="table bg-transparent table-bordered table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>User Name</th>
-                                                        <th>Gift Amount</th>
+                                                        <th>Sr.No.</th>
+                                                        <th>Name</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+
+                                                     @if (Model != null)
+                                                        {
+                                                            if (Model.lstoffer != null)
+                                                            {
+                                                                int i = 1;
+                                                                foreach (var Item in Model.lstoffer)
+                                                                {
+                                                                    <tr class="text-left">
+                                                                        <td>@i</td>
+                                                                        <td>@Item.Name</td>
+                                                                    </tr>
+                                                                    i++;
+                                                                }
+                                                            }
+                                                        }
+
+                                                    @*<tr>
                                                         <td>John Doe</td>
                                                         <td>$50</td>
                                                     </tr>
@@ -933,7 +950,7 @@
                                                     <tr>
                                                         <td>Lucas Pink</td>
                                                         <td>$155</td>
-                                                    </tr>
+                                                    </tr>*@
                                                 </tbody>
                                             </table>
                                         </div>
