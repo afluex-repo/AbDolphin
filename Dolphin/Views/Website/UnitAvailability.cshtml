@@ -59,11 +59,7 @@
 
 @using (Html.BeginForm("UnitAvailability", "Website", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-
-
-
-
-
+    
 
     <!-- section-top-map -->
     <section class="section-top-map">
@@ -116,44 +112,50 @@
                         <div class="wg-filter style-2">
                             <div class="form-title style-2">
                                 <div class="nice-select" tabindex="0">
-                                    <span class="current">Select Site Type</span>
-                                    <ul class="list">
+                                    @*<span class="current">Select Site Type</span>*@
+                                    @Html.DropDownListFor(m => m.SiteTypeID, new SelectList(ViewBag.ddlSiteType, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteTypeChange();" })
+                                    @*<ul class="list">
                                         <li data-value class="option selected">Status</li>
                                         <li data-value="bungalow" class="option">Bungalow</li>
-                                    </ul>
+                                    </ul>*@
                                 </div>
                                 <div class="nice-select" tabindex="0">
-                                    <span class="current">Select Site</span>
+                                    @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                                    @*<span class="current">Select Site</span>
                                     <ul class="list">
                                         <li data-value="1" class="option">Type</li>
                                         <li data-value="bungalow" class="option">Bungalow</li>
-                                    </ul>
+                                    </ul>*@
                                 </div>
                                 <div class="nice-select" tabindex="0">
-                                    <span class="current">Select Site Sector</span>
+                                    @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
+                                    @*<span class="current">Select Site Sector</span>
                                     <ul class="list">
                                         <li data-value="" class="option selected focus">Baths</li>
                                         <li data-value="floating" class="option">Floating baths</li>
                                         <li data-value="massage" class="option">Massage baths</li>
                                         <li data-value="floor-standing" class="option">Floor-standing bath</li>
                                         <li data-value="built-in" class="option">Built-in baths</li>
-                                    </ul>
+                                    </ul>*@
                                 </div>
                                 <div class="nice-select" tabindex="0">
-                                    <span class="current">Select Block</span>
+                                    @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
+                                    @*<span class="current">Select Block</span>
                                     <ul class="list">
                                         <li data-value="" class="option selected focus">Beds</li>
                                         <li data-value="twin" class="option">Twin beds</li>
-                                    </ul>
+                                    </ul>*@
                                 </div>
                                 <form>
-                                    <fieldset>
-                                        <input type="text" placeholder="Address, City, ZIP...">
-                                    </fieldset>
+                                    @*<fieldset>*@
+                                        @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @placeholder = "Plot Number" })
+                                        @*<input type="text" placeholder="Address, City, ZIP...">*@
+                                    @*</fieldset>*@
                                 </form>
-                                <div class="btn-filter show-form">
+                                <div class="btn-filter show-form" onclick="ClearFilter()">
                                     <div class="icons">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      
+                                        @*<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M21 4H14" stroke="#F1913D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                             <path d="M10 4H3" stroke="#F1913D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                             <path d="M21 12H12" stroke="#F1913D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -163,13 +165,14 @@
                                             <path d="M14 2V6" stroke="#F1913D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                             <path d="M8 10V14" stroke="#F1913D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                             <path d="M16 18V22" stroke="#F1913D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
+                                        </svg>*@ Clear
                                     </div>
                                 </div>
                                 <div class="wrap-btn">
-                                    <a href="#" class="tf-btn bg-color-primary pd-3 fw-6">
+                                    @*<a href="#" class="tf-btn bg-color-primary pd-3 fw-6" id="btnSearchPlot" onclick="return GetDetails(); ">
                                         Search <i class="icon-MagnifyingGlass fw-6"></i>
-                                    </a>
+                                    </a>*@
+                                    <button type="submit" class="tf-btn bg-color-primary pd-3 fw-6" name="Search" value="Search" id="btnSearchPlot" onclick="return GetDetails(); ">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -184,277 +187,153 @@
     <section class="section-property tf-spacing-2 ">
         <div class="tf-container">
             <div class="row">
-                <div class="col-md-3 mb-3 px-2">
-                    <div class="card bordered rounded-2 text-center shadow-none" style="background: #e66b6b">
-                        <div class="card-body">
-                            <input type="hidden" value="1">
-                            <input type="hidden" value="2">
-                            <input type="hidden" value="2">
-                            <ul class="ploatArea">
-                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
-                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
 
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3 px-2">
-                    <div class="card bordered rounded-2 text-center shadow-none" style="background: greenyellow">
-                        <div class="card-body">
-                            <input type="hidden" value="1">
-                            <input type="hidden" value="2">
-                            <input type="hidden" value="2">
-                            <ul class="ploatArea">
-                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
-                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3 px-2">
-                    <div class="card bordered rounded-2 text-center shadow-none" style="background: #e66b6b">
-                        <div class="card-body">
-                            <input type="hidden" value="1">
-                            <input type="hidden" value="2">
-                            <input type="hidden" value="2">
-                            <ul class="ploatArea">
-                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
-                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3 px-2">
-                    <div class="card bordered rounded-2 text-center shadow-none" style="background: greenyellow">
-                        <div class="card-body">
-                            <input type="hidden" value="1">
-                            <input type="hidden" value="2">
-                            <input type="hidden" value="2">
-                            <ul class="ploatArea">
-                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
-                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3 px-2">
-                    <div class="card bordered rounded-2 text-center shadow-none" style="background: #e66b6b">
-                        <div class="card-body">
-                            <input type="hidden" value="1">
-                            <input type="hidden" value="2">
-                            <input type="hidden" value="2">
-                            <ul class="ploatArea">
-                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
-                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3 px-2">
-                    <div class="card bordered rounded-2 text-center shadow-none" style="background: #e66b6b">
-                        <div class="card-body">
-                            <input type="hidden" value="1">
-                            <input type="hidden" value="2">
-                            <input type="hidden" value="2">
-                            <ul class="ploatArea">
-                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
-                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3 px-2">
-                    <div class="card bordered rounded-2 text-center shadow-none" style="background: #e66b6b">
-                        <div class="card-body">
-                            <input type="hidden" value="1">
-                            <input type="hidden" value="2">
-                            <input type="hidden" value="2">
-                            <ul class="ploatArea">
-                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
-                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3 px-2">
-                    <div class="card bordered rounded-2 text-center shadow-none" style="background: greenyellow">
-                        <div class="card-body">
-                            <input type="hidden" value="1">
-                            <input type="hidden" value="2">
-                            <input type="hidden" value="2">
-                            <ul class="ploatArea">
-                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
-                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-            <!-- /section-property -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <div class="content-wrapper">
-                <div class="breadcrumb-wrap bg-f unitAvaila">
-                    <div class="container">
-                        <div class="breadcrumb-title">
-                            <h2>Unit Availability</h2>
-                            <ul class="breadcrumb-menu list-style">
-                                <li><a href="/Website/Index">Home </a></li>
-                                <li>Unit Availability</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <section class="agent-wrap pt-50 pb-0">
-                    <div class="container">
-                        <div class="section-title style1 text-center mb-40">
-                            <h2>Unit Availability</h2>
-                        </div>
-                    </div>
-                </section>
-                <section class="pb-50">
-                    <div class="container">
-                        <div class="search-property style1 mt-0 mb-50">
-                            <div class="property-search-form justify-content-center">
-                                <div class="form-group">
-                                    @Html.DropDownListFor(m => m.SiteTypeID, new SelectList(ViewBag.ddlSiteType, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteTypeChange();" })
-                                </div>
-                                <div class="form-group">
-                                    @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
-                                </div>
-                                <div class="form-group">
-                                    @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
-                                </div>
-                                <div class="form-group">
-                                    @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
-                                </div>
-                                <div class="form-group">
-                                    @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @placeholder = "Plot Number" })
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn style2" name="Search" value="Search" id="btnSearchPlot" onclick="return GetDetails(); ">Search Property</button>
-                                </div>
-                                <div class="form-group">
-                                    <button type="buttom" class="btn style2 clearProper" style="background: #2c3240;">
-                                        <a class="text-white" href="/Website/UnitAvailability">Clear Property Filter</a>
-                                    </button>
-                                    @*<input type="submit" name="Search" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails(); " />*@
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="agent-wrap pt-20 pb-0">
-                    <div class="container">
-                        <div class="row g-3 justify-content-center mb-30">
-                            <div class="col-lg-2 col-md-6">
-                                <div class="d-flex justify-content-between align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
-                                    <div class="ms-2"><b>Availability Status</b></div>
-                                    <div class="font-22 text-primary">
-                                        <i class="lni lni-arrow-right"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-6">
-                                <div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
-                                    <div class="font-22 text-primary">
-                                        <span class="badge rounded-pill" style="background:#e66b6b">&nbsp;</span>
-                                    </div>
-                                    <div class="ms-2">Booked</div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-6">
-                                <div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
-                                    <div class="font-22 text-primary">
-                                        <span class="badge rounded-pill" style="background:#69ce69">&nbsp;</span>
-                                    </div>
-                                    <div class="ms-2">Available</div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-6">
-                                <div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
-                                    <div class="font-22 text-primary">
-                                        <span class="badge rounded-pill" style="background:#ffff00">&nbsp;</span>
-                                    </div>
-                                    <div class="ms-2"> On Hold</div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-6">
-                                <div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
-                                    <div class="font-22 text-primary">
-                                        <span class="badge rounded-pill" style="background:#e470e4"> &nbsp;</span>
-                                    </div>
-                                    <div class="ms-2">Allotted</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <div class="container">
-                        <div class="row g-1 mt-4 mb-30">
-                            @if (Model != null)
+                @if (Model != null)
                 {
                     if (Model.lstPlot != null)
                     {
                         foreach (var Item in Model.lstPlot)
                         {
-                                        <div class="col-md-3">
-                                            <div class="card bordered rounded-2 text-center shadow-none" style="background: @Item.ColorCSS">
-                                                <div class="card-body">
-                                                    <input type="hidden" value="@Item.PlotID" />
-                                                    <input type="hidden" value="@Item.SiteID" />
-                                                    <input type="hidden" value="@Item.SectorID" />
-                                                    <ul class="ploatArea">
-                                                        <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">@Item.PlotNumber</strong></li>
-                                                        <li><b>Plot Area :  </b>  <span>@Item.PlotArea  (@Item.SectorName,@Item.BlockName)</span></li>
-                                                        @*<li><b>&nbsp; </b> <span>(@Item.SectorName,@Item.BlockName)</span></li>*@
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                }
-                            }
+
+                            <div class="col-md-3 mb-3 px-2">
+                                <div class="card bordered rounded-2 text-center shadow-none" style="background: @Item.ColorCSS">
+                                    <div class="card-body">
+                                        <input type="hidden" value="@Item.PlotID">
+                                        <input type="hidden" value="@Item.SiteID">
+                                        <input type="hidden" value="@Item.SectorID">
+                                        <ul class="ploatArea">
+                                            <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">@Item.PlotNumber</strong></li>
+                                            <li><b>Plot Area :  </b>  <span>@Item.PlotArea  (@Item.SectorName,@Item.BlockName)</span></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        }
+                    }
+                }
+
+
+                @*<div class="col-md-3 mb-3 px-2">
+                    <div class="card bordered rounded-2 text-center shadow-none" style="background: #e66b6b">
+                        <div class="card-body">
+                            <input type="hidden" value="1">
+                            <input type="hidden" value="2">
+                            <input type="hidden" value="2">
+                            <ul class="ploatArea">
+                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
+                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
+
+                            </ul>
                         </div>
                     </div>
-                </section>
+                </div>
+                <div class="col-md-3 mb-3 px-2">
+                    <div class="card bordered rounded-2 text-center shadow-none" style="background: greenyellow">
+                        <div class="card-body">
+                            <input type="hidden" value="1">
+                            <input type="hidden" value="2">
+                            <input type="hidden" value="2">
+                            <ul class="ploatArea">
+                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
+                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3 px-2">
+                    <div class="card bordered rounded-2 text-center shadow-none" style="background: #e66b6b">
+                        <div class="card-body">
+                            <input type="hidden" value="1">
+                            <input type="hidden" value="2">
+                            <input type="hidden" value="2">
+                            <ul class="ploatArea">
+                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
+                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3 px-2">
+                    <div class="card bordered rounded-2 text-center shadow-none" style="background: greenyellow">
+                        <div class="card-body">
+                            <input type="hidden" value="1">
+                            <input type="hidden" value="2">
+                            <input type="hidden" value="2">
+                            <ul class="ploatArea">
+                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
+                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3 px-2">
+                    <div class="card bordered rounded-2 text-center shadow-none" style="background: #e66b6b">
+                        <div class="card-body">
+                            <input type="hidden" value="1">
+                            <input type="hidden" value="2">
+                            <input type="hidden" value="2">
+                            <ul class="ploatArea">
+                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
+                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3 px-2">
+                    <div class="card bordered rounded-2 text-center shadow-none" style="background: #e66b6b">
+                        <div class="card-body">
+                            <input type="hidden" value="1">
+                            <input type="hidden" value="2">
+                            <input type="hidden" value="2">
+                            <ul class="ploatArea">
+                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
+                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3 px-2">
+                    <div class="card bordered rounded-2 text-center shadow-none" style="background: #e66b6b">
+                        <div class="card-body">
+                            <input type="hidden" value="1">
+                            <input type="hidden" value="2">
+                            <input type="hidden" value="2">
+                            <ul class="ploatArea">
+                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
+                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3 px-2">
+                    <div class="card bordered rounded-2 text-center shadow-none" style="background: greenyellow">
+                        <div class="card-body">
+                            <input type="hidden" value="1">
+                            <input type="hidden" value="2">
+                            <input type="hidden" value="2">
+                            <ul class="ploatArea">
+                                <li><b>Plot Number :  </b> <strong class="font-weight-bold d-block">A1</strong></li>
+                                <li><b>Plot Area :  </b>  <span>2000.00 Sq/Ft  (Sector 1,Block A)</span></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>*@
             </div>
+        </div>
+    </section>
+            <!-- /section-property -->
+
+    
+
 }
 <script>
     function GetDetails() {
@@ -472,6 +351,11 @@
             return false;
         }
         return true;
+    }
+
+    function ClearFilter()
+    {
+        window.location.href = "/Website/UnitAvailability";
     }
     function onSiteTypeChange() {
         //  $("#divload").css({ 'display': '' });

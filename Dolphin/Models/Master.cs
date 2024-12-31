@@ -11,6 +11,14 @@ namespace Dolphin.Models
     public class Master : Common
     {
         #region Properties
+
+        public string HoldDate { get; set; }
+        public string HoldAmount { get; set; }
+        public string RecieptNo { get; set; }
+        public string CustomerDetails { get; set; }
+        public string AssociateDetails { get; set; }
+        public string BookingNumber { get; set; }
+        public string NetPlotAmount { get; set; }
         public string Subject { get; set; }
         public string LoginId { get; set; }
         public string Body { get; set; }
@@ -86,13 +94,16 @@ namespace Dolphin.Models
         public string AssociateName { get; set; }
         public string FK_SponsorId { get; set; }
 
-
+        public List<Master> lstTrad { get; set; }
+        public string Status { get; set; }
+        public string AssociateLoginId { get; set; }
         public string HoldTo { get; set; }
         public string HoldFrom { get; set; }
         public string HolderName { get; set; }
         public string TotalPaidAmount { get; set; }
         public string BookingDate { get; set; }
         public string CustomerName { get; set; }
+        public DataTable AssociatedownLoginId { get; set; }
 
         #endregion
 
@@ -319,6 +330,34 @@ namespace Dolphin.Models
                                   new SqlParameter("@PlotNumber", PlotNumber),
                                   };
             DataSet ds = Connection.ExecuteQuery("PlotList", para);
+            return ds;
+        }
+
+
+        public DataSet GetDownlineDetails()
+        {
+            SqlParameter[] para = {
+
+                                      new SqlParameter("@LoginId", LoginId) };
+            DataSet ds = Connection.ExecuteQuery("GetDownAssociateDet", para);
+            return ds;
+        }
+
+        public DataSet BookingDetails()
+        {
+            SqlParameter[] para = { 
+                                  new SqlParameter("@PlotID", PlotID),
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetBookingDetails", para);
+            return ds;
+        }
+
+        public DataSet BookingHoldDetails()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@PlotID", PlotID),
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetBookingHoldDetails", para);
             return ds;
         }
 
@@ -904,6 +943,19 @@ namespace Dolphin.Models
 
                             };
             DataSet ds = Connection.ExecuteQuery("DetailsPlotAvailabilityReportsStatus", para);
+            return ds;
+        }
+        
+        public DataSet promotersave()
+        {
+            SqlParameter[] para =
+                            {
+
+                                new SqlParameter("@LoginId",LoginId),
+                                new SqlParameter("@AssociatedownLoginId",AssociatedownLoginId),
+                                new SqlParameter("@AddedBy",AddedBy),
+                            };
+            DataSet ds = Connection.ExecuteQuery("Savepromoter", para);
             return ds;
         }
 
