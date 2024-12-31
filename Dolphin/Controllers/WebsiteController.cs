@@ -24,8 +24,7 @@ namespace Dolphin.Controllers
                 {
                     ViewBag.BookingId = ds.Tables[0].Rows[0]["TotalPk_BookingId"].ToString();
                 }
-
-
+                
                 List<Website> lstInst = new List<Website>();
                 DataSet dsInst = model.GetTopBusiness();
                 if (dsInst != null && dsInst.Tables[0].Rows.Count > 0)
@@ -44,20 +43,27 @@ namespace Dolphin.Controllers
                     model.lstTopBusiness = lstInst;
                     ViewBag.ClosingDate = dsInst.Tables[1].Rows[0]["ClosingDate"].ToString();
                 }
+
+                List<Website> lstoffer = new List<Website>();
+                DataSet dss = model.GetBusiness();
+                if (dss != null && dss.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dss.Tables[0].Rows)
+                    {
+                        Website obj = new Website();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["FullName"].ToString();
+                        obj.Business = r["TotalPaidAmount"].ToString();
+                        lstoffer.Add(obj);
+                    }
+                    model.lstoffer = lstoffer;
+                }
             }
             catch (Exception ex)
             {
                 TempData["Dashboard"] = ex.Message;
             }
-
-
-
-
-
-
-
-
-
+            
             #region ddlSiteType
             Master objSiteType = new Master();
             int count1 = 0;
@@ -79,8 +85,7 @@ namespace Dolphin.Controllers
             ViewBag.ddlSiteType = ddlSiteType;
 
             #endregion
-
-
+            
             List<SelectListItem> ddlSite = new List<SelectListItem>();
             ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
             ViewBag.ddlSite = ddlSite;
@@ -92,24 +97,10 @@ namespace Dolphin.Controllers
             List<SelectListItem> ddlBlock = new List<SelectListItem>();
             ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
             ViewBag.ddlBlock = ddlBlock;
-
-
-
-
-
-
-
-
+            
             return View(model);
         }
-
-
-
-        //{
-
-        //    return View();
-        //}
-
+        
         public ActionResult Contact()
         {
             return View();

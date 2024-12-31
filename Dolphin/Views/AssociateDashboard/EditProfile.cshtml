@@ -118,9 +118,16 @@
         </div>
     </div>
 }
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-
+    $(document).ready(function () {
+        var sponsorID = $('#SponsorID').val();
+        if (sponsorID.length > 0) {
+            var maskedID = 'x'.repeat(sponsorID.length);
+            //var maskedID = 'x'.repeat(sponsorID.length - 4) + sponsorID.slice(-4);
+            $('#SponsorID').val(maskedID);
+        }
+    });
     function getStateCity() {
         debugger
         var pincode = $('#Pincode').val();
