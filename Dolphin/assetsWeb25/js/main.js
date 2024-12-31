@@ -561,7 +561,8 @@
 
 $(document).ready(function () {
     $("#modalLogin").modal('show');
-    $("#modalGif").modal('show'); 
+    $("#modalGif").modal('show');
+    $("#festival").modal('show');
 });
 $(document).ready(function () {
     $("#signUp").modal('show');
