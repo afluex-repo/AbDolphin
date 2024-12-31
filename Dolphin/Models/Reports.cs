@@ -101,6 +101,10 @@ namespace Dolphin.Models
 
         public List<Reports> lstSiteAndAssociateWiseBooking { get; set; }
         public string TotalBooking { get; set; }
+        public string Pk_DownPromId { get; set; }
+        public string AssociateDeatils { get; set; }
+        public string DownAssociateDeatils { get; set; }
+        public string Date { get; set; }
 
 
         #region 31/01/2022
@@ -385,6 +389,31 @@ namespace Dolphin.Models
             DataSet ds = Connection.ExecuteQuery("GetTDSReportDateWise", para);
             return ds;
         }
+
+        public List<Reports> lstpromoter { get; set; }
+
+        public DataSet GetPromoter()
+        {
+            SqlParameter[] para = {
+                                       new SqlParameter("@LoginId", LoginId),
+                                      //new SqlParameter("@FromDate", FromDate),
+                                      //new SqlParameter("@ToDate", ToDate)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetPromoter", para);
+            return ds;
+        }
+
+        public DataSet promoterDelete()
+        {
+            SqlParameter[] para = {
+                                       new SqlParameter("@Pk_PromoterId", Pk_DownPromId),
+                                       new SqlParameter("@DeletedBy", UpdatedBy),
+                                  };
+            DataSet ds = Connection.ExecuteQuery("DeletePromoter", para);
+            return ds;
+        }
+
+
     }
 }
 

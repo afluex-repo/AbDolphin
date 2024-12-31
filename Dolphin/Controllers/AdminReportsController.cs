@@ -4797,6 +4797,67 @@ namespace Dolphin.Controllers
             return View(model);
         }
 
+        public ActionResult Promoterlist()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("Promoterlist")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult SearchPromoter(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+            //model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            //model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetPromoter();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Pk_DownPromId = r["Pk_DownPromId"].ToString();
+                    obj.AssociateDeatils = r["AssociateDeatils"].ToString();
+                    obj.DownAssociateDeatils = r["DownAssociateDeatils"].ToString();
+                    obj.Date = r["AddDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstpromoter = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult DeletePromoter(Reports model,string promoterId)
+        {
+            try
+            {
+                model.Pk_DownPromId = promoterId;
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.promoterDelete();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if(ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["prmMSg"] = "Prmototer Detail Deleted Successfully..";
+                    }
+                    else
+                    {
+                        TempData["prmMSg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["prmMSg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch(Exception ex)
+            {
+                TempData["prmMSg"] = ex.Message;
+            }
+            return RedirectToAction("Promoterlist", "AdminReports");
+        }
+
+
 
     }
 }

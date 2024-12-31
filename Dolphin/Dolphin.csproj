@@ -3141,6 +3141,7 @@
     <Content Include="Views\Plot\PendingPaymentReport.cshtml" />
     <Content Include="Views\AssociateDashboard\LedgerAssociate.cshtml" />
     <Content Include="Views\Master\Promoter.cshtml" />
+    <Content Include="Views\AdminReports\Promoterlist.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
