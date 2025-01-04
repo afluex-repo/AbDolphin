@@ -2856,6 +2856,7 @@
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="Views\AdminReports\TranferPayment.cshtml" />
+    <Content Include="Views\Plot\ReverseApprovePayment.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

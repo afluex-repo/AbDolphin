@@ -725,6 +725,23 @@ namespace Dolphin.Models
             return ds;
         }
 
+        public DataSet GetPaymentApprovedReportList()
+        {
+            SqlParameter[] para =
+                            {
+                                 new SqlParameter("@CustomerLoginID",CustomerID),
+                                 new SqlParameter("@PaymentStatus",PaymentStatus),
+                                  new SqlParameter("@FromDate",FromDate),
+                                   new SqlParameter("@ToDate",ToDate),
+                                   new SqlParameter("@ApprovedToDate",ApprovedToDate),
+                                   new SqlParameter("@ApprovedFromDate",ApprovedFromDate),
+                                   new SqlParameter("@FromAmount",FromAmount),
+                                   new SqlParameter("@ToAmount",ToAmount)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetDeatilsForApprovedPaymentReport", para);
+            return ds;
+        }
+
         public string ApproveDescription { get; set; }
         public string RejectDescription { get; set; }
 
@@ -1375,6 +1392,17 @@ namespace Dolphin.Models
             return ds;
         }
 
+
+        public DataSet ReverseApprovePayment()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_BookingDetailsId",UserID),
+                                      new SqlParameter("@Description",Description),
+                                      new SqlParameter("@UpdatedBy",AddedBy),
+                                        new SqlParameter("@ApprovedDate",ApprovedDate)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("ReverseApprovedPayment", para);
+            return ds;
+        }
     }
 }
 
