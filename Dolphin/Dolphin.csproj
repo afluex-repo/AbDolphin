@@ -3142,6 +3142,7 @@
     <Content Include="Views\AssociateDashboard\LedgerAssociate.cshtml" />
     <Content Include="Views\Master\Promoter.cshtml" />
     <Content Include="Views\AdminReports\Promoterlist.cshtml" />
+    <Content Include="Views\AdminReports\PromoterBussinesslist.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

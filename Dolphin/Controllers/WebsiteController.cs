@@ -56,7 +56,8 @@ namespace Dolphin.Controllers
                         obj.Business = r["TotalPaidAmount"].ToString();
                         lstoffer.Add(obj);
                     }
-                    model.lstoffer = lstoffer;
+                    model.lstoffer = lstoffer;  
+                   
                 }
             }
             catch (Exception ex)

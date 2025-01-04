@@ -24,10 +24,10 @@
                 <div class="col-md-12">
                         <div class="col-md-4">
                             <label class="float-label">LoginID<span style="color:red">*</span></label>
-                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "LoginId" })
+                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "LoginId", @onchange = "return GetassociateName()" })
+                            <span style="color:red;" id="userName"></span>
                         </div>
                 </div>
-                
             </div>
         </div>
         <div class="card">
@@ -43,7 +43,7 @@
                         <tbody id="TextBoxContainer">
                             <tr class="mycontainer" id="mainrow">
                                 <td>
-                                    @Html.TextBoxFor(m => m.AssociateLoginId, new { @class = "form-control AssociateLoginId", @Placeholder = "LoginId" })
+                                    @Html.TextBoxFor(m => m.AssociateLoginId, new { @class = "form-control AssociateLoginId", @Placeholder = "LoginId"})
                                 </td>
                                 <td>
                                     <button type="button" id="add" class="btn btn-sm btn-success addRow">ADD</button>
@@ -154,6 +154,34 @@
 
 
 <script>
+    function GetassociateName() {
+        var loginId = $("#LoginId").val();
+
+        if (!loginId) {
+            alert("Please enter a Login ID.");
+            return;
+        }
+        $.ajax({
+            url: '/Master/getUserDetails',
+            type: 'GET',
+            data: { LoginID: loginId },
+            contentType: 'application/json',
+            success: function (response) {
+                if (response.Result === "yes") {
+                    $("#userName").text(response.Name);
+                } else if (response.Result === "no") {
+                    alert("No user details found.");
+                } else {
+                    alert("Error: " + response.Message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Error details: " + status + " - " + error);
+                alert("An error occurred while retrieving user details.");
+            }
+        });
+    }
+
     function validateform() {
         $(".errortext").removeClass("errortext");
         if ($('#LoginId').val() == '') {

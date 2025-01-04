@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-@using (Html.BeginForm("Promoterlist", "AdminReports", FormMethod.Post, new { @id = "form1", name = "formKYC" }))
+@using (Html.BeginForm("Promoterlist", "AdminReports", FormMethod.Post, new { @id = "form1",@autocomplete="off" }))
 {
 
     <div class="page-content">
@@ -27,10 +27,16 @@
                           <div class="col-md-3 mb-3">
                               <div class="form-group">
                                   <label>LoginId</label>
-                                  @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @readonly = "ds", @placeholder = "LoginId" })
+                                  @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "LoginId" })
                               </div>
                           </div>
                         @*<div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label>Down LoginId</label>
+                                @Html.TextBoxFor(m => m.AssociateLoginID, new { @class = "form-control", @placeholder = "Down LoginId" })
+                            </div>
+                        </div>*@
+                        <div class="col-md-3 mb-3">
                             <div class="form-group">
                                 <label> From Date</label>
                                 @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds", @placeholder = "DD/MM/YYYY" })
@@ -41,9 +47,7 @@
                                 <label>  To Date</label>
                                 @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds", @placeholder = "DD/MM/YYYY" })
                             </div>
-                        </div>*@
-
-
+                        </div>
                         <div class="col-md-2 mb-3">
                             <div class="form-group">
                                 <label class="d-block">  &nbsp;</label>
@@ -63,11 +67,11 @@
                         <thead>
                             <tr class="table-active">
                                 <th>Sr No.</th>
-                                <th hidden>Pk_DownPromId</th>
+                                <th hidden>Pk_PromoterId</th>
                                 <th>Associate Details</th>
                                 <th>Downline Associate Deatils</th>
                                 <th>Date</th>
-                                <th>Action</th>
+                                @*<th>Action</th>*@
                             </tr>
                         </thead>
                         <tbody>
@@ -80,13 +84,13 @@
                                     {
                                         <tr class="text-left">
                                             <td>@i</td>
-                                            <td hidden>@Item.Pk_DownPromId</td>
+                                            <td hidden>@Item.Pk_PromoterId</td>
                                             <td>@Item.AssociateDeatils</td>
                                             <td>@Item.DownAssociateDeatils</td>
                                             <td>@Item.Date</td>
-                                            <td>
+                                            @*<td>
                                                 <a href="/AdminReports/DeletePromoter?promoterId=@Item.Pk_DownPromId" class="btn btn-danger btn-sm">Delete</a>
-                                            </td>
+                                            </td>*@
                                         </tr>
 
                                         i++;

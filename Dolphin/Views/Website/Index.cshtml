@@ -843,317 +843,32 @@
 
 
 <!-- .offer user details-->
-<div class="modal modal-account fade" id="modalGif">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header border-bottom-0">
-                <h1 class="modal-title fs-3" id="staticBackdropLabel">Abdolphin: Where Innovation Meets Dedication.</h1>
-                <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
-            </div>
-            <div class="flat-account">
-                <div class="banner-account">
-                    <div class="row align-items-center gx-5">
-                        <div class="col-md-12">
-                            <div class=" bg-f offerContentArea">
-                                <div class="row align-items-center justify-content-center gx-5">
-                                    <div class="col-md-8 col-lg-8">
-                                        <div class="table-responsive mt-4">
-                                            <table class="table bg-transparent table-bordered table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>User Name</th>
-                                                        <th>Gift Amount</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>John Doe</td>
-                                                        <td>$50</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Jane Smith</td>
-                                                        <td>$100</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Michael Brown</td>
-                                                        <td>$75</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Lisa Johnson</td>
-                                                        <td>$120</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Chris Green</td>
-                                                        <td>$30</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Anna White</td>
-                                                        <td>$200</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Paul Black</td>
-                                                        <td>$90</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Sarah Grey</td>
-                                                        <td>$110</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Emily Blue</td>
-                                                        <td>$60</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Ryan Yellow</td>
-                                                        <td>$40</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>David Red</td>
-                                                        <td>$250</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Olivia Gold</td>
-                                                        <td>$180</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Ethan Silver</td>
-                                                        <td>$130</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Chloe Bronze</td>
-                                                        <td>$70</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Matthew Aqua</td>
-                                                        <td>$95</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Grace Purple</td>
-                                                        <td>$80</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Lucas Pink</td>
-                                                        <td>$155</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+@if (Model.lstoffer != null)
+{
+    <div class="modal modal-account fade" id="modalGif">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h1 class="modal-title fs-3" id="staticBackdropLabel">Abdolphin: Where Innovation Meets Dedication.</h1>
+                    <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /.offer details-->
-<!-- .offer -->
-<div class="modal modal-account fade" id="modalLogin">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header border-bottom-0">
-                <h1 class="modal-title fs-3" id="staticBackdropLabel">Abdolphin: Where Innovation Meets Dedication.</h1>
-                <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
-            </div>
-            <div class="flat-account">
-                <div class="banner-account">
-                    <img src="https://www.abdolphininfratech.com/assetsWeb/img/offer.jpg" alt="banner">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /.offer -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container">
-    <div class="search-property style1">
-        @using (Html.BeginForm("UnitAvailability", "Website", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data", @class = "property-search-form justify-content-center" }))
-        {
-
-            <div class="form-group">
-
-                @Html.DropDownListFor(m => m.SiteTypeID, new SelectList(ViewBag.ddlSiteType, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteTypeChange();" })
-            </div>
-            <div class="form-group">
-                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
-            </div>
-            <div class="form-group">
-                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
-            </div>
-                        <div class="form-group">
-                            @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
-                        </div>
-                        <div class="form-group">
-                            @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @placeholder = "Plot Number" })
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="btn style2" name="Search" value="Search" id="btnSearchPlot" onclick="return GetDetails(); ">Search Property</button>
-                            @*<input type="submit" name="Search" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails(); " />*@
-                        </div>
-                        <div class="form-group">
-                            <button type="buttom" class="btn style2 clearProper" style="background: #2c3240;">
-
-
-                                <a class="text-white" href="/Website/Index">Clear Property Filter</a>
-
-                            </button>
-                        </div>
-        }
-    </div>
-</div>
-
-
-
-
-@*<div id="myModal" class="modal fade " role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content secondPopup" style="top:100px">
-                <div class="modal-header p-0">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="ri-close-line"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="newyear">
-                                <img style="width:100%" src="~/assets2/img/AbDolphineOffer.jpeg" class="img-responsive" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
-
-
-@*<div id="myOffer" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="top:100px">
-                <div class="modal-header p-0">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"></h4>
-                </div>
-                <div class="modal-body position-relative" id="offerBody">
-                    <div class="row">
-                        <div class="col-md-12 offerContentArea">
-                            <div class="text-center">
-                                <h1 id="myElem" style="display:none">@ViewBag.BookingId</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
-
-
-@*===================================================================================*@
-
-<style>
-    @@media (max-width:767px) {
-        #offerBody {
-            height: 383px;
-        }
-
-        #offerTable .table-responsive {
-            height: 259px !important;
-        }
-    }
-
-    #offerBody .offerContentArea {
-        position: absolute;
-        bottom: 15%;
-    }
-
-
-
-    #myElem {
-        display: block;
-        position: absolute;
-        bottom: 10%;
-        left: 45%;
-        color: #fb9f03;
-        font-weight: bold;
-        font-size: 66px;
-        font-family: inherit;
-    }
-
-    #offerTable .col-md-8 {
-        position: absolute;
-        top: 28%;
-    }
-
-    #offerTable .table-responsive {
-        height: 358px;
-        border: 6px solid #ffffff52;
-        color: #fff;
-        border-radius: 23px;
-        overflow: auto;
-    }
-
-        #offerTable .table-responsive tr td, #offerTable .table-responsive tr {
-            color: #fff !important;
-        }
-</style>
-
-
-    @if (Model.lstoffer != null)
-    {
-        <div class="modal fade show" id="signUp" tabindex="-1" role="dialog" aria-modal="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header border-0">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="ri-close-line text-white"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body bg-white" id="offerTable">
+                <div class="flat-account">
+                    <div class="banner-account">
                         <div class="row align-items-center gx-5">
                             <div class="col-md-12">
-                                <div class="login-bg bg-f offerContentArea position-relative" style="background-size:100% 100%!important;">
+                                <div class=" bg-f offerContentArea">
                                     <div class="row align-items-center justify-content-center gx-5">
-                                        <div class="col-md-8">
+                                        <div class="col-md-8 col-lg-8">
                                             <div class="table-responsive mt-4">
-                                                <table class="table table-bordered table-striped">
-                                                    <thead class="text-center">
+                                                <table class="table bg-transparent table-bordered table-striped">
+                                                    <thead>
                                                         <tr>
                                                             <th>Sr.No.</th>
                                                             <th>Name</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody class="text-center">
+                                                    <tbody>
+
                                                         @if (Model != null)
                                                         {
                                                             if (Model.lstoffer != null)
@@ -1181,9 +896,51 @@
                 </div>
             </div>
         </div>
-    }
+    </div>
+}
+
+<!-- /.offer details-->
+<!-- .offer -->
+<div class="modal modal-account fade" id="modalLogin">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h1 class="modal-title fs-3" id="staticBackdropLabel">Abdolphin: Where Innovation Meets Dedication.</h1>
+                <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
+            </div>
+            <div class="flat-account">
+                <div class="banner-account">
+                    <img src="https://www.abdolphininfratech.com/assetsWeb/img/offer.jpg" alt="banner">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.offer -->
 
 
+
+
+
+<!-- .offer -->
+<div class="modal modal-account fade" id="festival">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h1 class="modal-title fs-3" id="staticBackdropLabel">Wishing our incredible team continued success, happiness, and growth.</h1>
+                <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
+            </div>
+            <div class="flat-account">
+                <div class="banner-account">
+                    <img src="~/assetsWeb25/images/section/festival.jpg" alt="banner">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.offer -->
+
+ 
 
 @*===========================================================================*@
 

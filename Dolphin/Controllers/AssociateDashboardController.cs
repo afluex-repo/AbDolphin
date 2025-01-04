@@ -123,6 +123,7 @@ namespace Dolphin.Controllers
                     ViewBag.TargetPercentage = ds.Tables[0].Rows[0]["TargetPercentage"].ToString();
                     ViewBag.RemainingTargetPercent = ds.Tables[0].Rows[0]["RemainingTargetPercent"].ToString();
                     ViewBag.UserRank = ds.Tables[0].Rows[0]["UserRank"].ToString();
+                    ViewBag.TotalTDSPaid = ds.Tables[0].Rows[0]["TotalTDS"].ToString();
                 }
             }
             catch (Exception ex)
@@ -985,7 +986,7 @@ namespace Dolphin.Controllers
                     AssociateBooking obj = new AssociateBooking();
 
                     obj.Status = r["Status"].ToString();
-                    obj.QualifyDate = r["QualifyDate"].ToString();
+                    obj.Target = r["Target"].ToString();
                     obj.RewardImage = r["RewardImage"].ToString();
                     obj.RewardName = r["RewardName"].ToString();
                     obj.Contact = r["BackColor"].ToString();
@@ -2363,7 +2364,51 @@ namespace Dolphin.Controllers
             }
             return View(model);
         }
-      
+
+        public ActionResult AssociateDownlineReports()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("AssociateDownlineReports")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetDownLineReports(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+            try
+            {
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/mm/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/mm/yyyy");
+
+                model.Fk_UserId = Session["Pk_UserId"].ToString();
+                
+                DataSet ds = model.GetDownLineReport();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+
+                        obj.LoginDetails = r["LoginDetails"].ToString();
+                        obj.TotalBusiness = r["TotalBusiness"].ToString();
+                        obj.TeamBusinessAmount = r["TeamBusiness"].ToString();
+                        obj.DirectMemberJoining = r["DirectMemberJoining"].ToString();
+                        obj.TeamMemberJoining = r["TeamMemberJoining"].ToString();
+                        obj.Income = r["Income"].ToString();
+
+                        lst.Add(obj);
+                    }
+                    model.lstDownline = lst;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return View(model);
+        }
 
     }
 }

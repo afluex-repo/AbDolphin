@@ -10,6 +10,7 @@ namespace Dolphin.Models
 {
     public class Reports : Common
     {
+        public string Pk_PromoterId { get; set; }
         public string Email { get; set; }
         public string DesignationID { get; set; }
         public string NewDesignationID { get; set; }
@@ -30,8 +31,9 @@ namespace Dolphin.Models
         public string Name { get; set; }
         public string LoginId { get; set; }
         public string UserLoginId { get; set; }
+        public string Mobile { get; set; }
 
-        
+
         public List<Reports> lstRegistry { get; set; }
         public string ToDate { get; set; }
         public string FromDate { get; set; }
@@ -290,6 +292,8 @@ namespace Dolphin.Models
             DataSet ds = Connection.ExecuteQuery("GetBusiness", para);
             return ds;
         }
+
+        
         public DataSet GetBusinessDown()
         {
             SqlParameter[] para = {
@@ -395,9 +399,10 @@ namespace Dolphin.Models
         public DataSet GetPromoter()
         {
             SqlParameter[] para = {
-                                       new SqlParameter("@LoginId", LoginId),
-                                      //new SqlParameter("@FromDate", FromDate),
-                                      //new SqlParameter("@ToDate", ToDate)
+                                      new SqlParameter("@LoginId", LoginId),
+                                      //new SqlParameter("@DownLoginId", AssociateLoginID),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
                                   };
             DataSet ds = Connection.ExecuteQuery("GetPromoter", para);
             return ds;
@@ -413,6 +418,56 @@ namespace Dolphin.Models
             return ds;
         }
 
+
+
+
+        public List<Reports> lstDownline { get; set; }
+        public string TeamBusinessAmount { get; set; }
+        public string TotalBusiness { get; set; }
+        public string LoginDetails { get; set; }
+        
+        public DataSet GetDownLineReport()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Pk_UserId",Fk_UserId),
+                                      new SqlParameter("@LoginID", AssociateID),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetBusinessUserDown", para);
+            return ds;
+        }
+
+        public DataSet Getpromoters()
+        {
+            DataSet ds = Connection.ExecuteQuery("Getpromoters");
+            return ds;
+        }
+
+        public List<Reports> lstpromoterbusiness { get; set; }
+
+        public DataSet GetPromoterbusiness()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId),
+                                      //new SqlParameter("@DownLoginId", AssociateLoginID),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetPromoterBusiness", para);
+            return ds;
+        }
+
+        public DataSet GetDownLineBusinespromoter()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@Fk_UserId", Fk_UserId),
+                                        new SqlParameter("@FromDate", FromDate),
+                                        new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDownBusinessPrmoter", para);
+            return ds;
+        }
 
     }
 }
