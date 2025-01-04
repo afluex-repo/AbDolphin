@@ -4503,9 +4503,145 @@ namespace Dolphin.Controllers
         }
 
 
-        public ActionResult ReverseApprovePayment()
+        public ActionResult ReverseApprovePayment(Plot model)
         {
+           
             return View();
         }
+
+        [HttpPost]
+        [ActionName("ReverseApprovePayment")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetReverseCancelledPlotPaymentList(Plot model)
+        {
+            List<Plot> lst = new List<Plot>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.ApprovedFromDate = string.IsNullOrEmpty(model.ApprovedFromDate) ? null : Common.ConvertToSystemDate(model.ApprovedFromDate, "dd/MM/yyyy");
+            model.ApprovedToDate = string.IsNullOrEmpty(model.ApprovedToDate) ? null : Common.ConvertToSystemDate(model.ApprovedToDate, "dd/MM/yyyy");
+
+            DataSet ds = model.GetPaymentApprovedReportList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Plot obj = new Plot();
+                    obj.AssociateID = r["AssociateLoginID"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.UserID = r["PK_BookingDetailsId"].ToString();
+                    obj.CustomerID = r["CustomerLoginID"].ToString();
+                    obj.CustomerName = r["CustomerName"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    ViewBag.TotalAmount = ds.Tables[0].Rows[0]["Total2"].ToString();
+                    obj.TransactionNumber = r["TransactionNo"].ToString();
+                    obj.Remark = r["Remark"].ToString();
+                    obj.PaidAmount = r["PaidAmount"].ToString();
+                    obj.PaymentStatus = r["PaymentStatus"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.ApprovedDate = r["ApprovedDate"].ToString();
+                    //  obj.RejectedDate = r["RejectedDate"].ToString();
+                    obj.ApproveDescription = r["Description"].ToString();
+                    //  obj.RejectDescription = r["RejectDescription"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+            //#region ddlpaymentStatus
+            //List<SelectListItem> ddlpaymentStatus = Common.BindPaymentStatus();
+            //ViewBag.ddlpaymentStatus = ddlpaymentStatus;
+            //#endregion ddlpaymentStatus
+
+            return View(model);
+        }
+
+
+
+        public ActionResult ReverseApprovePaymentDetails(Plot model, string UserID, string Description, string ApprovedDate)
+        {
+            try
+            {
+                model.UserID = UserID;
+                model.Description = Description;
+                model.ApprovedDate = ApprovedDate;
+                model.AddedBy = Session["Pk_AdminId"]?.ToString();
+
+                DataSet ds = model.ReverseApprovePayment();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    var resultCode = ds.Tables[0].Rows[0][0].ToString();
+                    if (resultCode == "1")
+                    {
+                        model.Result = "Yes";
+                    }
+                    else if (resultCode == "2")
+                    {
+                        model.Result = "Closing done for this payment";
+                    }
+                    else
+                    {
+                        model.Result = ds.Tables[0].Rows[0]["ErrorMessage"]?.ToString();
+                    }
+                }
+                else
+                {
+                    model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Result = "An error occurred: " + ex.Message;
+            }
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+        //public ActionResult ReverseApprovePaymentDetails(Plot model,string UserID, string Description, string ApprovedDate)
+        //{
+        //    try
+        //    {
+        //        model.UserID = UserID;
+        //        model.Description = Description;
+        //        model.ApprovedDate = ApprovedDate;
+        //        model.AddedBy = Session["Pk_AdminId"].ToString();
+
+        //        DataSet ds = model.ReverseApprovePayment();
+        //        if (ds != null && ds.Tables.Count > 0)
+        //        {
+        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //            {
+        //                model.Result = "Yes";
+        //            }
+        //            else if (ds.Tables[0].Rows[0][0].ToString() == "2")
+        //            {
+        //                model.Result = "Closing done for this payment";
+        //            }
+        //            else
+        //            {
+        //               model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //        }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        model.Result = ex.Message;
+        //    }
+        //    return Json(model, JsonRequestBehavior.AllowGet);
+        //}
+
+
+
+
+
+
     }
 }

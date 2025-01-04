@@ -123,6 +123,7 @@ namespace Dolphin.Controllers
                     ViewBag.TargetPercentage = ds.Tables[0].Rows[0]["TargetPercentage"].ToString();
                     ViewBag.RemainingTargetPercent = ds.Tables[0].Rows[0]["RemainingTargetPercent"].ToString();
                     ViewBag.UserRank = ds.Tables[0].Rows[0]["UserRank"].ToString();
+                    ViewBag.UserRewards=ds.Tables[0].Rows[0]["Rewards"].ToString();
                     ViewBag.TotalTDSPaid = ds.Tables[0].Rows[0]["TotalTDS"].ToString();
                 }
             }
