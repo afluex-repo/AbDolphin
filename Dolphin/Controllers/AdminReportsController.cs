@@ -4799,6 +4799,169 @@ namespace Dolphin.Controllers
             }
             return View(model);
         }
-        
+
+        public ActionResult Promoterlist()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("Promoterlist")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult SearchPromoter(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetPromoter();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Pk_PromoterId = r["Pk_PromoterId"].ToString();
+                    obj.AssociateDeatils = r["AssociateDetails"].ToString();
+                    obj.DownAssociateDeatils = r["DownAssociateDetails"].ToString();
+                    obj.Date = r["AddDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstpromoter = lst;
+            }
+            return View(model);
+        }
+
+        //public ActionResult DeletePromoter(Reports model,string promoterId)
+        //{
+        //    try
+        //    {
+        //        model.Pk_DownPromId = promoterId;
+        //        model.UpdatedBy = Session["Pk_AdminId"].ToString();
+        //        DataSet ds = model.promoterDelete();
+        //        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        //        {
+        //            if(ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+        //            {
+        //                TempData["prmMSg"] = "Prmototer Detail Deleted Successfully..";
+        //            }
+        //            else
+        //            {
+        //                TempData["prmMSg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            TempData["prmMSg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //        }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        TempData["prmMSg"] = ex.Message;
+        //    }
+        //    return RedirectToAction("Promoterlist", "AdminReports");
+        //}
+
+        public ActionResult PromoterBussinesslist(Reports model)
+        {
+            #region GetPromoter
+            List<SelectListItem> ddlPromoter = new List<SelectListItem>();
+            DataSet ds = model.Getpromoters();
+            int pcount = 0;
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    if (pcount == 0)
+                    {
+                        ddlPromoter.Add(new SelectListItem { Text = "Select Associate", Value = "0" });
+                    }
+                    ddlPromoter.Add(new SelectListItem { Text = r["AssociateDetails"].ToString(), Value = r["LoginId"].ToString() });
+                    pcount = 1;
+                }
+
+            }
+           
+
+            ViewBag.ddlPromoter = ddlPromoter;
+            #endregion
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("PromoterBussinesslist")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult SearchPromoterbusiness(Reports model)
+        {
+            #region GetPromoter
+            List<SelectListItem> ddlPromoter = new List<SelectListItem>();
+            DataSet dsp = model.Getpromoters();
+            int pcount = 0;
+
+            if (dsp != null && dsp.Tables.Count > 0)
+            {
+
+                foreach (DataRow r in dsp.Tables[0].Rows)
+                {
+                    if (pcount == 0)
+                    {
+                        ddlPromoter.Add(new SelectListItem { Text = "Select Associate", Value = "0" });
+                    }
+                    ddlPromoter.Add(new SelectListItem { Text = r["AssociateDetails"].ToString(), Value = r["LoginId"].ToString() });
+                    pcount = 1;
+                }
+            }
+
+            ViewBag.ddlPromoter = ddlPromoter;
+            #endregion
+
+            List<Reports> lst = new List<Reports>();
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetPromoterbusiness();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Fk_UserId = r["PK_UserId"].ToString();
+                    obj.LoginId = r["LoginDetails"].ToString();
+                    obj.TotalAllotmentAmount = r["TotalBusiness"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstpromoterbusiness = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult GetDownLineBusinesspromoter(string Fk_UserId, string FromDate, string ToDate)
+        {
+            Reports model = new Reports();
+            List<Reports> lst = new List<Reports>();
+            model.Fk_UserId = Fk_UserId;
+            model.FromDate = string.IsNullOrEmpty(FromDate) ? null : Common.ConvertToSystemDate(FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(ToDate) ? null : Common.ConvertToSystemDate(ToDate, "dd/MM/yyyy");
+            DataSet dspayout = model.GetDownLineBusinespromoter();
+            if (dspayout != null && dspayout.Tables[0].Rows.Count > 0)
+            {
+                model.Result = "yes";
+                if (dspayout != null && dspayout.Tables.Count > 0 && dspayout.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dspayout.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.Business = r["Business"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstDownLineBusiness = lst;
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

@@ -2938,69 +2938,44 @@ namespace Dolphin.Controllers
             return View();
         }
 
-        [HttpPost]
-        public JsonResult SavePromoter(List<string> loginIds,string LoginId)
+        public ActionResult SavePromoter(List<string> loginIds, string LoginId)
         {
             Master model = new Master();
+            var response = new { Result = "0", Message = "An error occurred" };
+
             try
             {
                 var dtst = new DataTable();
                 string LoginIdss = "";
 
                 dtst.Columns.Add("LoginIdss", typeof(string));
-                
+
                 for (int i = 0; i <= (loginIds.Count) - 1; i++)
                 {
-
                     LoginIdss = loginIds[i].ToString();
                     dtst.Rows.Add(LoginIdss);
                 }
-                
+
                 model.LoginId = LoginId;
                 model.AssociatedownLoginId = dtst;
                 model.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = model.promotersave();
+
                 if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                 {
-                    model.Result = "1";
+                    response = new { Result = "1", Message = "Data saved successfully." };
                 }
                 else
                 {
-                    model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    response = new { Result = "0", Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString() };
                 }
             }
             catch (Exception ex)
             {
-               model.Result = "Error occurred: " + ex.Message;
+                response = new { Result = "0", Message = ex.Message };
             }
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
-
-
-        //[HttpPost]
-        //[ActionName("Promoter")]
-        //[OnAction(ButtonName = "btnSerach")]
-        //public ActionResult GetDownlineAssoci(Master model)
-        //{
-        //    List<Master> lst = new List<Master>();
-        //    DataSet ds = model.GetDownlineDetails();
-        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-        //    {
-        //        foreach (DataRow r in ds.Tables[0].Rows)
-        //        {
-        //            Master obj = new Master();
-        //            obj.Status = r["Status"].ToString();
-        //            obj.LoginId = r["AssociateDetails"].ToString();
-        //            obj.AssociateName = r["AssociateName"].ToString();
-        //            obj.DesignationName = r["DesignationName"].ToString();
-        //            obj.Percentage = r["Percentage"].ToString();
-        //            obj.BranchName = r["BranchName"].ToString();
-        //            lst.Add(obj);
-        //        }
-        //        model.lstTrad = lst;
-        //    }
-        //    return View(model);
-        //}
-
+        
     }
 }
