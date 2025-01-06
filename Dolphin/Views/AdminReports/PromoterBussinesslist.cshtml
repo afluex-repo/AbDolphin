@@ -175,7 +175,7 @@
 
     function validateform() {
         $(".errortext").removeClass("errortext");
-        if ($('#LoginId').val() == '0') {
+        if ($('#LoginId').val() == '0' || $('#LoginId').val() == '') {
             $("#LoginId").addClass('errortext');
             $('#LoginId').focus();
             return false;

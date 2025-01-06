@@ -2856,6 +2856,7 @@
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="Views\AdminReports\TranferPayment.cshtml" />
+    <Content Include="Views\Plot\ReverseApprovePayment.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -3143,6 +3144,7 @@
     <Content Include="Views\Master\Promoter.cshtml" />
     <Content Include="Views\AdminReports\Promoterlist.cshtml" />
     <Content Include="Views\AdminReports\PromoterBussinesslist.cshtml" />
+    <Content Include="Views\AssociateDashboard\AssociateDownlineReports.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -4869,7 +4869,6 @@ namespace Dolphin.Controllers
 
             if (ds != null && ds.Tables.Count > 0)
             {
-
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     if (pcount == 0)
@@ -4879,7 +4878,9 @@ namespace Dolphin.Controllers
                     ddlPromoter.Add(new SelectListItem { Text = r["AssociateDetails"].ToString(), Value = r["LoginId"].ToString() });
                     pcount = 1;
                 }
+
             }
+           
 
             ViewBag.ddlPromoter = ddlPromoter;
             #endregion
