@@ -843,31 +843,33 @@
 
 
 <!-- .offer user details-->
-<div class="modal modal-account fade" id="modalGif">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header border-bottom-0">
-                <h1 class="modal-title fs-3" id="staticBackdropLabel">Abdolphin: Where Innovation Meets Dedication.</h1>
-                <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
-            </div>
-            <div class="flat-account">
-                <div class="banner-account">
-                    <div class="row align-items-center gx-5">
-                        <div class="col-md-12">
-                            <div class=" bg-f offerContentArea">
-                                <div class="row align-items-center justify-content-center gx-5">
-                                    <div class="col-md-8 col-lg-8">
-                                        <div class="table-responsive mt-4">
-                                            <table class="table bg-transparent table-bordered table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Sr.No.</th>
-                                                        <th>Name</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+@if (Model.lstoffer != null)
+{
+    <div class="modal modal-account fade" id="modalGif">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h1 class="modal-title fs-3" id="staticBackdropLabel">Abdolphin: Where Innovation Meets Dedication.</h1>
+                    <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
+                </div>
+                <div class="flat-account">
+                    <div class="banner-account">
+                        <div class="row align-items-center gx-5">
+                            <div class="col-md-12">
+                                <div class=" bg-f offerContentArea">
+                                    <div class="row align-items-center justify-content-center gx-5">
+                                        <div class="col-md-8 col-lg-8">
+                                            <div class="table-responsive mt-4">
+                                                <table class="table bg-transparent table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr.No.</th>
+                                                            <th>Name</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
 
-                                                     @if (Model != null)
+                                                        @if (Model != null)
                                                         {
                                                             if (Model.lstoffer != null)
                                                             {
@@ -882,77 +884,9 @@
                                                                 }
                                                             }
                                                         }
-
-                                                    @*<tr>
-                                                        <td>John Doe</td>
-                                                        <td>$50</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Jane Smith</td>
-                                                        <td>$100</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Michael Brown</td>
-                                                        <td>$75</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Lisa Johnson</td>
-                                                        <td>$120</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Chris Green</td>
-                                                        <td>$30</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Anna White</td>
-                                                        <td>$200</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Paul Black</td>
-                                                        <td>$90</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Sarah Grey</td>
-                                                        <td>$110</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Emily Blue</td>
-                                                        <td>$60</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Ryan Yellow</td>
-                                                        <td>$40</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>David Red</td>
-                                                        <td>$250</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Olivia Gold</td>
-                                                        <td>$180</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Ethan Silver</td>
-                                                        <td>$130</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Chloe Bronze</td>
-                                                        <td>$70</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Matthew Aqua</td>
-                                                        <td>$95</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Grace Purple</td>
-                                                        <td>$80</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Lucas Pink</td>
-                                                        <td>$155</td>
-                                                    </tr>*@
-                                                </tbody>
-                                            </table>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -963,7 +897,8 @@
             </div>
         </div>
     </div>
-</div>
+}
+
 <!-- /.offer details-->
 <!-- .offer -->
 <div class="modal modal-account fade" id="modalLogin">

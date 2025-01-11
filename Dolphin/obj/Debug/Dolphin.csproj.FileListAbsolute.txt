@@ -535,7 +535,6 @@ E:\Tanishq\Repository\AbDolphin\Dolphin\bin\System.Web.Http.xml
 E:\Tanishq\Repository\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.xml
 E:\Tanishq\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
 E:\Tanishq\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb
-E:\Tanishq\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
 D:\Devendra\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
 E:\Anku\Projects\Abdolphin\AbDolphin\Dolphin\bin\ApplicationInsights.config
 E:\Anku\Projects\Abdolphin\AbDolphin\Dolphin\bin\roslyn\csc.exe
@@ -591,6 +590,7 @@ E:\Anku\Projects\Abdolphin\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.xml
 E:\Anku\Projects\Abdolphin\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
 E:\Anku\Projects\Abdolphin\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
 E:\Anku\Projects\Abdolphin\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb
+E:\Tanishq\Repository\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache
 E:\RISHI\REPOSITORY\AbDolphin\Dolphin\bin\ApplicationInsights.config
 E:\RISHI\REPOSITORY\AbDolphin\Dolphin\bin\roslyn\csc.exe
 E:\RISHI\REPOSITORY\AbDolphin\Dolphin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -644,4 +644,3 @@ E:\RISHI\REPOSITORY\AbDolphin\Dolphin\bin\System.Web.Http.xml
 E:\RISHI\REPOSITORY\AbDolphin\Dolphin\bin\System.Web.Http.WebHost.xml
 E:\RISHI\REPOSITORY\AbDolphin\Dolphin\obj\Debug\Dolphin.dll
 E:\RISHI\REPOSITORY\AbDolphin\Dolphin\obj\Debug\Dolphin.pdb
-E:\RISHI\REPOSITORY\AbDolphin\Dolphin\obj\Debug\Dolphin.csprojResolveAssemblyReference.cache

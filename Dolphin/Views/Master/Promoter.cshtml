@@ -15,7 +15,7 @@
                     <h5 class="mb-0">Promoter</h5>
                 </div>
                 <p style="color: red;display: block; margin-bottom:0px; text-align:center">
-                    @*@TempData["PLC"]*@
+                    @TempData["Msg"]
                 </p>
             </div>
         </div>
@@ -24,10 +24,10 @@
                 <div class="col-md-12">
                         <div class="col-md-4">
                             <label class="float-label">LoginID<span style="color:red">*</span></label>
-                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "LoginId" })
+                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "LoginId", @onchange = "return GetassociateName()" })
+                            <span style="color:red;" id="userName"></span>
                         </div>
                 </div>
-                
             </div>
         </div>
         <div class="card">
@@ -43,7 +43,7 @@
                         <tbody id="TextBoxContainer">
                             <tr class="mycontainer" id="mainrow">
                                 <td>
-                                    @Html.TextBoxFor(m => m.AssociateLoginId, new { @class = "form-control AssociateLoginId", @Placeholder = "LoginId" })
+                                    @Html.TextBoxFor(m => m.AssociateLoginId, new { @class = "form-control AssociateLoginId", @Placeholder = "LoginId"})
                                 </td>
                                 <td>
                                     <button type="button" id="add" class="btn btn-sm btn-success addRow">ADD</button>
@@ -55,8 +55,15 @@
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <button class="btn btn-success" type="button" id="btnSave" name="btnSave">SAVE</button>
+
+                        &nbsp;
+                        <a class="btn btn-primary" href="/AdminReports/PromoterList">Back to List</a>
                     </div>
+                
+                       
+                   
                 </div>
+               
             </div>
         </div>
 
@@ -128,22 +135,22 @@
             }
 
             var loginIdd = $("#LoginId").val();
-
             $.ajax({
-                url: '/Master/Savepromoter', 
+                url: '/Master/SavePromoter',
                 type: 'POST',
-                data: JSON.stringify({ loginIds: loginIds,LoginId: loginIdd }),
-                contentType: 'application/json', 
+                data: JSON.stringify({ loginIds: loginIds, LoginId: loginIdd }),
+                contentType: 'application/json',
                 success: function (response) {
-                    if (response.Result=="1") {
+                    if (response.Result === "1") {
                         alert("Data saved successfully.");
                         location.reload();
                     } else {
-                        alert("Error saving data.");
+                        alert("Error: " + response.Message);
                         location.reload();
                     }
                 },
-                error: function () {
+                error: function (xhr, status, error) {
+                    console.log("Error details: " + status + " - " + error);
                     alert("An error occurred while saving data.");
                     location.reload();
                 }
@@ -153,86 +160,35 @@
 </script>
 
 
-@*<script>
-    $(document).ready(function () {
-        let rowIndex = 1;
-
-        $(document).on("click", ".addRow", function () {
-            const currentRow = $(this).closest("tr");
-            const currentLoginId = currentRow.find(".AssociateLoginId").val().trim();
-
-            if (!currentLoginId) {
-                alert("Please fill in the Associate LoginId before adding a new row.");
-                return;
-            }
-
-            $(".AssociateLoginId").each(function () {
-                if ($(this).val().trim() === currentLoginId) {
-                    isDuplicate = true;
-                    return false;
-                }
-            });
-
-            let newRow = `<tr class="mycontainer">
-                        <td>
-                            <input type="text" name="AssociateLoginId[${rowIndex}]" class="AssociateLoginId form-control" placeholder="LoginId" value="${currentLoginId}" readonly />
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-danger removeRow">REMOVE</button>
-                        </td>
-                      </tr>`;
-
-            $("#TextBoxContainer").append(newRow);
-            rowIndex++;
-
-            currentRow.find(".AssociateLoginId").val('');
-        });
-
-        $(document).on("click", ".removeRow", function () {
-            const rowsCount = $("#TextBoxContainer tr").length;
-
-            if (rowsCount > 1) {
-                $(this).closest("tr").remove();
-            } else {
-                alert("At least one row is required.");
-            }
-        });
-
-        $("#btnSave").on("click", function () {
-            let loginIds = [];
-            let hasEmptyField = false;
-
-            $(".AssociateLoginId").each(function () {
-                const value = $(this).val().trim();
-                if (!value) {
-                    hasEmptyField = true;
-                }
-                loginIds.push(value);
-            });
-
-            $.ajax({
-                url: '/Master/Savepromoter',  // URL to the backend controller
-                type: 'POST',
-                data: JSON.stringify({ loginIds: loginIds }),  // Send data as JSON
-                contentType: 'application/json',  // Specify that the request body is JSON
-                success: function (response) {
-                    if (response.success) {
-                        alert("Data saved successfully.");
-                        // Optionally, you can clear the fields or reset the form here
-                    } else {
-                        alert("Error saving data.");
-                    }
-                },
-                error: function () {
-                    alert("An error occurred while saving data.");
-                }
-            });
-        });
-    });
-</script>*@
-
-
 <script>
+    function GetassociateName() {
+        var loginId = $("#LoginId").val();
+
+        if (!loginId) {
+            alert("Please enter a Login ID.");
+            return;
+        }
+        $.ajax({
+            url: '/Master/getUserDetails',
+            type: 'GET',
+            data: { LoginID: loginId },
+            contentType: 'application/json',
+            success: function (response) {
+                if (response.Result === "yes") {
+                    $("#userName").text(response.Name);
+                } else if (response.Result === "no") {
+                    alert("No user details found.");
+                } else {
+                    alert("Error: " + response.Message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Error details: " + status + " - " + error);
+                alert("An error occurred while retrieving user details.");
+            }
+        });
+    }
+
     function validateform() {
         $(".errortext").removeClass("errortext");
         if ($('#LoginId').val() == '') {

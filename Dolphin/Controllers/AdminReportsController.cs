@@ -4338,6 +4338,34 @@ namespace Dolphin.Controllers
         public ActionResult TransferPaymentList()
         {
             Reports model = new Reports();
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+
             List<Reports> lst = new List<Reports>();
             DataSet ds = model.GetTransferPaymentList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -4358,10 +4386,168 @@ namespace Dolphin.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ActionName("TransferPaymentList")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetTransferPaymentList(Reports model)
+        {
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+            model.SiteID = model.SiteID == "0" ? null : model.SiteID;
+            model.SectorID = model.SectorID == "0" ? null : model.SectorID;
+            model.BlockID = model.BlockID == "0" ? null : model.BlockID;
+
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetTransferPaymentList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.RecieverBookingNo = r["RecieverBookingNo"].ToString();
+                    obj.TransferBookingNo = r["TransferBookingNo"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.PaidAmount = r["PaidAmount"].ToString();
+                    obj.TransferDate = r["TransferDate"].ToString();
+                    obj.Remarks = r["PaymentRemarks"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstTransfer = lst;
+             
+            }
+            return View(model);
+        }
+
         public ActionResult TransferPlotList()
         {
 
-            return View();
+            Reports model = new Reports();
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+
+            List<Reports> lstTransferPlot = new List<Reports>();
+            DataSet ds = model.GetTransferPlotList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.OldTransferPlot = r["OldPlotDetails"].ToString();
+                    obj.NewTransferPlot = r["NewPlotDetails"].ToString();
+                    obj.PlotTransferBy = r["TransferredBy"].ToString();
+                    obj.PlotTransferDate = r["TransferredDate"].ToString();
+
+                    lstTransferPlot.Add(obj);
+                }
+                model.lstTransfer = lstTransferPlot;
+            }
+
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("TransferPlotList")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetTransferPlotList(Reports model)
+        {
+            model.SiteID = model.SiteID == "0" ? null : model.SiteID;
+            model.SectorID = model.SectorID == "0" ? null : model.SectorID;
+            model.BlockID = model.BlockID == "0" ? null : model.BlockID;
+            
+            List<Reports> lstTransferPlot = new List<Reports>();
+            DataSet ds = model.GetTransferPlotList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.OldTransferPlot = r["OldPlotDetails"].ToString();
+                    obj.NewTransferPlot = r["NewPlotDetails"].ToString();
+                    obj.PlotTransferBy = r["TransferredBy"].ToString();
+                    obj.PlotTransferDate = r["TransferredDate"].ToString();
+                    lstTransferPlot.Add(obj);
+                }
+                model.lstTransfer = lstTransferPlot;
+              
+                #region ddlSite
+                int count1 = 0;
+                List<SelectListItem> ddlSite = new List<SelectListItem>();
+                DataSet dsSite = model.GetSiteList();
+                if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dsSite.Tables[0].Rows)
+                    {
+                        if (count1 == 0)
+                        {
+                            ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                        }
+                        ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                        count1 = count1 + 1;
+
+                    }
+                }
+                ViewBag.ddlSite = ddlSite;
+                #endregion
+
+                List<SelectListItem> ddlSector = new List<SelectListItem>();
+                ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+                ViewBag.ddlSector = ddlSector;
+
+                List<SelectListItem> ddlBlock = new List<SelectListItem>();
+                ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+                ViewBag.ddlBlock = ddlBlock;
+
+            }
+            return View(model);
         }
 
 
@@ -4799,6 +4985,164 @@ namespace Dolphin.Controllers
             }
             return View(model);
         }
-        
+
+        public ActionResult Promoterlist()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("Promoterlist")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult SearchPromoter(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetPromoter();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Pk_PromoterId = r["Pk_PromoterId"].ToString();
+                    obj.AssociateDeatils = r["AssociateDetails"].ToString();
+                    obj.DownAssociateDeatils = r["DownAssociateDetails"].ToString();
+                    obj.Date = r["AddDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstpromoter = lst;
+            }
+            return View(model);
+        }
+
+        //public ActionResult DeletePromoter(Reports model,string promoterId)
+        //{
+        //    try
+        //    {
+        //        model.Pk_DownPromId = promoterId;
+        //        model.UpdatedBy = Session["Pk_AdminId"].ToString();
+        //        DataSet ds = model.promoterDelete();
+        //        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        //        {
+        //            if(ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+        //            {
+        //                TempData["prmMSg"] = "Prmototer Detail Deleted Successfully..";
+        //            }
+        //            else
+        //            {
+        //                TempData["prmMSg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            TempData["prmMSg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //        }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        TempData["prmMSg"] = ex.Message;
+        //    }
+        //    return RedirectToAction("Promoterlist", "AdminReports");
+        //}
+
+       public ActionResult PromoterBussinesslist(Reports model)
+        {
+            #region GetPromoter
+            List<SelectListItem> ddlPromoter = new List<SelectListItem>
+             {
+                 new SelectListItem { Text = "Select Associate", Value = "0" } 
+             };
+
+            DataSet ds = model.Getpromoters();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    ddlPromoter.Add(new SelectListItem { Text = r["AssociateDetails"].ToString(), Value = r["LoginId"].ToString() });
+                }
+            }
+
+            ViewBag.ddlPromoter = ddlPromoter;
+            #endregion
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("PromoterBussinesslist")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult SearchPromoterbusiness(Reports model)
+        {
+           
+            #region GetPromoter
+            List<SelectListItem> ddlPromoter = new List<SelectListItem>
+             {
+                 new SelectListItem { Text = "Select Associate", Value = "0" }
+             };
+
+            DataSet ds = model.Getpromoters();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    ddlPromoter.Add(new SelectListItem { Text = r["AssociateDetails"].ToString(), Value = r["LoginId"].ToString() });
+                }
+            }
+
+            ViewBag.ddlPromoter = ddlPromoter;
+            #endregion
+
+            List<Reports> lst = new List<Reports>();
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds1 = model.GetPromoterbusiness();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Fk_UserId = r["PK_UserId"].ToString();
+                    obj.LoginId = r["LoginDetails"].ToString();
+                    obj.TotalAllotmentAmount = r["TotalBusiness"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstpromoterbusiness = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult GetDownLineBusinesspromoter(string Fk_UserId, string FromDate, string ToDate)
+        {
+            Reports model = new Reports();
+            List<Reports> lst = new List<Reports>();
+            model.Fk_UserId = Fk_UserId;
+            model.FromDate = string.IsNullOrEmpty(FromDate) ? null : Common.ConvertToSystemDate(FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(ToDate) ? null : Common.ConvertToSystemDate(ToDate, "dd/MM/yyyy");
+            DataSet dspayout = model.GetDownLineBusinespromoter();
+            if (dspayout != null && dspayout.Tables[0].Rows.Count > 0)
+            {
+                model.Result = "yes";
+                if (dspayout != null && dspayout.Tables.Count > 0 && dspayout.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dspayout.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.Business = r["Business"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstDownLineBusiness = lst;
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }
