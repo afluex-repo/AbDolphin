@@ -33,6 +33,21 @@
         </div>
         <div class="card">
             <div class="card-body row">
+                <div class="col-sm-3 mb-3">
+                    <label class="float-label">From Date</label>
+                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "ds", @placeholder = "From Date" })
+                </div>
+                <div class="col-sm-3 mb-3">
+                    <label class="float-label">To Date</label>
+                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds", @placeholder = "To Date" })
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label class="float-label d-block">&nbsp;</label>
+                    <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="Search" />
+                </div>
+
+
                 <div class="table-responsive">
                     <table id="example2" class="table table-bordered table-striped mb-0">
                         <thead>
@@ -158,10 +173,14 @@
         location.reload();
     }
     $('#FromDate').datepicker({
-        dateFormat: 'dd/mm/yy'
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
     });
     $('#ToDate').datepicker({
-        dateFormat: 'dd/mm/yy'
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
     });
 
 

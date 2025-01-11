@@ -2185,17 +2185,34 @@ namespace Dolphin.Controllers
             }
             return View(model);
         }
-        //public ActionResult DownBusinessReport()
-        //{
-        //    Reports model = new Reports();
-        //    return View(model);
-        //}
-        //[HttpPost]
-        //[ActionName("DownBusinessReport")]
-        //[OnAction(ButtonName = "btnSearch")]
         public ActionResult DownBusinessReport()
         {
             Reports model = new Reports();
+            model.Fk_UserId= Session["PK_UserId"].ToString();
+            model.LoginId = Session["LoginID"].ToString();
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetBusinessDown();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Fk_UserId = r["PK_UserId"].ToString();
+                    obj.LoginId = r["LoginDetails"].ToString();
+                    obj.TotalAllotmentAmount = r["TotalBusiness"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstP = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("DownBusinessReport")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult DownBusinessReportSearch(Reports model)
+        {
+            
             List<Reports> lst = new List<Reports>();
             model.LoginId = Session["LoginID"].ToString();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");

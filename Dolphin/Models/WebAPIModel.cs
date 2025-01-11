@@ -186,7 +186,10 @@ namespace Dolphin.Models
 	  public string Totalregistry{get;set;}
 	  public string SelfRegistry{get;set;}
 	  public string TeamRegistry{get;set;}
-     
+      public string TotalTDS { get; set; }
+      public string UserRewards { get;set; }
+
+
     }
 	public class Graph
 	{
@@ -1349,6 +1352,39 @@ namespace Dolphin.Models
         public string Balance { get; set; }
         public string Discount { get; set; }
         public string BookingNumber { get; set; }
+    }
+
+    public class AssociateDownLineReports
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string AssociateID { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public List <lstAssociateDownLine> lstAssociateDownLine { get; set; }
+
+        public DataSet GetDownLineReport()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Pk_UserId",AssociateID),
+                                      new SqlParameter("@LoginID", LoginId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetBusinessUserDown", para);
+            return ds;
+        }
+    }
+
+    public class lstAssociateDownLine
+    {
+        public string LoginDetails { get; set; }
+        public string TotalBusiness { get; set; }
+        public string TeamBusinessAmount { get; set; }
+        public string DirectMemberJoining { get; set; }
+        public string TeamMemberJoining { get; set; }
+        public string Income { get; set; }
     }
 
 }
