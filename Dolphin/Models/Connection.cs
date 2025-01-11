@@ -26,9 +26,7 @@ namespace Dolphin.Models
                 throw; 
             }
         }
-
-
-        public static int ExecuteNonQuery(string commandText, params SqlParameter[] commandParameters)
+     public static int ExecuteNonQuery(string commandText, params SqlParameter[] commandParameters)
         {
             int k = 0;
             try
