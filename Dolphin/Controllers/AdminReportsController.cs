@@ -1628,6 +1628,7 @@ namespace Dolphin.Controllers
                     obj.DisplayName = r["BackColor"].ToString();
                     obj.ApprovalDate = r["ApprovalDate"].ToString();
                     obj.BankName = r["MemberBankName"].ToString();
+                    //obj.PanNo = r["PanNumber"].ToString();
 
                     lst.Add(obj);
                 }
@@ -1689,6 +1690,7 @@ namespace Dolphin.Controllers
                     obj.DisplayName = r["BackColor"].ToString();
                     obj.ApprovalDate = r["ApprovalDate"].ToString();
                     obj.BankName = r["MemberBankName"].ToString();
+                    //obj.PanNo = r["PanNumber"].ToString();
 
                     lst.Add(obj);
                 }
@@ -2385,7 +2387,7 @@ namespace Dolphin.Controllers
             model.BlockID = model.BlockID == "0" ? null : model.BlockID;
             model.BookingNumber = string.IsNullOrEmpty(model.BookingNumber) ? null : model.BookingNumber;
             model.PlotNumber = string.IsNullOrEmpty(model.PlotNumber) ? null : model.PlotNumber;
-            // model.PlotNumber = PlotNumber;
+          
             DataSet dsblock = model.FillDetails();
 
             if (dsblock != null && dsblock.Tables.Count > 0 && dsblock.Tables[1].Rows.Count > 0)
@@ -2672,7 +2674,6 @@ namespace Dolphin.Controllers
             }
             else
             {
-
                 List<SelectListItem> ddlSector = new List<SelectListItem>();
                 ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
                 ViewBag.ddlSector = ddlSector;
@@ -2725,9 +2726,7 @@ namespace Dolphin.Controllers
         }
 
 
-
-
-        public ActionResult PlotBookingDetails(string SiteID, string SectorID, string BlockID, string PlotNumber, string BookingNumber)
+    public ActionResult PlotBookingDetails(string SiteID, string SectorID, string BlockID, string PlotNumber, string BookingNumber)
         {
             Reports model = new Reports();
             if (BookingNumber == "")
@@ -2755,7 +2754,7 @@ namespace Dolphin.Controllers
 
                     model.Result = "yes";
 
-                    // model.PlotID = dsblock.Tables[0].Rows[0]["PK_PlotID"].ToString();
+                 
                     model.BookingStatus = dsblock.Tables[0].Rows[0]["BookingStatus"].ToString();
                     model.PK_BookingId = dsblock.Tables[0].Rows[0]["PK_BookingId"].ToString();
                     model.BranchID = dsblock.Tables[0].Rows[0]["BranchID"].ToString();
