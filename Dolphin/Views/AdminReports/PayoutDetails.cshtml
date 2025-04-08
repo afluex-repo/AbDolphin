@@ -64,14 +64,15 @@
                         <thead>
                             <tr class="table-active">
                                 <th>Sr No.</th>
-                                <th> Closing Date</th>
-                                <th> PayOut No</th>
-                                <th>  Login ID</th>
-                                <th> First Name</th>
-                                <th> Gross Amount</th>
+                                <th>Closing Date</th>
+                                <th>PayOut No</th>
+                                <th>Login ID</th>
+                                <th>First Name</th>
+                                <th>Pan Number</th>
+                                <th>Gross Amount</th>
                                 <th hidden="hidden"> TDS</th>
-                                <th> Processing</th>
-                                <th> NetAmount</th>
+                                <th>Processing</th>
+                                <th>NetAmount</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -89,6 +90,7 @@
                                             <td>@Item.PayOutNo</td>
                                             <td>@Item.AssociateLoginID  </td>
                                             <td>@Item.FirstName </td>
+                                            <td>@Item.PanNumber</td>
                                             <td>@Item.GrossAmount</td>
                                             <td hidden="hidden">@Item.TDS</td>
                                             <td>@Item.Processing</td>

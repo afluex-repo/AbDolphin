@@ -1492,6 +1492,7 @@ namespace Dolphin.Controllers
                     obj.Processing = r["Processing"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
                     obj.PK_PaidPayoutId = r["PK_PaidPayoutId"].ToString();
+                    obj.PanNumber = r["PanNumber"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
@@ -1527,6 +1528,7 @@ namespace Dolphin.Controllers
                     obj.Processing = r["Processing"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
                     obj.PK_PaidPayoutId = r["PK_PaidPayoutId"].ToString();
+                    obj.PanNumber = r["PanNumber"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
