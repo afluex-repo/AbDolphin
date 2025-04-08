@@ -316,9 +316,38 @@ namespace Dolphin.Models
         }
         public DataSet GetTransferPaymentList()
         {
-            DataSet ds = Connection.ExecuteQuery("getTransferPaymentList");
+            SqlParameter[] para =
+           {
+               new SqlParameter("@SiteID",SiteID),
+               new SqlParameter("@SectorID",SectorID),
+               new SqlParameter("@BlockID",BlockID),
+               new SqlParameter("@PlotNumber",PlotNumber)
+            };
+            DataSet ds = Connection.ExecuteQuery("getTransferPaymentList",para);
             return ds;
         }
+
+        
+        public List<Reports> lstTransferPlot { get; set; }
+        public string OldTransferPlot { get; set; }
+        public string NewTransferPlot { get; set; }
+        public string PlotTransferBy { get; set; }
+        public string PlotTransferDate { get; set; }
+
+        public DataSet GetTransferPlotList()
+        {
+            SqlParameter[] para =
+            {
+               new SqlParameter("@SiteID",SiteID),
+               new SqlParameter("@SectorID",SectorID),
+               new SqlParameter("@BlockID",BlockID),
+               //new SqlParameter("@FK_SiteTypeID",SiteTypeID),
+               new SqlParameter("@PlotNumber",PlotNumber)
+            };
+            DataSet ds = Connection.ExecuteQuery("TransferPlotList",para);
+            return ds;
+        }
+
         public DataSet GetSummryReports()
         {
             SqlParameter[] para = {

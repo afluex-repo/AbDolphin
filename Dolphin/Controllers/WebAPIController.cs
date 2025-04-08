@@ -396,7 +396,9 @@ namespace Dolphin.Controllers
                             obj1.Totalregistry = r["Totalregistry"].ToString();
                             obj1.SelfRegistry = r["SelfRegistry"].ToString();
                             obj1.TeamRegistry = r["TeamRegistry"].ToString();
-                            
+                            obj1.TotalTDS = r["TotalTDS"].ToString();
+                            obj1.UserRewards = r["Rewards"].ToString();
+
                             lst.Add(obj1);
                         }
                         obj.lstassociate = lst;
@@ -2199,7 +2201,59 @@ namespace Dolphin.Controllers
 
         #endregion
 
+        #region Associate Downline Reports
 
+        public ActionResult GetDownLineReports(AssociateDownLineReports model)
+        {
+            List<lstAssociateDownLine> lstAssociateDownLine = new List<lstAssociateDownLine>();
+            try
+            {
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/mm/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/mm/yyyy");
+
+                //model.Fk_UserId = Session["Pk_UserId"].ToString();
+
+                DataSet ds = model.GetDownLineReport();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        lstAssociateDownLine obj = new lstAssociateDownLine();
+
+                        obj.LoginDetails = r["LoginDetails"].ToString();
+                        obj.TotalBusiness = r["TotalBusiness"].ToString();
+                        obj.TeamBusinessAmount = r["TeamBusiness"].ToString();
+                        obj.DirectMemberJoining = r["DirectMemberJoining"].ToString();
+                        obj.TeamMemberJoining = r["TeamMemberJoining"].ToString();
+                        obj.Income = r["Income"].ToString();
+
+                        lstAssociateDownLine.Add(obj);
+                    }
+                    model.lstAssociateDownLine = lstAssociateDownLine;
+                    model.Status = "0";
+                    model.Message = "Associate Downline Data Fetched..";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+
+            
+        }
+
+
+
+        #endregion
 
     }
 }

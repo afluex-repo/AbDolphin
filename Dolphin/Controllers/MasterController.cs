@@ -2963,7 +2963,7 @@ namespace Dolphin.Controllers
 
                 if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                 {
-                    response = new { Result = "1", Message = "Data saved successfully." };
+                    response = new { Result = "1", Message = "Promoter added successfully." };
                 }
                 else
                 {
