@@ -24,6 +24,12 @@
                     <div class="row">
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
+                                <label>LoginId</label>
+                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Search by LoginId" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
                                 <label>  Action</label>
                                 @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", @Placeholder = "Search by Action" })
                             </div>

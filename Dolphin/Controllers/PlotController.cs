@@ -1683,7 +1683,8 @@ namespace Dolphin.Controllers
                         {
                             BLSMS.SendSMS(mob, str, TempId);
                         }
-                        catch { }
+                        catch {
+                        }
                     }
                     else
                     {
@@ -2532,6 +2533,7 @@ namespace Dolphin.Controllers
                     obj.Remark = r["Remark"].ToString();
                     obj.PaidAmount = r["PaidAmount"].ToString();
                     obj.PaymentStatus = r["PaymentStatus"].ToString();
+                    obj.ApprovedBy = r["UpdatedByName"].ToString();
                     obj.PaymentDate = r["PaymentDate"].ToString();
                     obj.ApprovedDate = r["ApprovedDate"].ToString();
                     //  obj.RejectedDate = r["RejectedDate"].ToString();
