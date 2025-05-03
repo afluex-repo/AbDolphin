@@ -1,6 +1,6 @@
 ﻿@model Dolphin.Models.Home
 
-<ul class="metismenu" id="menu">
+@*<ul class="metismenu" id="menu">
     @if (Model != null)
             {
                 if (Model.lstMenu != null)
@@ -34,7 +34,79 @@
             }
         }
     }
+</ul>*@
+
+
+<ul class="metismenu" id="menu">
+    @if (Model != null)
+    {
+        if (Model.lstMenu != null)
+        {
+            foreach (var item in Model.lstMenu)
+            {
+                <li>
+                    <a href="@item.Url" class="has-arrow"
+                       id="menuname_@item.MenuId"
+                       @(item.Url == "#" ? $"onclick=\"return logMenuClick({item.MenuId})\"" : "")>
+                        <div class="parent-icon">
+                            <i class='@item.Icon'></i>
+                        </div>
+                        <div class="menu-title">@item.MenuName</div>
+                    </a>
+
+                    @if (item.Url == "#")
+                    {
+                        <ul>
+                            @foreach (var item1 in Model.lstsubmenu)
+                            {
+                                if (item1.MenuId == item.MenuId)
+                                {
+                                    <li>
+                                        <a href="@item1.Url"
+                                           id="submenuname_@item1.SubMenuId"
+                                           class="menu"
+                                           data-formview="@item1.FormView"
+                                           data-formsave="@item1.FormSave"
+                                           data-formupdate="@item1.FormUpdate"
+                                           data-formdelete="@item1.FormDelete"
+                                           onclick="logSubMenuClick(@item1.SubMenuId)">
+                                            <i class='bx bx-category'></i>@item1.SubMenuName
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    }
+                </li>
+            }
+        }
+    }
 </ul>
 
+<!-- Hidden field to store clicked menu name -->
+<input type="hidden" id="menuname" />
+
+<script>
+    function logMenuClick(im) {
+        var menuItem = $('#menuname_' + im).text().trim();
+        $('#menuname').val(menuItem);
+    }
+
+    function logSubMenuClick(is) {
+        var submenuItem = $('#submenuname_' + is).text().trim();
+        var menuItems = $('#menuname').val();
+        $.ajax({
+            url: '@Url.Action("LogMenuClick", "Home")',
+            method: 'POST',
+            data: { submenuItem: submenuItem, menuItems: menuItems },
+            success: function () {
+                // Success handler (optional)
+            },
+            error: function () {
+                // Error handler (optional)
+            }
+        });
+    }
+</script>
 
 

@@ -43,7 +43,7 @@ namespace Dolphin.Models
         public string ApprovedFromDate { get; set; }
 
         public string ApprovedToDate { get; set; }
-
+        public string ApprovedBy { get; set; }
         public List<Plot> TermsListDetails { get; set; }
         public List<Plot> Paid { get; set; }
         public string PK_PlotID { get; set; }

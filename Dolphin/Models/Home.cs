@@ -38,6 +38,30 @@ namespace Dolphin.Models
         public string Status1 { get; set; }
 
 
+        public string FormView { get; set; }
+        public string FormSave { get; set; }
+        public string FormUpdate { get; set; }
+        public string FormDelete { get; set; }
+        public string SubMenuNameItem { get; set; }
+        public string MenuNameItem { get; set; }
+
+
+
+        public DataSet SaveLogMenuClick()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@SubMenuNameItem", SubMenuNameItem),
+                new SqlParameter("@MenuNameItem", MenuNameItem),
+                 new SqlParameter("@LoginID", LoginId)
+            };
+            DataSet ds = Connection.ExecuteQuery("SaveLogMenuClick", para);
+            return ds;
+        }
+
+
+
+
+
         public DataSet Login()
         {
             SqlParameter[] para ={new SqlParameter ("@LoginId",LoginId),
