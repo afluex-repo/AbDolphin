@@ -142,7 +142,9 @@ namespace Dolphin.Models
         public string FromPlotNumber { get; set; }
         public string ToPlotNumber { get; set; }
 
+        public string ReturnPaidAmount { get; set; }
 
+        public string BalanceReturnPaidAmount { get; set; }
         #endregion
 
         #region PlotBooking

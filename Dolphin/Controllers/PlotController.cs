@@ -3979,6 +3979,12 @@ namespace Dolphin.Controllers
                     model.BookingAmount = dsblock.Tables[0].Rows[0]["BookingAmt"].ToString();
                     model.PaymentDate = dsblock.Tables[0].Rows[0]["PaymentDate"].ToString();
                     model.PaidAmount = dsblock.Tables[0].Rows[0]["PaidAmount"].ToString();
+
+                    model.ReturnPaidAmount = dsblock.Tables[0].Rows[0]["ReturnPaidAmount"].ToString();
+
+                    model.BalanceReturnPaidAmount = dsblock.Tables[0].Rows[0]["BalanceReturnPaidAmount"].ToString();
+
+
                     model.Discount = dsblock.Tables[0].Rows[0]["Discount"].ToString();
                     model.PaymentPlanID = dsblock.Tables[0].Rows[0]["Fk_PlanId"].ToString();
                     model.PlanName = dsblock.Tables[0].Rows[0]["PlanName"].ToString();
