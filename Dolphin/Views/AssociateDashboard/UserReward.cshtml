@@ -5,86 +5,111 @@
     Layout = "~/Views/Shared/AssociateLayout.cshtml";
 }
 
-
 @using (Html.BeginForm("UserReward", "AssociateDashboard", FormMethod.Post, new { @id = "form1" }))
 {
     <div class="page-content">
-        <div class="card">
+        @*<div class="card">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between">
                     <h5 class="mb-0">User Rewards</h5>
-                   
                     <span style="color:red">@TempData["Rewardmsg"]</span>
                 </div>
             </div>
-        </div>
+        </div>*@
+
         <div class="card">
             <div class="card-body">
-                <h6 style="color:red"> Note:Fresh rewards counting from buisness 01-Jan-2025</h6>
-                <div class="table-responsive">
-                    <table id="example2" class="table table-bordered table-striped mb-0 text-center">
-                        <thead>
-                            <tr class="table-active">
-                                <th>Sr No.</th>
-                                <th>Target</th>
-                                <th>Reward</th>
-                                <th>Reward Name</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model != null)
+                <section class="reward-zigzag py-5">
+                    <div class="container">
+                        <div class="text-center mb-5">
+                            <h2 class="fw-bold">🎯 User Rewards</h2>
+                            <p style="color:red; font-weight:500; font-size:16px;">Rewards counted from 01-Jan-2025</p>
+                        </div>
+
+                        @if (Model.lstPlot != null && Model.lstPlot.Any())
+                        {
+                            int i = 0;
+                            foreach (var item in Model.lstPlot)
                             {
-                                if (Model.lstPlot != null)
+                                var layoutClass = (i % 2 == 0) ? "flex-md-row" : "flex-md-row-reverse";
+                                var textAlign = (i % 2 == 0) ? "text-md-start" : "text-md-end";
+
+                                var statusClass = "bg-secondary";
+                                if (item.Status.ToLower().Contains("achieved"))
                                 {
-                                    int i = 1;
-                                    foreach (var Item in Model.lstPlot)
-                                    {
-                                        <tr>
-                                            <td>@i</td>
-                                            <td>@Item.Target</td>
-                                            <td>
-                                        <img src="@Item.RewardImage" style="width:30%;height:30%" />
-                                             </td>
-                                            <td>@Item.RewardName</td>
-                                        <td class="@((Item.Status == "Achieved") ? "text-success" : (Item.Status == "Pending" ? "text-danger" : ""))" style="font-weight:bold">
-                                                @Item.Status
-                                            </td>
-
-                                       
-                                            <td>
-                                                @if (Item.Status == "Achieved")
-                                                {
-                                                    <a class="btn btn-info btn-sm" href="/AssociateDashboard/ClaimReward/@Item.PK_RewardItemId" onclick="return confirm('Are you sure you wish to claim this Award?');">Claim</a>
-                                                                    <a class="btn btn-warning btn-sm" href="/AssociateDashboard/SkipReward/@Item.PK_RewardItemId" onclick="return confirm('Are you sure you wish to Skip this Award?');">Skip</a>
-                                                }
-                                            </td>
-                                        </tr>
-                                        i++;
-                                    }
+                                    statusClass = "bg-success";
                                 }
+                                else if (item.Status.ToLower().Contains("pending"))
+                                {
+                                    statusClass = "bg-warning text-dark";
+                                }
+                                else if (item.Status.ToLower().Contains("rejected"))
+                                {
+                                    statusClass = "bg-danger";
+                                }
+
+                                <div class="reward-card d-flex flex-column @layoutClass mb-4 shadow">
+                                    <div class="reward-img-box">
+                                        <img src="@item.RewardImage" alt="@item.RewardName" />
+                                    </div>
+                                    <div class="reward-text-box @textAlign text-center">
+                                        <h5 class="fw-bold">@item.RewardName</h5>
+                                        <p><strong>Target:</strong> ₹@item.Target</p>
+                                        <p><strong>Status:</strong> <span class="badge @statusClass">@item.Status</span></p>
+                                    </div>
+                                </div>
+
+                                i++;
                             }
-
-
-                        </tbody>
-                    </table>
-                </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info text-center">
+                                No rewards found.
+                            </div>
+                        }
+                    </div>
+                </section>
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-    
-
-
 }
 
+<style>
+    .reward-zigzag {
+        background-color: #f8f9fa;
+    }
 
+    .reward-card {
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .reward-img-box img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin: 20px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .reward-text-box {
+        flex: 1;
+        padding: 20px;
+    }
+
+    .badge {
+        font-size: 0.85rem;
+        padding: 5px 12px;
+        border-radius: 8px;
+    }
+
+    @@media (max-width: 768px) {
+        .reward-text-box {
+            text-align: center !important;
+        }
+    }
+</style>
