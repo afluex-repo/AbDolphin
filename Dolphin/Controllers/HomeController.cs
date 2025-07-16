@@ -916,6 +916,40 @@ namespace Dolphin.Controllers
         }
 
 
+        #region LogMenuClick
+        public ActionResult LogMenuClick(string submenuItem, string menuItems)
+        {
+            try
+            {
+                Home model = new Home();
+                model.SubMenuNameItem = submenuItem;
+                model.MenuNameItem = menuItems;
+                model.LoginId = Session["LoginId"].ToString();
+                DataSet ds = model.SaveLogMenuClick();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        model.Result = "no";
+                    }
+                }
+                else
+                {
+                    model.Result = "no";
+
+                }
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+        #endregion
 
     }
 }

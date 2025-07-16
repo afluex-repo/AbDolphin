@@ -531,9 +531,11 @@ namespace Dolphin.Models
         }
         public DataSet TransactionLogReportBy()
         {
-            SqlParameter[] para = { new SqlParameter("@ActionName", DisplayName),
-                 new SqlParameter("@FromDate", FromDate),
-                  new SqlParameter("@ToDate", ToDate),
+            SqlParameter[] para = {
+                                new SqlParameter("@LoginId",LoginId),
+                                new SqlParameter("@ActionName", DisplayName),
+                                new SqlParameter("@FromDate", FromDate),
+                                new SqlParameter("@ToDate", ToDate),
 
 
                                       };

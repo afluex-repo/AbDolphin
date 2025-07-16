@@ -580,13 +580,13 @@
             }
         }
         //For disable button 
-        //document.getElementById("btnSave").addEventListener("click", btnDisabled);
+        document.getElementById("btnSave").addEventListener("click", btnDisabled);
         btnDisabled();
      
         return true;
     }
 
-    ///For disable button 
+    //For disable button 
     function btnDisabled() {
         debugger;
         var $button = $('#Save');
@@ -597,7 +597,7 @@
                 $button.prop('disabled', false);
                 $button.val('Save');// Re-enable the button after 5 seconds
             }, 5000);
-            //$('#form1').submit();
+            $('#form1').submit();
         };
 
 
