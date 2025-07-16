@@ -22,13 +22,15 @@
             <div class="card-body">
                 <h6 style="color:red"> Note:Fresh rewards counting from buisness 01-Jan-2025</h6>
                 <div class="table-responsive">
-                    <table id="example2" class="table table-bordered table-striped mb-0">
+                    <table id="example2" class="table table-bordered table-striped mb-0 text-center">
                         <thead>
                             <tr class="table-active">
                                 <th>Sr No.</th>
                                 <th>Target</th>
                                 <th>Reward</th>
+                                <th>Reward Name</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,13 +41,13 @@
                                     int i = 1;
                                     foreach (var Item in Model.lstPlot)
                                     {
-                                        <tr class="text-left">
+                                        <tr>
                                             <td>@i</td>
                                             <td>@Item.Target</td>
-                                           &nbsp;
                                             <td>
-                                        <img src="@Item.RewardImage" height="100" width="100" />(@Item.RewardName)
+                                        <img src="@Item.RewardImage" style="width:30%;height:30%" />
                                              </td>
+                                            <td>@Item.RewardName</td>
                                         <td class="@((Item.Status == "Achieved") ? "text-success" : (Item.Status == "Pending" ? "text-danger" : ""))" style="font-weight:bold">
                                                 @Item.Status
                                             </td>
