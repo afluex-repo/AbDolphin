@@ -5145,5 +5145,102 @@ namespace Dolphin.Controllers
         }
 
 
+        public ActionResult ClaimedUserRewards(Reports model)
+        {
+            
+            List<Reports> lst = new List<Reports>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.ClaimedUserRewardsList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.PK_RewardAchieverId = r["PK_RewardAchieverId"].ToString();
+                    obj.LoginId = r["Logindetails"].ToString();
+                    obj.RewardImage = r["RewardImage"].ToString();
+                    obj.RewardName = r["RewardName"].ToString();
+                    obj.QualifyDate = r["ClaimDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.Target = r["Target"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstRewards = lst;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("ClaimedUserRewards")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult GetClaimedUserRewards(Reports model)
+        {
+          
+
+            List<Reports> lst = new List<Reports>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.ClaimedUserRewardsList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.PK_RewardAchieverId = r["PK_RewardAchieverId"].ToString();
+                    obj.LoginId = r["Logindetails"].ToString();
+                    obj.RewardImage = r["RewardImage"].ToString();
+                    obj.RewardName = r["RewardName"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.QualifyDate = r["ClaimDate"].ToString();
+                    obj.Target = r["Target"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstRewards = lst;
+            }
+
+            return View(model);
+        }
+
+
+        public ActionResult ConfirmClaimRewards(string RewardId, string Remark,string LoginId,string RewardName)
+        {
+            Reports model = new Reports();
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                model.PK_RewardAchieverId = RewardId;
+                model.Remarks = Remark;
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                model.LoginId = LoginId;
+                model.RewardName = RewardName;
+                DataSet ds = model.ConfirmClaimRewards();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
+                    {
+                        model.Result = "1";
+                       
+                    }
+                    else
+                    {
+                        model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                      
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ClaimRewards"] = ex.Message;
+            }
+            FormName = "ClaimedUserRewards";
+            Controller = "AdminReports";
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }
