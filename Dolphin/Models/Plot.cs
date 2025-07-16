@@ -145,6 +145,7 @@ namespace Dolphin.Models
         public string ReturnPaidAmount { get; set; }
 
         public string BalanceReturnPaidAmount { get; set; }
+        public string BankDetails { get; set; }
         #endregion
 
         #region PlotBooking
@@ -504,7 +505,7 @@ namespace Dolphin.Models
                                 new SqlParameter("@SectorID",SectorID),
                                 new SqlParameter("@BlockID",BlockID),
                                 new SqlParameter("@PlotNumber",PlotNumber),
-                                 new SqlParameter("@BookingNo",BookingNumber)
+                                new SqlParameter("@BookingNo",BookingNumber)
 
                             };
             DataSet ds = Connection.ExecuteQuery("GetPlotDetailsForAllotment", para);
@@ -522,10 +523,10 @@ namespace Dolphin.Models
                                         new SqlParameter("@TransactionDate" ,TransactionDate),
                                         new SqlParameter("@BankBranch", BankBranch),
                                         new SqlParameter("@PaymentRemarks",PaymentRemarks),
-                                          new SqlParameter("@ReceiverBank",ReceiverBank),
+                                        new SqlParameter("@ReceiverBank",ReceiverBank),
                                         new SqlParameter("@BankName"  , BankName),
                                         new SqlParameter("@AddedBy",AddedBy),
-                                         new SqlParameter("@AccountHeadName",AccountHeadName)
+                                        new SqlParameter("@AccountHeadName",AccountHeadName)
 
                             };
             DataSet ds = Connection.ExecuteQuery("PlotAllotment", para);
@@ -1403,6 +1404,51 @@ namespace Dolphin.Models
                                         new SqlParameter("@ApprovedDate",ApprovedDate)
                                   };
             DataSet ds = Connection.ExecuteQuery("ReverseApprovedPayment", para);
+            return ds;
+        }
+
+
+        public DataSet GetReturnRequestPaymentList()
+        {
+            SqlParameter[] para =
+                            {
+                               
+                                 new SqlParameter("@SiteID",SiteID),
+                                 new SqlParameter("@SectorID",SectorID),
+                                 new SqlParameter("@BlockID",BlockID),
+                                 new SqlParameter("@PlotNumber",PlotNumber),
+                                 new SqlParameter("@BookingNo",BookingNumber)
+                                
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetCancelledPlotPaymentReturnRequest", para);
+            return ds;
+        }
+
+        public DataSet ApproveReturnRequestPayment()
+        {
+            SqlParameter[] para =
+                            {
+                                 new SqlParameter("@PK_ReturnPaymentId",UserID),
+                                 new SqlParameter("@Description",Description),
+                                 new SqlParameter("@UpdatedBy",AddedBy),
+                                 new SqlParameter("@PayAmount",PayAmount),
+                                 new SqlParameter("@ApprovedDate",ApprovedDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("ApproveReturnRequestPayment", para);
+            return ds;
+        }
+
+
+        public DataSet RejectReturnRequestPayment()
+        {
+            SqlParameter[] para =
+                            {
+                                 new SqlParameter("@PK_ReturnPaymentId",UserID),
+                                 new SqlParameter("@Description",Description),
+                                 new SqlParameter("@UpdatedBy",AddedBy),
+                                 new SqlParameter("@ApprovedDate",ApprovedDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("RejectReturnRequestPayment", para);
             return ds;
         }
     }

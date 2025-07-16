@@ -1,0 +1,530 @@
+﻿@model Dolphin.Models.Plot
+
+@{
+    ViewBag.Title = "ApproveReturnPaymentRequest";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@*<h2>ApproveReturnPaymentRequest</h2>*@
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+    }
+
+    .border-danger {
+        border: 2px solid red !important;
+    }
+</style>
+
+@using (Html.BeginForm("ApproveReturnPaymentRequest", "Plot", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0"> Approve Return Payment Request</h5>
+                </div>
+                <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    @TempData["Plot"]
+                </p>
+            </div>
+        </div>
+        <div class="items">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>Select Site <span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label> Select Sector <span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>Select Block <span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label> Plot Number <span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number", @style = "text-transform:uppercase" })
+                            @Html.HiddenFor(m => m.PlotID)
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label>Booking Number</label>
+                            @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Booking Number" })
+                            @Html.HiddenFor(m => m.PK_BookingId)
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <br />
+                            <input type="submit" name="SearchPlot" value="Search" class="btn btn-success" />
+
+                            @*<input type="button" name="SearchPlot" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return GetDetails();" />*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="table-active">
+                                <th>S No.</th>
+                                <th>Customer ID</th>
+                                <th>Affiliate ID</th>
+                                <th>Booking Number</th>
+                                <th>Plot Details</th>
+                                <th>Payment Mode</th>
+                                <th>Plot Cancelled Date</th>
+                                <th>Transaction No.</th>
+                                <th>Bank Details</th>
+                                <th>Amount</th>
+                                <th>Payment Request Date</th>
+                                <th>Remarks</th>
+                                <th>Status</th>
+                                <th>Pay Amount</th>
+                                <th style="min-width: 250px;">Description</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstPlot != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstPlot)
+                                    {
+                                        <tr class="text-left">
+                                            <td hidden><input type="hidden" id="PK_BookingDetailsId_@i" name="PK_BookingDetailsId_@i" value="@Item.UserID" /></td>
+                                            <td>@i</td>
+                                            <td>@Item.CustomerID (@Item.CustomerName)</td>
+                                            <td>@Item.AssociateID (@Item.AssociateName)</td>
+                                            <td>@Item.BookingNumber</td>
+                                            <td>@Item.PlotNumber</td>
+                                            <td>@Item.PaymentMode</td>
+                                            <td>@Item.CancelDate</td>
+                                            <td>@Item.TransactionNumber</td>
+                                            <td>@Item.BankDetails</td>
+                                            <td data-max="@Item.PaidAmount" id="PaidAmountCell_@i">@Item.PaidAmount</td>
+                                            <td>@Item.PaymentDate</td>
+                                            <td>@Item.Remark</td>
+                                            <td>@Item.PaymentStatus</td>
+                                            <td>
+                                                @Html.TextBox("PayAmount_" + i, Item.PayAmount, new
+                                                {
+                                                    @class = "form-control",
+                                                    @placeholder = "Pay Amount",
+                                                    id = "PaidAmount_" + i
+                                                })
+                                            </td>
+                                            <td>
+                                                <textarea id="txtDesc_@i" name="txtDesc_@i" class="form-control" rows="3" placeholder="Enter description"></textarea>
+                                            </td>
+                                            <td>
+                                                <input type="date" id="txtAppDate_@i" name="txtAppDate_@i" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0);" class="btn btn-success btn-sm"
+                                                   onclick="if (Validate(@i, 'approve')) { Approve('@i'); }">
+                                                    Approve
+                                                </a>
+                                                <a href="javascript:void(0);" class="btn btn-danger btn-sm"
+                                                   onclick="if (Validate(@i, 'reject')) { Reject('@i'); }">
+                                                    Reject
+                                                </a>
+
+                                            </td>
+                                         </tr>
+                                        i++;
+                                    }
+                                    <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                }
+                            }
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>Total Amount :-</th>
+                                <th style="color:dodgerblue;font-weight:800">@ViewBag.TotalAmount</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr class="table-active">
+                                <th>S No.</th>
+                                <th>Customer ID</th>
+                                <th>Affiliate ID</th>
+                                <th>Booking Number</th>
+                                <th>Plot Details</th>
+                                <th>Payment Mode</th>
+                                <th>Plot Cancelled Date</th>
+                                <th>Transaction No.</th>
+                                <th>Payment Remarks</th>
+                                <th>Bank Details</th>
+                                <th>Amount</th>
+                                <th>Payment Request Date</th>
+                                <th>Status</th>
+                                <th>Pay Amount</th>
+                                <th style="min-width: 250px;">Description</th>
+                                <th>Date</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+    <input type="hidden" id="txtdecription" />
+    <input type="hidden" id="txtAppDt" />
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+    function Validate(index, action) {
+        var isValid = true;
+
+        var amountSelector = "#PaidAmount_" + index;
+        var descSelector = "#txtDesc_" + index;
+        var dateSelector = "#txtAppDate_" + index;
+
+        var amountField = $(amountSelector);
+        var descField = $(descSelector);
+        var dateField = $(dateSelector);
+
+        var amountVal = amountField.val();
+        var descVal = descField.val();
+        var dateVal = dateField.val();
+
+        // Reset all borders
+        amountField.removeClass("border-danger");
+        descField.removeClass("border-danger");
+        dateField.removeClass("border-danger");
+
+        if (action === 'approve') {
+            if (!amountVal || amountVal.trim() === "") {
+                amountField.addClass("border-danger");
+                isValid = false;
+            }
+        }
+
+        if (!descVal || descVal.trim() === "") {
+            descField.addClass("border-danger");
+            isValid = false;
+        }
+
+        if (!dateVal || dateVal.trim() === "") {
+            dateField.addClass("border-danger");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            alert("Please fill all required fields.");
+        }
+
+        return isValid;
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("input[id^='PaidAmount_']").on("input", function () {
+            var inputId = $(this).attr("id"); // e.g., PaidAmount_1
+            var index = inputId.split("_")[1]; // get 1
+
+            var enteredAmount = parseFloat($(this).val());
+            var maxAmount = parseFloat($("#PaidAmountCell_" + index).data("max"));
+
+            if (!isNaN(enteredAmount) && !isNaN(maxAmount)) {
+                if (enteredAmount > maxAmount) {
+                    $(this).addClass("border-danger");
+                    alert("Entered Pay Amount cannot be greater than original Paid Amount: " + maxAmount);
+                    $(this).val(""); // Optional: clear invalid input
+                } else {
+                    $(this).removeClass("border-danger");
+                }
+            }
+        });
+    });
+</script>
+
+
+
+<script type="text/javascript">
+    var approveUrl = '@Url.Action("ApproveReturnRequest", "Plot")';
+    var approveRedirectUrl = '@Url.Action("ApproveReturnPaymentRequest", "Plot")';
+    var rejectRedirectUrl = '@Url.Action("ApproveReturnPaymentRequest", "Plot")';
+</script>
+
+
+
+
+<script>
+    function onSiteTypeChange() {
+        //  $("#divload").css({ 'display': '' });
+
+        var value = $('#SiteTypeID').val();
+        var values = $('#SiteID').val();
+        var tr = [];
+        $.ajax({
+            url: "/AdminReports/GetSiteBySiteType",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteTypeID: value },
+            success: function (data) {
+                var j = 1;
+
+                //   $("#divload").css({ 'display': 'none' });
+
+                $("#SiteID").html(""); // clear before appending new list
+                $("#SiteID").empty();
+                $("#SiteID").append(
+                    $('<option></option>').val(0).html('Select Site'));
+                $.each(data.ddlSite, function (index, Sectorcount) {
+                    $("#SiteID").append(
+                        $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                });
+
+            }
+
+        });
+
+    }
+    function onSiteChange() {
+        $("#divload").css({ 'display': '' });
+
+        var value = $('#SiteID').val();
+        var values = $('#SectorID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Master/GetSiteDetails",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+                var j = 1;
+                if (data.Result == "yes") {
+                    $("#divload").css({ 'display': 'none' });
+                    $('#Rate').val(data.Rate);
+                    $("#SectorID").html(""); // clear before appending new list
+                    $("#SectorID").empty();
+                    $("#SectorID").append(
+                        $('<option></option>').val(0).html('Select Sector'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#SectorID").append(
+                            $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                    });
+
+                }
+                else {
+                    $("#SectorID").empty();
+                    $('#Rate').val('');
+                }
+            }
+
+        });
+
+    }
+    function onSectorChange() {
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#SiteID').val();
+        var sectorID = $('#SectorID').val();
+        $.ajax({
+            url: '/Master/GetBlockList', type: 'post', dataType: 'json',
+            data: { 'SiteID': siteID, 'sectorID': sectorID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                $("#BlockID").html(""); // clear before appending new list
+                $("#BlockID").empty();
+                $("#BlockID").append(
+                    $('<option></option>').val(0).html('Select Block'));
+                $.each(data.lstBlock, function (index, BlockCount) {
+                    $("#BlockID").append(
+                        $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+
+            }
+
+        });
+    }
+
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+
+
+    //function GetDetails() {
+    //    var siteID = $('#SiteID').val();
+    //    var sectorID = $('#SectorID').val();
+    //    var blockID = $('#BlockID').val();
+    //    var plotNumber = $('#PlotNumber').val();
+    //    var bookingNumber = $('#BookingNumber').val();
+
+    //    if (plotNumber === '' && bookingNumber === '') {
+    //        alert("Please, either select Site ID, Sector ID, Block ID and fill Plot Number OR fill Booking Number");
+    //        return;
+    //    }
+
+    //    var url = `/Plot/GetApproveReturnPaymentRequest?SiteID=${siteID}&SectorID=${sectorID}&BlockID=${blockID}&PlotNumber=${plotNumber}&BookingNumber=${bookingNumber}`;
+    //    window.location.href = url; // redirect to controller action, loads View with table
+    //}
+
+
+    function resetFormFields() {
+        $("#BookingNumber").val('');
+        $("#SiteID").val('0');
+        $("#SectorID").val('0');
+        $("#BlockID").val('0');
+        $("#PlotNumber").val('');
+    }
+
+
+
+    function Approve(index) {
+        var r = confirm('Are you sure you want to approve this Payment?');
+        if (r === true) {
+            $("#divload").css({ 'display': '' });
+
+            var userIdSelector = '#PK_BookingDetailsId_' + index;
+            var descSelector = '#txtDesc_' + index;
+            var dateSelector = '#txtAppDate_' + index;
+            var payAmountSelector = '#PaidAmount_' + index;
+
+            var userid = $(userIdSelector).val();
+            var description = $(descSelector).val();
+            var approvedDate = $(dateSelector).val();
+            var payAmount = $(payAmountSelector).val();
+
+            $.ajax({
+                url: approveUrl,
+                type: "POST",
+                dataType: "json",
+                data: {
+                    UserID: userid,
+                    Description: description,
+                    ApprovedDate: approvedDate,
+                    PayAmount: payAmount
+                },
+                success: function (data) {
+                    alert(data.message || "Payment approved successfully");
+                    window.location.href = approveRedirectUrl;
+                    $("#divload").css({ 'display': 'none' });
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX error:", xhr.responseText);
+                    alert("Error occurred: " + error);
+                    $("#divload").css({ 'display': 'none' });
+                }
+            });
+        }
+    }
+
+    function getdata(decription) {
+        $('#txtdecription').val(decription.value);
+    }
+    function getdata2(date) {
+        $('#txtAppDt').val(date.value);
+    }
+
+
+    function Reject(index) {
+        var r = confirm('Are you sure you want to reject this Payment?');
+        if (r === true) {
+            $("#divload").css({ 'display': '' });
+
+            var userIdSelector = '#PK_BookingDetailsId_' + index;
+            var descSelector = '#txtDesc_' + index;
+            var dateSelector = '#txtAppDate_' + index;
+
+            var userid = $(userIdSelector).val();
+            var description = $(descSelector).val();
+            var approvedDate = $(dateSelector).val();
+
+            $.ajax({
+                url: "/Plot/RejectReturnRequest",
+                type: "POST",              // corrected casing
+                dataType: "json",          // corrected casing
+                data: {
+                    UserID: userid,
+                    Description: description,
+                    ApprovedDate: approvedDate
+                },
+                success: function (data) {
+                    alert(data.message || "Payment rejected successfully");
+                    if (data.success) {
+                        window.location.href = rejectRedirectUrl;
+                    }
+                    $("#divload").css({ 'display': 'none' });
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX error:", xhr.responseText);
+                    alert("Error occurred: " + error);
+                    $("#divload").css({ 'display': 'none' });
+                }
+            });
+        }
+    }
+
+</script>
+
+
+<script>
+
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ApprovedDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+
+    });
+
+</script>
+
+

@@ -1683,7 +1683,8 @@ namespace Dolphin.Controllers
                         {
                             BLSMS.SendSMS(mob, str, TempId);
                         }
-                        catch {
+                        catch
+                        {
                         }
                     }
                     else
@@ -3734,7 +3735,7 @@ namespace Dolphin.Controllers
             }
             ViewBag.ddlSite = ddlSite;
             #endregion
-            
+
             #region ddlPlan
             int count2 = 0;
             Plot obj1 = new Plot();
@@ -3954,8 +3955,8 @@ namespace Dolphin.Controllers
             ViewBag.ddlBlock = ddlBlock;
             return View(model);
         }
-       
-        
+
+
         public ActionResult ReturnCancelledPlotPaymentDetails(string SiteID, string SectorID, string BlockID, string PlotNumber, string BookingNumber)
         {
             Plot model = new Plot();
@@ -4001,6 +4002,8 @@ namespace Dolphin.Controllers
                     model.CustomerLoginID = dsblock.Tables[0].Rows[0]["CustomerLoginID"].ToString();
                     model.CustomerName = dsblock.Tables[0].Rows[0]["CustomerName"].ToString();
 
+                    model.CancelDate = dsblock.Tables[0].Rows[0]["CancelledDate"].ToString();
+
 
                 }
                 else if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "0")
@@ -4036,14 +4039,14 @@ namespace Dolphin.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["ReturnCancelledPlot"] = " Return Cancelled Plot Payment Done successfully !";
+                        TempData["ReturnCancelledPlot"] = " Return Cancelled Plot Payment Request sent successfully !";
                         string name = ds.Tables[0].Rows[0]["Name"].ToString();
                         string Plot = ds.Tables[0].Rows[0]["Plot"].ToString();
                         string mob = ds.Tables[0].Rows[0]["Mobile"].ToString();
                         string amt = obj.PaidAmount;
                         if (ds.Tables[0].Rows[0]["PK_ReturnPaymentId"].ToString() != "")
                         {
-                            TempData["CancelledPartPaymentSucesssMessage"] = "Return Cancelled Plot Payment Done successfully !";
+                            TempData["CancelledPartPaymentSucesssMessage"] = "Return Cancelled Plot Payment Request sent successfully !";
                             Session["PartPaymentId"] = Crypto.Encrypt(ds.Tables[0].Rows[0]["PK_ReturnPaymentId"].ToString());
                         }
                         try
@@ -4091,7 +4094,7 @@ namespace Dolphin.Controllers
             }
             ViewBag.ddlPaymentMode = ddlPaymentMode;
             #endregion
-            
+
             return View(model);
         }
 
@@ -4122,7 +4125,7 @@ namespace Dolphin.Controllers
                     obj.TransactionDate = r["TransactionDate"].ToString();
                     obj.TransactionNumber = r["TransactionNo"].ToString();
                     obj.Remark = r["Details"].ToString();
-                    
+
                     obj.SiteName = r["SiteName"].ToString();
                     obj.SectorName = r["SectorName"].ToString();
                     obj.BlockName = r["BlockName"].ToString();
@@ -4156,14 +4159,14 @@ namespace Dolphin.Controllers
             }
             ViewBag.ddlPaymentMode = ddlPaymentMode;
             #endregion
-            
+
             return View(model);
         }
 
 
 
 
-       
+
         [HttpPost]
         [ActionName("ApprovalReturnPaymentCancelledPlot")]
         [OnAction(ButtonName = "btnapprovereturn")]
@@ -4309,8 +4312,8 @@ namespace Dolphin.Controllers
             return View(model);
         }
 
-        
-       
+
+
 
         public ActionResult ReturnPlotPaymentLedger(Plot model)
         {
@@ -4468,7 +4471,7 @@ namespace Dolphin.Controllers
             return View(model);
         }
 
-        public ActionResult UpdatePaymentMode(string PK_BookingDetailsId,string PaymentMode,string TransactionNumber,string TransactionDate,string BankName,string BankBranch,string Remark)
+        public ActionResult UpdatePaymentMode(string PK_BookingDetailsId, string PaymentMode, string TransactionNumber, string TransactionDate, string BankName, string BankBranch, string Remark)
         {
             Plot model = new Plot();
             try
@@ -4489,7 +4492,7 @@ namespace Dolphin.Controllers
                     {
                         model.Result = "yes";
                     }
-                    else if(dd.Tables[0].Rows[0]["MSG"].ToString() == "0")
+                    else if (dd.Tables[0].Rows[0]["MSG"].ToString() == "0")
                     {
                         model.Result = dd.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
@@ -4499,7 +4502,7 @@ namespace Dolphin.Controllers
                     model.Result = dd.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 model.Result = ex.Message;
             }
@@ -4507,7 +4510,7 @@ namespace Dolphin.Controllers
 
 
         }
-       
+
 
         public ActionResult UpdateBookingDetails(string PK_BookingId)
         {
@@ -4550,8 +4553,8 @@ namespace Dolphin.Controllers
             }
             return View(model);
         }
-        
-        public ActionResult EditBookingDetails(Plot model,string PK_BookingId,string CustomerID,string AssociateID, string PlotAmount,string Discount,string NetPlotAmount,string TotalPLC,string PlotRate)
+
+        public ActionResult EditBookingDetails(Plot model, string PK_BookingId, string CustomerID, string AssociateID, string PlotAmount, string Discount, string NetPlotAmount, string TotalPLC, string PlotRate)
         {
             try
             {
@@ -4583,7 +4586,7 @@ namespace Dolphin.Controllers
 
         public ActionResult ReverseApprovePayment(Plot model)
         {
-           
+
             return View();
         }
 
@@ -4677,49 +4680,221 @@ namespace Dolphin.Controllers
         }
 
 
+        public ActionResult ApproveReturnPaymentRequest(string PK_BookingId)
+        {
+
+            Plot model = new Plot();
+         
+          
+
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
 
 
-        //public ActionResult ReverseApprovePaymentDetails(Plot model,string UserID, string Description, string ApprovedDate)
-        //{
-        //    try
-        //    {
-        //        model.UserID = UserID;
-        //        model.Description = Description;
-        //        model.ApprovedDate = ApprovedDate;
-        //        model.AddedBy = Session["Pk_AdminId"].ToString();
+            List<Plot> lst = new List<Plot>();
+            DataSet ds1 = model.GetReturnRequestPaymentList();
 
-        //        DataSet ds = model.ReverseApprovePayment();
-        //        if (ds != null && ds.Tables.Count > 0)
-        //        {
-        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
-        //            {
-        //                model.Result = "Yes";
-        //            }
-        //            else if (ds.Tables[0].Rows[0][0].ToString() == "2")
-        //            {
-        //                model.Result = "Closing done for this payment";
-        //            }
-        //            else
-        //            {
-        //               model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-        //            }
-        //        }
-        //        else
-        //        {
-        //            model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-        //        }
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        model.Result = ex.Message;
-        //    }
-        //    return Json(model, JsonRequestBehavior.AllowGet);
-        //}
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    Plot obj1 = new Plot();
+                    obj1.UserID = r["PK_ReturnPaymentId"].ToString();
+                    obj1.CustomerID = r["CustomerLoginID"].ToString();
+                    obj1.CustomerName = r["CustomerName"].ToString();
+                    obj1.AssociateID = r["AssociateLoginID"].ToString();
+                    obj1.AssociateName = r["AssociateName"].ToString();
+                    obj1.BookingNumber = r["BookingNo"].ToString();
+                    obj1.PaymentMode = r["PaymentMode"].ToString();
+                    obj1.TransactionDate = r["TransactionDate"].ToString();
+                    obj1.CancelDate = r["CancelledDate"].ToString();
+                    obj1.TransactionNumber = r["TransactionNo"].ToString();
+                    obj1.Remark = r["Remark"].ToString();
+                    obj1.PlotNumber = r["Plotdetails"].ToString();
+                    obj1.PaidAmount = r["RequestedReturnAmount"].ToString();
+                    obj1.PaymentStatus = r["PaymentStatus"].ToString();
+                    obj1.PaymentDate = r["PaymentRequestedDate"].ToString();
+                    obj1.BankDetails = r["Details"].ToString();
+                    lst.Add(obj1);
+
+                }
+                model.lstPlot = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("ApproveReturnPaymentRequest")]
+        [OnAction(ButtonName = "SearchPlot")]
+        public ActionResult GetApproveReturnPaymentRequest(string SiteID, string SectorID, string BlockID, string PlotNumber, string BookingNumber)
+        {
+            Plot model = new Plot();
+            List<Plot> lst = new List<Plot>();
+            model.SiteID = (!string.IsNullOrEmpty(SiteID) && SiteID != "0") ? SiteID : null;
+            model.SectorID = (!string.IsNullOrEmpty(SectorID) && SectorID != "0") ? SectorID : null;
+            model.BlockID = (!string.IsNullOrEmpty(BlockID) && BlockID != "0") ? BlockID : null;
+            model.PlotNumber = (!string.IsNullOrEmpty(PlotNumber) && PlotNumber != "0") ? PlotNumber : null;
+            model.BookingNumber = (!string.IsNullOrWhiteSpace(BookingNumber)) ? BookingNumber.Trim() : null;
+
+            //model.SiteID = model.SiteID == "0" ? null : model.SiteID;
+            //model.SectorID = model.SectorID == "0" ? null : model.SectorID;
+            //model.BlockID = model.BlockID == "0" ? null : model.BlockID;
+            //model.PlotNumber = model.PlotNumber == "0" ? null : model.PlotNumber;
+            //model.BookingNumber = model.BookingNumber == "0" ? null : model.BookingNumber;
+            //model.BookingNumber = BookingNumber;
+           
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+
+           DataSet ds = model.GetReturnRequestPaymentList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Plot obj = new Plot();
+                    obj.UserID = r["PK_ReturnPaymentId"].ToString();
+                    obj.CustomerID = r["CustomerLoginID"].ToString();
+                    obj.CustomerName = r["CustomerName"].ToString();
+                    obj.AssociateID = r["AssociateLoginID"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.BookingNumber = r["BookingNo"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.CancelDate = r["CancelledDate"].ToString();
+                    obj.TransactionNumber = r["TransactionNo"].ToString();
+                    obj.Remark = r["Remark"].ToString();
+                    obj.PlotNumber = r["Plotdetails"].ToString();
+                    obj.PaidAmount = r["RequestedReturnAmount"].ToString();
+                    obj.PaymentStatus = r["PaymentStatus"].ToString();
+                    obj.PaymentDate = r["PaymentRequestedDate"].ToString();
+                    obj.BankDetails = r["Details"].ToString();
+
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+
+            return View("ApproveReturnPaymentRequest", model);
+        }
 
 
+        [HttpPost]
+        public JsonResult ApproveReturnRequest(string UserID, string Description, string ApprovedDate, string PayAmount)
+        {
+            try
+            {
+                Plot model = new Plot
+                {
+                    UserID = UserID,
+                    Description = Description,
+                    ApprovedDate = ApprovedDate,
+                    PayAmount= PayAmount,
+                    AddedBy = Session["Pk_AdminId"]?.ToString(),
+                    Result = "yes"
+                };
+
+                DataSet ds = model.ApproveReturnRequestPayment();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        return Json(new { success = true, message = "Payment Approved successfully!" });
+                    }
+                    else
+                    {
+                        return Json(new { success = false, message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString() });
+                    }
+                }
+
+                return Json(new { success = false, message = "Unexpected response from database." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
 
 
+        [HttpPost]
+        public JsonResult RejectReturnRequest(string UserID, string Description, string ApprovedDate)
+        {
+            try
+            {
+                Plot model = new Plot
+                {
+                    UserID = UserID,
+                    Description = Description,
+                    ApprovedDate = ApprovedDate,
+                    AddedBy = Session["Pk_AdminId"].ToString()
+                };
 
+                DataSet ds = model.RejectReturnRequestPayment();
 
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    return Json(new { success = true, message = "Payment Rejected successfully!" });
+                }
+                else
+                {
+                    string error = ds?.Tables[0].Rows[0]["ErrorMessage"].ToString() ?? "Unknown error";
+                    return Json(new { success = false, message = error });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
     }
 }
+         
+    

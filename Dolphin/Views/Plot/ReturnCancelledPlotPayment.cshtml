@@ -4,6 +4,8 @@
     ViewBag.Title = "ReturnCancelledPlotPayment";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+
+
 @using (Html.BeginForm("ReturnCancelledPlotPayment", "Plot", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" ,@autocomplete="off"}))
 {
    
@@ -202,7 +204,7 @@
                                 </div>*@
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="bolds">Balance :</label>
+                                        <label class="bolds">Cancelled Date :</label>
                                         <label id="bal"></label>
                                     </div>
                                 </div>
@@ -212,14 +214,14 @@
                             <div class="row">
                                 <div class="col-md-3 mb-3">
                                     <div class="form-group">
-                                        <label >Pay Amount<span style="color: red">*</span></label>
-                                        @Html.TextBoxFor(m => m.PaidAmount, new { @class = "form-control", @Placeholder = "Pay Amount" , @onkeypress = "return  isNumberOrDecimal(event);", @maxlength = "30" })
+                                        <label >Return Amount<span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.PaidAmount, new { @class = "form-control", @Placeholder = "Return Amount", @onkeypress = "return  isNumberOrDecimal(event);", @maxlength = "30" })
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <div class="form-group">
-                                        <label> Payment Date<span style="color: red">*</span></label>
-                                        @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @Placeholder = "Select Payment Date", @readonly = true })
+                                        <label> Requested Date<span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @Placeholder = "Select Date", @readonly = true })
                                     </div>
                                 </div>
 
@@ -286,7 +288,7 @@
                             <div class="row ">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="submit" name="Save" value="Save" id="btnSave" class="btn btn-success" onclick="return validateform();" />
+                                        <input type="submit" name="Save" value="Request" id="btnSave" class="btn btn-success" onclick="return validateform();" />
                                     </div>
                                 </div>
                             </div>
@@ -303,7 +305,25 @@
     <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-    <script>
+   
+<script>
+    $(document).ready(function () {
+        // Attach event handler on input change for the Return Amount textbox
+        $('input[name="PaidAmount"]').on('input', function () {
+            var enteredAmount = parseFloat($(this).val()) || 0; // safely parse to number
+            var balanceAmount = parseFloat($('#BalanceReturnPaidAmount').text()) || 0;
+
+            if (enteredAmount > balanceAmount) {
+                alert("Request amount cannot be greater than balance amount");
+                $(this).val(''); // clear invalid input
+            }
+        });
+    });
+</script>
+
+
+
+ <script>
 
 
     $(document).ready(function () {
@@ -468,7 +488,6 @@
                         $("#AssoName").text(data.AssociateName);
                         $("#CustID").text(data.CustomerLoginID);
                         $("#CustName").text(data.CustomerName);
-
                         $("#ActPlotAmt").text(data.PlotAmount);
                         $("#ActPlotRate").text(data.ActualPlotRate);
                         $("#Plotrte").text(data.PlotRate);
@@ -490,10 +509,12 @@
                         //$("#noOfinst").text(data.TotalInstallment);
                         //$("#instAmt").text(data.InstallmentAmount);
                         $("#Plotarea").text(data.PlotArea);
+                        $("#bal").text(data.CancelDate);
+
 
                          $('#netplotamount').text(data.PlotAmount - data.Discount);
-                        var baln = Number(data.Balance);
-                        $("#bal").text(baln);
+                        var baln = Number(data.CancelDate);
+                        //$("#bal").text(baln);
                         //$("#SiteID").val('');
                         //$("#SectorID").val('');
                         //$("#BlockID").val('');
@@ -560,9 +581,11 @@
                         //$("#instAmt").text(data.InstallmentAmount);
 
                         $("#Plotarea").text(data.PlotArea);
+                        $("#bal").text(data.CancelDate);
+
                         $('#netplotamount').text(data.PlotAmount - data.Discount);
                         var baln = Number(data.Balance) - Number($('#disct').text());
-                        $("#bal").text(baln);
+                        //$("#bal").text(baln);
                         //$("#SiteID").val('');
                         //$("#SectorID").val('');
                         //$("#BlockID").val('');
