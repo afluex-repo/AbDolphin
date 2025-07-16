@@ -604,6 +604,7 @@ namespace Dolphin.Models
 		public string Amount {get;set;}
 		public string SuccessMessage {get;set;}
 		public string ErrorMessage {get;set;}
+
 		public DataSet SavePayoutRequest()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", UserID),
