@@ -3145,6 +3145,7 @@
     <Content Include="Views\AdminReports\PromoterBussinesslist.cshtml" />
     <Content Include="Views\AssociateDashboard\AssociateDownlineReports.cshtml" />
     <Content Include="Views\Plot\ApproveReturnPaymentRequest.cshtml" />
+    <Content Include="Views\AdminReports\ClaimedUserRewards.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

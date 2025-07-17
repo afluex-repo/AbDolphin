@@ -108,6 +108,10 @@ namespace Dolphin.Models
         public string DownAssociateDeatils { get; set; }
         public string Date { get; set; }
 
+        public List<Reports> lstRewards { get; set; }
+        public string ClaimBusinessAmount { get; set; }
+
+        public string PK_RewardAchieverId { get; set; }
 
         #region 31/01/2022
         public string DesignationName { get; set; }
@@ -498,6 +502,35 @@ namespace Dolphin.Models
             return ds;
         }
 
+        public DataSet ClaimedUserRewardsList()
+        {
+            SqlParameter[] para = {
+
+                new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate)
+
+            };
+
+            DataSet ds = Connection.ExecuteQuery("GetRewardClaimBusiness", para);
+            return ds;
+        }
+
+
+        public DataSet ConfirmClaimRewards()
+        {
+            SqlParameter[] para =
+                            {
+                                        new SqlParameter("@PK_RewardAchieverId ",PK_RewardAchieverId),
+                                        new SqlParameter("@Remark ", Remarks),
+                                        new SqlParameter("@ApprovedBy",AddedBy),
+                                         new SqlParameter("@LoginId ", LoginId),
+                                        new SqlParameter("@RewardName",RewardName)
+
+                            };
+            DataSet ds = Connection.ExecuteQuery("ClaimRewards", para);
+            return ds;
+        }
     }
 }
 
