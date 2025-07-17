@@ -27,13 +27,31 @@
                             @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "LoginId" })
                         </div>
                             <div class="col-sm-3 mb-3">
-                        <label class="float-label">From Date</label>
+                        <label class="float-label">From Achieved Date</label>
                         @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "Fom Date", @readonly = true })
                         </div>
                         <div class="col-sm-3 mb-3">
-                            <label class="float-label">To Date</label>
+                            <label class="float-label">To Achieved Date</label>
                             @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = true })
                         </div>
+                        <div class="col-sm-3 mb-3">
+                            <label class="float-label">From Claim Date</label>
+                            @Html.TextBoxFor(m => m.FromClaimDate, new { @class = "form-control", @Placeholder = "Fom Date", @readonly = true })
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <label class="float-label">To Claim Date</label>
+                            @Html.TextBoxFor(m => m.ToClaimDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = true })
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <label class="float-label">Status</label>
+                            @Html.DropDownListFor(m => m.RewardStatus,
+                            new List<SelectListItem>
+                            {
+                                new SelectListItem { Text = "Achieved", Value = "Achieved" },
+                                new SelectListItem { Text = "Claimed", Value = "Claimed" }
+                            },new { @class = "form-control" })
+                             </div>
+
                         <div class="col-md-3 mb-3">
                             <label class="d-block">  &nbsp;</label>
                             <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="btnSearch" />
@@ -48,14 +66,14 @@
                     <table id="example2" class="table table-striped table-bordered">
                         <thead>
                             <tr class="table-active">
-                                <th hidden>PK_RewardAchieverId</th>
+                               
                                 <th>Sr No.</th>
                                 <th>Login Id</th>
                                 <th>Target</th>
                                 <th>Rewards</th>
                                 <th>Status</th>
                                 <th>Reward Qualifying Date</th>
-                                <th>Claim</th>
+                                <th>Pay</th>
                               
                                
                             </tr>
@@ -69,7 +87,7 @@
                                     foreach (var Item in Model.lstRewards)
                                     {
                                         <tr class="text-left">
-                                            <td hidden>@Item.PK_RewardAchieverId</td>
+                                          
                                             <td>@i</td>
                                             <td>@Item.LoginId</td>
                                             <td>@Item.Target</td>
@@ -165,6 +183,19 @@
         changeMonth: true
     });
 
+    $('#FromClaimDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: 0,
+        changeYear: true,
+        changeMonth: true
+    });
+
+    $('#ToClaimDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: 0,
+        changeYear: true,
+        changeMonth: true
+    });
 
     function openCancelPopup(RewardId,LoginId,RewardName) {
         $("#PK_RewardAchieverId").val(RewardId);
