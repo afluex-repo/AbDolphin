@@ -11,7 +11,7 @@
       "RelativeMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|solutionrelative:dolphin\\models\\plot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|e:\\rishi\\repository\\abdolphin\\dolphin\\controllers\\plotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|E:\\RISHI\\REPOSITORY\\AbDolphin\\dolphin\\controllers\\plotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|solutionrelative:dolphin\\controllers\\plotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -19,11 +19,11 @@
       "RelativeMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|solutionrelative:dolphin\\models\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|e:\\rishi\\repository\\abdolphin\\dolphin\\views\\plot\\returncancelledplotpayment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|E:\\RISHI\\REPOSITORY\\AbDolphin\\dolphin\\views\\plot\\returncancelledplotpayment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|solutionrelative:dolphin\\views\\plot\\returncancelledplotpayment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|e:\\rishi\\repository\\abdolphin\\dolphin\\views\\plot\\approvereturnpaymentrequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|E:\\RISHI\\REPOSITORY\\AbDolphin\\dolphin\\views\\plot\\approvereturnpaymentrequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CEF4BD90-847C-487C-AE4F-A6C130B0B34E}|Dolphin\\Dolphin.csproj|solutionrelative:dolphin\\views\\plot\\approvereturnpaymentrequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
@@ -51,8 +51,7 @@
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAYAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-13T06:13:41.476Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -70,7 +69,7 @@
               "RelativeDocumentMoniker": "Dolphin\\Views\\Website\\UnitAvailability.cshtml",
               "ToolTip": "E:\\RISHI\\REPOSITORY\\AbDolphin\\Dolphin\\Views\\Website\\UnitAvailability.cshtml",
               "RelativeToolTip": "Dolphin\\Views\\Website\\UnitAvailability.cshtml",
-              "ViewState": "AgIAADYAAAAAAAAAAAAAAEsAAAA/AAAAAAAAAA==",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAEsAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-07-09T10:50:35.695Z",
               "EditorCaption": ""
@@ -85,8 +84,7 @@
               "RelativeToolTip": "Dolphin\\Views\\Plot\\ReturnCancelledPlotPayment.cshtml",
               "ViewState": "AgIAAMgBAAAAAAAAAAAowPIBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-09T10:15:20.608Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T10:15:20.608Z"
             },
             {
               "$type": "Document",
@@ -98,8 +96,7 @@
               "RelativeToolTip": "Dolphin\\Views\\Plot\\ApproveReturnPaymentRequest.cshtml",
               "ViewState": "AgIAAJ4BAAAAAAAAAAAiwLYBAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-09T07:50:10.756Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T07:50:10.756Z"
             },
             {
               "$type": "Document",
@@ -111,8 +108,7 @@
               "RelativeToolTip": "Dolphin\\Controllers\\PlotController.cs",
               "ViewState": "AgIAAEQSAAAAAAAAAAAawJASAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T07:41:32.805Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T07:41:32.805Z"
             },
             {
               "$type": "Document",
@@ -124,8 +120,7 @@
               "RelativeToolTip": "Dolphin\\Models\\Plot.cs",
               "ViewState": "AgIAAH0FAAAAAAAAAAAEwJYFAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T07:47:15.267Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T07:47:15.267Z"
             },
             {
               "$type": "Document",
