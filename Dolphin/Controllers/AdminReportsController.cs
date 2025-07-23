@@ -1824,8 +1824,39 @@ namespace Dolphin.Controllers
         public ActionResult TransactionLogReport(AssociateBooking model)
         {
 
+            List<AssociateBooking> lst = new List<AssociateBooking>();
+            DateTime now = DateTime.Now;
+            DateTime currentDate = DateTime.Now;
+            currentDate = currentDate.AddDays(-7);
+            model.FromDate = currentDate.ToString("dd/MM/yyyy");
+            model.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
+
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.TransactionLogReportBy();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
+                    obj.DisplayName = r["ActionName"].ToString();
+                    obj.Remark = r["Remark"].ToString();
+                    obj.FromDate = r["CreatedDate"].ToString();
+                    obj.TransactionNumber = r["TransactionBy"].ToString();
+
+
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+
             return View(model);
         }
+
+
+
+
         [HttpPost]
         [ActionName("TransactionLogReport")]
         [OnAction(ButtonName = "Search")]
@@ -1833,6 +1864,9 @@ namespace Dolphin.Controllers
         {
 
             List<AssociateBooking> lst = new List<AssociateBooking>();
+            DateTime now = DateTime.Now;
+            DateTime currentDate = DateTime.Now;
+          
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.TransactionLogReportBy();
@@ -5242,6 +5276,7 @@ namespace Dolphin.Controllers
             {
                 TempData["ClaimRewards"] = ex.Message;
             }
+
             FormName = "ClaimedUserRewards";
             Controller = "AdminReports";
 

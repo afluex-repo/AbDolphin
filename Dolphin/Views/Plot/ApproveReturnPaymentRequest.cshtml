@@ -128,12 +128,13 @@
                                             <td>@Item.Remark</td>
                                             <td>@Item.PaymentStatus</td>
                                             <td>
-                                                @Html.TextBox("PayAmount_" + i, Item.PayAmount, new
-                                                {
-                                                    @class = "form-control",
-                                                    @placeholder = "Pay Amount",
-                                                    id = "PaidAmount_" + i
-                                                })
+                                               @Html.TextBox("PayAmount_" + i, Item.PaidAmount, new
+                                          {
+                                              @class = "form-control",
+                                              @placeholder = "Pay Amount",
+                                              id = "PaidAmount_" + i
+                                          })
+
                                             </td>
                                             <td>
                                                 <textarea id="txtDesc_@i" name="txtDesc_@i" class="form-control" rows="3" placeholder="Enter description"></textarea>
