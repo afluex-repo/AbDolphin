@@ -64,6 +64,7 @@
                     <table id="example2" class="table table-bordered table-striped mb-0">
                         <thead>
                             <tr class="table-active">
+                                <th hidden></th>
                                 <th>Sr.No.</th>
                                 <th>Customer ID</th>
                                 <th>Affiliate ID</th>
@@ -129,12 +130,13 @@
                                         </tr>
                                         i++;
                                     }
-                                    <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                    @*<input type="hidden" id="hdRows" name="hdRows" value="@i" />*@
                                 }
                             }
                         </tbody>
                         <tfoot>
                             <tr class="table-active">
+                                <th hidden></th>
                                 <th>Sr No.</th>
                                 <th>Customer ID</th>
                                 <th>Affiliate ID</th>
