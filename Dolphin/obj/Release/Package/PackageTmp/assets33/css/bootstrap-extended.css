@@ -352,10 +352,8 @@ a {
 	color: rgba(255, 255, 255, .5)!important
 }
 
-
-
 .bg-primary {
-	background-color: #008cff !important;
+	background-color: #9ec5fe !important;
   }
 
 .bg-success {
@@ -363,7 +361,7 @@ a {
   }
 
 .bg-danger {
-	background-color: #fd3550 !important;
+	background-color: #69c76f !important;
   }
 
 
