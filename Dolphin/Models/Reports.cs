@@ -502,13 +502,20 @@ namespace Dolphin.Models
             return ds;
         }
 
+        public string FromClaimDate { get; set; }
+        public string ToClaimDate { get; set; }
+        public string RewardStatus { get; set; }
+
         public DataSet ClaimedUserRewardsList()
         {
             SqlParameter[] para = {
 
                 new SqlParameter("@LoginId", LoginId),
                 new SqlParameter("@FromDate",FromDate),
-                new SqlParameter("@ToDate",ToDate)
+                new SqlParameter("@ToDate",ToDate),
+                new SqlParameter("@FromClaimDate",FromClaimDate),
+                new SqlParameter("@ToClaimDate",ToClaimDate),
+                new SqlParameter("@RewardStatus",RewardStatus)
 
             };
 

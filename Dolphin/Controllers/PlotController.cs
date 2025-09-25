@@ -4076,6 +4076,41 @@ namespace Dolphin.Controllers
 
         public ActionResult ApprovalReturnPaymentCancelledPlot(Plot model)
         {
+            List<Plot> lst = new List<Plot>();
+            DataSet ds = model.GetReturnCancelledPlotPaymentList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Plot obj = new Plot();
+                    obj.UserID = r["PK_ReturnPaymentId"].ToString();
+                    obj.CustomerID = r["CustomerLoginID"].ToString();
+                    obj.CustomerName = r["CustomerName"].ToString();
+                    obj.AssociateID = r["AssociateLoginID"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.TransactionNumber = r["TransactionNo"].ToString();
+                    obj.Remark = r["Details"].ToString();
+
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+
+                    obj.PlotNumber = r["PlotNumber"].ToString();
+                    obj.PaidAmount = r["PaidAmount"].ToString();
+                    obj.PaymentStatus = r["PaymentStatus"].ToString();
+                    obj.PaymentRemarks = r["PaymentRemarks"].ToString();
+                    obj.ReceiverBank = r["ReceiverBank"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.AccountHeadName = r["AccountHeadName"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+
+
             #region ddlPaymentMode
             int count3 = 0;
             List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
