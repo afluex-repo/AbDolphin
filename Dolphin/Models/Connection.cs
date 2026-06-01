@@ -16,9 +16,9 @@ namespace Dolphin.Models
         {
             try
             {
-                //connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=dolphindb; User Id=sa; Password=Fx1479LVAPbF; Integrated Security=false;";
+                connectionString = "Data Source=101.53.150.222,1433;Initial Catalog=dolphindb; User Id=sa; Password=J2q+NETi78M; Integrated Security=false;";
 
-               connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=dolphindbTest_8Apr2024; User Id=sa; Password=Fx1479LVAPbF; Integrated Security=false;";
+                //connectionString = "Data Source=101.53.150.222,1433;Initial Catalog=dolphindbTest211225; User Id=sa; Password=J2q+NETi78M; Integrated Security=false;";
 
             }
             catch (Exception)
@@ -51,12 +51,15 @@ namespace Dolphin.Models
         public static DataSet ExecuteQuery(string commandText, params SqlParameter[] parameters)
         {
             DataSet ds = new DataSet();
+            int commandTimeout = 120;
+            
             try
             {
                 using (var connection = new SqlConnection(connectionString))
                 using (var command = new SqlCommand(commandText, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
+                    command.CommandTimeout = commandTimeout; // Set the timeout
                     command.Parameters.AddRange(parameters);
                     SqlDataAdapter da = new SqlDataAdapter(command);
                     da.Fill(ds);

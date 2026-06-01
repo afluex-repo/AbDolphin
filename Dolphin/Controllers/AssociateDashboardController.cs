@@ -125,6 +125,8 @@ namespace Dolphin.Controllers
                     ViewBag.UserRank = ds.Tables[0].Rows[0]["UserRank"].ToString();
                     ViewBag.UserRewards=ds.Tables[0].Rows[0]["Rewards"].ToString();
                     ViewBag.TotalTDSPaid = ds.Tables[0].Rows[0]["TotalTDS"].ToString();
+                    ViewBag.CurrentYearTeamBusiness = ds.Tables[0].Rows[0]["CurrentYearTeamBusiness"].ToString();
+                    ViewBag.CurrentYearSelfBusiness = ds.Tables[0].Rows[0]["CurrentYearSelfBusiness"].ToString();
                 }
             }
             catch (Exception ex)

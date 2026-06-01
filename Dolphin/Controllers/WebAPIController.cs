@@ -995,6 +995,7 @@ namespace Dolphin.Controllers
                     obj.RewardImage = r["RewardImage"].ToString();
                     obj.RewardName = r["RewardName"].ToString();
                     obj.Contact = r["BackColor"].ToString();
+                    obj.Target = r["Target"].ToString();
                     obj.PK_RewardItemId = r["PK_RewardItemId"].ToString();
                     lst.Add(obj);
                 }
