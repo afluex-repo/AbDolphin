@@ -531,6 +531,7 @@ namespace Dolphin.Models
         public string RewardImage { get; set; }
         public string RewardName { get; set; }
         public string Contact { get; set; }
+        public string Target { get; set; }
         public string PK_RewardItemId { get; set; }
     }
     public class RewardClaim
