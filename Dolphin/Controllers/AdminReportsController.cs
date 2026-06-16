@@ -29,7 +29,7 @@ namespace Dolphin.Controllers
             model.PlotNumber = string.IsNullOrEmpty(model.PlotNumber) ? null : model.PlotNumber;
             model.BlockID = model.BlockID == "0" ? null : model.BlockID;
             model.PK_BookingId = PK_BookingId;
-            DataSet dsBookingDetails = model.GetBookingDetailsList();
+            //DataSet dsBookingDetails = model.GetBookingDetailsList();
             #region ddlSite
             int count1 = 0;
             List<SelectListItem> ddlSite = new List<SelectListItem>();
