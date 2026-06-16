@@ -16,9 +16,9 @@ namespace Dolphin.Models
         {
             try
             {
-                connectionString = "Data Source=101.53.150.222,1433;Initial Catalog=dolphindb; User Id=sa; Password=J2q+NETi78M; Integrated Security=false;";
+                //connectionString = "Data Source=101.53.150.222,53389;Initial Catalog=dolphindb; User Id=sa; Password=J2q+NETi78M; Integrated Security=false;";
 
-                //connectionString = "Data Source=101.53.150.222,1433;Initial Catalog=dolphindbTest211225; User Id=sa; Password=J2q+NETi78M; Integrated Security=false;";
+                connectionString = "Data Source=101.53.150.222,53389;Initial Catalog=dolphindbTest211225; User Id=sa; Password=J2q+NETi78M; Integrated Security=false;";
 
             }
             catch (Exception)
